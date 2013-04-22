@@ -9,6 +9,6 @@
     </head>
     <body>
         <h1>We zijn online!</h1>
-        <h2>ik wil het ook testen</h2>
+        <h2>test push</h2>
     </body>
 </html>
