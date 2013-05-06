@@ -70,7 +70,7 @@ public class Ride  implements java.io.Serializable {
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
-    
+  
     @Column(name="idRide", unique=true, nullable=false)
     public Integer getIdRide() {
         return this.idRide;

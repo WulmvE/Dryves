@@ -2,10 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package session;
 
+import beans.RideManagerImpl;
+import entity.Ride;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DryvesServlet extends HttpServlet {
 
+    @EJB
+    RideManagerImpl rideManagerImpl;
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -43,6 +49,11 @@ public class DryvesServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+       
+        List<Ride> rides = rideManagerImpl.findRides();
+        for (Ride ride : rides) {
+            System.out.println(ride.getIdRide());
+        }
         try {
         
             
@@ -66,6 +77,7 @@ public class DryvesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    
        String userPath = request.getServletPath();
 
         // if addToCart action is called
@@ -97,7 +109,8 @@ public class DryvesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userPath = request.getServletPath();
-
+      
+ 
         // if addToCart action is called
         if (userPath.equals("/searchRide")) {
             // TODO: Implement ritZoeken action

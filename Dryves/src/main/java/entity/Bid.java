@@ -57,8 +57,8 @@ public class Bid  implements java.io.Serializable {
     public void setIdBid(Integer idBid) {
         this.idBid = idBid;
     }
-    @Version@Temporal(TemporalType.TIMESTAMP)
-    @Column(name="timestamp", nullable=false, length=19)
+   @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="'timestamp'", nullable=false, length=19)
     public Date getTimestamp() {
         return this.timestamp;
     }
