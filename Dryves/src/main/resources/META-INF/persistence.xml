@@ -5,7 +5,7 @@
         <jta-data-source>dryvesDs</jta-data-source>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <property name="eclipselink.ddl-generation"/>
+            <property name="eclipselink.ddl-generation" value=""/>
         </properties>
       
     </persistence-unit>
