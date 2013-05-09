@@ -2006,6 +2006,32 @@ table {
   margin-bottom: 20px;
 }
 
+.conv_recieved {
+    float: left;
+    clear: both;
+    text-align: left;
+    width: 30%;
+    height: auto;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 10px, 20px, 10px, 20px;
+    border: 1px solid #000;
+    background-color: #d1d1d1;
+}
+
+.conv_sent {
+    float: right;
+    clear: left;
+    text-align: right;
+    width: 30%;
+    height: auto;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 10px, 20px, 10px, 20px;
+    border: 1px solid #dddddd;    
+    background-color: #b3b3b3;
+}
+
 .table th,
 .table td {
   padding: 8px;
@@ -4237,6 +4263,12 @@ input[type="submit"].btn.btn-mini {
   overflow: auto;
 }
 
+.tab-content > .msg {
+      width: 200px;
+    height: 200px;
+    background-color: green;
+}
+
 .tabs-below > .nav-tabs,
 .tabs-right > .nav-tabs,
 .tabs-left > .nav-tabs {
@@ -6156,3 +6188,4 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
