@@ -1,0 +1,299 @@
+/*This is a comment*/
+@font-face {
+	font-family: 'eras';
+	src: url('../fonts/ERASLGHT.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/ERASLGHT.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('../fonts/ERASLGHT.woff') format('woff'), /* Modern Browsers */
+	     url('../fonts/ERASLGHT.ttf')  format('truetype'), /* Safari, Android, iOS */
+	     url('../fonts/ERASLGHT.svg#svgFontName') format('svg'); /* Legacy iOS */
+	}
+
+@font-face
+{
+font-family: eras;
+src: url('../fonts/ERASLGHT.ttf');
+ 
+}	
+
+html {
+
+min-height: 100%;
+
+background-size: cover;
+background-image: url(../img/bg.jpg);
+background-repeat: no-repeat;
+background-position: right bottom;
+}
+
+body{
+background-color:transparent;
+margin:0px;
+padding:0px;
+min-height:100%;
+font-family:eras;
+color:#a0a0a0;
+text-align: center;
+}
+
+
+#main{
+display:inline-block;
+margin-top: 125px;
+text-align: center;
+}
+
+
+#col_logo{
+min-height:100%;
+width:187px;
+position:relative;
+float:left;
+margin: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
+text-align: left;
+}
+
+#col_content{
+min-height:100%;
+
+float:left;
+margin: 0px;
+padding: 0px;
+text-align: left;
+}
+
+#cont_logo{
+width:187px;
+height:131px;
+background-color:#a6c400;
+border-radius: 8px;
+text-align: center;
+}
+
+#cont_logo img{
+border: none; 
+}
+
+#tagline{
+font-family:arial;
+font-weight:bold;
+font-size:12px;
+line-height:20px;
+color:#ffffff;
+text-align: center;
+}
+
+#cont_search, #cont_create {
+width:370px;
+height:390px;
+float: left;
+background-color:#ffffff;
+border-radius: 8px;
+text-align: center;
+margin: 0px 0px 8px 8px;
+}
+
+#cont_promo {
+width:748px;
+height:90px;
+clear:both;
+background-color:#ffffff;
+border-radius: 8px;
+text-align: center;
+margin: 0px 0px 8px 8px;
+}
+
+h2{
+font-size: 36px;
+font-family:eras;
+font-weight:normal;
+color:#000000;
+float:left;
+margin:12px 0px 50px 20px;
+padding:0px;
+}
+
+input {
+width:250px;
+font-family:arial;
+font-size:22px;
+color:#bababa;
+border-radius: 8px;
+border-style:solid;
+border-color:#aaa7a7;
+border-width:1px;
+padding: 8px;
+margin: 0px 0px 30px 0px;
+}
+
+.pac-container{
+text-align: left;
+font-family:arial;
+font-size:22px;
+color:#bababa;
+border-radius: 1px;
+border-bottom-right-radius: 8px;
+border-bottom-left-radius: 8px;
+border-style:solid;
+border-color:#aaa7a7;
+border-width:0px 1px 1px 1px;
+padding: 4px 0px 30px 0px;
+margin: -10px 0px 0px 0px;
+}
+
+.button{
+float:right;
+font-size:28px;
+color:#000000;
+float:right;
+margin: 10px 30px 0 0;
+}
+
+.button:link {text-decoration:none;}
+.button:visited {text-decoration:none;}
+.button:hover {text-decoration:underline;}
+
+/*********************** top menu ************************/
+
+
+#cont_top{
+text-align:center;
+}
+.arial{
+font-family:arial;
+font-size:18px;
+}
+
+#top_menu{
+margin:0px;
+display:inline-block;
+list-style-type:none;
+text-align:center;
+-moz-user-select: none;  
+-webkit-user-select: none;
+-ms-user-select: none;  
+user-select: none;
+}
+
+.menu_item{
+background-image: url(../img/tab.png);
+background-repeat: no-repeat;
+
+text-align:center;
+float:left;
+width:181px;
+height:34px;
+margin-left:15px;
+line-height:31px;
+}
+
+.menu_item:first-child{
+margin-left:0px;
+}
+
+.menu_item a{
+font-size:20px;
+color:#ffffff;
+text-decoration:none;
+}
+/*********************** results page ************************/
+
+#cont_results{
+margin: 0px;
+padding:0px;
+}
+
+#results{
+list-style-type:none;
+width:750px;
+margin: 0px;
+padding:0px;
+
+}
+
+.result{
+float:left;
+width:300px;
+height:220px;
+background-color:#ffffff;
+border-radius: 8px;
+margin: 0px 0px 8px 8px;
+}
+
+.result div{
+margin: 50px 0px 8px 20px;
+float:left;
+}
+
+.result .summary{
+font-family:arial;
+font-size:14px;
+vertical-align:middle;
+}
+
+.result .route{
+font-family: eras;
+color:#000000;
+font-size:18px;
+margin: 0px;
+padding: 0px;
+}
+
+.avatar{
+border-style:solid;
+border-color:#bfbdbd;
+border-width:1px;
+
+}
+
+.avatar_label{color:#e68200;}
+.avatar_label:link {text-decoration:none;}
+.avatar_label:visited {text-decoration:none;}
+.avatar_label:hover {text-decoration:underline;}
+
+.view_details{
+font-family: eras;
+color:#000000;
+font-size:18px;
+margin-top:3em;
+float:right;
+}
+
+.view_details:link {text-decoration:none;}
+.view_details:visited {text-decoration:none;}
+.view_details:hover {text-decoration:underline;}
+
+.orange{
+color:#e68200;
+}
+
+.price{
+color:#ffffff;
+background-color:#e68200;
+border-radius: 2px;
+padding: 0px 2px 0px 2px;
+}
+
+h1{
+margin: 0px 0px 8px 18px;
+font-weight: normal;
+line-height:70%;
+font-size:36px;
+color:#ffffff;
+}
+
+.pac-container:after{
+display:none;
+}
+
+
+/* other geocomplete tag 
+
+.pac-container 
+.pac-container:after 
+.pac-item 
+.pac-item:hover 
+.pac-selected 
+.pac-placeholder 
+
+ */

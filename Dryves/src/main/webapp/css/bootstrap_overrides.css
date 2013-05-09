@@ -1,0 +1,28 @@
+/* 
+    Document   : bootstrap_overrides
+    Created on : May 9, 2013, 1:43:57 PM
+    Author     : Patrick
+    Description:
+        Some quick overrides for  bootstrap affected elements for temporary design compatability
+*/
+
+body { 
+    background-color: transparent;
+}
+
+.well.span12{
+    margin-left: 0px;
+}
+
+
+.nav > li > a{    
+    color:#ffffff;
+}
+
+.nav > li > a:hover{   
+    color:#000000;
+}
+
+#bs_main .row{
+    margin-top:125px;
+}
