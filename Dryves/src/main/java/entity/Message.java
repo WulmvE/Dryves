@@ -25,7 +25,7 @@ public class Message  implements java.io.Serializable {
      private Integer idMessage;
      private Member memberByIdMemberSender;
      private Member memberByIdMemberReciever;
-     private String text;
+     private String text, dateTime;
 
     public Message() {
     }
@@ -79,8 +79,14 @@ public class Message  implements java.io.Serializable {
         this.text = text;
     }
 
+    @Column(name="dateTime", nullable=false)
+    public String getDateTime(){
+        return this.dateTime;
+    }
 
-
+    public void setDateTime(String dateTime){
+        this.dateTime = dateTime;
+    }
 
 }
 

@@ -1,0 +1,59 @@
+/* 
+    Document   : metro
+    Created on : 8-mei-2013, 22:52:09
+    Author     : Willem van Ess
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.root { 
+    alignment-adjust: middle;
+    display: table;
+    margin: 0 13.9% 0 13.9%;
+    width: 72.2%;
+    height: 100%;
+    clear: both;
+    background-color: black;
+}
+
+.tile {
+    float: left !important;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    padding: 5px;
+    background-color: yellowgreen;
+}
+
+.bigTile {
+    float: left !important;
+    /*    position: 240;*/
+    width: 460px;
+    height: 460px;
+    margin: 5px;
+    padding: 5px;
+    background-color: yellowgreen;
+}
+
+.longTile {
+    float: left !important;
+    /*    position: 240;*/
+    width: 460px;
+    height: 220px;
+    margin: 5px;
+    padding: 5px;
+    background-color: yellowgreen;
+}
+
+.logoHolder {
+    float: left !important;
+    width: 230px;
+    height: 230px;
+    margin: 5px;
+}
+
+.logo {
+    height: 100%;
+    width: 100%;
+}
+

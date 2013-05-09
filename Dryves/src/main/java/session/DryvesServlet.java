@@ -20,21 +20,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Vincent
  */
-
-@WebServlet(name = "DryvesServlet", 
-            loadOnStartup = 1,
-            urlPatterns = { "/searchRide", 
-                            "/searchRideList", 
-                            "/searchRideDetails",
-                            "/myRides",
-                            "/myRequestedRides",    
-                            "/myRideDetails"})
-
+@WebServlet(name = "DryvesServlet",
+        loadOnStartup = 1,
+        urlPatterns = {"/searchRide",
+    "/searchRideList",
+    "/searchRideDetails",
+    "/myRides",
+    "/myRequestedRides",
+    "/myRideDetails"})
 
 public class DryvesServlet extends HttpServlet {
 
     @EJB
     RideManagerImpl rideManagerImpl;
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -49,17 +48,13 @@ public class DryvesServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-       
+
         List<Ride> rides = rideManagerImpl.findRides();
         for (Ride ride : rides) {
             System.out.println(ride.getIdRide());
         }
         try {
-        
-            
-            
-            
-        } finally {            
+        } finally {
             out.close();
         }
     }
@@ -77,23 +72,22 @@ public class DryvesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
-       String userPath = request.getServletPath();
+
+        String userPath = request.getServletPath();
 
         // if addToCart action is called
         if (userPath.equals("/searchRide")) {
             // TODO: Implement ritZoeken action
-      
-        } 
+        }
 
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
-        try {
-            request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+            try {
+                request.getRequestDispatcher(url).forward(request, response);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
     }
 
     /**
@@ -109,13 +103,12 @@ public class DryvesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userPath = request.getServletPath();
-      
- 
+
+
         // if addToCart action is called
         if (userPath.equals("/searchRide")) {
             // TODO: Implement ritZoeken action
-      
-        } 
+        }
 
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
