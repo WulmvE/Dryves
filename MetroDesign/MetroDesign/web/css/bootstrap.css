@@ -3213,11 +3213,11 @@ button.close {
 }
 
 .btn {
-  display: inline-block;
-  *display: inline;
-  padding: 4px 12px;
+/*  display: inline-block;
+  *display: inline;*/
+/*  padding: 4px 12px;
   margin-bottom: 0;
-  *margin-left: .3em;
+  *margin-left: .3em;*/
   font-size: 14px;
   line-height: 20px;
   color: #333333;
@@ -3238,9 +3238,9 @@ button.close {
   border-color: #e6e6e6 #e6e6e6 #bfbfbf;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   border-bottom-color: #b3b3b3;
-  -webkit-border-radius: 4px;
+/*  -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
-          border-radius: 4px;
+          border-radius: 4px;*/
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   *zoom: 1;

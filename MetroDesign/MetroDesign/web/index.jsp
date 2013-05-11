@@ -9,20 +9,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" rel="stylesheet" href="metro.css"/>
+        <link type="text/css" rel="stylesheet" href="css/metro.css"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
         <title>JSP Page</title>
     </head>
     <body bgcolor="black">
         <div class="root">
             <!-- Dryves Logo -->
-            <div class="logoHolder"><img src="dryves.jpg" class="logo"></div>
+            <div class="logoHolder"><img src="img/dryves.jpg" class="logo"></div>
 
             <!-- SmallTiles -->
-            <div class="tile">tekst1</div>
-            <div class="tile">tekst2</div>
-            <div class="tile">tekst3</div>
-            <div class="tile">tekst4</div>
-            <div class="tile">tekst5</div>
+            <div class="tile"><a href="" class="button"></a></div>
+            <div class="tile"><img src="img/message_icon.png" class="icon"></div>
+            <div class="tile"><img src="img/About-icon.png" class="icon"></div>
+            <div class="tile"><img src="img/contact_icon.jpg" class="icon"></div>
+            <div class="tile"><img src="img/login_icon.png" class="icon"></div>
             <div class="tile">tekst6</div>
             <div class="tile">tekst7</div>   
             <div class="tile">tekst8</div>
@@ -37,7 +38,7 @@
             <!-- LongTiles -->
             <div class="longTile">tekst</div>
             <div class="longTile">tekst</div>
+            <script src="js/bootstrap.js"></script>
         </div>
-        <!--        </div>-->
     </body>
 </html>
