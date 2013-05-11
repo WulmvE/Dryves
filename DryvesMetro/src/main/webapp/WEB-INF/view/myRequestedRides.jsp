@@ -1,14 +1,16 @@
 <%-- 
     Document   : myRequestedRides
     Created on : 5-mei-2013, 20:46:18
-    Author     : Willem van Ess
+    Author     : Vincent
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <link type="text/css" rel="stylesheet" href="css/main.css"/>    	
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap_overrides.css"/>
 
     </head>
     <body>
@@ -44,10 +46,10 @@
         </br>
 
         <!-- logo -->
-        <div class="container">
+        <div id="bs_main" class="container">
             <div class="row">
                 <div class="span3">
-                    <img src="img/dryves.jpg" class="img-rounded">
+                    <div id="cont_logo"><img src="img/logo.png" class="img-rounded"/></div>
                 </div>
                 </br>
                 </br>
@@ -58,11 +60,10 @@
                 <div class="span9">
                     <div class="tabbable"> <!-- Only required for left/right tabs -->
                         <ul class="nav nav-tabs">
-                            <li><a href="#tab1" data-toggle="tab">Zoek een rit</a></li>
-                            <li><a href="#tab2" data-toggle="tab">Nieuwe rit aanbieden</a></li>
-                            <li><a href="#tab1" data-toggle="tab">Mijn aangeboden ritten</a></li>
-                            <li><a href="#tab1" data-toggle="tab">Mijn aanvragen</a></li>
-                            <li class="active"><a href="#tab1" data-toggle="tab">Mijn berichten</a></li>
+                            <li><a href="/Dryves/searchRide" data-toggle="tab">Zoek een rit</a></li>
+                            <li><a href="/Dryves/myRideDetails" data-toggle="tab">Nieuwe rit aanbieden</a></li>
+                            <li><a href="/Dryves/myRides" data-toggle="tab">Mijn aangeboden ritten</a></li>
+                            <li class="active"><a href="/Dryves/myRequestedRides" data-toggle="tab">Mijn aanvragen</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
@@ -81,42 +82,66 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Afzender</th>
-                            <th>Onderwerp</th>
+                            <th>Beginpunt</th>
+                            <th>Eindpunt</th>
                             <th>Datum</th>
+                            <th>Tijd</th>
+                            <th>Auto</th>
+                            <th>Zitplaatsen</th>
+                            <th>Prijs</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Dryves</td>
-                            <td>Welkom bij Dryves</td>
-                            <td>08-05-2013</td>
-                            <th><a href="#">Bekijken</a></th>
+                            <td>Amsterdam centraal</td>
+                            <td>Amsterdam sloterdijk</td>
+                            <td>29-04-2013</td>
+                            <td>19:00</td>
+                            <td>BMW 1-serie</td>
+                            <td>2</td>
+                            <td>€20</td>
+                            <th>Bevestigd</th>
                         </tr>
                         <tr>
-                            <td>Hey! Jij ook hier?</td>
-                            <td>Die ene collega</td>
-                            <td>08-05-2013</td>
-                            <th><a href="#">Bekijken</a></th>
+                            <td>Amsterdam centraal</td>
+                            <td>Amsterdam sloterdijk</td>
+                            <td>29-04-2013</td>
+                            <td>19:00</td>
+                            <td>BMW 1-serie</td>
+                            <td>2</td>
+                            <td>€20</td>
+                            <th><a href="#">Annuleren</a></th>
                         </tr>
                         <tr>
-                            <td>Rij je mee?</td>
-                            <td>Die andere collega</td>
-                            <td>10-05-2013</td>
-                            <th><a href="#">Bekijken</a></th>
+                            <td>Amsterdam centraal</td>
+                            <td>Amsterdam sloterdijk</td>
+                            <td>29-04-2013</td>
+                            <td>19:00</td>
+                            <td>BMW 1-serie</td>
+                            <td>2</td>
+                            <td>€20</td>
+                            <th>Bevestigd</th>
                         </tr>
                         <tr>
-                            <td>DatabaseMember04</td>
-                            <td>DatabaseSubject04</td>
-                            <td>DataBaseDate04</td>
-                            <th><a href="#">Bekijken</a></th>
+                            <td>Amsterdam centraal</td>
+                            <td>Amsterdam sloterdijk</td>
+                            <td>29-04-2013</td>
+                            <td>19:00</td>
+                            <td>BMW 1-serie</td>
+                            <td>2</td>
+                            <td>€20</td>
+                            <th><a href="#">Annuleren</a></th>
                         </tr>
                         <tr>
-                            <td>DatabaseMember05</td>
-                            <td>DatabaseSubject05</td>
-                            <td>DataBaseDate05</td>
-                            <th><a href="#">Bekijken</a></th>
+                            <td>Amsterdam centraal</td>
+                            <td>Amsterdam sloterdijk</td>
+                            <td>29-04-2013</td>
+                            <td>19:00</td>
+                            <td>BMW 1-serie</td>
+                            <td>2</td>
+                            <td>€20</td>
+                            <th><a href="#">Annuleren</a></th>
                         </tr>
                     </tbody>
                 </table>

@@ -1,0 +1,95 @@
+/* 
+    Document   : metro
+    Created on : 8-mei-2013, 22:52:09
+    Author     : Willem van Ess
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+html, body {
+    min-height: 100%;
+    background-size: cover;
+    background-image: url(../img/bg.jpg);
+    background-repeat: no-repeat;
+    background-color:transparent;
+    padding:0px;
+    min-height:100%;
+    font-family:eras;
+    color:#ccc;
+    text-align: center;
+}
+
+input {
+    width:250px;
+    font-family:arial;
+    font-size:22px;
+    color:#bababa;
+    border-radius: 8px;
+    border-style:solid;
+    border-color:#aaa7a7;
+    border-width:1px;
+    padding: 8px;
+    margin: 0px 0px 30px 0px;
+}
+
+.container {
+    display: inline-block;
+    margin: 5px auto 5px auto;
+}
+
+.tileHeader {
+    margin: 10px;
+    text-transform: uppercase;
+    font-size: 22px;
+    text-shadow: #000;
+}
+
+#logoHolder {
+    width: 210px;
+    height: 210px;
+    float: left;
+    margin: 5px;
+    background-color: #080;
+}
+
+.logo {
+    width: 210px;
+    height: 210px;
+    background-color: #080;
+}
+
+.icon {
+    width: 90px;
+    height: 90px;
+    background-color: #080;
+    margin-top: 5px;
+}
+
+#bigTile {
+    display: inline-block;
+    width: 265px;
+    height: 265px;
+    background-color: #080;
+    float: left;
+    margin: 5px;
+}
+
+#halfTile {
+    width: 540px;
+    height: 100px;
+    background-color: #080;
+    float: left;
+    margin: 5px;
+}
+
+#smallTile {
+    width: 100px;
+    height: 100px;
+    background-color: #080;
+    float: left;
+    margin: 5px;
+    text-align: center;
+    font-weight: bold;
+    word-wrap: break-word;
+    color: #fff;
+}

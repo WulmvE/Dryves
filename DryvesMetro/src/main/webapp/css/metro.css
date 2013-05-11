@@ -1,0 +1,22 @@
+/* 
+    Document   : mobileMetro
+    Created on : 11-mei-2013, 13:48:02
+    Author     : Willem van Ess
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+html, body{
+    display: none;
+/*    min-height: 100%;
+    background-size: cover;
+    background-image: url(../img/bg.jpg);
+    background-repeat: no-repeat;
+    background-color:transparent;
+    margin:0 auto;
+    padding:0px;
+    min-height:100%;
+    font-family:eras;
+    color:#a0a0a0;
+    text-align: center;*/
+}

@@ -1,14 +1,16 @@
 <%-- 
-    Document   : myRequestedRides
-    Created on : 5-mei-2013, 20:46:18
-    Author     : Willem van Ess
+    Document   : searchRideDetails
+    Created on : 5-mei-2013, 20:33:47
+    Author     : Vincent
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <link type="text/css" rel="stylesheet" href="css/main.css"/>	
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap_overrides.css"/>
 
     </head>
     <body>
@@ -44,10 +46,10 @@
         </br>
 
         <!-- logo -->
-        <div class="container">
+        <div  id="bs_main" class="container">
             <div class="row">
                 <div class="span3">
-                    <img src="img/dryves.jpg" class="img-rounded">
+                    <div id="cont_logo"><img src="img/logo.png" class="img-rounded"/></div>
                 </div>
                 </br>
                 </br>
@@ -58,11 +60,10 @@
                 <div class="span9">
                     <div class="tabbable"> <!-- Only required for left/right tabs -->
                         <ul class="nav nav-tabs">
-                            <li><a href="#tab1" data-toggle="tab">Zoek een rit</a></li>
-                            <li><a href="#tab2" data-toggle="tab">Nieuwe rit aanbieden</a></li>
-                            <li><a href="#tab1" data-toggle="tab">Mijn aangeboden ritten</a></li>
-                            <li><a href="#tab1" data-toggle="tab">Mijn aanvragen</a></li>
-                            <li><a href="#tab1" data-toggle="tab">Mijn berichten</a></li>
+                            <li class="active"><a href="/Dryves/searchRide" data-toggle="tab">Zoek een rit</a></li>
+                            <li><a href="/Dryves/myRideDetails" data-toggle="tab">Nieuwe rit aanbieden</a></li>
+                            <li><a href="/Dryves/myRides" data-toggle="tab">Mijn aangeboden ritten</a></li>
+                            <li><a href="/Dryves/myRequestedRides" data-toggle="tab">Mijn aanvragen</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
@@ -76,19 +77,42 @@
                 </div>
             </div>
 
-            <form class= "well span12">	
-                
-                <div class="conv_recieved">Hier komt dan de conversatie...</div>
+            <form class= "well span12">
+                <div class="span1">	
+                    <p>Beginpunt:</p>
+                    <p>Eindpunt:</p>
+                    <p>Datum:</p>
+                    <p>Tijd:</p>
+                    <p>Auto:</p>
+                    <p>Zitplaatsen:</p>
+                    <p>Prijs</p>
+                    <div class="span2">
+                        <button class="btn btn-primary">Ja, ik wil meerijden</button>
+                    </div>
+                </div>
+                <div class="span2">	
+                    <p>Amsterdam centraal</p>
+                    <p>Amsterdam sloterdijk</p>
+                    <p>29-04-2013</p>
+                    <p>19:00</p>
+                    <p>BMW 1-serie</p>
+                    <p>2</p>
+                    <p>20€</p>
+                </div>
+                <div class="span1 offset1">	
+                    <p>Chauffeur:</p>
+                    <div class="span3">	
+                        <img src="img/avatar.jpg" class="img-rounded">
+                    </div>
+                </div>
+                <div class="span2">	
+                    <p>hctung</p>
+                </div>
 
-                <div class="conv_sent">En de reactie daarop...<br>
-                                       welke over meerdere regels gaat...</div>
-
-                <div class="conv_recieved">Hier komt dan de conversatie...<br>ook<br>al<br>zijn<br>dit<br>er<br>veel</div>
-
-                <div class="conv_sent">En de reactie daarop...</div>
-                
+                <div class="span4">
+                    <img src="img/kaart.jpg" class="img-rounded">
+                </div>
             </form>
             <script src="js/bootstrap.js"></script>
-        </div>
     </body>
 </html>

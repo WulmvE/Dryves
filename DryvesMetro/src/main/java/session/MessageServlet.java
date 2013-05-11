@@ -1,0 +1,42 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package session;
+
+import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author Willem van Ess
+ */
+
+@WebServlet(name = "MetroServlet",
+        loadOnStartup = 1,
+        urlPatterns = {"/resTest"})
+
+public class MessageServlet extends HttpServlet {
+
+    /* HTTP GET request */
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        String userPath = request.getServletPath();
+
+        // if addToCart action is called
+        if (userPath.equals("/resTest")) {
+            // TODO: Implement ritZoeken action
+        }
+        
+        String url = "/WEB-INF/" + userPath + ".jsp";
+        try {
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }}
+}

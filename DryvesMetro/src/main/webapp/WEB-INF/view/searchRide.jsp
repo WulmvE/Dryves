@@ -1,14 +1,16 @@
 <%-- 
-    Document   : myRequestedRides
-    Created on : 5-mei-2013, 20:46:18
-    Author     : Willem van Ess
+    Document   : ritZoeken
+    Created on : 5-mei-2013, 19:48:26
+    Author     : Vincent
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <link type="text/css" rel="stylesheet" href="css/main.css"/>	
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap_overrides.css"/>
 
     </head>
     <body>
@@ -38,31 +40,27 @@
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
-        </div>
-
+        </div>	
         </br>
         </br>
-
         <!-- logo -->
-        <div class="container">
+        <div id="bs_main" class="container">
             <div class="row">
                 <div class="span3">
-                    <img src="img/dryves.jpg" class="img-rounded">
+                    <div id="cont_logo"><img src="img/logo.png" class="img-rounded"/></div>
                 </div>
                 </br>
                 </br>
                 </br>
-                </br>
-
+                </br>		
                 <!-- tabs-->
                 <div class="span9">
                     <div class="tabbable"> <!-- Only required for left/right tabs -->
                         <ul class="nav nav-tabs">
-                            <li><a href="#tab1" data-toggle="tab">Zoek een rit</a></li>
-                            <li><a href="#tab2" data-toggle="tab">Nieuwe rit aanbieden</a></li>
-                            <li><a href="#tab1" data-toggle="tab">Mijn aangeboden ritten</a></li>
-                            <li><a href="#tab1" data-toggle="tab">Mijn aanvragen</a></li>
-                            <li><a href="#tab1" data-toggle="tab">Mijn berichten</a></li>
+                            <li class="active"><a href="/Dryves/searchRide" data-toggle="tab">Zoek een rit</a></li>
+                            <li><a href="/Dryves/myRideDetails" data-toggle="tab">Nieuwe rit aanbieden</a></li>
+                            <li><a href="/Dryves/myRides" data-toggle="tab">Mijn aangeboden ritten</a></li>
+                            <li><a href="/Dryves/myRequestedRides" data-toggle="tab">Mijn aanvragen</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
@@ -76,19 +74,20 @@
                 </div>
             </div>
 
-            <form class= "well span12">	
-                
-                <div class="conv_recieved">Hier komt dan de conversatie...</div>
-
-                <div class="conv_sent">En de reactie daarop...<br>
-                                       welke over meerdere regels gaat...</div>
-
-                <div class="conv_recieved">Hier komt dan de conversatie...<br>ook<br>al<br>zijn<br>dit<br>er<br>veel</div>
-
-                <div class="conv_sent">En de reactie daarop...</div>
-                
+            <form class= "well span12">
+                <div class="span4">	
+                    <input type="text" class="span4" placeholder="VAN" /><br/>
+                    <input type="text" class="span4" placeholder="NAAR" /><br/>
+                    <input type="text" class="span4" placeholder="DATUM" /><br/>
+                    <input type="text" class="span4" placeholder="TIJDSTIP" /><br/>	
+                    <button class="btn btn-primary">Zoeken</button>
+                    <button class="btn">Zoekopties</button>
+                </div>
+                <div class="span4 offset3">
+                    <img src="img/kaart.jpg" class="img-rounded">
+                </div>
             </form>
             <script src="js/bootstrap.js"></script>
-        </div>
     </body>
 </html>
+
