@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Willem van Ess
  */
 
-@WebServlet(name = "MetroServlet",
+@WebServlet(name = "MessageServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/resTest"})
+        urlPatterns = {"/messages"})
 
 public class MessageServlet extends HttpServlet {
 
@@ -29,11 +29,11 @@ public class MessageServlet extends HttpServlet {
         String userPath = request.getServletPath();
 
         // if addToCart action is called
-        if (userPath.equals("/resTest")) {
+        if (userPath.equals("/messages")) {
             // TODO: Implement ritZoeken action
         }
         
-        String url = "/WEB-INF/" + userPath + ".jsp";
+        String url = "/WEB-INF/view/" + userPath + ".jsp";
         try {
             request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception ex) {

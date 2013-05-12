@@ -19,6 +19,21 @@ html, body {
     text-align: center;
 }
 
+.pac-container{
+    text-align: left;
+    font-family:arial;
+    font-size:16px;
+    color:#bababa;
+    border-radius: 1px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-style:solid;
+    border-color:#aaa7a7;
+    border-width:0px 1px 1px 1px;
+    padding: 4px 0px 30px 0px;
+    margin: -10px 0px 0px 0px;
+}
+
 input {
     width:250px;
     font-family:arial;
@@ -72,6 +87,8 @@ input {
     background-color: #080;
     float: left;
     margin: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #halfTile {
@@ -92,4 +109,61 @@ input {
     font-weight: bold;
     word-wrap: break-word;
     color: #fff;
+}
+
+/*#largestTile {
+    width: 540px;
+    height: 365px;
+    background-color: #080;
+    float: left;
+    margin: 5px;
+    overflow: auto;
+}*/
+
+table {
+    width: auto;
+    max-height: 265px;
+}
+
+tr {
+    width: 265px;
+    border: solid #000;
+}
+
+td {
+
+    font-size: 12px;
+    width: 130px;
+    color: #ccc;
+    word-wrap: break-word;
+}
+
+th {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+#recieved {
+    margin: 5px;
+    width: 130px;
+    height: auto;
+    background-color: #880;
+    color: #fff;
+    border: solid #000;
+    border-radius: 8px;
+    float: right;
+    clear: left;
+}
+
+#sent {
+    margin: 5px;
+    width: 130px;
+    height: auto;
+    background-color: #46a546;
+    color: #fff;
+    border: solid #000;
+    border-radius: 8px;
+    float: left;
+    clear: right;
 }

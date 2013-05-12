@@ -57,14 +57,15 @@
                 <table>    
                     <thead>
                         <tr>
-                            <th>Eindpunt</th>
-                            <th>Datum</th>
+                            <th>Afzender</th>
+                            <th>Onderwerp</th>
+                            <!--                            <th>Datum</th>-->
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Amsterdam</td>
-                            <td><a href="#">12-06-2013</a></td>
+                            <td>Dryves</td>
+                            <td><a href="#">Welkom bij Dryves</a></td>
                         </tr>
                         <tr>
                             <td>Die ene collega</td>
@@ -86,40 +87,21 @@
                 </table>              
             </div>
             <div id="bigTile">
-<div class="span4">	
-                    <p>Beginpunt:</p>
-                    <p>Eindpunt:</p>
-                    <p>Datum:</p>
-                    <p>Tijd:</p>
-                    <p>Auto:</p>
-                    <p>Zitplaatsen:</p>
-                    <p>Prijs</p>
-                    <div class="span4">
-                        <button class="btn btn-primary">Ja, ik wil meerijden</button>
-                    </div>
-                </div>
-                <div class="span4">	
-                    <p>Amsterdam centraal</p>
-                    <p>Amsterdam sloterdijk</p>
-                    <p>29-04-2013</p>
-                    <p>19:00</p>
-                    <p>BMW 1-serie</p>
-                    <p>2</p>
-                    <p>20€</p>
-                </div>
-                <div class="span4 offset4">	
-                    <p>Chauffeur:</p>
-                    <div class="span4">	
-                        <img src="img/avatar.jpg" class="img-rounded">
-                    </div>
-                </div>
-                <div class="span4">	
-                    <p>hctung</p>
-                </div>
+                
+                <div id="recieved">Hier komt dan de conversatie...</div>
 
-                <div class="span4">
-                    <img src="img/kaart.jpg"/>
-                </div>                
+                <div id="sent">En de reactie daarop...<br>
+                    welke over meerdere regels gaat...</div>
+
+                <div id="recieved">Hier komt dan de conversatie...<br>ook<br>al<br>zijn<br>dit<br>er<br>veel</div>
+
+                <div id="sent">En de reactie daarop...</div>
+
+                <div id="recieved">En de reactie daarop...</div>
+
+                <div id="sent">En de reactie daarop...</div>
+
+                <div id="recieved">En de reactie daarop...</div>
             </div>
 
             <br>

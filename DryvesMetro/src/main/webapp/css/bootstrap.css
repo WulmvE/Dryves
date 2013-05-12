@@ -929,32 +929,6 @@ input.search-query {
   padding-left: 180px;
 }
 
-.conv_recieved {
-    float: left;
-    clear: both;
-    text-align: left;
-    width: 30%;
-    height: auto;
-    border-radius: 20px;
-    padding: 8px;
-    margin: 10px 20px 10px 20px;
-    border: 1px solid #000;
-    background-color: #d1d1d1;
-}
-
-.conv_sent {
-    float: right;
-    clear: left;
-    text-align: right;
-    width: 30%;
-    height: auto;
-    border-radius: 20px;
-    padding: 8px;
-    margin: 10px 20px 10px 20px;
-    border: 1px solid #dddddd;    
-    background-color: #b3b3b3;
-}
-
 button.close {
   padding: 0;
   cursor: pointer;
