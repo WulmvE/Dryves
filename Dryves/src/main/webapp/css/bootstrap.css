@@ -6156,3 +6156,28 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+#recieved {
+    margin: 5px;
+    width: 51%;
+    height: auto;
+    background-color: #ccc;
+    color: #000;
+    padding: 8px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    float: right;
+    clear: left;
+}
+
+#sent {
+    margin: 5px;
+    width: 51%;
+    height: auto;
+    background-color: #aaa;
+    color: #000;
+    padding: 8px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    float: left;
+    clear: right;
+}
