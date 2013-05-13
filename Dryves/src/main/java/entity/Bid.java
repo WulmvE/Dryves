@@ -58,7 +58,7 @@ public class Bid  implements java.io.Serializable {
         this.idBid = idBid;
     }
    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="'timestamp'", nullable=false, length=19)
+    @Column(name="timestamp", nullable=false)
     public Date getTimestamp() {
         return this.timestamp;
     }
@@ -87,7 +87,7 @@ public class Bid  implements java.io.Serializable {
         this.amount = amount;
     }
     
-    @Column(name="text", length=65535)
+    @Column(name="text", length=156)
     public String getText() {
         return this.text;
     }

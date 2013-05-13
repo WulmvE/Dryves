@@ -73,7 +73,7 @@ public class Rating  implements java.io.Serializable {
         this.score = score;
     }
     
-    @Column(name="comment", length=65535)
+    @Column(name="comment", length=140)
     public String getComment() {
         return this.comment;
     }

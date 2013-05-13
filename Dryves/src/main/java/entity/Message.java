@@ -70,7 +70,7 @@ public class Message  implements java.io.Serializable {
         this.memberByIdMemberReciever = memberByIdMemberReciever;
     }
     
-    @Column(name="text", length=65535)
+    @Column(name="text", length=156)
     public String getText() {
         return this.text;
     }
