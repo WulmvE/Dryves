@@ -57,7 +57,7 @@ country: 'nl'
 		<a  href="results.html" class="button" id="button_search">zoek</a>
 		</div>
 		<div id="cont_create">
-		<h2>Ik zoek ik meerijders</h2>
+		<h2>Ik zoek meerijders</h2>
 		<input class="input_location" type="text"  placeholder="van"/><br/>
 		<input class="input_location" type="text"  placeholder="naar"/><br/>
 		<input class="input_date" type="text"  placeholder="op"/><br/>
