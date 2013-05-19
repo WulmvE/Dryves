@@ -17,7 +17,7 @@
 
         <title>JSP Page</title>
 
-        
+
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 
@@ -39,17 +39,13 @@
         <div class="container">
 
             <div id="logoHolder"><img src="img/dryves.jpg" class="logo"/></div>
-
-            <div id="smallTile"><img src="img/car_icon.jpg" class="icon"/></div>
-            <div id="smallTile"><img src="img/message_icon.png" class="icon"/></div>
-            <div id="smallTile"><img src="img/login_icon.png" class="icon"/></div>
-
-            <br>
-
             <div id="smallTile"><img src="img/about_icon.png" class="icon"/></div>
             <div id="smallTile"><img src="img/contact_icon.jpg" class="icon"/></div>
             <div id="smallTile"><br>200.456 ton CO2 bespaard!</div>
-
+            <br>
+            <div id="smallTile"><img src="img/car_icon.jpg" class="icon"/></div>
+            <div id="smallTile"><img src="img/message_icon.png" class="icon"/></div>
+            <div id="smallTile"><img src="img/login_icon.png" class="icon"/></div>
             <br>
 
             <div id="bigTile">
