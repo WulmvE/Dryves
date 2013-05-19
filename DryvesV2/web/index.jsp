@@ -5,7 +5,7 @@
 --%>
 
 	<div id="col_content">
-	hoi
+	
 		<div id="quick_search" class="block_six white">		
 		<h2>ik wil meerijden</h2>
 		<input class="input_location" type="text"  placeholder="van"/><br/>
