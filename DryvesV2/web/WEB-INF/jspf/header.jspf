@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <!--This is a comment-->
+
+        <title>Dryves - Home</title>
+
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+
+        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/jquery.ui.datepicker-nl.js"></script>
+
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&language=nl"></script>
+        <script type="text/javascript" src="js/jquery.geocomplete.min.js"></script>
+
+    </head>
+
+    <body>
+
+        <script type="text/javascript">
+            $(function() {
+                $(".input_location").geocomplete({
+                    types: ['(cities)'],
+                    country: 'nl'
+                });
+
+                $(function() {
+                    $(".input_date").datepicker({
+                        dateFormat: "dd/mm/yy",
+                        regional: "nl"
+
+                    });
+                });
+
+
+            });
+        </script>
+
+        <div id="main">
+            <div id="header">
+                <div id="col_left">
+                    <div id="logo" class="block_double green"><a href="index.html"><img src="img/logo.png"/></a></div>
+                    <div class="block_single blue"><a class="menu_item" href="#">over dryves</a></div>
+                    <div class="block_single blue"><a class="menu_item" href="#">contact</a></div>
+                    <div class="block_single blue"><a class="menu_item" href="#">hoe werkt 't</a></div>
+                    <div class="block_single blue"><a class="menu_item" href="#">mijn <span>dryves</span></a></div>		
+                </div>
+            </div>

@@ -1,0 +1,296 @@
+/*This is a comment*/
+@font-face {
+	font-family: 'segoe';
+	src: url('../fonts/segoeuil.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/segoeuil.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	     url('../fonts/segoeuil.woff') format('woff'), /* Modern Browsers */
+	     url('../fonts/segoeuil.ttf')  format('truetype'), /* Safari, Android, iOS */
+	     url('../fonts/segoeuil.svg#svgFontName') format('svg'); /* Legacy iOS */
+	}
+
+@font-face
+{
+font-family: segoe;
+src: url('../fonts/segoeuil.ttf');
+}
+
+@media (max-width: 912px) {
+  #main {
+    width:456px;
+  }
+}	
+
+html {
+min-height: 100%;
+background-size: cover;
+background-image: url(../img/bg.jpg);
+background-repeat: no-repeat;
+}
+
+body{
+background-color:transparent;
+margin:0px;
+padding:0px;
+min-height:100%;
+font-family: "segoe";
+color:#a0a0a0;
+text-align: center;
+}
+
+#main{
+display:inline-block;
+margin-top: 15%;
+text-align: center;
+
+}
+
+#col_left{
+min-height:100%;
+position:relative;
+margin: 0px;
+padding: 0px;
+text-align: left;
+}
+
+#col_content{
+min-height:100%;
+clear:left;
+margin: 0px;
+padding: 0px;
+text-align: left;
+}
+
+img{
+border: none; 
+}
+
+.block_single{
+width:149px;
+height:149px;
+float:left;
+}
+
+.block_double{
+width:301px;
+height:149px;
+float:left;
+}
+
+.block_quad{
+width:453px;
+height:301px;
+float: left;
+}
+
+.block_six{
+width:453px;
+height:301px;
+float: left;
+}
+
+.block_single, .block_double, .block_quad, .block_six{
+margin: 0px 3px 3px 0px;
+text-align:center;
+}
+
+.white{
+background-color:#ffffff;
+text-align: center;
+}
+
+.green{
+background-color:#a6c400;
+}
+
+.green:hover{
+background-color:#b5d501;
+}
+
+.blue {
+background-color:#62b5dc;
+}
+
+.blue:hover{
+background-color:#6ac3ed;
+}
+
+.blue, .blue:hover, .green, .green:hover{
+transition: background-color 0.2s;
+-webkit-transition: background-color 0.2s;
+}
+
+#cont_promo {
+font-size:30px;
+color:#ffffff;
+clear:both;
+text-align: center;
+padding-top: 70px;
+}
+.sub{
+vertical-align: bottom;
+font-size:14px;
+}
+
+h2{
+font-size: 32px;
+font-weight: lighter;
+color:#62b5dc;
+float:left;
+margin:10px 0px 20px 18px;
+padding:0px;
+}
+
+input {
+width:214px;
+font-family:arial;
+font-size:22px;
+color:#bababa;
+border-style:solid;
+border-color:#aaa7a7;
+border-width:1px;
+padding: 7px 8px;
+margin: 0px 0px 18px 0px;
+}
+
+.pac-container{
+text-align: left;
+font-family:arial;
+font-size:22px;
+color:#bababa;
+border-style:solid;
+border-color:#aaa7a7;
+border-width:0px 1px 1px 1px;
+padding: 4px 0px 10px 0px;
+margin: -10px 0px 0px 0px;
+}
+
+.button{
+float:right;
+font-size:28px;
+color:#000000;
+float:right;
+margin: 0px 18px 0 0;
+}
+
+.menu_item{
+color:#ffffff;
+font-size:24px;
+display: inline-block;
+padding: 110px 0px 0px 0px;
+}
+.menu_item:link {text-decoration:none;}
+.menu_item:visited {text-decoration:none;}
+
+
+
+.arial{
+font-family:arial;
+font-size:18px;
+}
+
+
+/*********************** results page ************************/
+
+#cont_results{
+margin: 0px;
+padding:0px;
+}
+
+#results{
+list-style-type:none;
+width:750px;
+margin: 0px;
+padding:0px;
+
+}
+
+.result{
+float:left;
+width:300px;
+height:220px;
+background-color:#ffffff;
+border-radius: 8px;
+margin: 0px 0px 8px 8px;
+}
+
+.result div{
+margin: 50px 0px 8px 20px;
+float:left;
+}
+
+.result .summary{
+font-family:arial;
+font-size:14px;
+vertical-align:middle;
+}
+
+.result .route{
+font-family: eras;
+color:#000000;
+font-size:18px;
+margin: 0px;
+padding: 0px;
+}
+
+.avatar{
+border-style:solid;
+border-color:#bfbdbd;
+border-width:1px;
+
+}
+
+.avatar_label{color:#e68200;}
+.avatar_label:link {text-decoration:none;}
+.avatar_label:visited {text-decoration:none;}
+.avatar_label:hover {text-decoration:underline;}
+
+.view_details{
+font-family: eras;
+color:#000000;
+font-size:18px;
+margin-top:3em;
+float:right;
+}
+
+.view_details:link {text-decoration:none;}
+.view_details:visited {text-decoration:none;}
+.view_details:hover {text-decoration:underline;}
+
+.orange{
+color:#e68200;
+}
+
+.price{
+color:#ffffff;
+background-color:#e68200;
+border-radius: 2px;
+padding: 0px 2px 0px 2px;
+}
+
+h1{
+margin: 0px 0px 8px 18px;
+font-weight: normal;
+line-height:70%;
+font-size:36px;
+color:#ffffff;
+}
+
+.pac-container:after{
+display:none;
+}
+
+/*#ui-datepicker-div {
+
+  margin-top: -170px;
+}*/
+
+
+/* other geocomplete tag 
+
+.pac-container 
+.pac-container:after 
+.pac-item 
+.pac-item:hover 
+.pac-selected 
+.pac-placeholder 
+
