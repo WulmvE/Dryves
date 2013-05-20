@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-
-        <!--This is a comment-->
-
+    <head>        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dryves - Home</title>
 
         <link rel="stylesheet" type="text/css" href="css/main.css" />
@@ -20,7 +18,6 @@
     </head>
 
     <body>
-
         <script type="text/javascript">
             $(function() {
                 $(".input_location").geocomplete({
@@ -35,18 +32,15 @@
 
                     });
                 });
-
-
             });
         </script>
 
         <div id="main">
-            <div id="header">
-                <div id="col_left">
-                    <div id="logo" class="block_double green"><a href="index.html"><img src="img/logo.png"/></a></div>
-                    <div class="block_single blue"><a class="menu_item" href="#">over dryves</a></div>
-                    <div class="block_single blue"><a class="menu_item" href="#">contact</a></div>
-                    <div class="block_single blue"><a class="menu_item" href="#">hoe werkt 't</a></div>
-                    <div class="block_single blue"><a class="menu_item" href="#">mijn <span>dryves</span></a></div>		
-                </div>
+
+            <div id="main_menu">
+                <a id="logo" class="block_double green" href="#" ><span><img src="img/logo.png" alt="Dryves logo"/></span></a>
+                <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">over dryves</span></a>
+                <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">contact</span></a>
+                <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">hoe werkt 't</span></a>
+                <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">mijn <span>dryves</span></span></a>		
             </div>
