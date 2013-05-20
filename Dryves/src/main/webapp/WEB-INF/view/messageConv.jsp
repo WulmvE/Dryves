@@ -1,5 +1,5 @@
 <%-- 
-    Document   : myRequestedRides
+    Document   : messageConv
     Created on : 5-mei-2013, 20:46:18
     Author     : Willem van Ess
 --%>
@@ -78,14 +78,14 @@
 
             <form class= "well span12">	
                 
-                <div class="conv_recieved">Hier komt dan de conversatie...</div>
+                <div id="recieved">Hier komt dan de conversatie...</div>
 
-                <div class="conv_sent">En de reactie daarop...<br>
+                <div id="sent">En de reactie daarop...<br>
                                        welke over meerdere regels gaat...</div>
 
-                <div class="conv_recieved">Hier komt dan de conversatie...<br>ook<br>al<br>zijn<br>dit<br>er<br>veel</div>
+                <div id="recieved">Hier komt dan de conversatie...<br>ook<br>al<br>zijn<br>dit<br>er<br>veel</div>
 
-                <div class="conv_sent">En de reactie daarop...</div>
+                <div id="sent">En de reactie daarop...</div>
                 
             </form>
             <script src="js/bootstrap.js"></script>

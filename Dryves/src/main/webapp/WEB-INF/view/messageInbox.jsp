@@ -1,5 +1,5 @@
 <%-- 
-    Document   : myRequestedRides
+    Document   : messageInbox
     Created on : 5-mei-2013, 20:46:18
     Author     : Willem van Ess
 --%>

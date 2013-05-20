@@ -4,7 +4,9 @@
  */
 package session;
 
+import entity.Message;
 import java.io.IOException;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +33,7 @@ public class MessageServlet extends HttpServlet {
 
         // if addToCart action is called
         if (userPath.equals("/messageInbox")) {
-            // TODO: Implement ritZoeken action
+            // TODO: Implement inbox action
         }
         
         String url = "/WEB-INF/view" + userPath + ".jsp";
