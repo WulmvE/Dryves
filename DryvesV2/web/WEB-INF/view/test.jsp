@@ -22,7 +22,16 @@
         <table>
             <c:forEach var="dryver" items="${dryvers}">
                 <tr>                 
+                    <td>
                     ${dryver.alias}
+                    </td>
+                </tr>
+            </c:forEach>
+            <c:forEach var="ride" items="${rides}">
+                <tr>                 
+                    <td>
+                    ${ride.idRide}
+                    </td>
                 </tr>
             </c:forEach>
 

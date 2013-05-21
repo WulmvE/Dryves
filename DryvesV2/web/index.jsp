@@ -8,7 +8,7 @@
 
     <div id="quick_search" class="block_six white">		
         <h2>ik wil meerijden</h2>
-        <form name="quick_search_form" method="post" action="?">
+        <form name="quick_search_form" method="post" action="searchresults">
             <input class="input_location" name="search_start" type="text"  placeholder="van"/><br/>
             <input class="input_location" name="search_destination" type="text"  placeholder="naar"/><br/>
             <input class="input_date"  name="search_date" type="text"  placeholder="op" /><br/>
