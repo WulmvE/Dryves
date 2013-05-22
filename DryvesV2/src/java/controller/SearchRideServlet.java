@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
 import java.io.IOException;
@@ -28,7 +27,6 @@ public class SearchRideServlet extends HttpServlet {
 
     @EJB
     private DryverFacade dryverFacade;
-    
     @EJB
     private RideFacade rideFacade;
 
@@ -37,8 +35,8 @@ public class SearchRideServlet extends HttpServlet {
 
         // store category list in servlet context
         getServletContext().setAttribute("dryvers", dryverFacade.findAll());
-        
-       
+
+
     }
 
     /**
@@ -53,7 +51,7 @@ public class SearchRideServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-System.out.println("GET");
+        System.out.println("GET");
         String userPath = request.getServletPath();
 
         // if searchRideDetails page is requested
@@ -64,8 +62,7 @@ System.out.println("GET");
             // TODO: test, of de controller request forward naar view
         } else if (userPath.equals("/test")) {
             //dit is een test
-        } else if (userPath.equals("/searchresults")){
-            
+        } else if (userPath.equals("/searchresults")) {
         }
 
         // use RequestDispatcher to forward request internally
@@ -90,12 +87,11 @@ System.out.println("GET");
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //getServletContext().setAttribute("rides", rideFacade.findAll());
         String van = request.getParameter("search_start");
         String naar = request.getParameter("search_destination");
         String op = request.getParameter("search_date");
         getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
-        int aantalrides = rideFacade.searchRideByStart(van).size();
+
         getServletContext().setAttribute("aantalrides", aantalrides);
 //        String att =   (String) request.getAttribute("search_start");
 //        System.out.println("TEST");

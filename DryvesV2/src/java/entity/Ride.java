@@ -38,6 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ride.findAll", query = "SELECT r FROM Ride r"),
+    @NamedQuery(name = "Ride.findByAll", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation AND r.endLocation = :endLocation AND r.departureDate = :departureDate"),
+    @NamedQuery(name = "Ride.searchRideByStartEnd", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation AND r.endLocation = :endLocation"),
+    @NamedQuery(name = "Ride.searchRideByStartDate", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation AND r.departureDate = :departureDate"),
+    @NamedQuery(name = "Ride.searchRideByEndDate", query = "SELECT r FROM Ride r WHERE r.endLocation = :endLocation AND r.departureDate = :departureDate"),
     @NamedQuery(name = "Ride.findByIdRide", query = "SELECT r FROM Ride r WHERE r.idRide = :idRide"),
     @NamedQuery(name = "Ride.findByAskingPrice", query = "SELECT r FROM Ride r WHERE r.askingPrice = :askingPrice"),
     @NamedQuery(name = "Ride.findByDepartureDate", query = "SELECT r FROM Ride r WHERE r.departureDate = :departureDate"),
