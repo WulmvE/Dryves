@@ -6,7 +6,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<!--
 <html>
 
     <head>
@@ -54,7 +54,7 @@
                 <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">contact</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">hoe werkt 't</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">mijn <span>dryves</span></span></a>		
-            </div>
+            </div>-->
 
             <div id="sub_menu">
                 <div class="block_double blue"><div class="menu_icon icon_results">50</div><span class="menu_item">resultaten</span></div>
@@ -79,156 +79,156 @@
 
                 <ul id="results">
                     <c:forEach var="ride" items="${rides}">
-                    <li class="result block_triple white">
+                        <li class="result block_triple white">
 
-                        <div>
-                            <img class="avatar" src="img/avatar.jpg" />
-                            <a href="#" class="avatar_label">${ride.idRide}</a>
-                        </div>
+                            <div>
+                                <img class="avatar" src="img/avatar.jpg" />
+                                <a href="#" class="avatar_label">${ride.idRide}</a>
+                            </div>
 
-                        <div class="summary">
-                            <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
-                            ${ride.departureDate}<br>
-                            ${ride.seatsAvailable} stoelen beschikbaar<br>
-                            <span class="price">&euro; ${ride.askingPrice}</span> / Plaats <br>
-                            <span class="rating_small text_green"></span>
-                            <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
-                        </div>
+                            <div class="summary">
+                                <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
+                                ${ride.departureDate}<br>
+                                ${ride.seatsAvailable} stoelen beschikbaar<br>
+                                <span class="price">&euro; ${ride.askingPrice}</span> / Plaats <br>
+                                <span class="rating_small text_green"></span>
+                                <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                            </div>
 
-                    </li>
+                        </li>
                     </c:forEach>
-<!--
-                    <li class="result block_triple white">
-
-                        <div>
-                            <img class="avatar" src="img/avatar.jpg" />
-                            <a href="#" class="avatar_label">blake1987</a>
-                        </div>
-
-                        <div class="summary">
-                            <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg2</span><br>
-                            31/05/2013<br>
-                            1 plaats vrij<br>
-                            <span class="price">€10</span> / Plaats <br>
-                            <span class="rating_small text_orange"></span>
-                            <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
-                        </div>
-
-                    </li>
-
-                    <li class="result block_triple white">
-
-                        <div>
-                            <img class="avatar" src="img/avatar.jpg" />
-                            <a href="#" class="avatar_label">blake1987</a>
-                        </div>
-
-                        <div class="summary">
-                            <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg3</span><br>
-                            31/05/2013<br>
-                            1 plaats vrij<br>
-                            <span class="price">€10</span> / Plaats <br>
-                            <span class="rating_small text_orange"></span>
-                            <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
-                        </div>
-
-                    </li>
-
-                    <li class="result block_triple white">
-
-                        <div>
-                            <img class="avatar" src="img/avatar.jpg" />
-                            <a href="#" class="avatar_label">blake1987</a>
-
-                        </div>
-
-                        <div class="summary">
-                            <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg4</span><br>
-                            31/05/2013<br>
-                            1 plaats vrij<br>
-                            <span class="price">€10</span> / Plaats <br>
-                            <span class="rating_small text_green"></span>
-                            <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
-                        </div>
-
-                    </li>
-
-                    <li class="result block_triple white">
-
-                        <div>
-                            <img class="avatar" src="img/avatar.jpg" />
-                            <a href="#" class="avatar_label">blake1987</a>
-                        </div>
-
-                        <div class="summary">
-                            <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg</span><br>
-                            31/05/2013<br>
-                            1 plaats vrij<br>
-                            <span class="price">€10</span> / Plaats <br>
-                            <span class="rating_small text_red"></span>
-                            <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
-                        </div>
-
-                    </li>
-
-                    <li class="result block_triple white">
-
-                        <div>
-                            <img class="avatar" src="img/avatar.jpg" />
-                            <a href="#" class="avatar_label">blake1987</a>
-                        </div>
-
-                        <div class="summary">
-                            <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg</span><br>
-                            31/05/2013<br>
-                            1 plaats vrij<br>
-                            <span class="price">€10</span> / Plaats <br>
-                            <span class="rating_small text_grey"></span>
-                            <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
-                        </div>
-
-                    </li>
-
-                    <li class="result block_triple white">
-
-                        <div>
-                            <img class="avatar" src="img/avatar.jpg" />
-                            <a href="#" class="avatar_label">blake1987</a>
-                        </div>
-
-                        <div class="summary">
-                            <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg</span><br>
-                            31/05/2013<br>
-                            1 plaats vrij<br>
-                            <span class="price">€10</span> / Plaats <br>
-                            <span class="rating_small text_green"></span>
-                            <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
-                        </div>
-
-                    </li>
-
-                    <li class="result block_triple white">
-
-                        <div>
-                            <img class="avatar" src="img/avatar.jpg" />
-                            <a href="#" class="avatar_label">blake1987</a>
-                        </div>
-
-                        <div class="summary">
-                            <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg</span><br>
-                            31/05/2013<br>
-                            1 plaats vrij<br>
-                            <span class="price">€10</span> / Plaats <br>
-                            <span class="rating_small text_red"></span>
-                            <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
-                        </div>
-
-                    </li>-->
+                    <!--
+                                        <li class="result block_triple white">
+                    
+                                            <div>
+                                                <img class="avatar" src="img/avatar.jpg" />
+                                                <a href="#" class="avatar_label">blake1987</a>
+                                            </div>
+                    
+                                            <div class="summary">
+                                                <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg2</span><br>
+                                                31/05/2013<br>
+                                                1 plaats vrij<br>
+                                                <span class="price">€10</span> / Plaats <br>
+                                                <span class="rating_small text_orange"></span>
+                                                <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                                            </div>
+                    
+                                        </li>
+                    
+                                        <li class="result block_triple white">
+                    
+                                            <div>
+                                                <img class="avatar" src="img/avatar.jpg" />
+                                                <a href="#" class="avatar_label">blake1987</a>
+                                            </div>
+                    
+                                            <div class="summary">
+                                                <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg3</span><br>
+                                                31/05/2013<br>
+                                                1 plaats vrij<br>
+                                                <span class="price">€10</span> / Plaats <br>
+                                                <span class="rating_small text_orange"></span>
+                                                <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                                            </div>
+                    
+                                        </li>
+                    
+                                        <li class="result block_triple white">
+                    
+                                            <div>
+                                                <img class="avatar" src="img/avatar.jpg" />
+                                                <a href="#" class="avatar_label">blake1987</a>
+                    
+                                            </div>
+                    
+                                            <div class="summary">
+                                                <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg4</span><br>
+                                                31/05/2013<br>
+                                                1 plaats vrij<br>
+                                                <span class="price">€10</span> / Plaats <br>
+                                                <span class="rating_small text_green"></span>
+                                                <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                                            </div>
+                    
+                                        </li>
+                    
+                                        <li class="result block_triple white">
+                    
+                                            <div>
+                                                <img class="avatar" src="img/avatar.jpg" />
+                                                <a href="#" class="avatar_label">blake1987</a>
+                                            </div>
+                    
+                                            <div class="summary">
+                                                <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg</span><br>
+                                                31/05/2013<br>
+                                                1 plaats vrij<br>
+                                                <span class="price">€10</span> / Plaats <br>
+                                                <span class="rating_small text_red"></span>
+                                                <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                                            </div>
+                    
+                                        </li>
+                    
+                                        <li class="result block_triple white">
+                    
+                                            <div>
+                                                <img class="avatar" src="img/avatar.jpg" />
+                                                <a href="#" class="avatar_label">blake1987</a>
+                                            </div>
+                    
+                                            <div class="summary">
+                                                <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg</span><br>
+                                                31/05/2013<br>
+                                                1 plaats vrij<br>
+                                                <span class="price">€10</span> / Plaats <br>
+                                                <span class="rating_small text_grey"></span>
+                                                <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                                            </div>
+                    
+                                        </li>
+                    
+                                        <li class="result block_triple white">
+                    
+                                            <div>
+                                                <img class="avatar" src="img/avatar.jpg" />
+                                                <a href="#" class="avatar_label">blake1987</a>
+                                            </div>
+                    
+                                            <div class="summary">
+                                                <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg</span><br>
+                                                31/05/2013<br>
+                                                1 plaats vrij<br>
+                                                <span class="price">€10</span> / Plaats <br>
+                                                <span class="rating_small text_green"></span>
+                                                <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                                            </div>
+                    
+                                        </li>
+                    
+                                        <li class="result block_triple white">
+                    
+                                            <div>
+                                                <img class="avatar" src="img/avatar.jpg" />
+                                                <a href="#" class="avatar_label">blake1987</a>
+                                            </div>
+                    
+                                            <div class="summary">
+                                                <span class="route" >Amsterdam <span class="text_green"><></span> Tilburg</span><br>
+                                                31/05/2013<br>
+                                                1 plaats vrij<br>
+                                                <span class="price">€10</span> / Plaats <br>
+                                                <span class="rating_small text_red"></span>
+                                                <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                                            </div>
+                    
+                                        </li>-->
                 </ul>
             </div>
 
-            <div id="cont_promo">al 24.145 ton co<span class="sub">2</span> bespaart...</div>
+<!--            <div id="cont_promo">al 24.145 ton co<span class="sub">2</span> bespaart...</div>
 
         </div>
     </body>
-</html>
+</html>-->

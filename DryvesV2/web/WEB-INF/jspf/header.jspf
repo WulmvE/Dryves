@@ -3,7 +3,7 @@
 
     <head>        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dryves - Home</title>
+        <title>Dryves</title>
 
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
@@ -33,6 +33,29 @@
                     });
                 });
             });
+        </script>
+        <script type="text/javascript">
+            $(function() {
+                $(".view_details img").click(function() {
+                    var position = $(this).parents("#result").position();
+                    $(this).parents("#results").toggleClass("dimmed");
+                    $('body').append('<div class="overlay"/>');
+                });
+
+                $(".sort_option").click(function() {
+                    var current = $(this);
+                    if (!current.hasClass("active_up") && !current.hasClass("active_down")) {
+                        current.addClass("active_up").siblings().removeClass("active_up active_down");
+                    }
+                    else {
+                        current.toggleClass("active_up active_down");
+                    }
+                });
+            });
+
+
+
+
         </script>
 
         <div id="main">
