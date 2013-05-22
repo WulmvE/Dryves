@@ -31,6 +31,10 @@ public class RideFacade extends AbstractFacade<Ride> {
         super(Ride.class);
     }
     
+    public List<Ride> searchRideByStart(String van){
+        return em.createNamedQuery("Ride.findByStartLocation").setParameter("startLocation", van).getResultList();
+    }
+    
     public List<Ride> searchedRides(String van , String naar , String date){
         String query = "select * from Ride where startLocation ='"+van+"'";
         List<Ride> rides = new ArrayList<Ride>();

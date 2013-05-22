@@ -37,6 +37,7 @@ public class SearchRideServlet extends HttpServlet {
 
         // store category list in servlet context
         getServletContext().setAttribute("dryvers", dryverFacade.findAll());
+        
        
     }
 
@@ -89,34 +90,20 @@ System.out.println("GET");
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // getServletContext().setAttribute("rides", rideFacade.findAll());
+        //getServletContext().setAttribute("rides", rideFacade.findAll());
         String van = request.getParameter("search_start");
         String naar = request.getParameter("search_destination");
         String op = request.getParameter("search_date");
-        String att =   (String) request.getAttribute("search_start");
-        System.out.println("TEST");
-        System.out.println("TEST");
-        System.out.println("att: " + att);
-        System.out.println("uri path" + request.getRequestURI());
-        System.out.println("van : "+ van);
-        System.out.println("van : "+ van);
-        System.out.println("van : "+ van);
-        System.out.println("van : "+ van);
-        System.out.println("van : "+ van);
-        System.out.println(naar);
-        System.out.println(naar);
-        System.out.println(naar);
-        System.out.println(naar);
-        System.out.println(op);
-        System.out.println(op);
-        System.out.println(op);
-        System.out.println(op);
-        System.out.println(op);
-        System.out.println("POST");
-        System.out.println("POST");
-        System.out.println("POST");
-        System.out.println("POST");
-        rideFacade.searchedRides(van, naar, op);
+        getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
+//        String att =   (String) request.getAttribute("search_start");
+//        System.out.println("TEST");
+//        System.out.println("att: " + att);
+//        System.out.println("uri path" + request.getRequestURI());
+//        System.out.println("van : "+ van);
+//        System.out.println(naar);
+//        System.out.println(op);
+//        System.out.println("POST");
+//        rideFacade.searchedRides(van, naar, op);
         String userPath = request.getServletPath();
 
         // if searchRide action is called
