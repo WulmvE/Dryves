@@ -57,7 +57,7 @@
             </div>-->
 
             <div id="sub_menu">
-                <div class="block_double blue"><div class="menu_icon icon_results">50</div><span class="menu_item">resultaten</span></div>
+                <div class="block_double blue"><div class="menu_icon icon_results">${aantalrides}</div><span class="menu_item">resultaten</span></div>
 
                 <a class="block_single white" href="#"><div class="menu_icon"></div><span class="menu_item menu_label_blue">opnieuw</span></a>
 

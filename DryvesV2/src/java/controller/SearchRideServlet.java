@@ -95,6 +95,8 @@ System.out.println("GET");
         String naar = request.getParameter("search_destination");
         String op = request.getParameter("search_date");
         getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
+        int aantalrides = rideFacade.searchRideByStart(van).size();
+        getServletContext().setAttribute("aantalrides", aantalrides);
 //        String att =   (String) request.getAttribute("search_start");
 //        System.out.println("TEST");
 //        System.out.println("att: " + att);
