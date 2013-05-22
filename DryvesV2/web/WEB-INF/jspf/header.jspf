@@ -61,7 +61,7 @@
         <div id="main">
 
             <div id="main_menu">
-                <a id="logo" class="block_double green" href="#" ><span><img src="img/logo.png" alt="Dryves logo"/></span></a>
+                <a id="logo" class="block_double green" href="index.jsp" ><span><img src="img/logo.png" alt="Dryves logo"/></span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">over dryves</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">contact</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item">hoe werkt 't</span></a>
