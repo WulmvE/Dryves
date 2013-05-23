@@ -108,6 +108,8 @@ public class Dryver implements Serializable {
     private Collection<Negotiation> negotiationCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
     private Collection<Rating> ratingCollection;
+    
+    //private Stars sterren;
 
     public Dryver() {
     }
@@ -152,6 +154,39 @@ public class Dryver implements Serializable {
 
     public Double getAvgRating() {
         return avgRating;
+    }
+    
+    public Stars getStars() {
+        Double rating = getAvgRating();
+        if(rating < 1) {
+            return Stars.EEN;
+        } else if (rating < 2) {
+            
+        }
+        //        <c:if test="${ride.idMember.avgRating > 0.00 && ride.idMember.avgRating <= 2.00}">
+        //        <span class="rating_small text_green"></span>
+        //        </c:if>
+        //        <c:if test="${ride.idMember.avgRating > 2.00 && ride.idMember.avgRating <= 4.00}">
+        //        <span class="rating_small text_green"></span>
+        //        </c:if>
+        //        <c:if test="${ride.idMember.avgRating > 4.00 && ride.idMember.avgRating <= 5.00}">
+        //        <span class="rating_small text_green"></span>
+        //        </c:if>
+        return Stars.TWEE;
+    }
+    
+    public enum Stars {
+        EEN("\u2345"),
+        TWEE("");
+        private String unicode;
+        private Stars(String uni) {
+            unicode = uni;
+        }
+
+        @Override
+        public String toString() {
+            return unicode;
+        }
     }
 
     public void setAvgRating(Double avgRating) {
