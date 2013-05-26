@@ -48,14 +48,8 @@ public class MessageServlet extends HttpServlet {
         String userPath = request.getServletPath();
         // TODO: get all messages of the idMember that is logged in for inbox
         Dryver idMember = new Dryver(107);
-  //      Dryver idSender = new Dryver(101);
         getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idMember));
-        // Retrieve all messages from a certain sender depending on the idMember that is logged in.
-//        getServletContext().setAttribute("senders", messageFacade.searchMessageByidSender(idMember, idSender));
 
-
-//        int aantalmessages = messageFacade.searchMessageByidSender(idMember, idSender).size();
-//        getServletContext().setAttribute("aantalmessages", aantalmessages);
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
@@ -78,13 +72,15 @@ public class MessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Dryver idReciever = new Dryver(107);
         int idMessage = Integer.parseInt(request.getParameter("idMessage"));
-      //  Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
-      //  String dateTime = request.getParameter("dateTime");
+        Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
+        String dateTime = request.getParameter("dateTime");
         // Select a single message.
-        //getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
-        getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessageOnID(idMessage));
-
+        getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+        //if the user has sent messages to this person...
+        //getServletContext().setAttribute("sent", messageFacade.getSentMessage(idSender, idReciever));
+        
         String userPath = request.getServletPath();
         if (userPath.equals("/messages")) {
         }

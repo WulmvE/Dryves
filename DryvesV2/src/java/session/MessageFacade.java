@@ -41,13 +41,17 @@ public class MessageFacade extends AbstractFacade<Message> {
         return em.createNamedQuery("Message.findBySender").setParameter("idMemberReciever", idMember).setParameter("idMemberSender", idSender).getResultList();
     }
     
-    // retrieve a single message.
+    // retrieve a single message by messageId, SenderId and Date.
     public List<Message> getSingleMessage(int idMessage, Dryver idSender, String dateTime){
         return em.createNamedQuery("Message.getSingleMessage").setParameter("idMessage", idMessage).setParameter("idMemberSender", idSender).setParameter("dateTime", dateTime).getResultList();
     }
     
-    // retrieve a single message.
+    // retrieve a single message by messageId.
     public List<Message> getSingleMessageOnID(int idMessage){
         return em.createNamedQuery("Message.findByIdMessage").setParameter("idMessage", idMessage).getResultList();
+    }
+    
+    public List<Message> getSentMessage(Dryver idSender, Dryver idReciever){
+        return em.createNamedQuery("Message.getSentMessage").setParameter("idMemberSender", idSender).setParameter("idMemberReciever", idReciever).getResultList();
     }
 }

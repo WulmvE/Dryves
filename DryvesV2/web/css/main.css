@@ -166,11 +166,11 @@ background-color:#6ac3ed;
 }
 
 .red{
-background-color:#ffffff;
+background-color:#d00000;
 }
 
 .red:hover{
-background-color:#e1f2fa;
+background-color:#f00000;
 }
 
 .blue, .blue:hover, .green, .green:hover, .red, .red:hover, white, .white:hover{
@@ -218,6 +218,11 @@ color:#62b5dc;
   -moz-user-select: none;    
   -ms-user-select: none;      
   user-select: none;
+}
+
+.menu_icon.icon_messages{
+font-family:fontawesome;
+color:#ffffff;
 }
 
 .menu_icon.icon_results{
@@ -276,6 +281,7 @@ top:2px;
 .menu_label_blue{	
 color: #62b5dc;
 }
+
 .arial{
 font-family:arial;
 font-size:18px;
@@ -348,6 +354,26 @@ font-family:fontawesome;
 size:14px;
 }
 
+/******************** Message Pane ********************/
+
+#msgTitle{
+    float: right;
+    margin-right: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 24px;
+    text-align: right;
+}
+
+#msgText{
+    float: left;
+    text-align: left;
+    margin-left: 10px;
+}
+
+hr{
+    border-color: #62b5dc;
+}
 
 /*********************** other ************************/
 
