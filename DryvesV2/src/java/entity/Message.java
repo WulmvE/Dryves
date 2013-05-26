@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entity;
 
 import java.io.Serializable;
@@ -33,8 +32,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m"),
     @NamedQuery(name = "Message.findByIdMessage", query = "SELECT m FROM Message m WHERE m.idMessage = :idMessage"),
     @NamedQuery(name = "Message.findByDateTime", query = "SELECT m FROM Message m WHERE m.dateTime = :dateTime"),
-    @NamedQuery(name = "Message.findByText", query = "SELECT m FROM Message m WHERE m.text = :text")})
+    @NamedQuery(name = "Message.findByText", query = "SELECT m FROM Message m WHERE m.text = :text"),
+    @NamedQuery(name = "Message.findByReciever", query = "SELECT m FROM Message m WHERE m.idMemberReciever = :idMemberReciever"),
+    @NamedQuery(name = "Message.findBySender", query = "SELECT m FROM Message m WHERE m.idMemberReciever = :idMemberReciever AND m.idMemberSender = :idMemberSender"),
+    @NamedQuery(name = "Message.getSingleMessage", query = "SELECT m FROM Message m WHERE m.idMessage = :idMessage AND m.idMemberSender = :idMemberSender AND m.dateTime = :dateTime")})
 public class Message implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -132,5 +135,4 @@ public class Message implements Serializable {
     public String toString() {
         return "entity.Message[ idMessage=" + idMessage + " ]";
     }
-    
 }

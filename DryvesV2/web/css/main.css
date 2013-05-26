@@ -178,6 +178,9 @@ transition: background-color 0.2s;
 -webkit-transition: background-color 0.2s;
 }
 
+.hidden{
+    display: hidden;
+}
 /****************** global text colors ******************/
 .text_green{
 color:#a6c400;
@@ -325,6 +328,11 @@ border-width:1px;
 
 .view_details{
 margin: 10px 0px 0px 0px;
+float:right;
+}
+
+.view_message{
+margin: 0px 4px 0px 0px;
 float:right;
 }
 
