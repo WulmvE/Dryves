@@ -58,4 +58,5 @@ public class RideFacade extends AbstractFacade<Ride> {
     public List<Ride> searchRideByAll(String van, String naar, String op) {
         return em.createNamedQuery("Ride.findByAll").setParameter("startLocation", van).setParameter("endLocation", naar).setParameter("departureDate", op).getResultList();
     }
+    
 }

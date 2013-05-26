@@ -5,16 +5,26 @@
  */
 package controller;
 
+
+import entity.Car;
+import entity.Dryver;
+import entity.Ride;
 import java.io.IOException;
 import java.lang.Exception;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.CarFacade;
 import session.DryverFacade;
 import session.RideFacade;
+import session.RideManager;
 
 /**
  *
@@ -22,13 +32,17 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/searchRideList", "/searchresults"})
+        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/searchRideList", "/searchresults", "/createRide"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
     private DryverFacade dryverFacade;
     @EJB
     private RideFacade rideFacade;
+     @EJB
+    private RideManager rideManager;
+      @EJB
+    private CarFacade carFacade;
 
     @Override
     public void init() throws ServletException {
@@ -87,22 +101,49 @@ public class SearchRideServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String van = request.getParameter("search_start");
-        String naar = request.getParameter("search_destination");
-        String op = request.getParameter("search_date");
-        getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
-        int aantalrides = rideFacade.searchRideByStart(van).size();
-     
-        getServletContext().setAttribute("aantalrides", aantalrides);
-        
+
         String userPath = request.getServletPath();
 
         // if searchRide action is called
-        if (userPath.equals("/searchRide")) {
-            // TODO: Implement search ride action
+        if (userPath.equals("/searchresults")) {
+            String van = request.getParameter("search_start");
+            String naar = request.getParameter("search_destination");
+            String op = request.getParameter("search_date");
+            getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
+            int aantalrides = rideFacade.searchRideByStart(van).size();
+            getServletContext().setAttribute("aantalrides", aantalrides);
         }
 
-        // use RequestDispatcher to forward request internally
+        // if createRide action is called
+        if (userPath.equals("/createRide")) {
+            String startLocation = request.getParameter("create_start");
+            String endLocation = request.getParameter("create_destination");
+            Dryver dryver = dryverFacade.find(100);
+            Car car = carFacade.find(100);
+ 
+            int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car);
+
+            /*Date departureDate = new Date();
+            Date departureTime = new Date();
+            
+
+            // to be asked
+            double askingPrice = 10.0;
+            String seatsAvailable = "2";
+            boolean status = false;
+
+            Ride ride = new Ride();
+            ride.setStartLocation(startLocation);
+            ride.setEndLocation(endLocation);
+            ride.setDepartureDate(departureDate);
+            ride.setDepartureTime(departureTime);
+            ride.setAskingPrice(askingPrice);
+            ride.setSeatsAvailable(seatsAvailable);
+            ride.setStatus(status);*/
+
+            
+        }
+
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
@@ -111,5 +152,4 @@ public class SearchRideServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
-
 }
