@@ -51,6 +51,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ride.findByStartLocation", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation"),
     @NamedQuery(name = "Ride.findByStatus", query = "SELECT r FROM Ride r WHERE r.status = :status")})
 public class Ride implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,12 +67,12 @@ public class Ride implements Serializable {
     @Column(name = "departureDate")
     @Temporal(TemporalType.DATE)
     private Date departureDate;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @NotNull
     @Column(name = "departureTime")
     @Temporal(TemporalType.TIME)
     private Date departureTime;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "endLocation")
@@ -231,4 +232,4 @@ public class Ride implements Serializable {
         return "entity.Ride[ idRide=" + idRide + " ]";
     }
     
-}
+    }

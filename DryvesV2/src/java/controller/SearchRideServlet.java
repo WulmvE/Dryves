@@ -5,6 +5,9 @@
  */
 package controller;
 
+
+import entity.Car;
+import entity.Dryver;
 import entity.Ride;
 import java.io.IOException;
 import java.lang.Exception;
@@ -15,8 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import session.CarFacade;
 import session.DryverFacade;
 import session.RideFacade;
+import session.RideManager;
 
 /**
  *
@@ -31,6 +36,10 @@ public class SearchRideServlet extends HttpServlet {
     private DryverFacade dryverFacade;
     @EJB
     private RideFacade rideFacade;
+     @EJB
+    private RideManager rideManager;
+      @EJB
+    private CarFacade carFacade;
 
     @Override
     public void init() throws ServletException {
@@ -117,20 +126,46 @@ public class SearchRideServlet extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
 
+        // if searchRide action is called
         if (userPath.equals("/searchresults")) {
-
             String van = request.getParameter("search_start");
             String naar = request.getParameter("search_destination");
             String op = request.getParameter("search_date");
-            session.setAttribute("rides", rideFacade.searchRideByStart(van));
+            getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
             int aantalrides = rideFacade.searchRideByStart(van).size();
-
-            session.setAttribute("aantalrides", aantalrides);
-
-
+            getServletContext().setAttribute("aantalrides", aantalrides);
         }
 
-        // use RequestDispatcher to forward request internally
+        // if createRide action is called
+        if (userPath.equals("/createRide")) {
+            String startLocation = request.getParameter("create_start");
+            String endLocation = request.getParameter("create_destination");
+            Dryver dryver = dryverFacade.find(100);
+            Car car = carFacade.find(100);
+ 
+            int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car);
+
+            /*Date departureDate = new Date();
+            Date departureTime = new Date();
+            
+
+            // to be asked
+            double askingPrice = 10.0;
+            String seatsAvailable = "2";
+            boolean status = false;
+
+            Ride ride = new Ride();
+            ride.setStartLocation(startLocation);
+            ride.setEndLocation(endLocation);
+            ride.setDepartureDate(departureDate);
+            ride.setDepartureTime(departureTime);
+            ride.setAskingPrice(askingPrice);
+            ride.setSeatsAvailable(seatsAvailable);
+            ride.setStatus(status);*/
+
+            
+        }
+
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
