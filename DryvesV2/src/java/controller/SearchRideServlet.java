@@ -140,8 +140,8 @@ public class SearchRideServlet extends HttpServlet {
         if (userPath.equals("/createRide")) {
             String startLocation = request.getParameter("create_start");
             String endLocation = request.getParameter("create_destination");
-            Dryver dryver = dryverFacade.find(100);
-            Car car = carFacade.find(100);
+            Dryver dryver = new Dryver(100);
+            Car car = new Car(100);
  
             int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car);
 
