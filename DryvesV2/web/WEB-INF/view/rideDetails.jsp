@@ -22,7 +22,6 @@
 		};
 		var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
 		directionsDisplay.setMap(map);
-		directionsDisplay.setPanel(document.getElementById("directionsPanel"));
 	}
 	function calcRoute() {
 		var start = "${selectedRide.startLocation}";
