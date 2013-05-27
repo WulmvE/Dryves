@@ -36,9 +36,9 @@ public class MessageFacade extends AbstractFacade<Message> {
         return em.createNamedQuery("Message.findByReciever").setParameter("idMemberReciever", idMember).getResultList();
     }
     
-    // get all messages from a certain sender AND the logged in idMember.
-    public List<Message> searchMessageByidSender(Dryver idMember, Dryver idSender){
-        return em.createNamedQuery("Message.findBySender").setParameter("idMemberReciever", idMember).setParameter("idMemberSender", idSender).getResultList();
+    // get all messages sent by the logged user.
+    public List<Message> searchMessageByidSender(Dryver idMember){
+        return em.createNamedQuery("Message.findBySender").setParameter("idMemberSender", idMember).getResultList();
     }
     
     // retrieve a single message by messageId, SenderId and Date.

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.DryverFacade;
 import session.MessageFacade;
 
 /**
@@ -21,11 +22,14 @@ import session.MessageFacade;
  */
 @WebServlet(name = "MessageServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/messages"})
+        urlPatterns = {"/inbox", "/outbox", "/write"})
 public class MessageServlet extends HttpServlet {
 
     @EJB
     private MessageFacade messageFacade;
+    
+    @EJB
+    private DryverFacade dryverFacade;
 
     @Override
     public void init() throws ServletException {
@@ -46,10 +50,15 @@ public class MessageServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("GET");
         String userPath = request.getServletPath();
-        // TODO: get all messages of the idMember that is logged in for inbox
-        Dryver idMember = new Dryver(107);
-        getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idMember));
-
+        if (userPath.equals("/inbox")) {
+            // TODO: get all messages of the idMember that is logged in for inbox
+            Dryver idMember = new Dryver(107);
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idMember));
+        } if (userPath.equals("/outbox")) {
+            Dryver idMember = new Dryver(107);
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idMember));
+        } if (userPath.equals("/write")) {
+        }
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
@@ -78,9 +87,9 @@ public class MessageServlet extends HttpServlet {
         String dateTime = request.getParameter("dateTime");
         // Select a single message.
         getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
-        
+
         String userPath = request.getServletPath();
-        if (userPath.equals("/messages")) {
+        if (userPath.equals("/inbox")) {
         }
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
