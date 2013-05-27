@@ -7,13 +7,7 @@ package controller;
 
 import entity.Car;
 import entity.Dryver;
-import entity.Ride;
 import java.io.IOException;
-import java.lang.Exception;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -144,10 +138,10 @@ public class SearchRideServlet extends HttpServlet {
             String naar = request.getParameter("search_destination");
             String op = request.getParameter("search_date");
             getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
-        int aantalrides = rideFacade.searchRideByStart(van).size();
 
-        //Get the total number of Rides for this search.
-        int aantalrides = rideFacade.searchRideByStart(van).size();
+
+            //Get the total number of Rides for this search.
+            int aantalrides = rideFacade.searchRideByStart(van).size();
             getServletContext().setAttribute("aantalrides", aantalrides);
         }
 
@@ -192,45 +186,42 @@ public class SearchRideServlet extends HttpServlet {
             }
 
             //car
-            //TODO
+             Date departureTime = new Date();
 
             //number of seats
             String numSeats = request.getParameter("create_num_seats");
 
-            //price
-            String price = request.getParameter("create_price");
+             // to be asked
+             double askingPrice = 10.0;
+             String seatsAvailable = "2";
+             boolean status = false;
 
             Dryver dryver = new Dryver(100);
             Car car = new Car(100);
-            Ride ride = new Ride();
-            ride.setStartLocation(startLocation);
-            ride.setEndLocation(endLocation);
-            ride.setDepartureDate(departureDate);
-            ride.setDepartureTime(departureTime);
-            ride.setAskingPrice(askingPrice);
-            ride.setSeatsAvailable(seatsAvailable);
-            ride.setStatus(status);*/
+             Ride ride = new Ride();
+             ride.setStartLocation(startLocation);
+             ride.setEndLocation(endLocation);
+             ride.setDepartureDate(departureDate);
+             ride.setDepartureTime(departureTime);
+             ride.setAskingPrice(askingPrice);
+             ride.setSeatsAvailable(seatsAvailable);
+             ride.setStatus(status);*/
 
             int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
-        
-        String userPath = request.getServletPath();
-
-        // if searchRide action is called
-        String userPath = request.getServletPath();
-        if (userPath.equals("/searchRide")) {
-            // TODO: Implement search ride action
-        }
+            if (userPath.equals("/searchRide")) {
+                // TODO: Implement search ride action
+            }
 
 
 
-        // use RequestDispatcher to forward request internally
-        String url = "/WEB-INF/view" + userPath + ".jsp";
+            // use RequestDispatcher to forward request internally
+            String url = "/WEB-INF/view" + userPath + ".jsp";
 
-        try {
-            request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            try {
+                request.getRequestDispatcher(url).forward(request, response);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
-
 }
