@@ -35,6 +35,7 @@
 
     <ul id="results">
         <c:forEach var="ride" items="${rides}">
+
             <li class="result block_triple white">
 
                 <div>
@@ -48,15 +49,15 @@
                     ${ride.seatsAvailable} stoelen beschikbaar<br>
                     <span class="price">&euro; ${ride.askingPrice}</span> / Plaats <br>
                     <c:if test="${ride.idMember.avgRating > 0.00 && ride.idMember.avgRating <= 2.00}">
-                    <span class="rating_small text_green"></span>
+                        <span class="rating_small text_green"></span>
                     </c:if>
                     <c:if test="${ride.idMember.avgRating > 2.00 && ride.idMember.avgRating <= 4.00}">
-                    <span class="rating_small text_green"></span>
+                        <span class="rating_small text_green"></span>
                     </c:if>
                     <c:if test="${ride.idMember.avgRating > 4.00 && ride.idMember.avgRating <= 5.00}">
-                    <span class="rating_small text_green"></span>
+                        <span class="rating_small text_green"></span>
                     </c:if>
-                    <a class="view_details" href="#"><img src="img/arrow_right.png" /></a><br>
+                    <a class="view_details" href="<c:url value='rideDetails?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
                 </div>
 
             </li>

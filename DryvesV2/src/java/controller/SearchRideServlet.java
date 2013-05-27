@@ -5,6 +5,7 @@
  */
 package controller;
 
+import entity.Ride;
 import java.io.IOException;
 import java.lang.Exception;
 import javax.ejb.EJB;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import session.DryverFacade;
 import session.RideFacade;
 
@@ -22,7 +24,7 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/searchRideList", "/searchresults"})
+        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
@@ -51,18 +53,42 @@ public class SearchRideServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("GET");
+
         String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
+        Ride selectedRide;
+//        System.out.println("GET");
 
         // if searchRideDetails page is requested
-        if (userPath.equals("/searchRideDetails")) {
-            // TODO: Implement searchRideDetails request
-            // if searchRideList page is requested
+        if (userPath.equals("/searchresults")) {
+
+//            String van = request.getParameter("search_start");
+//            String naar = request.getParameter("search_destination");
+//            String op = request.getParameter("search_date");
+//            session.setAttribute("rides", rideFacade.searchRideByStart(van));
+//            int aantalrides = rideFacade.searchRideByStart(van).size();
+//
+//
+//            session.setAttribute("aantalrides", aantalrides);
+
+        } else if (userPath.equals("/rideDetails")) {
+
+            String idRide = request.getQueryString();
+
+            if (idRide != null) {
+
+                // get selected ride
+                selectedRide = rideFacade.find(Integer.parseInt(idRide));
+
+                // place selected category in session scope
+                session.setAttribute("selectedRide", selectedRide);
+
+            }
+
         } else if (userPath.equals("/searchRideList")) {
             // TODO: test, of de controller request forward naar view
         } else if (userPath.equals("/test")) {
             //dit is een test
-        } else if (userPath.equals("/searchresults")) {
         }
 
         // use RequestDispatcher to forward request internally
@@ -87,19 +113,21 @@ public class SearchRideServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String van = request.getParameter("search_start");
-        String naar = request.getParameter("search_destination");
-        String op = request.getParameter("search_date");
-        getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
-        int aantalrides = rideFacade.searchRideByStart(van).size();
-     
-        getServletContext().setAttribute("aantalrides", aantalrides);
-        
-        String userPath = request.getServletPath();
 
-        // if searchRide action is called
-        if (userPath.equals("/searchRide")) {
-            // TODO: Implement search ride action
+        String userPath = request.getServletPath();
+        HttpSession session = request.getSession();
+
+        if (userPath.equals("/searchresults")) {
+
+            String van = request.getParameter("search_start");
+            String naar = request.getParameter("search_destination");
+            String op = request.getParameter("search_date");
+            session.setAttribute("rides", rideFacade.searchRideByStart(van));
+            int aantalrides = rideFacade.searchRideByStart(van).size();
+
+            session.setAttribute("aantalrides", aantalrides);
+
+
         }
 
         // use RequestDispatcher to forward request internally
@@ -111,5 +139,4 @@ public class SearchRideServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
-
 }
