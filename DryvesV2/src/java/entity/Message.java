@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Message.findByText", query = "SELECT m FROM Message m WHERE m.text = :text"),
     @NamedQuery(name = "Message.findByReciever", query = "SELECT m FROM Message m WHERE m.idMemberReciever = :idMemberReciever ORDER BY m.dateTime DESC"),
     @NamedQuery(name = "Message.findBySender", query = "SELECT m FROM Message m WHERE m.idMemberReciever = :idMemberReciever AND m.idMemberSender = :idMemberSender"),
-    @NamedQuery(name = "Message.getSingleMessage", query = "SELECT m FROM Message m WHERE m.idMessage = :idMessage AND m.idMemberSender = :idMemberSender AND m.dateTime = :dateTime"),
-    @NamedQuery(name = "Message.getSentMessage", query = "SELECT m FROM Message m WHERE m.idMemberReciever = :idSender AND m.idMemberSender = :idReciever")})
+    @NamedQuery(name = "Message.getSingleMessage", query = "SELECT m FROM Message m WHERE m.idMessage = :idMessage AND m.idMemberSender = :idMemberSender AND m.dateTime = :dateTime")})
 public class Message implements Serializable {
 
     private static final long serialVersionUID = 1L;

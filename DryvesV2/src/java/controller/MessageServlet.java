@@ -72,14 +72,12 @@ public class MessageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Dryver idReciever = new Dryver(107);
+        Dryver idReciever = new Dryver(107);
         int idMessage = Integer.parseInt(request.getParameter("idMessage"));
         Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
         String dateTime = request.getParameter("dateTime");
         // Select a single message.
         getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
-        //if the user has sent messages to this person...
-        //getServletContext().setAttribute("sent", messageFacade.getSentMessage(idSender, idReciever));
         
         String userPath = request.getServletPath();
         if (userPath.equals("/messages")) {

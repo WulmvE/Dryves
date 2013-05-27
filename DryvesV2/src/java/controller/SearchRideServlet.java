@@ -48,6 +48,7 @@ public class SearchRideServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+//        getServletContext().setAttribute("dryvers", dryverFacade.findAll());
 
         // store category list in servlet context
         getServletContext().setAttribute("dryvers", dryverFacade.findAll());
@@ -72,6 +73,14 @@ public class SearchRideServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Ride selectedRide;
 //        System.out.println("GET");
+//            // if searchRideList page is requested
+//        } else if (userPath.equals("/searchRideList")) {
+//            // TODO: test, of de controller request forward naar view
+//        } else if (userPath.equals("/test")) {
+//            //dit is een test
+//        } else if (userPath.equals("/searchresults")) {
+//        }
+//        // use RequestDispatcher to forward request internally
 
         // if searchRideDetails page is requested
         if (userPath.equals("/searchresults")) {
@@ -125,7 +134,7 @@ public class SearchRideServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        //Search a ride.
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
 
@@ -135,7 +144,10 @@ public class SearchRideServlet extends HttpServlet {
             String naar = request.getParameter("search_destination");
             String op = request.getParameter("search_date");
             getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
-            int aantalrides = rideFacade.searchRideByStart(van).size();
+        int aantalrides = rideFacade.searchRideByStart(van).size();
+
+        //Get the total number of Rides for this search.
+        int aantalrides = rideFacade.searchRideByStart(van).size();
             getServletContext().setAttribute("aantalrides", aantalrides);
         }
 
@@ -190,13 +202,28 @@ public class SearchRideServlet extends HttpServlet {
 
             Dryver dryver = new Dryver(100);
             Car car = new Car(100);
+            Ride ride = new Ride();
+            ride.setStartLocation(startLocation);
+            ride.setEndLocation(endLocation);
+            ride.setDepartureDate(departureDate);
+            ride.setDepartureTime(departureTime);
+            ride.setAskingPrice(askingPrice);
+            ride.setSeatsAvailable(seatsAvailable);
+            ride.setStatus(status);*/
 
             int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
+        
+        String userPath = request.getServletPath();
 
+        // if searchRide action is called
+        String userPath = request.getServletPath();
+        if (userPath.equals("/searchRide")) {
+            // TODO: Implement search ride action
         }
 
 
 
+        // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
@@ -205,4 +232,5 @@ public class SearchRideServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
+
 }

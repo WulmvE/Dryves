@@ -14,7 +14,7 @@
         <li class="block_six white" style="overflow: auto">
 
             <c:forEach var="message" items="${messages}">
-                <form name="message_form_${message.idMessage}" method="POST">
+                <form name="message_form_${message.idMessage}" method="post">
                     <input type="hidden" name="idMessage" value="${message.idMessage}"/>
                     <input type="hidden" name="idSender" value="${message.idMemberSender}"/>
                     <input type="hidden" name="dateTime" value="${message.dateTime}"/>
@@ -34,12 +34,6 @@
                 <hr>
                 <span id="msgText"class="text_blue">${single.text}</span><br>
             </c:forEach>
-            <c:forEach var="sent" items="${sent}">
-                <span style="float: right; padding-left: 5px;">Verzonden door u:</span>
-                <br>
-                <hr>
-                <span id="msgText"class="text_blue">${sent.text}</span><br>
-            </c:forEach>
         </li>
     </ul>
 </div>
@@ -49,12 +43,5 @@
     <a class="block_single blue" href="#"><div class="menu_icon icon_messages">&#xf040;</div><span class="menu_item menu_label_white">Schrijven</span></a>		
 
     <div class="block_triple blue">
-<!--        <div style="height: 71%; margin-top: 15px;">
-            <form name="message_send" method="POST">
-                <textarea name="typed" rows="4" cols="29" style="width: 70%; font-size: 14px;"></textarea>
-                <input type="submit" style="width: 25%; color: #444; font-size:18px; margin-left: 1%; position: relative; top: -35px;">
-            </form>
-        </div>
-        <span class="menu_item">Reageer</span>-->
     </div>
 </div>
