@@ -5,8 +5,11 @@
  */
 package session;
 
+import entity.Car;
+import entity.Dryver;
 import entity.Ride;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -58,5 +61,29 @@ public class RideFacade extends AbstractFacade<Ride> {
     public List<Ride> searchRideByAll(String van, String naar, String op) {
         return em.createNamedQuery("Ride.findByAll").setParameter("startLocation", van).setParameter("endLocation", naar).setParameter("departureDate", op).getResultList();
     }
-    
+ 
+    public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car, Date date, String numseats, String price) {   
+        Ride ride = new Ride();
+        
+        System.out.println("startlocatie" + startLocation);
+        System.out.println("endLocatie" + endLocation);
+        System.out.println(date);
+        
+        ride.setStartLocation(startLocation);
+        ride.setEndLocation(endLocation);
+        ride.setDepartureDate(date);
+        
+        // time not implemented yet
+        Date time = new Date();
+        ride.setDepartureTime(time);
+        ride.setAskingPrice(Double.parseDouble(price));
+        ride.setSeatsAvailable(numseats);  
+        ride.setStatus(false);  
+        ride.setIdMember(dryver);
+        ride.setIdCar(car);
+        
+        em.persist(ride);
+        em.flush();
+        return ride.getIdRide();
+    }
 }

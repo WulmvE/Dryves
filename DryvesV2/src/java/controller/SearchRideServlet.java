@@ -26,7 +26,6 @@ import javax.servlet.http.HttpSession;
 import session.CarFacade;
 import session.DryverFacade;
 import session.RideFacade;
-import session.RideManager;
 
 /**
  *
@@ -41,8 +40,6 @@ public class SearchRideServlet extends HttpServlet {
     private DryverFacade dryverFacade;
     @EJB
     private RideFacade rideFacade;
-    @EJB
-    private RideManager rideManager;
     @EJB
     private CarFacade carFacade;
     private String tempStartLocation;
@@ -168,12 +165,12 @@ public class SearchRideServlet extends HttpServlet {
             if (endLocation.equals("")) {
                 endLocation = tempEndLocation;
             }
-      
+
             //date
             String date = request.getParameter("create_date");
             if (date.equals("")) {
                 date = tempDate;
-            }   
+            }
             DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
             Date dateObj = new Date();
             try {
@@ -181,13 +178,23 @@ public class SearchRideServlet extends HttpServlet {
             } catch (ParseException ex) {
                 Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
+            //car
+            //TODO
+
+            //number of seats
+            String numSeats = request.getParameter("create_num_seats");
+
+            //price
+            String price = request.getParameter("create_price");
+
             Dryver dryver = new Dryver(100);
             Car car = new Car(100);
 
-            int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car, dateObj);
+            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
 
         }
+
 
 
         String url = "/WEB-INF/view" + userPath + ".jsp";
