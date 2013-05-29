@@ -29,8 +29,4 @@ public class DryverFacade extends AbstractFacade<Dryver> {
     public DryverFacade() {
         super(Dryver.class);
     }
- 
-    public List<Dryver> getFriends(Dryver idMember){
-        return em.createNamedQuery("Dryver.findFriends").setParameter("idMember", idMember).getResultList();    
-    }
 }

@@ -6,7 +6,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<div id="sub_menu">
+    <a class="block_single white" href="javascript:history.back()"><div class="menu_icon">&#xf060;</div><span class="menu_item menu_label_blue">terug</span></a>		
+    <a class="block_single blue" href="inbox"><div class="menu_icon icon_messages">&#xf003;</div><span class="menu_item menu_label_white">Inbox</span></a>		
+    <a class="block_single blue" href="#"><div class="menu_icon icon_messages">&#xf040;</div><span class="menu_item menu_label_white">Schrijven</span></a>		
 
+    <div class="block_triple blue">
+    </div>
 <div id="col_content">
 
     <ul id="results">
@@ -29,6 +35,7 @@
         </li>
         <li class="block_six white">
             <c:forEach var="single" items="${singleMessage}">
+                <hr>
                 <span style="float: left; padding-left: 5px;">Ontvangen van:</span><span id="msgTitle" class="text_blue">${single.idMemberSender.alias}</span>
                 <br>
                 <hr>
@@ -37,11 +44,5 @@
         </li>
     </ul>
 </div>
-<div id="sub_menu">
-    <a class="block_single white" href="javascript:history.back()"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
-    <a class="block_single blue" href="outbox"><div class="menu_icon icon_messages">&#xf093;</div><span class="menu_item menu_label_white">Verzonden</span></a>		
-    <a class="block_single blue" href="#"><div class="menu_icon icon_messages">&#xf040;</div><span class="menu_item menu_label_white">Schrijven</span></a>		
 
-    <div class="block_triple blue">
-    </div>
 </div>

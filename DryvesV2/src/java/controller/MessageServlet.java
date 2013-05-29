@@ -81,17 +81,24 @@ public class MessageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userPath = request.getServletPath();
+        System.out.println("DIT WERKT");
         Dryver idReciever = new Dryver(107);
         int idMessage = Integer.parseInt(request.getParameter("idMessage"));
         Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
         String dateTime = request.getParameter("dateTime");
         if (userPath.equals("/inbox")) {
-            // TODO: get all messages of the idMember that is logged in for inbox
+            // TODO: get all messages of the idMember that is logged in for inbox.
             getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
-        } if (userPath.equals("/outbox")) {
+            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+        }
+            // TODO: get all messages sent from the logged in idMember.
+        if (userPath.equals("/outbox")) {
             getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
-        } if (userPath.equals("/write")) {
-            getServletContext().setAttribute("friends", dryverFacade.getFriends(idReciever));
+            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+        }
+            // TODO: get Friendslist from the logged in user.
+        if (userPath.equals("/write")) {
+            getServletContext().setAttribute("friends", dryverFacade.find(idReciever));
         }
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
