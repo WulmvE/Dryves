@@ -157,9 +157,6 @@ public class SearchRideServlet extends HttpServlet {
         if (userPath.equals("/createRideConfirmed")) {
             //start
             String startLocation = request.getParameter("create_start");
-            
-            
-            
             if (startLocation.equals("")) {
                 startLocation = tempStartLocation;
             }
@@ -200,6 +197,9 @@ public class SearchRideServlet extends HttpServlet {
 
 
 
+
+
+
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
@@ -208,4 +208,5 @@ public class SearchRideServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
+
 }
