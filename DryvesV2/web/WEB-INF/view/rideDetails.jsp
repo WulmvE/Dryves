@@ -79,7 +79,7 @@ window.onload=go;
             </div>
         </div>
                     <div class="result block_triple white">
-                        [FRIEND REQUEST] [MELD AAN] [STUUR BERICHT]<br>
+                        <button onclick="location.href='#'">Meld aan</button> <button onclick="location.href='#'">Stuur Bericht</button> <button onclick="location.href='#'">Friend Request</button><br>
                         knoppen komen hier<br>
                         TODO: maak nieuwe div zonder mouseOver
                     </div>
