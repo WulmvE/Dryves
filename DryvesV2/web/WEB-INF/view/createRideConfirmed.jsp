@@ -15,6 +15,7 @@
 
     </div>   
 
+    
     <a class="block_single white" href="index.jsp"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>
      
     <div id="quick_search" class="block_triple white">		
