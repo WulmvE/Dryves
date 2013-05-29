@@ -5,7 +5,6 @@
  */
 package controller;
 
-
 import entity.Car;
 import entity.Dryver;
 import entity.Ride;
@@ -36,9 +35,9 @@ public class SearchRideServlet extends HttpServlet {
     private DryverFacade dryverFacade;
     @EJB
     private RideFacade rideFacade;
-     @EJB
+    @EJB
     private RideManager rideManager;
-      @EJB
+    @EJB
     private CarFacade carFacade;
 
     @Override
@@ -70,7 +69,6 @@ public class SearchRideServlet extends HttpServlet {
 
         // if searchRideDetails page is requested
         if (userPath.equals("/searchresults")) {
-
 //            String van = request.getParameter("search_start");
 //            String naar = request.getParameter("search_destination");
 //            String op = request.getParameter("search_date");
@@ -79,7 +77,6 @@ public class SearchRideServlet extends HttpServlet {
 //
 //
 //            session.setAttribute("aantalrides", aantalrides);
-
         } else if (userPath.equals("/rideDetails")) {
 
             String idRide = request.getQueryString();
@@ -136,8 +133,23 @@ public class SearchRideServlet extends HttpServlet {
             getServletContext().setAttribute("aantalrides", aantalrides);
         }
 
+        // if createRide action is called
+        if (userPath.equals("/createRide")) {
+            
+            // pass parameters to createRideDetails
+            String startLocation = request.getParameter("create_start");
+            String endLocation = request.getParameter("create_destination");
+            String date = request.getParameter("create_date");
+            getServletContext().setAttribute("create_start", startLocation);
+            getServletContext().setAttribute("create_end", endLocation);
+            getServletContext().setAttribute("create_date", date);
+            
+        }
+
+
         // if createRideConfirmed action is called
         if (userPath.equals("/createRideConfirmed")) {
+            
             String startLocation = request.getParameter("create_startdetail");
             String endLocation = request.getParameter("create_destinationdetail");
             System.out.println("Test");
@@ -145,16 +157,13 @@ public class SearchRideServlet extends HttpServlet {
             System.out.println(endLocation);
             Dryver dryver = new Dryver(100);
             Car car = new Car(100);
-            
-            
- 
+
+
+
             int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car);
-            
+
         }
-        // if createRide action is called
-                if (userPath.equals("/createRide")) {
-       
-        }
+
 
         String url = "/WEB-INF/view" + userPath + ".jsp";
 

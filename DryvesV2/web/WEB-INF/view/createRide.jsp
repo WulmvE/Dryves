@@ -8,9 +8,9 @@
 <form name="quick_create_form" method="post" action="createRideConfirmed">
     <div id="quick_search" class="block_six white">		
         <h2>rit aanmaken</h2><br/><br/><br/><br/>
-            <input class="input_location" name="create_startdetail" type="text"  placeholder="van"/><br/>
-            <input class="input_location" name="create_destinationdetail" type="text"  placeholder="naar"/><br/>
-            <input class="input_date"  name="create_datedetail" type="text"  placeholder="op" /><br/>
+            <input class="input_location" name="create_startdetail" type="text"  placeholder="${create_start}"/><br/>
+            <input class="input_location" name="create_destinationdetail" type="text"  placeholder= "${create_end}"/><br/>
+            <input class="input_date"  name="create_datedetail" type="text"  placeholder="${create_date}" /><br/>
     </div>
 
     <div id="quick_create" class="block_six white">		
