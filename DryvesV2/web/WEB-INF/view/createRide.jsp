@@ -22,5 +22,6 @@
             <a href="#" onclick="document.quick_create_form.submit()" class="button" id="button_create"><img src="img/arrow_right.png" alt="create button" /></a>
     </div>
 </form>
-   
+
+    <div>test<div>
 </div>
