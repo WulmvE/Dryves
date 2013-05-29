@@ -148,10 +148,15 @@ public class SearchRideServlet extends HttpServlet {
             tempStartLocation = request.getParameter("create_start");
             tempEndLocation = request.getParameter("create_destination");
             tempDate = request.getParameter("create_date");
+            
+            Dryver dryver = dryverFacade.find(100); 
+            Collection<Car> carCollection = dryver.getCarCollection();
+            String tempCar = carCollection.iterator().next().getBrand();
 
             getServletContext().setAttribute("create_start", tempStartLocation);
             getServletContext().setAttribute("create_end", tempEndLocation);
             getServletContext().setAttribute("create_date", tempDate);
+            getServletContext().setAttribute("create_car", tempCar);
 
         }
 
@@ -190,7 +195,7 @@ public class SearchRideServlet extends HttpServlet {
             //price
             String price = request.getParameter("create_price");
 
-            Dryver dryver = dryverFacade.find(100);        
+            Dryver dryver = dryverFacade.find(100); 
             Collection<Car> carCollection = dryver.getCarCollection();
             Car car = carCollection.iterator().next();
             
