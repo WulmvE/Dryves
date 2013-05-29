@@ -8,8 +8,16 @@ package controller;
 import entity.Car;
 import entity.Dryver;
 import java.io.IOException;
+<<<<<<< HEAD
+import java.lang.Exception;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+>>>>>>> Alles weer netjes?
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +43,11 @@ public class SearchRideServlet extends HttpServlet {
     @EJB
     private RideFacade rideFacade;
     @EJB
+<<<<<<< HEAD
+=======
+    private RideManager rideManager;
+    @EJB
+>>>>>>> Alles weer netjes?
     private CarFacade carFacade;
     private String tempStartLocation;
     private String tempEndLocation;
@@ -147,6 +160,7 @@ public class SearchRideServlet extends HttpServlet {
 
         // if createRide action is called
         if (userPath.equals("/createRide")) {
+<<<<<<< HEAD
 
             // pass parameters to createRideDetails
             tempStartLocation = request.getParameter("create_start");
@@ -186,18 +200,61 @@ public class SearchRideServlet extends HttpServlet {
             }
 
             //car
-             Date departureTime = new Date();
+            //TODO
 
             //number of seats
             String numSeats = request.getParameter("create_num_seats");
+
+            //price
+            String price = request.getParameter("create_price");
+
+            Dryver dryver = new Dryver(100);
+            Car car = new Car(100);
+            Ride ride = new Ride();
+            ride.setStartLocation(startLocation);
+            ride.setEndLocation(endLocation);
+            ride.setDepartureDate(departureDate);
+            ride.setDepartureTime(departureTime);
+            ride.setAskingPrice(askingPrice);
+            ride.setSeatsAvailable(seatsAvailable);
+            ride.setStatus(status);*/
+
+            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
+        
+        String userPath = request.getServletPath();
+
+        // if searchRide action is called
+        String userPath = request.getServletPath();
+        if (userPath.equals("/searchRide")) {
+            // TODO: Implement search ride action
+        }
+
+
+
+        // use RequestDispatcher to forward request internally
+        String url = "/WEB-INF/view" + userPath + ".jsp";
+
+        try {
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+=======
+            String startLocation = request.getParameter("create_start");
+            String endLocation = request.getParameter("create_destination");
+            Dryver dryver = dryverFacade.find(100);
+            Car car = carFacade.find(100);
+
+            int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car);
+
+            /*Date departureDate = new Date();
+             Date departureTime = new Date();
+            
 
              // to be asked
              double askingPrice = 10.0;
              String seatsAvailable = "2";
              boolean status = false;
 
-            Dryver dryver = new Dryver(100);
-            Car car = new Car(100);
              Ride ride = new Ride();
              ride.setStartLocation(startLocation);
              ride.setEndLocation(endLocation);
@@ -207,12 +264,9 @@ public class SearchRideServlet extends HttpServlet {
              ride.setSeatsAvailable(seatsAvailable);
              ride.setStatus(status);*/
 
-            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
             if (userPath.equals("/searchRide")) {
                 // TODO: Implement search ride action
             }
-
-
 
             // use RequestDispatcher to forward request internally
             String url = "/WEB-INF/view" + userPath + ".jsp";
@@ -222,6 +276,7 @@ public class SearchRideServlet extends HttpServlet {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+>>>>>>> Alles weer netjes?
         }
     }
 }
