@@ -10,6 +10,12 @@ import entity.Dryver;
 import entity.Ride;
 import java.io.IOException;
 import java.lang.Exception;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -150,33 +156,36 @@ public class SearchRideServlet extends HttpServlet {
 
         }
 
-
         // if createRideConfirmed action is called
         if (userPath.equals("/createRideConfirmed")) {
-
+            //start
             String startLocation = request.getParameter("create_start");
             if (startLocation.equals("")) {
                 startLocation = tempStartLocation;
             }
+            //end
             String endLocation = request.getParameter("create_destination");
             if (endLocation.equals("")) {
                 endLocation = tempEndLocation;
             }
+      
+            //date
             String date = request.getParameter("create_date");
             if (date.equals("")) {
                 date = tempDate;
+            }   
+            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+            Date dateObj = new Date();
+            try {
+                dateObj = df.parse(date);
+            } catch (ParseException ex) {
+                Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Test2000");
-            System.out.println(startLocation);
-            System.out.println("Test2000");
-            System.out.println(endLocation);
-            System.out.println(date);
+            
             Dryver dryver = new Dryver(100);
             Car car = new Car(100);
 
-
-
-            int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car);
+            int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car, dateObj);
 
         }
 

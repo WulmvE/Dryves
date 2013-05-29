@@ -22,13 +22,13 @@ public class RideManager {
      @PersistenceContext(unitName = "DryvesPU")
     private EntityManager em;
 
-    public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car) {   
+    public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car, Date date) {   
         Ride ride = new Ride();
         ride.setStartLocation(startLocation);
         System.out.println("startlocatie" + startLocation);
         ride.setEndLocation(endLocation);
         System.out.println("endLocatie" + endLocation);
-        Date date = new Date();
+        //Date date = new Date();
         System.out.println(date);
         ride.setDepartureDate(date);
         Date time = new Date();
