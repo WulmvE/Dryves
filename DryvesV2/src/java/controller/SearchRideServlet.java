@@ -144,15 +144,15 @@ public class SearchRideServlet extends HttpServlet {
             // pass parameters to createRideDetails
             tempStartLocation = request.getParameter("create_start");
             if  (tempStartLocation.equals("")){
-                tempStartLocation = "VAN";
+                tempStartLocation = "van";
             }
             tempEndLocation = request.getParameter("create_destination");
             if  (tempEndLocation.equals("")){
-                tempEndLocation = "NAAR";
+                tempEndLocation = "naar";
             }
             tempDate = request.getParameter("create_date");
             if  (tempDate.equals("")){
-                tempDate = "DATUM";
+                tempDate = "datum";
             }
             
             Dryver dryver = dryverFacade.find(100); 
