@@ -22,9 +22,7 @@ public class RideManager {
      @PersistenceContext(unitName = "DryvesPU")
     private EntityManager em;
 
-    public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car) {
-        System.out.println("Data object");
-      
+    public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car) {   
         Ride ride = new Ride();
         ride.setStartLocation(startLocation);
         System.out.println("startlocatie" + startLocation);

@@ -39,6 +39,9 @@ public class SearchRideServlet extends HttpServlet {
     private RideManager rideManager;
     @EJB
     private CarFacade carFacade;
+    private String tempStartLocation;
+    private String tempEndLocation;
+    private String tempDate;
 
     @Override
     public void init() throws ServletException {
@@ -135,26 +138,39 @@ public class SearchRideServlet extends HttpServlet {
 
         // if createRide action is called
         if (userPath.equals("/createRide")) {
-            
+
             // pass parameters to createRideDetails
-            String startLocation = request.getParameter("create_start");
-            String endLocation = request.getParameter("create_destination");
-            String date = request.getParameter("create_date");
-            getServletContext().setAttribute("create_start", startLocation);
-            getServletContext().setAttribute("create_end", endLocation);
-            getServletContext().setAttribute("create_date", date);
-            
+            tempStartLocation = request.getParameter("create_start");
+            tempEndLocation = request.getParameter("create_destination");
+            tempDate = request.getParameter("create_date");
+
+            getServletContext().setAttribute("create_start", tempStartLocation);
+            getServletContext().setAttribute("create_end", tempEndLocation);
+            getServletContext().setAttribute("create_date", tempDate);
+
         }
 
 
         // if createRideConfirmed action is called
         if (userPath.equals("/createRideConfirmed")) {
-            
-            String startLocation = request.getParameter("create_startdetail");
-            String endLocation = request.getParameter("create_destinationdetail");
-            System.out.println("Test");
+
+            String startLocation = request.getParameter("create_start");
+            if (startLocation.equals("")) {
+                startLocation = tempStartLocation;
+            }
+            String endLocation = request.getParameter("create_destination");
+            if (endLocation.equals("")) {
+                endLocation = tempEndLocation;
+            }
+            String date = request.getParameter("create_date");
+            if (date.equals("")) {
+                date = tempDate;
+            }
+            System.out.println("Test2000");
             System.out.println(startLocation);
+            System.out.println("Test2000");
             System.out.println(endLocation);
+            System.out.println(date);
             Dryver dryver = new Dryver(100);
             Car car = new Car(100);
 
