@@ -78,6 +78,11 @@ window.onload=go;
                 
             </div>
         </div>
+                    <div class="result block_triple white">
+                        [FRIEND REQUEST] [MELD AAN] [STUUR BERICHT]<br>
+                        knoppen komen hier<br>
+                        TODO: maak nieuwe div zonder mouseOver
+                    </div>
 
 <!--        <h2>ik wil meerijden</h2>
         <form name="quick_search_form" method="post" action="searchresults">
