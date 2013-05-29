@@ -29,7 +29,7 @@ import session.RideManager;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide"})
+        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide", "/createRideDetails", "/createRideConfirmed"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
@@ -136,34 +136,24 @@ public class SearchRideServlet extends HttpServlet {
             getServletContext().setAttribute("aantalrides", aantalrides);
         }
 
-        // if createRide action is called
-        if (userPath.equals("/createRide")) {
-            String startLocation = request.getParameter("create_start");
-            String endLocation = request.getParameter("create_destination");
+        // if createRideConfirmed action is called
+        if (userPath.equals("/createRideConfirmed")) {
+            String startLocation = request.getParameter("create_startdetail");
+            String endLocation = request.getParameter("create_destinationdetail");
+            System.out.println("Test");
+            System.out.println(startLocation);
+            System.out.println(endLocation);
             Dryver dryver = new Dryver(100);
             Car car = new Car(100);
+            
+            
  
             int rideId = rideManager.placeRide(startLocation, endLocation, dryver, car);
-
-            /*Date departureDate = new Date();
-            Date departureTime = new Date();
             
-
-            // to be asked
-            double askingPrice = 10.0;
-            String seatsAvailable = "2";
-            boolean status = false;
-
-            Ride ride = new Ride();
-            ride.setStartLocation(startLocation);
-            ride.setEndLocation(endLocation);
-            ride.setDepartureDate(departureDate);
-            ride.setDepartureTime(departureTime);
-            ride.setAskingPrice(askingPrice);
-            ride.setSeatsAvailable(seatsAvailable);
-            ride.setStatus(status);*/
-
-            
+        }
+        // if createRide action is called
+                if (userPath.equals("/createRide")) {
+       
         }
 
         String url = "/WEB-INF/view" + userPath + ".jsp";
