@@ -135,6 +135,7 @@ body{
 }
 
 .block_single, .block_double, .block_triple, .block_quad, .block_six{
+    position: relative;
     margin: 0px 3px 3px 0px;
     text-align:center;
 }
@@ -433,11 +434,13 @@ a{
 }
 
 .button{
-    float:right;
+    position:absolute;
+    bottom: 5px;
+    right: 18px;
     font-size:28px;
     color:#000000;
-    float:right;
-    margin: 0px 18px 0 0;
+   
+    
 }
 
 
