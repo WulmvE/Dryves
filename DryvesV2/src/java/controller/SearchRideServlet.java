@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -86,6 +87,8 @@ public class SearchRideServlet extends HttpServlet {
         } else if (userPath.equals("/rideDetails")) {
 
             String idRide = request.getQueryString();
+            
+            
 
             if (idRide != null) {
 

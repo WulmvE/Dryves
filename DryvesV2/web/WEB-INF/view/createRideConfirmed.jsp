@@ -10,8 +10,8 @@
 
     <div id="quick_search" class="block_double white">		
 
-        <h2>Rit aangemaakt!</h2><br><br><br><br>
-        <span>Deze rit is terug te vinden onder "Mijn Dryves"</span><br>
+        <h2>Rit aangemaakt!</h2>
+        <span class="block_double">Deze rit is terug te vinden onder "Mijn Dryves"</span><br>
 
     </div>   
 
