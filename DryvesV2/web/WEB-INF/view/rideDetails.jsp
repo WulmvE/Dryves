@@ -4,6 +4,7 @@
     Author     : hctung
 --%>
 
+<%@page import="entity.Car"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -64,17 +65,24 @@ window.onload=go;
 <div id="col_content">
 
     <div class="block_six white">
-            <p id="rideId">Ride id: ${selectedRide.idRide}</p>
-            <p id="rideMember">Aanbieder: ${selectedRide.idMember.alias}</p>
+        <div class="result block_triple white">
             <div>
                 <img class="avatar" src="img/avatar.jpg" />
                 <a href="#" class="avatar_label">${ride.idMember.alias}</a>
             </div>
             <div class="summary">
-                <span class="route" >${selectedRide.startLocation} <span class="text_green"><></span> ${selectedRide.endLocation}</span><br>
-                ${selectedRide.departureDate}<br>
-                ${selectedRide.seatsAvailable} stoelen beschikbaar<br>
+                    <span class="route" >${selectedRide.startLocation} <span class="text_green"><></span> ${selectedRide.endLocation}</span><br>
+                    ${selectedRide.departureDate}<br>
+                    ${selectedRide.seatsAvailable} stoelen beschikbaar<br>
+                    <span class="price">&euro; ${selectedRide.askingPrice}</span> / Plaats <br>
+                
             </div>
+        </div>
+                    <div class="result block_triple white">
+                        <button onclick="location.href='#'">Meld aan</button> <button onclick="location.href='#'">Stuur Bericht</button> <button onclick="location.href='#'">Friend Request</button><br>
+                        knoppen komen hier<br>
+                        TODO: maak nieuwe div zonder mouseOver
+                    </div>
 
 <!--        <h2>ik wil meerijden</h2>
         <form name="quick_search_form" method="post" action="searchresults">

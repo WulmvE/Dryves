@@ -13,8 +13,9 @@ import java.lang.Exception;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Enumeration;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -147,12 +148,26 @@ public class SearchRideServlet extends HttpServlet {
 
             // pass parameters to createRideDetails
             tempStartLocation = request.getParameter("create_start");
+            if  (tempStartLocation.equals("")){
+                tempStartLocation = "VAN";
+            }
             tempEndLocation = request.getParameter("create_destination");
+            if  (tempEndLocation.equals("")){
+                tempEndLocation = "NAAR";
+            }
             tempDate = request.getParameter("create_date");
+            if  (tempDate.equals("")){
+                tempDate = "DATUM";
+            }
+            
+            Dryver dryver = dryverFacade.find(100); 
+            Collection<Car> carCollection = dryver.getCarCollection();
+            String tempCar = carCollection.iterator().next().getBrand();
 
             getServletContext().setAttribute("create_start", tempStartLocation);
             getServletContext().setAttribute("create_end", tempEndLocation);
             getServletContext().setAttribute("create_date", tempDate);
+            getServletContext().setAttribute("create_car", tempCar);
 
         }
 
@@ -160,9 +175,6 @@ public class SearchRideServlet extends HttpServlet {
         if (userPath.equals("/createRideConfirmed")) {
             //start
             String startLocation = request.getParameter("create_start");
-            
-            
-            
             if (startLocation.equals("")) {
                 startLocation = tempStartLocation;
             }
@@ -194,12 +206,16 @@ public class SearchRideServlet extends HttpServlet {
             //price
             String price = request.getParameter("create_price");
 
-            Dryver dryver = new Dryver(100);
-            Car car = new Car(100);
-
+            Dryver dryver = dryverFacade.find(100); 
+            Collection<Car> carCollection = dryver.getCarCollection();
+            Car car = carCollection.iterator().next();
+            
             int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
 
         }
+
+
+
 
 
 
@@ -211,4 +227,5 @@ public class SearchRideServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
+
 }

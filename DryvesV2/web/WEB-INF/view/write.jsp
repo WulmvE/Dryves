@@ -12,20 +12,18 @@
     <ul id="results">
 
         <li class="block_six white" style="overflow: auto">
-
-            <c:forEach var="friend" items="${friends}">
+            <c:forEach var="friend" items="${friends}">${friend.idFriend}</c:forEach>
 <!--                <form name="message_form_${friend.idMember}" method="post">
                     <input type="hidden" name="idMessage" value="${message.idMessage}"/>
                     <input type="hidden" name="idSender" value="${message.idMemberSender}"/>
                     <input type="hidden" name="dateTime" value="${message.dateTime}"/>
                 </form>-->
                 <hr>
-                <span class="text_blue" style="float: left; margin-left: 5px;">Naam: <a href="#">${friend.idFriend}</a>, 
+                <span class="text_blue" style="text-align: left; margin-left: 5px;">Naam: ${friends.dryverCollection} 
 <!--                    datum: </span><span style="float: left; margin-left: 0.5em;"> ${message.dateTime}</span>-->
-                <span><a href="#" onclick="document.message_form_${message.idMessage}.submit();"><img class="view_message" src="img/arrow_right.png" alt="Toon bericht"></a></span>
+<!--                <span><a href="#" onclick="document.message_form_${message.idMessage}.submit();"><img class="view_message" src="img/arrow_right.png" alt="Toon bericht"></a></span>-->
                 <br>
                 <hr>
-            </c:forEach>
         </li>
         <li class="block_six white">
             <c:forEach var="single" items="${singleMessage}">

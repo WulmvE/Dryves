@@ -45,6 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dryver.findByFirstName", query = "SELECT d FROM Dryver d WHERE d.firstName = :firstName"),
     @NamedQuery(name = "Dryver.findByLastName", query = "SELECT d FROM Dryver d WHERE d.lastName = :lastName"),
     @NamedQuery(name = "Dryver.findByPassword", query = "SELECT d FROM Dryver d WHERE d.password = :password")})
+
 public class Dryver implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
