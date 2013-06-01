@@ -73,88 +73,115 @@ ${selectedRide.seatsAvailable} ${selectedRide.seatsAvailable==1 ? "plaats" : "pl
 
     </div>
 
-    <div class="block_six white">		
-        <h2>Mijn vrienden</h2>
+    <!--    <div class="block_six white">		-->
+    <div id="col_content">
+        <div id="sub_menu">
+            <div class="block_triple_half blue">		
+                <h2 style="color: white">Mijn vrienden</h2>
+            </div>
+        </div>
+        <!--        <div style="max-width: 453px; clear: both; margin: auto; text-align: center; position: relative; margin-bottom: 20px;">-->
+        <!--            <div class="block_triple" style="overflow-x: scroll; overflow-y: hidden; ; white-space: nowrap;">
+                        <div class="block_single red" style="display: inline-block; display: inline; vertical-align: top"></div>
+                        <div class="block_single red" style="display: inline-block; display: inline; vertical-align: top"></div>
+                        <div class="block_single red" style="display: inline-block; display: inline; vertical-align: top"></div>
+                        <div class="block_single red" style="display: inline-block; display: inline; vertical-align: top"></div>
+                    </div>-->
+        <!--        </div>-->
+        <div class="block_triple" style=" overflow-x: scroll; overflow-y: hidden;">
+            <ul style="margin-top: 0px; padding: 0px; float: left; margin-right: -999em; white-space: nowrap; list-style: none;">
+                <li class="block_single white" style="text-align: center; float: left; display: inline;"></li>
+                <li class="block_single white" style="text-align: center; float: left; display: inline;"></li>
+                <li class="block_single white" style="text-align: center; float: left; display: inline;"></li>
+                <li class="block_single white" style="text-align: center; float: left; display: inline;"></li>
 
-    </div>
-</div>
 
 
-<div id="col_content">
-    <div id="sub_menu">
-        <div class="block_triple_half blue">		
-            <h2 style="color: white">Aangeboden ritten</h2>
+            </ul>
+        </div>
+        <div id="sub_menu">
+            <div class="block_triple_half white">		
+                <h4 style="margin-top: 25px;">knoppenbalk</h4>
+            </div>
         </div>
     </div>
-    <div id="col_content" style="width: 456px; height: 100%; max-height: 228px; overflow: auto;">
 
-        <ul id="profile_results">
 
-            <li class="profile_result block_triple_half white">
-                <div class="summary">
-                    <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                    <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
+    <div id="col_content">
+        <div id="sub_menu">
+            <div class="block_triple_half blue">		
+                <h2 style="color: white">Aangeboden ritten</h2>
+            </div>
+        </div>
+        <div id="col_content" style="width: 456px; height: 100%; max-height: 228px; overflow: auto;">
 
-                    <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                </div>
-            </li>
-            <li class="profile_result block_triple_half white">
-                <div class="summary">
-                    <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                    <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
+            <ul id="profile_results">
 
-                    <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                </div>
-            </li>
-            <li class="profile_result block_triple_half white">
-                <div class="summary">
-                    <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                    <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
+                <li class="profile_result block_triple_half white">
+                    <div class="summary">
+                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
+                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
 
-                    <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                </div>
-            </li>
-            <li class="profile_result block_triple_half white">
-                <div class="summary">
-                    <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                    <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
+                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
+                    </div>
+                </li>
+                <li class="profile_result block_triple_half white">
+                    <div class="summary">
+                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
+                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
 
-                    <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                </div>
-            </li>
-        </ul>
+                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
+                    </div>
+                </li>
+                <li class="profile_result block_triple_half white">
+                    <div class="summary">
+                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
+                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
 
-    </div>
-</div>
+                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
+                    </div>
+                </li>
+                <li class="profile_result block_triple_half white">
+                    <div class="summary">
+                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
+                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
 
-<div id="col_content">
-    <div id="sub_menu">
-        <div class="block_triple_half blue">		
-            <h2 style="color: white">Gevraagde ritten</h2>
+                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
+                    </div>
+                </li>
+            </ul>
+
         </div>
     </div>
-    <div id="col_content" style="width: 456px; height: 100%; max-height: 228px; overflow: auto;">
 
-        <ul id="profile_results">
+    <div id="col_content">
+        <div id="sub_menu">
+            <div class="block_triple_half blue">		
+                <h2 style="color: white">Gevraagde ritten</h2>
+            </div>
+        </div>
+        <div id="col_content" style="width: 456px; height: 100%; max-height: 228px; overflow: auto;">
 
-            <li class="profile_result block_triple_half white">
-                <div class="summary">
-                    <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                    <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
+            <ul id="profile_results">
 
-                    <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                </div>
-            </li>
-            <li class="profile_result block_triple_half white">
-                <div class="summary">
-                    <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                    <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
+                <li class="profile_result block_triple_half white">
+                    <div class="summary">
+                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
+                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
 
-                    <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                </div>
-            </li>
+                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
+                    </div>
+                </li>
+                <li class="profile_result block_triple_half white">
+                    <div class="summary">
+                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
+                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
 
-        </ul>
+                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
+                    </div>
+                </li>
 
+            </ul>
+
+        </div>
     </div>
-</div>
