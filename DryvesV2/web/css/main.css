@@ -120,6 +120,13 @@ body{
     float:left;
 }
 
+.block_triple_half{
+    display:block;
+    width:453px;
+    height:73px;
+    float:left;
+}
+
 .block_quad{
     display:block;
     width:301px;
@@ -134,7 +141,14 @@ body{
     float: left;
 }
 
-.block_single, .block_double, .block_triple, .block_quad, .block_six{
+.block_nine{
+    display:block;
+    width:453px;
+    height:453px;
+    float: left;
+}
+
+.block_single, .block_double, .block_triple, .block_triple_half, .block_quad, .block_six, .block_nine{
     position: relative;
     margin: 0px 3px 3px 0px;
     text-align:center;
@@ -146,7 +160,7 @@ body{
     background-color:#ffffff;
 }
 
-a.white:hover, .result:hover{
+a.white:hover, .result:hover, .profile_result:hover{
     background-color:#e1f2fa;
 }
 
@@ -292,7 +306,7 @@ a.white:hover, .result:hover{
 /*********************** results page ************************/
 
 #results{
-    position:relative;
+    position: relative;
     max-width:912px;
     list-style-type:none;
     margin: 0px;
@@ -353,6 +367,44 @@ a.white:hover, .result:hover{
 .rating_small{
     font-family:fontawesome;
     size:14px;
+}
+
+
+/*********************** profile page ************************/
+
+#profile_results{
+    position: static;
+    max-width: 912px;
+    list-style-type:none;
+    margin: 0px;
+    padding:0px;
+}
+
+.profile_result{
+}
+
+.profile_result div{
+    margin: 0px 0px 0px 25px;
+    float:left;
+    padding: 0px 0px 0px 0px;
+}
+
+.profile_result .summary{
+    margin-top:16px;
+    width: 300px;
+    font-size:14px;
+    text-align:left;
+}
+
+.profile_result .route{
+    color:#000000;
+    font-size:16px;
+    padding: 0px;
+    margin:0px;
+}
+
+.date_time{
+    margin-right: 25px;
 }
 
 /******************** Message Pane ********************/
@@ -439,8 +491,8 @@ a{
     right: 18px;
     font-size:28px;
     color:#000000;
-   
-    
+
+
 }
 
 

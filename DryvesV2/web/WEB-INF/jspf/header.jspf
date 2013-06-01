@@ -65,5 +65,5 @@
                 <a class="block_single blue" href="#"><div class="menu_icon icon_messages"></div><span class="menu_item">over dryves</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon icon_messages"></div><span class="menu_item">contact</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon icon_messages"></div><span class="menu_item">hoe werkt 't</span></a>
-                <a class="block_single blue" href="#"><div class="menu_icon icon_messages">&#xf090;</div><span class="menu_item">mijn <span>dryves</span></span></a>		
+                <a class="block_single blue" href="myDryves"><div class="menu_icon icon_messages">&#xf090;</div><span class="menu_item">mijn <span>dryves</span></span></a>		
             </div>

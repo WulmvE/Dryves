@@ -35,7 +35,7 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide", "/createRideDetails", "/createRideConfirmed"})
+        urlPatterns = {"/test", "/myDryves", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide", "/createRideDetails", "/createRideConfirmed"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
@@ -73,18 +73,13 @@ public class SearchRideServlet extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         Ride selectedRide;
-//        System.out.println("GET");
 
-        // if searchRideDetails page is requested
-        if (userPath.equals("/searchresults")) {
-//            String van = request.getParameter("search_start");
-//            String naar = request.getParameter("search_destination");
-//            String op = request.getParameter("search_date");
-//            session.setAttribute("rides", rideFacade.searchRideByStart(van));
-//            int aantalrides = rideFacade.searchRideByStart(van).size();
-//
-//
-//            session.setAttribute("aantalrides", aantalrides);
+        
+        // if myDryves page is requested
+        if (userPath.equals("/myDryves")) {
+            //TODO: myDryves logic
+            
+            
         } else if (userPath.equals("/rideDetails")) {
 
             String idRide = request.getQueryString();
