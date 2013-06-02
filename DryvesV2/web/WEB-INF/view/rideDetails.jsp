@@ -69,7 +69,7 @@
         <div class="result block_triple white">
             <div>
                 <img class="avatar" src="img/avatar.jpg" />
-                <a href="#" class="avatar_label">${ride.idMember.alias}</a>
+                <a href="#" class="avatar_label">${selectedRide.idMember.alias}</a>
             </div>
             <div class="summary">
                 <span class="route" >${selectedRide.startLocation} <span class="text_green"><></span> ${selectedRide.endLocation}</span><br>
