@@ -394,6 +394,23 @@ a.white:hover, .result:hover, .profile_result:hover{
     display: inline;
 }
 
+#profile{    
+}
+
+#profile .text{
+    color:#000000;
+    font-size:16px;
+    padding: 0px;
+    margin:0px;
+}
+
+#profile .summary{
+    margin:0px;
+    width: 100%;
+    font-size:14px;
+    text-align:left;
+}
+
 ul.profile_results{
     position: static;
     max-width: 100%;
