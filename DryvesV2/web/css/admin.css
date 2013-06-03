@@ -1,0 +1,91 @@
+/* 
+    Document   : admin
+    Created on : Jun 2, 2013, 6:29:32 PM
+    Author     : Patrick
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face
+{
+    font-family: fontawesome;
+    src: url('../fonts/FontAwesome.otf');
+}
+
+#logo{
+    font-size:64px;
+    display:inline-block;
+    position: relative;
+    top: 33px;
+    left: 4px;    
+}
+
+h2{
+    width: 100%;
+    text-align: left;
+}
+
+ul.selectstats{
+    display: inline-block;
+    padding:0;
+    margin: 0;
+    text-align: left;
+    font-weight: bold;
+}
+
+li.selectstat{
+    padding: 4px 0;
+    margin: 0 0 0 0;
+    list-style: circle;
+    color:#62b5dc;
+}
+
+li.selectstat span {
+    display: inline-block;
+    width:100%;
+    color:#a0a0a0;
+}
+
+li.selectstat:hover, li.selectstat span:hover, li.selectstat.active span, li.selectstat.active{
+    cursor: pointer;
+    list-style: disc;
+    color:#62b5dc;
+}
+
+li.selectstat, li.selectstat:hover{
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+/*.block_six:nth-last-of-type(even){
+    margin-right: 0px;
+    width:456px;
+}*/
+
+table.results{
+    
+    display: inline-block;
+    clear: left;
+    font-weight: bold;
+    border-collapse: collapse;
+}
+
+td{
+    padding: 4px 10px 4px 10px;
+    border: #d0d0d0 1px solid;
+}
+
+td.item_name{
+    min-width: 250px;
+}
+
+#graph_container, #pie_container{
+    display:inline-block;
+    width: 350px;
+    height: 200px;
+}
+
+#graph, #pie{
+    width: 350px;
+    height: 200px;
+}
