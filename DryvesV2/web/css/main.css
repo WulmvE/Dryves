@@ -218,6 +218,10 @@ a.white:hover, .result:hover, .profile_result:hover{
 
 /****************** top and submenu ******************/
 
+#logo{
+    font-size:81px;
+}
+
 .menu_icon{
     font-family:fontawesome;
     font-size:72px;
@@ -227,7 +231,7 @@ a.white:hover, .result:hover, .profile_result:hover{
     clear:right;
     height:120px;
     width:301px;
-    color:#62b5dc;
+/*    color:#62b5dc;*/
 
     -webkit-user-select: none;  
     -moz-user-select: none;    

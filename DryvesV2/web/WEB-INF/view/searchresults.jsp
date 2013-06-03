@@ -9,12 +9,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div id="sub_menu">
-    <div class="block_double blue"><div class="menu_icon icon_results">${aantalrides}</div><span class="menu_item">
+    <div class="block_double blue text_white"><div class="menu_icon icon_results">${aantalrides}</div><span class="menu_item">
             ${aantalrides==1 ? "resultaat" : "resultaten"}
         </span></div>
-    <a class="block_single white" href="index.jsp"><div class="menu_icon"></div><span class="menu_item menu_label_blue">opnieuw</span></a>
+    <a class="block_single white text_blue" href="index.jsp"><div class="menu_icon"></div><span class="menu_item menu_label_blue">opnieuw</span></a>
 
-    <div class="block_double white">
+    <div class="block_double white text_blue">
         <div class="menu_icon">			
             <ul class="sort_options">
                 <li class="sort_option active_up">tijdsdtip</li>
@@ -25,7 +25,7 @@
         <span class="menu_item menu_label_blue">sorteren op</span>
     </div>
 
-    <a class="block_single white" href="#"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
+    <a class="block_single white text_blue" href="#"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
 </div>
 
 <div id="col_content">
