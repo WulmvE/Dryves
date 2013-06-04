@@ -79,9 +79,9 @@ public class Ride implements Serializable {
     private String endLocation;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+//    @Size(min = 1, max = 45)
     @Column(name = "seatsAvailable")
-    private String seatsAvailable;
+    private int seatsAvailable;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -107,7 +107,7 @@ public class Ride implements Serializable {
         this.idRide = idRide;
     }
 
-    public Ride(Integer idRide, double askingPrice, Date departureDate, Date departureTime, String endLocation, String seatsAvailable, String startLocation, boolean status) {
+    public Ride(Integer idRide, double askingPrice, Date departureDate, Date departureTime, String endLocation, int seatsAvailable, String startLocation, boolean status) {
         this.idRide = idRide;
         this.askingPrice = askingPrice;
         this.departureDate = departureDate;
@@ -158,11 +158,11 @@ public class Ride implements Serializable {
         this.endLocation = endLocation;
     }
 
-    public String getSeatsAvailable() {
+    public int getSeatsAvailable() {
         return seatsAvailable;
     }
 
-    public void setSeatsAvailable(String seatsAvailable) {
+    public void setSeatsAvailable(int seatsAvailable) {
         this.seatsAvailable = seatsAvailable;
     }
 

@@ -62,7 +62,7 @@ public class RideFacade extends AbstractFacade<Ride> {
         return em.createNamedQuery("Ride.findByAll").setParameter("startLocation", van).setParameter("endLocation", naar).setParameter("departureDate", op).getResultList();
     }
  
-    public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car, Date date, String numseats, String price) {   
+    public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car, Date date, int numseats, String price) {   
         Ride ride = new Ride();
         
         System.out.println("startlocatie" + startLocation);
