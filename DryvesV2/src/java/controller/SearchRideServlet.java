@@ -196,7 +196,7 @@ public class SearchRideServlet extends HttpServlet {
             //TODO
 
             //number of seats
-            String numSeats = request.getParameter("create_num_seats");
+            int numSeats = Integer.parseInt(request.getParameter("create_num_seats"));
 
             //price
             String price = request.getParameter("create_price");
