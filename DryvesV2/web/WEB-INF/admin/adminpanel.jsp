@@ -26,8 +26,8 @@
         <script type="text/javascript">
 
             function initStats() {
-//                element = $('selectstat').get(0);
-//                getStats("mostCreated", element);
+                $element = $('selectstat').first();
+                $('.selectstats li:first').trigger('click');
             }
 
             function getStats(type, element) {
@@ -40,7 +40,7 @@
                     $.each(items, function(i, item) {
 
                         var listItem = '<tr class="result"><td class="text_blue">' + (i + 1) + '</td><td class="item_name">' + item[0] + '</td><td>' + item[1] + '</td></tr>';
-                        resultslist[i] = listItem;			
+                        resultslist[i] = listItem;
 
                     });
 
@@ -58,26 +58,47 @@
 
                 });
             }
+            
 
-            $(initStats());
+
+
+            $(function() {
+
+                initStats();
+
+                $("#menu_settings").on("click", function(event) {
+                    $('#col_content').hide(200, function(){
+                        
+                        $('.stats_cont').hide();
+                        $('.settings_cont').show();
+                        $('#col_content').show(200);
+                        $('#menu_stats').removeClass('green').addClass('blue');
+                        $('#menu_settings').removeClass('blue').addClass('green');
+                        
+                    });                    
+                    
+                });
+            });
         </script>
 
         <div id="main">
 
             <div id="main_menu">
                 <a class="block_double green text_white" href="#"><div id="logo" class="menu_icon">&#xf06c;</div><span class="menu_item">dryves admin</span></a>
-                <a class="block_single green" href="#"><div class="menu_icon"></div><span class="menu_item text_white">stastistieken</span></a>
-                <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item text_white">instellingen</span></a>
+                <a id="menu_stats" class="block_single green" href="#"><div class="menu_icon"></div><span class="menu_item text_white">stastistieken</span></a>
+                <a id="menu_settings" class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item text_white">instellingen</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item text_white">leden</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon text_white"></div><span class="menu_item text_white">uitloggen</span></a>		
             </div>
 
-            <div id="col_content">
+            <div id="col_content" >
+                
+                <!--statistieken-->
 
-                <div class="block_six white">		
+                <div class="block_six white stats_cont">		
                     <h2>Top 5</h2>
                     <ul class="selectstats">
-                        <li class="selectstat" onclick="getStats('mostCreated', this)" ><span>Lid: Meeste ritten aangeboden</span></li>
+                        <li id="starter" class="selectstat" onclick="getStats('mostCreated', this)" ><span>Lid: Meeste ritten aangeboden</span></li>
                         <li class="selectstat" onclick="getStats('mostDriven', this)"><span>Lid: Meeste ritten meegereden</span></li>
                         <li class="selectstat" onclick="getStats('highestGrossing', this)"><span>Lid: Hoogste opbrengst</span></li>
                         <li class="selectstat" onclick="getStats('mostDeparture', this)"><span>Populairste vertrekplaatsen</span></li>
@@ -85,13 +106,13 @@
                     </ul>
                 </div>
 
-                <div id="top5" class="block_six white">		
+                <div id="top5" class="block_six white stats_cont">		
                     <h2 id="top5_header"></h2>
                     <table class="results">                          
                     </table>
                 </div>
 
-                <div class="block_six white">		
+                <div class="block_six white stats_cont">		
                     <h2>Totalen</h2>
                     <ul class="selectstats">
                         <li class="selectstat" ><span class="active">Aantal leden</span></li>
@@ -100,13 +121,13 @@
                     </ul>
                 </div>
 
-                <div class="block_six white">
+                <div class="block_six white stats_cont">
                     <h2>Aantal Leden</h2>
                     <div id="graph_container"><div id="graph"></div></div>
 
                 </div>
 
-                <div class="block_six white">		
+                <div class="block_six white stats_cont">		
                     <h2>Verdeling</h2>
                     <ul class="selectstats">
                         <li class="selectstat" ><span class="active">Leeftijd</span></li>
@@ -114,11 +135,28 @@
                     </ul>
                 </div>
 
-                <div class="block_six white">
+                <div class="block_six white stats_cont">
                     <h2>Leeftijd</h2>
                     <div id="pie_container"><div id="pie"></div></div>
 
                 </div>
+
+
+                <!--instellingen-->
+
+                <div class="block_six white settings_cont">		
+                    <h2>Zakelijk</h2>
+                    <ul class="selectstats">
+                        <li class="selectstat active" ><span class="active">Percentage Ritprijs</span></li>
+                    </ul>
+                </div>
+
+                <div class="block_six white settings_cont">
+                    <h2>Percentage Ritprijs</h2>
+                    <input type="text" value="10" style="width:40px; margin-top: 50px;"/> <span style="font-size: 22px">%</span>
+                    <a class="button" href="<c:url value='rideDetails?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
+                </div>
+
             </div>
 
             <div id="cont_promo">al 24.145 ton co<span class="sub">2</span> bespaard...</div>
