@@ -35,7 +35,7 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide", "/createRideDetails", "/createRideConfirmed"})
+        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRideDetails"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
