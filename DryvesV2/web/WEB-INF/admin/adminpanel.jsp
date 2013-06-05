@@ -39,8 +39,8 @@
                     var resultslist = [];
                     $.each(items, function(i, item) {
 
-                        var listItem = '<tr class="result"><td class="text_blue">' + (i + 1) + '</td><td class="item_name">' + item[0] + '</td><td>' + item[1] + '</td></tr>'
-                        //adds items from the previous saved state to their parent lists.			
+                        var listItem = '<tr class="result"><td class="text_blue">' + (i + 1) + '</td><td class="item_name">' + item[0] + '</td><td>' + item[1] + '</td></tr>';
+                        resultslist[i] = listItem;			
 
                     });
 
