@@ -106,27 +106,18 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("login");
-        System.out.println("login");
-        System.out.println("login");
-        System.out.println("login");
-        System.out.println("login");
-        System.out.println("login");
-        System.out.println("login");
+ 
         String userPath = request.getServletPath();
 
 //                  ALIAS IS j_username IN HET INLOGSCHERM
           String mijnAlias = "vincent test";
           String alias = "jandeman";
-         // List<Dryver> members = dryverFacade.("jandeman");
-
+          String loggedInUser = request.getParameter("j_username");
+          getServletContext().setAttribute("loggedInUser", loggedInUser);
+          
+          
           getServletContext().setAttribute("cars", carFacade.findAll());
-//          List<Car> cars = carFacade.searchCars();
-          
-       //   getServletContext().setAttribute("members", members);
-//          getServletContext().setAttribute("cars", cars);
-          
-          
+               
           String testHttp;
           testHttp = request.getLocalAddr();
           
@@ -179,20 +170,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {     
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
-        System.out.println("WEEEEE");
+       
         String userPath = request.getServletPath();
 
         // if searchRide action is called

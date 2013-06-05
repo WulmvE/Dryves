@@ -14,16 +14,8 @@
     <div class="block_six white">	
         <p><a href="<c:url value='logout'/>">log out</a></p><br>
         <p> </p><br>
-        ${mijn_alias} <br>
-        
-        <c:forEach var="member" items="${members}">
-            <ul>
-                <li>
-                    ${member.idMember}
-                </li>
-            </ul>
-        </c:forEach>
-     
+        ${mijn_alias} <br> 
+        <div> user die is ingelogd ${loggedInUser}</div>
     </div>    
     
     <div class="block_six white">
