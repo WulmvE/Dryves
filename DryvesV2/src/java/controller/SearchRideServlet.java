@@ -35,7 +35,7 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/myDryves", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide", "/createRideDetails", "/createRideConfirmed"})
+        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide", "/createRideDetails", "/createRideConfirmed"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
@@ -75,9 +75,9 @@ public class SearchRideServlet extends HttpServlet {
         Ride selectedRide;
 
         
-        // if myDryves page is requested
-        if (userPath.equals("/myDryves")) {
-            //TODO: myDryves logic
+        // if myDryves2 page is requested
+        if (userPath.equals("/myDryves2")) {
+            //TODO: myDryves2 logic
             
             
         } else if (userPath.equals("/rideDetails")) {
