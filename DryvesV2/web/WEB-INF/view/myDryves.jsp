@@ -1,137 +1,75 @@
 <%-- 
     Document   : myDryves
-    Created on : 1-jun-2013, 17:02:03
-    Author     : hctung
+    Created on : May 27, 2013, 3:02:55 PM
+    Author     : Maartje
 --%>
-<%@taglib tagdir="/WEB-INF/tags" prefix="r"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
 
 
 <div id="col_content">
-
-    <div class="block_six white">		
-        <h2>Mijn profiel</h2>
-        <div class="profile block_triple white">
-            <div>
-                <img class="avatar" src="img/avatar.jpg" />
-                <a href="#" class="avatar_label">wijzig foto</a>
-            </div>
-            <div class="summary">
-                <span class="text" style="font-weight: bold">Dryver alias</span><br>              
-                <br>
-                <span class="text" style="font-weight: bold">text</span><br>
-                <r:rating_stars rating="4"/><br>
-                <a href="#">ratings inzien</a>
-            </div>
+    
+    <div class="block_six white">	
+        <p><a href="<c:url value='logout'/>">log out</a></p><br>
+        <p> </p><br>
+        ${mijn_alias} <br> 
+        <div> user die is ingelogd ${loggedInUser}</div>
+    </div>    
+    
+    <div class="block_six white">
+        <h2 class="blauw">
+            mijn gegevens
+        </h2> <br>
+        <p> </p><br>
+        <c:forEach var="member" items="${members}">
+    
+        <table float="left">
+            <tr><th>
+                  naam  
+            </th>    
+            <td>
+                  ${member.firstName} ${member.adjective} ${member.lastName}
+            </td></tr>
+            <tr><th>
+                  plaats 
+            </th>    
+            <td>
+                  ${member.city}
+            </td></tr>
+            <tr><th>
+                  email
+            </th>    
+            <td>
+                  ${member.email}
+            </td></tr>
+             <tr><th>
+               auto
+            </th>    
+            <td>
+                
+            </td></tr>
+        </table><br>
+            </c:forEach>   
+            <%--     <c:forEach var="car" items="${cars}">
+                      <c:if test="${car.idMember == 103}">
+                          <ul>
+                              <li>${car.brand}</li>
+                          </ul>
+                      </c:if>
+             </c:forEach>    --%>   
+        <p> </p><br>
+        <p> </p><br>
+        <div float="under">
+               ${httpistest}<br>
+               Previous Page:  ${mijnreferer}<br>
+               ${en}
         </div>
+        
     </div>
+  </div>
 
-
-    <div id="col_content">
-        <div id="sub_menu">
-            <div class="block_triple_half blue">		
-                <h2 style="color: white">Mijn vrienden</h2>
-            </div>
-        </div>
-
-
-        <div class="block_triple friends" style=" overflow-x: scroll; overflow-y: hidden;">
-            <ul>            
-                <li class="block_single white">
-                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
-                    <a href="#" class="avatar_label">alias</a>
-                </li>
-                <li class="block_single white">
-                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
-                    <a href="#" class="avatar_label">alias</a>
-                </li>                <li class="block_single white">
-                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
-                    <a href="#" class="avatar_label">alias</a>
-                </li>
-                <li class="block_single white"></li>
-            </ul>
-        </div>
-        <div id="sub_menu">
-            <div class="block_triple_half white">		
-                <h4 style="margin-top: 25px;">knoppenbalk</h4>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="col_content">
-        <div id="sub_menu">
-            <div class="block_triple_half blue">		
-                <h2 style="color: white">Aangeboden ritten</h2>
-            </div>
-        </div>
-        <div class="profile_result_block">
-
-            <ul class="profile_results">
-                <li class="profile_result block_triple_half white">
-                    <div class="summary">
-                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
-
-                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
-                <li class="profile_result block_triple_half white">
-                    <div class="summary">
-                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
-
-                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
-                <li class="profile_result block_triple_half white">
-                    <div class="summary">
-                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
-
-                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
-                <li class="profile_result block_triple_half white">
-                    <div class="summary">
-                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
-
-                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-
-    <div id="col_content">
-        <div id="sub_menu">
-            <div class="block_triple_half blue">		
-                <h2 style="color: white">Gevraagde ritten</h2>
-            </div>
-        </div>
-        <div class="profile_result_block">
-
-            <ul class="profile_results">
-
-                <li class="profile_result block_triple_half white">
-                    <div class="summary">
-                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
-
-                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
-                <li class="profile_result block_triple_half white">
-                    <div class="summary">
-                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
-
-                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
-
-            </ul>
-
-        </div>
-    </div>
+    
+    
+        

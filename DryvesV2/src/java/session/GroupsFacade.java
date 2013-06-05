@@ -6,7 +6,7 @@
 
 package session;
 
-import entity.Car;
+import entity.Groups;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author hctung
  */
 @Stateless
-public class CarFacade extends AbstractFacade<Car> {
+public class GroupsFacade extends AbstractFacade<Groups> {
     @PersistenceContext(unitName = "DryvesPU")
     private EntityManager em;
 
@@ -25,8 +25,8 @@ public class CarFacade extends AbstractFacade<Car> {
         return em;
     }
 
-    public CarFacade() {
-        super(Car.class);
+    public GroupsFacade() {
+        super(Groups.class);
     }
     
 }

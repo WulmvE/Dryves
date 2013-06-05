@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package entity;
 
 import java.io.Serializable;
@@ -23,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Willem
+ * @author hctung
  */
 @Entity
 @Table(name = "message")
@@ -32,12 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m"),
     @NamedQuery(name = "Message.findByIdMessage", query = "SELECT m FROM Message m WHERE m.idMessage = :idMessage"),
     @NamedQuery(name = "Message.findByDateTime", query = "SELECT m FROM Message m WHERE m.dateTime = :dateTime"),
-    @NamedQuery(name = "Message.findByText", query = "SELECT m FROM Message m WHERE m.text = :text"),
-    @NamedQuery(name = "Message.findByReciever", query = "SELECT m FROM Message m WHERE m.idMemberReciever = :idMemberReciever ORDER BY m.dateTime DESC"),
-    @NamedQuery(name = "Message.findBySender", query = "SELECT m FROM Message m WHERE m.idMemberSender = :idMemberSender"),
-    @NamedQuery(name = "Message.getSingleMessage", query = "SELECT m FROM Message m WHERE m.idMessage = :idMessage AND m.idMemberSender = :idMemberSender AND m.dateTime = :dateTime")})
+    @NamedQuery(name = "Message.findByText", query = "SELECT m FROM Message m WHERE m.text = :text")})
 public class Message implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,12 +49,12 @@ public class Message implements Serializable {
     @Size(max = 156)
     @Column(name = "text")
     private String text;
-    @JoinColumn(name = "idMemberReciever", referencedColumnName = "idMember")
-    @ManyToOne(optional = false)
-    private Dryver idMemberReciever;
     @JoinColumn(name = "idMemberSender", referencedColumnName = "idMember")
     @ManyToOne(optional = false)
     private Dryver idMemberSender;
+    @JoinColumn(name = "idMemberReciever", referencedColumnName = "idMember")
+    @ManyToOne(optional = false)
+    private Dryver idMemberReciever;
 
     public Message() {
     }
@@ -95,20 +92,20 @@ public class Message implements Serializable {
         this.text = text;
     }
 
-    public Dryver getIdMemberReciever() {
-        return idMemberReciever;
-    }
-
-    public void setIdMemberReciever(Dryver idMemberReciever) {
-        this.idMemberReciever = idMemberReciever;
-    }
-
     public Dryver getIdMemberSender() {
         return idMemberSender;
     }
 
     public void setIdMemberSender(Dryver idMemberSender) {
         this.idMemberSender = idMemberSender;
+    }
+
+    public Dryver getIdMemberReciever() {
+        return idMemberReciever;
+    }
+
+    public void setIdMemberReciever(Dryver idMemberReciever) {
+        this.idMemberReciever = idMemberReciever;
     }
 
     @Override
@@ -135,4 +132,5 @@ public class Message implements Serializable {
     public String toString() {
         return "entity.Message[ idMessage=" + idMessage + " ]";
     }
+    
 }

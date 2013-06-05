@@ -7,7 +7,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,7 +53,7 @@ public class Negotiation implements Serializable {
     @ManyToOne(optional = false)
     private Dryver dryver;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "negotiation")
-    private Collection<Bid> bidCollection;
+    private List<Bid> bidList;
 
     public Negotiation() {
     }
@@ -112,12 +112,12 @@ public class Negotiation implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Bid> getBidCollection() {
-        return bidCollection;
+    public List<Bid> getBidList() {
+        return bidList;
     }
 
-    public void setBidCollection(Collection<Bid> bidCollection) {
-        this.bidCollection = bidCollection;
+    public void setBidList(List<Bid> bidList) {
+        this.bidList = bidList;
     }
 
     @Override

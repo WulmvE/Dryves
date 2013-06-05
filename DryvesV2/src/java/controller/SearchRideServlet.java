@@ -35,7 +35,7 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/myDryves", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide", "/createRideDetails", "/createRideConfirmed"})
+        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRide", "/createRideDetails", "/createRideConfirmed"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
@@ -75,9 +75,9 @@ public class SearchRideServlet extends HttpServlet {
         Ride selectedRide;
 
         
-        // if myDryves page is requested
-        if (userPath.equals("/myDryves")) {
-            //TODO: myDryves logic
+        // if myDryves2 page is requested
+        if (userPath.equals("/myDryves2")) {
+            //TODO: myDryves2 logic
             
             
         } else if (userPath.equals("/rideDetails")) {
@@ -144,20 +144,20 @@ public class SearchRideServlet extends HttpServlet {
             // pass parameters to createRideDetails
             tempStartLocation = request.getParameter("create_start");
             if  (tempStartLocation.equals("")){
-                tempStartLocation = "VAN";
+                tempStartLocation = "van";
             }
             tempEndLocation = request.getParameter("create_destination");
             if  (tempEndLocation.equals("")){
-                tempEndLocation = "NAAR";
+                tempEndLocation = "naar";
             }
             tempDate = request.getParameter("create_date");
             if  (tempDate.equals("")){
-                tempDate = "DATUM";
+                tempDate = "datum";
             }
             
             Dryver dryver = dryverFacade.find(100); 
-            Collection<Car> carCollection = dryver.getCarCollection();
-            String tempCar = carCollection.iterator().next().getBrand();
+            List<Car> carList = dryver.getCarList();
+            String tempCar = carList.iterator().next().getBrand();
 
             getServletContext().setAttribute("create_start", tempStartLocation);
             getServletContext().setAttribute("create_end", tempEndLocation);
@@ -196,14 +196,14 @@ public class SearchRideServlet extends HttpServlet {
             //TODO
 
             //number of seats
-            String numSeats = request.getParameter("create_num_seats");
+            int numSeats = Integer.parseInt(request.getParameter("create_num_seats"));
 
             //price
             String price = request.getParameter("create_price");
 
             Dryver dryver = dryverFacade.find(100); 
-            Collection<Car> carCollection = dryver.getCarCollection();
-            Car car = carCollection.iterator().next();
+            List<Car> carList = dryver.getCarList();
+            Car car = carList.get(0);
             
             int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
 

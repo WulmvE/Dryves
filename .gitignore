@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+-Target
+-/Dryves/target/
+-Dryves/lib/unknown/binary/mysql-connector-java-5.1.18-bin/SNAPSHOT/mysql-connector-java-5.1.18-bin-SNAPSHOT.jar
+-/Oefententamen/nbproject/private/
+-/MetroDryves/target/
+-/DryvesMetro/target/
+-/DryvesV2/nbproject/private/
+-/DryvesV2/build/
+-/DryvesV2/dist/
+-DryvesV2/nbproject/**
+-DryvesV2/nbproject/project.xml
+-DryvesV2/nbproject/project.xml
+-/Dryves_1/nbproject/private/
+-/Dryves_2/nbproject/private/
+-DryvesV2/.DS_Store
+-/Dryves werkende login/nbproject/private/
+=======
 Target
 /Dryves/target/
 Dryves/lib/unknown/binary/mysql-connector-java-5.1.18-bin/SNAPSHOT/mysql-connector-java-5.1.18-bin-SNAPSHOT.jar
@@ -13,3 +31,5 @@ DryvesV2/nbproject/project.xml
 /Dryves_1/nbproject/private/
 /Dryves_2/nbproject/private/
 DryvesV2/.DS_Store
+/Dryves werkende login/nbproject/private/
+>>>>>>> 4f75f8e3ac30901fab23fdab145c67da3f5b17ad

@@ -7,8 +7,8 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,10 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ride.findAll", query = "SELECT r FROM Ride r"),
-    @NamedQuery(name = "Ride.findByAll", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation AND r.endLocation = :endLocation AND r.departureDate = :departureDate"),
-    @NamedQuery(name = "Ride.searchRideByStartEnd", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation AND r.endLocation = :endLocation"),
-    @NamedQuery(name = "Ride.searchRideByStartDate", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation AND r.departureDate = :departureDate"),
-    @NamedQuery(name = "Ride.searchRideByEndDate", query = "SELECT r FROM Ride r WHERE r.endLocation = :endLocation AND r.departureDate = :departureDate"),
     @NamedQuery(name = "Ride.findByIdRide", query = "SELECT r FROM Ride r WHERE r.idRide = :idRide"),
     @NamedQuery(name = "Ride.findByAskingPrice", query = "SELECT r FROM Ride r WHERE r.askingPrice = :askingPrice"),
     @NamedQuery(name = "Ride.findByDepartureDate", query = "SELECT r FROM Ride r WHERE r.departureDate = :departureDate"),
@@ -51,7 +47,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ride.findByStartLocation", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation"),
     @NamedQuery(name = "Ride.findByStatus", query = "SELECT r FROM Ride r WHERE r.status = :status")})
 public class Ride implements Serializable {
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,19 +62,18 @@ public class Ride implements Serializable {
     @Column(name = "departureDate")
     @Temporal(TemporalType.DATE)
     private Date departureDate;
-    @Basic(optional = true)
+    @Basic(optional = false)
     @NotNull
     @Column(name = "departureTime")
     @Temporal(TemporalType.TIME)
     private Date departureTime;
-    @Basic(optional = true)
+    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "endLocation")
     private String endLocation;
     @Basic(optional = false)
     @NotNull
-//    @Size(min = 1, max = 45)
     @Column(name = "seatsAvailable")
     private int seatsAvailable;
     @Basic(optional = false)
@@ -91,14 +85,14 @@ public class Ride implements Serializable {
     @NotNull
     @Column(name = "status")
     private boolean status;
-    @JoinColumn(name = "idCar", referencedColumnName = "idCar")
-    @ManyToOne(optional = false)
-    private Car idCar;
     @JoinColumn(name = "idMember", referencedColumnName = "idMember")
     @ManyToOne(optional = false)
     private Dryver idMember;
+    @JoinColumn(name = "idCar", referencedColumnName = "idCar")
+    @ManyToOne(optional = false)
+    private Car idCar;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ride")
-    private Collection<Negotiation> negotiationCollection;
+    private List<Negotiation> negotiationList;
 
     public Ride() {
     }
@@ -182,14 +176,6 @@ public class Ride implements Serializable {
         this.status = status;
     }
 
-    public Car getIdCar() {
-        return idCar;
-    }
-
-    public void setIdCar(Car idCar) {
-        this.idCar = idCar;
-    }
-
     public Dryver getIdMember() {
         return idMember;
     }
@@ -198,13 +184,21 @@ public class Ride implements Serializable {
         this.idMember = idMember;
     }
 
-    @XmlTransient
-    public Collection<Negotiation> getNegotiationCollection() {
-        return negotiationCollection;
+    public Car getIdCar() {
+        return idCar;
     }
 
-    public void setNegotiationCollection(Collection<Negotiation> negotiationCollection) {
-        this.negotiationCollection = negotiationCollection;
+    public void setIdCar(Car idCar) {
+        this.idCar = idCar;
+    }
+
+    @XmlTransient
+    public List<Negotiation> getNegotiationList() {
+        return negotiationList;
+    }
+
+    public void setNegotiationList(List<Negotiation> negotiationList) {
+        this.negotiationList = negotiationList;
     }
 
     @Override
@@ -232,4 +226,4 @@ public class Ride implements Serializable {
         return "entity.Ride[ idRide=" + idRide + " ]";
     }
     
-    }
+}

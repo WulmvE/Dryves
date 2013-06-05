@@ -7,7 +7,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -58,7 +58,7 @@ public class Car implements Serializable {
     @ManyToOne(optional = false)
     private Dryver idMember;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCar")
-    private Collection<Ride> rideCollection;
+    private List<Ride> rideList;
 
     public Car() {
     }
@@ -106,12 +106,12 @@ public class Car implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Ride> getRideCollection() {
-        return rideCollection;
+    public List<Ride> getRideList() {
+        return rideList;
     }
 
-    public void setRideCollection(Collection<Ride> rideCollection) {
-        this.rideCollection = rideCollection;
+    public void setRideList(List<Ride> rideList) {
+        this.rideList = rideList;
     }
 
     @Override

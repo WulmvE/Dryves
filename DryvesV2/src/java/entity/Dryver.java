@@ -7,7 +7,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,8 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,7 +44,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dryver.findByFirstName", query = "SELECT d FROM Dryver d WHERE d.firstName = :firstName"),
     @NamedQuery(name = "Dryver.findByLastName", query = "SELECT d FROM Dryver d WHERE d.lastName = :lastName"),
     @NamedQuery(name = "Dryver.findByPassword", query = "SELECT d FROM Dryver d WHERE d.password = :password")})
-
 public class Dryver implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -90,27 +88,26 @@ public class Dryver implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "password")
     private String password;
+    @ManyToMany(mappedBy = "dryverList")
+    private List<Groups> groupsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
-    private Collection<Car> carCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFriend")
-    private Collection<Dryver> dryverCollection;
-    @JoinColumn(name = "idFriend", referencedColumnName = "idMember")
-    @ManyToOne(optional = false)
-    private Dryver idFriend;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMemberReciever")
-    private Collection<Message> messageCollection;
+    private List<Car> carList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMemberSender")
-    private Collection<Message> messageCollection1;
+    private List<Message> messageList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMemberReciever")
+    private List<Message> messageList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
-    private Collection<Ride> rideCollection;
+    private List<Ride> rideList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "dryver")
     private Admin admin;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dryver")
-    private Collection<Negotiation> negotiationCollection;
+    private List<Negotiation> negotiationList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
-    private Collection<Rating> ratingCollection;
-    
-    //private Stars sterren;
+    private List<Rating> ratingList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
+    private List<Friend> friendList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFriend")
+    private List<Friend> friendList1;
 
     public Dryver() {
     }
@@ -155,39 +152,6 @@ public class Dryver implements Serializable {
 
     public Double getAvgRating() {
         return avgRating;
-    }
-    
-    public Stars getStars() {
-        Double rating = getAvgRating();
-        if(rating < 1) {
-            return Stars.EEN;
-        } else if (rating < 2) {
-            
-        }
-        //        <c:if test="${ride.idMember.avgRating > 0.00 && ride.idMember.avgRating <= 2.00}">
-        //        <span class="rating_small text_green"></span>
-        //        </c:if>
-        //        <c:if test="${ride.idMember.avgRating > 2.00 && ride.idMember.avgRating <= 4.00}">
-        //        <span class="rating_small text_green"></span>
-        //        </c:if>
-        //        <c:if test="${ride.idMember.avgRating > 4.00 && ride.idMember.avgRating <= 5.00}">
-        //        <span class="rating_small text_green"></span>
-        //        </c:if>
-        return Stars.TWEE;
-    }
-    
-    public enum Stars {
-        EEN("\u2345"),
-        TWEE("");
-        private String unicode;
-        private Stars(String uni) {
-            unicode = uni;
-        }
-
-        @Override
-        public String toString() {
-            return unicode;
-        }
     }
 
     public void setAvgRating(Double avgRating) {
@@ -235,56 +199,48 @@ public class Dryver implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Car> getCarCollection() {
-        return carCollection;
+    public List<Groups> getGroupsList() {
+        return groupsList;
     }
 
-    public void setCarCollection(Collection<Car> carCollection) {
-        this.carCollection = carCollection;
-    }
-
-    @XmlTransient
-    public Collection<Dryver> getDryverCollection() {
-        return dryverCollection;
-    }
-
-    public void setDryverCollection(Collection<Dryver> dryverCollection) {
-        this.dryverCollection = dryverCollection;
-    }
-
-    public Dryver getIdFriend() {
-        return idFriend;
-    }
-
-    public void setIdFriend(Dryver idFriend) {
-        this.idFriend = idFriend;
+    public void setGroupsList(List<Groups> groupsList) {
+        this.groupsList = groupsList;
     }
 
     @XmlTransient
-    public Collection<Message> getMessageCollection() {
-        return messageCollection;
+    public List<Car> getCarList() {
+        return carList;
     }
 
-    public void setMessageCollection(Collection<Message> messageCollection) {
-        this.messageCollection = messageCollection;
-    }
-
-    @XmlTransient
-    public Collection<Message> getMessageCollection1() {
-        return messageCollection1;
-    }
-
-    public void setMessageCollection1(Collection<Message> messageCollection1) {
-        this.messageCollection1 = messageCollection1;
+    public void setCarList(List<Car> carList) {
+        this.carList = carList;
     }
 
     @XmlTransient
-    public Collection<Ride> getRideCollection() {
-        return rideCollection;
+    public List<Message> getMessageList() {
+        return messageList;
     }
 
-    public void setRideCollection(Collection<Ride> rideCollection) {
-        this.rideCollection = rideCollection;
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
+    }
+
+    @XmlTransient
+    public List<Message> getMessageList1() {
+        return messageList1;
+    }
+
+    public void setMessageList1(List<Message> messageList1) {
+        this.messageList1 = messageList1;
+    }
+
+    @XmlTransient
+    public List<Ride> getRideList() {
+        return rideList;
+    }
+
+    public void setRideList(List<Ride> rideList) {
+        this.rideList = rideList;
     }
 
     public Admin getAdmin() {
@@ -296,21 +252,39 @@ public class Dryver implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Negotiation> getNegotiationCollection() {
-        return negotiationCollection;
+    public List<Negotiation> getNegotiationList() {
+        return negotiationList;
     }
 
-    public void setNegotiationCollection(Collection<Negotiation> negotiationCollection) {
-        this.negotiationCollection = negotiationCollection;
+    public void setNegotiationList(List<Negotiation> negotiationList) {
+        this.negotiationList = negotiationList;
     }
 
     @XmlTransient
-    public Collection<Rating> getRatingCollection() {
-        return ratingCollection;
+    public List<Rating> getRatingList() {
+        return ratingList;
     }
 
-    public void setRatingCollection(Collection<Rating> ratingCollection) {
-        this.ratingCollection = ratingCollection;
+    public void setRatingList(List<Rating> ratingList) {
+        this.ratingList = ratingList;
+    }
+
+    @XmlTransient
+    public List<Friend> getFriendList() {
+        return friendList;
+    }
+
+    public void setFriendList(List<Friend> friendList) {
+        this.friendList = friendList;
+    }
+
+    @XmlTransient
+    public List<Friend> getFriendList1() {
+        return friendList1;
+    }
+
+    public void setFriendList1(List<Friend> friendList1) {
+        this.friendList1 = friendList1;
     }
 
     @Override

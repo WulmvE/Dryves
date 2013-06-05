@@ -15,10 +15,11 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Willem
+ * @author hctung
  */
 @Stateless
 public class MessageFacade extends AbstractFacade<Message> {
+
     @PersistenceContext(unitName = "DryvesPU")
     private EntityManager em;
 
@@ -30,24 +31,25 @@ public class MessageFacade extends AbstractFacade<Message> {
     public MessageFacade() {
         super(Message.class);
     }
-    
+
     // retrieve all messages from the logged in idMember.
     public List<Message> searchMessageByIdReciever(Dryver idMember) {
         return em.createNamedQuery("Message.findByReciever").setParameter("idMemberReciever", idMember).getResultList();
     }
-    
+
     // get all messages sent by the logged user.
-    public List<Message> searchMessageByidSender(Dryver idMember){
+    public List<Message> searchMessageByidSender(Dryver idMember) {
         return em.createNamedQuery("Message.findBySender").setParameter("idMemberSender", idMember).getResultList();
     }
-    
+
     // retrieve a single message by messageId, SenderId and Date.
-    public List<Message> getSingleMessage(int idMessage, Dryver idSender, String dateTime){
+    public List<Message> getSingleMessage(int idMessage, Dryver idSender, String dateTime) {
         return em.createNamedQuery("Message.getSingleMessage").setParameter("idMessage", idMessage).setParameter("idMemberSender", idSender).setParameter("dateTime", dateTime).getResultList();
     }
-    
+
     // retrieve a single message by messageId.
-    public List<Message> getSingleMessageOnID(int idMessage){
+    public List<Message> getSingleMessageOnID(int idMessage) {
         return em.createNamedQuery("Message.findByIdMessage").setParameter("idMessage", idMessage).getResultList();
     }
+
 }
