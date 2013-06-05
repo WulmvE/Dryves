@@ -25,24 +25,41 @@
     <body>
         <script type="text/javascript">
 
-            $(function() {
+            function initStats() {
+//                element = $('selectstat').get(0);
+//                getStats("mostCreated", element);
+            }
 
-                $.getJSON("Admin", function(items) {
+            function getStats(type, element) {
 
-                    //remove old tr's
-                    $('.results .result').remove();
+                $element = $(element);
+
+                $.getJSON("Admin?type=" + type, function(items) {
+
                     var resultslist = [];
                     $.each(items, function(i, item) {
 
-                        var listItem = '<tr class="result"><td class="text_blue">' + (i + 1) + '</td><td class="item_name">' + item.place + '</td><td>' + item.value + '</td></tr>'
+                        var listItem = '<tr class="result"><td class="text_blue">' + (i + 1) + '</td><td class="item_name">' + item[0] + '</td><td>' + item[1] + '</td></tr>'
                         //adds items from the previous saved state to their parent lists.			
-                        resultslist[i] = listItem;
 
                     });
-                    //append tr's to table
-                    $(resultslist.join('')).appendTo(".results");
+
+                    //fade out old results. when animation is done append new ones and fade in again.
+                    $('#top5').children().fadeTo(200, 0.0, function() {
+                        //remove old tr's
+                        $('.results .result').remove();
+                        //append tr's to table
+                        $(resultslist.join('')).appendTo(".results");
+                        $('#top5_header').text($element.text());
+                        $element.addClass('active');
+                        $element.siblings().removeClass('active');
+                        $('#top5').children().fadeTo(200, 1.0);
+                    });
+
                 });
-            });
+            }
+
+            $(initStats());
         </script>
 
         <div id="main">
@@ -60,26 +77,24 @@
                 <div class="block_six white">		
                     <h2>Top 5</h2>
                     <ul class="selectstats">
-                        <li class="selectstat" ><span>Leden: Meeste aangeboden ritten</span></li>
-                        <li class="selectstat" ><span>Leden: Meeste meegereden ritten</span></li>
-                        <li class="selectstat" ><span>Leden: Hoogste opbrengst</span></li>
-                        <li class="selectstat active" ><span>Populairste vertrekplaatsen</span></li>
-                        <li class="selectstat" ><span>Populairste aankomstplaatsen</span></li>
+                        <li class="selectstat" onclick="getStats('mostCreated', this)" ><span>Lid: Meeste ritten aangeboden</span></li>
+                        <li class="selectstat" onclick="getStats('mostDriven', this)"><span>Lid: Meeste ritten meegereden</span></li>
+                        <li class="selectstat" onclick="getStats('highestGrossing', this)"><span>Lid: Hoogste opbrengst</span></li>
+                        <li class="selectstat" onclick="getStats('mostDeparture', this)"><span>Populairste vertrekplaatsen</span></li>
+                        <li class="selectstat" onclick="getStats('mostDestination', this)"><span>Populairste aankomstplaatsen</span></li>
                     </ul>
                 </div>
 
-                <div class="block_six white">		
-                    <h2>Vertrekplaatsen</h2>
-                    <table class="results">
-                        <tr class="result"><td class="text_blue">1</td><td>Amsterdam</td><td>357</td></tr>
-                        <tr class="result"><td class="text_blue">2</td><td>Rotterdam</td><td>281</td></tr>     
+                <div id="top5" class="block_six white">		
+                    <h2 id="top5_header"></h2>
+                    <table class="results">                          
                     </table>
                 </div>
 
                 <div class="block_six white">		
                     <h2>Totalen</h2>
                     <ul class="selectstats">
-                        <li class="selectstat active" ><span class="active">Aantal leden</span></li>
+                        <li class="selectstat" ><span class="active">Aantal leden</span></li>
                         <li class="selectstat" ><span>Aantal ritten</span></li>
                         <li class="selectstat" ><span>Opbrengst</span></li>
                     </ul>
@@ -90,11 +105,11 @@
                     <div id="graph_container"><div id="graph"></div></div>
 
                 </div>
-                
+
                 <div class="block_six white">		
                     <h2>Verdeling</h2>
                     <ul class="selectstats">
-                        <li class="selectstat active" ><span class="active">Leeftijd</span></li>
+                        <li class="selectstat" ><span class="active">Leeftijd</span></li>
                         <li class="selectstat" ><span>Geslacht</span></li>                       
                     </ul>
                 </div>
@@ -113,99 +128,99 @@
 
     <script type="text/javascript">
 
-        (function() {
-            var container = document.getElementById('graph'), graph;
-            var data = [[2009, 9146], [2008, 9484], [2007, 10129], [2006, 10225]];
-            graph = Flotr.draw(container, [data], {
-                bars: {
-                    show: true,
-                    horizontal: false,
+            (function() {
+                var container = document.getElementById('graph'), graph;
+                var data = [[2009, 9146], [2008, 9484], [2007, 10129], [2006, 10225]];
+                graph = Flotr.draw(container, [data], {
+                    bars: {
+                        show: true,
+                        horizontal: false,
+                        shadowSize: 0,
+                        barWidth: 0.5
+                    },
+                    mouse: {
+                        track: true,
+                        relative: true
+                    },
+                    xaxis: {
+                        noTicks: 4,
+                        ticks: [
+                            [0, "2011-Q3"],
+                            [1, "2011-Q4"],
+                            [2, "2012-Q1"],
+                            [3, "2012-Q2"]
+                        ]
+                    },
+                    yaxis: {
+                        min: 0,
+                        autoscaleMargin: 1
+                    },
+                    grid: {
+                        color: '#a0a0a0'}
+                });
+            })();
+
+
+
+            (function basic_pie(container) {
+
+                var
+                        d1 = [
+                    [0, 4]
+                ],
+                        d2 = [
+                    [0, 5]
+                ],
+                        d3 = [
+                    [0, 1.03]
+                ],
+                        d4 = [
+                    [0, 1.5]
+                ],
+                        graph;
+
+                graph = Flotr.draw(container, [{
+                        data: d1,
+                        label: '18-25'
+                    }, {
+                        data: d2,
+                        label: '26-40'
+                    }, {
+                        data: d3,
+                        label: '41-55',
+                        pie: {
+                            explode: 0
+                        }
+                    }, {
+                        data: d4,
+                        label: '56-75'
+                    }], {
                     shadowSize: 0,
-                    barWidth: 0.5
-                },
-                mouse: {
-                    track: true,
-                    relative: true
-                },
-                xaxis: {
-                    noTicks: 4,
-                    ticks: [
-                        [0, "2011-Q3"],
-                        [1, "2011-Q4"],
-                        [2, "2012-Q1"],
-                        [3, "2012-Q2"]
-                    ]
-                },
-                yaxis: {
-                    min: 0,
-                    autoscaleMargin: 1
-                },
-                grid: {
-                    color: '#a0a0a0'}
-            });
-        })();
-        
-
-        
-        (function basic_pie(container) {
-
-    var
-    d1 = [
-        [0, 4]
-    ],
-        d2 = [
-            [0, 5]
-        ],
-        d3 = [
-            [0, 1.03]
-        ],
-        d4 = [
-            [0, 1.5]
-        ],
-        graph;
-
-    graph = Flotr.draw(container, [{
-        data: d1,
-        label: '18-25'
-    }, {
-        data: d2,
-        label: '26-40'
-    }, {
-        data: d3,
-        label: '41-55',
-        pie: {
-            explode: 0
-        }
-    }, {
-        data: d4,
-        label: '56-75'
-    }], {
-    shadowSize:0,
-        HtmlText: false,
-        grid: {
-            verticalLines: false,
-            horizontalLines: false,
-            color: '#a0a0a0'
-        },
-        xaxis: {
-            showLabels: false
-        },
-        yaxis: {
-            showLabels: false
-        },
-        pie: {
-            show: true,
-            explode: 0
-        },
-        mouse: {
-            track: false
-        },
-        legend: {
-            position: 'se',
-            backgroundColor: '#ffffff'
-        }
-    });
-})(document.getElementById("pie"));
+                    HtmlText: false,
+                    grid: {
+                        verticalLines: false,
+                        horizontalLines: false,
+                        color: '#a0a0a0'
+                    },
+                    xaxis: {
+                        showLabels: false
+                    },
+                    yaxis: {
+                        showLabels: false
+                    },
+                    pie: {
+                        show: true,
+                        explode: 0
+                    },
+                    mouse: {
+                        track: false
+                    },
+                    legend: {
+                        position: 'se',
+                        backgroundColor: '#ffffff'
+                    }
+                });
+            })(document.getElementById("pie"));
 
 
 
@@ -213,6 +228,6 @@
 
 
     </script>
-    
-    
+
+
 </html>
