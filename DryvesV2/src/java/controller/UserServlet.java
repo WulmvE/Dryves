@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package controller;
+
 import entity.Car;
 import entity.Dryver;
 import entity.Ride;
@@ -32,20 +33,22 @@ import javax.servlet.http.HttpSession;
 import session.CarFacade;
 import session.DryverFacade;
 import session.RideFacade;
+
 /**
  *
  * @author Maartje
  */
 @WebServlet(name = "UserServlet",
         loadOnStartup = 1,
-        urlPatterns = { "/myDryves",
-                        "/changeprofile",
-                        "/createRideConfirmed",
-                        "/createRide",
-                        "/logout"})
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"DryvesUser"}))
+        urlPatterns = {"/myDryves",
+    "/changeprofile",
+    "/createRideConfirmed",
+    "/createRide",
+    "/logout"})
+@ServletSecurity(
+        @HttpConstraint(rolesAllowed = {"DryvesUser"}))
 public class UserServlet extends HttpServlet {
-    
+
     private String userPath;
     @EJB
     private DryverFacade dryverFacade;
@@ -53,16 +56,17 @@ public class UserServlet extends HttpServlet {
     private RideFacade rideFacade;
     @EJB
     private CarFacade carFacade;
-    
-     private String tempStartLocation;
+    private String tempStartLocation;
     private String tempEndLocation;
     private String tempDate;
-     @Override
+
+    @Override
     public void init() throws ServletException {
         // store category list in servlet context
         getServletContext().setAttribute("dryvers", dryverFacade.findAll());
         getServletContext().setAttribute("cars", carFacade.findAll());
     }
+
     /**
      * Handles the HTTP
      * <code>GET</code> method.
@@ -78,7 +82,6 @@ public class UserServlet extends HttpServlet {
         userPath = request.getServletPath();
         // if myDryves is requested
         if (userPath.equals("/myDryves")) {
-             
         }
         // if changeProfile is requested
         if (userPath.equals("/changeprofile")) {
@@ -86,12 +89,13 @@ public class UserServlet extends HttpServlet {
 //            request.setAttribute("orderList", orderList);
         }
 
-    
+
         // use RequestDispatcher to forward request internally
         userPath = "index.jsp";
         try {
             request.getRequestDispatcher(userPath).forward(request, response);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -108,61 +112,39 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
- 
+
         String userPath = request.getServletPath();
 //                  ALIAS IS j_username IN HET INLOGSCHERM
-          String alias = request.getUserPrincipal().getName();
-          getServletContext().setAttribute("alias", alias);
-           
-         
-               
-          String testHttp;
-          testHttp = request.getLocalAddr();
-          
-          String referer = request.getHeader("Referer");
-          if (referer == null) 
-          {referer = "none";}
-          
-          String terug = response.getContentType();
-          
-          request.setAttribute("en", terug);
-         
-          request.setAttribute("httpistest", testHttp);
-          request.setAttribute("mijnreferer", referer);
+        String alias = request.getUserPrincipal().getName();
+        getServletContext().setAttribute("alias", alias);
+
+
+
+        String testHttp;
+        testHttp = request.getLocalAddr();
+
+        String referer = request.getHeader("Referer");
+        if (referer == null) {
+            referer = "none";
+        }
+
+        String terug = response.getContentType();
+
+        request.setAttribute("en", terug);
+
+        request.setAttribute("httpistest", testHttp);
+        request.setAttribute("mijnreferer", referer);
 //          request.setAttribute("mijn_first_name", mijnFirstName);
 //          request.setAttribute("mijn_first_name", mijnAdjective);
 //          request.setAttribute("mijn_first_name", mijnLastName);
 //          request.setAttribute("mijn_first_name", mijnAvgRating);
 //          request.setAttribute("mijn_first_name", mijnCity);
 //          request.setAttribute("mijn_first_name", mijnEmail);         
-     
-          
-             // if createRide action is called
-        if (userPath.equals("/createRide")) {
-            // pass parameters to createRideDetails
-            tempStartLocation = request.getParameter("create_start");
-            if  (tempStartLocation.equals("")){
-                tempStartLocation = "van";
-            }
-            tempEndLocation = request.getParameter("create_destination");
-            if  (tempEndLocation.equals("")){
-                tempEndLocation = "naar";
-            }
-            tempDate = request.getParameter("create_date");
-            if  (tempDate.equals("")){
-                tempDate = "datum";
-            }
-            
-            Dryver dryver = dryverFacade.find(100); 
-            List<Car> carList = dryver.getCarList();
-            String tempCar = carList.iterator().next().getBrand();
-            getServletContext().setAttribute("create_start", tempStartLocation);
-            getServletContext().setAttribute("create_end", tempEndLocation);
-            getServletContext().setAttribute("create_date", tempDate);
-            getServletContext().setAttribute("create_car", tempCar);
-        }
-        
-               // if createRideConfirmed action is called
+
+
+
+
+        // if createRideConfirmed action is called
         if (userPath.equals("/createRideConfirmed")) {
             //start
             String startLocation = request.getParameter("create_start");
@@ -183,7 +165,8 @@ public class UserServlet extends HttpServlet {
             Date dateObj = new Date();
             try {
                 dateObj = df.parse(date);
-            } catch (ParseException ex) {
+            }
+            catch (ParseException ex) {
                 Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             //car
@@ -192,36 +175,40 @@ public class UserServlet extends HttpServlet {
             int numSeats = Integer.parseInt(request.getParameter("create_num_seats"));
             //price
             String price = request.getParameter("create_price");
-            Dryver dryver = dryverFacade.find(100); 
+            Dryver dryver = dryverFacade.find(100);
             List<Car> carList = dryver.getCarList();
             Car car = carList.get(0);
-            
+
             int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
         }
-          
- 
-          if (userPath.equals("/logout")) {
+
+
+        if (userPath.equals("/logout")) {
             HttpSession session = request.getSession();
-             alias = "";
-            
-            
-            
+            alias = "";
+
+
+
             session.invalidate();   // terminate session
             try {
                 getServletContext().setAttribute("alias", alias);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 ex.printStackTrace();
-            }    }
-       
+            }
+        }
+
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+
     /**
      * Handles the HTTP
      * <code>POST</code> method.
@@ -233,18 +220,46 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {     
-       
+            throws ServletException, IOException {
+
         String userPath = request.getServletPath();
         // if searchRide action is called
         if (userPath.equals("/myDryves")) {
             // TODO: Implement search ride action
         }
+
+        // if createRide action is called
+        if (userPath.equals("/createRide")) {
+            // pass parameters to createRideDetails
+            tempStartLocation = request.getParameter("create_start");
+            if (tempStartLocation.equals("")) {
+                tempStartLocation = "van";
+            }
+            tempEndLocation = request.getParameter("create_destination");
+            if (tempEndLocation.equals("")) {
+                tempEndLocation = "naar";
+            }
+            tempDate = request.getParameter("create_date");
+            if (tempDate.equals("")) {
+                tempDate = "datum";
+            }
+
+            Dryver dryver = dryverFacade.find(100);
+            List<Car> carList = dryver.getCarList();
+            String tempCar = carList.iterator().next().getBrand();
+            request.setAttribute("create_start", tempStartLocation);
+            request.setAttribute("create_end", tempEndLocation);
+            request.setAttribute("create_date", tempDate);
+            request.setAttribute("create_car", tempCar);
+        }
+
+
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
