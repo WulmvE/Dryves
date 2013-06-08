@@ -25,8 +25,8 @@
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
         directionsDisplay.setMap(map);
     }
-        function calcRoute() {
-            var start = "${selectedRide.startLocation}";
+    function calcRoute() {
+        var start = "${selectedRide.startLocation}";
         var end = "${selectedRide.endLocation}";
         var request = {
             origin: start,
@@ -77,13 +77,20 @@
                 ${selectedRide.seatsAvailable} ${selectedRide.seatsAvailable==1 ? "plaats" : "plaatsen"} vrij<br>
                 <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${selectedRide.askingPrice}" /></span> / Plaats <br>                    
                 <r:rating_stars rating="${selectedRide.idMember.avgRating}"/>
-                
+
             </div>
         </div>
         <div class="result block_triple white">
             <button onclick="location.href = '#'">Meld aan</button> <button onclick="location.href = '#'">Stuur Bericht</button> <button onclick="location.href = '#'">Friend Request</button><br>
-            knoppen komen hier<br>
-            TODO: maak nieuwe div zonder mouseOver
+            Passagiers van deze rit: <br>
+            <c:forEach var="negotiation" items="${selectedRide.negotiationList}">
+                <c:if test="${negotiation.acceptedDriver == 1 && negotiation.acceptedPassenger == 1}">
+                    Confirmed: ${negotiation.dryver.alias}<br>
+                </c:if>
+                <c:if test="${negotiation.acceptedDriver != 1 || negotiation.acceptedPassenger != 1}">
+                    Pending: ${negotiation.dryver.alias}<br>
+                </c:if>
+            </c:forEach>
         </div>
 
         <!--        <h2>ik wil meerijden</h2>
