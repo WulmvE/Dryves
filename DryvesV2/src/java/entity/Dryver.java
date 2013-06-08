@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,7 +20,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,6 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dryver.findByLastName", query = "SELECT d FROM Dryver d WHERE d.lastName = :lastName"),
     @NamedQuery(name = "Dryver.findByPassword", query = "SELECT d FROM Dryver d WHERE d.password = :password")})
 public class Dryver implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -88,6 +92,21 @@ public class Dryver implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 1)
+    @Column(name = "gender")
+    private String gender;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "birthDate")
+    @Temporal(TemporalType.DATE)
+    private Date birthDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "memberSince", updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date memberSince;
     @ManyToMany(mappedBy = "dryverList")
     private List<Groups> groupsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
@@ -116,7 +135,7 @@ public class Dryver implements Serializable {
         this.idMember = idMember;
     }
 
-    public Dryver(Integer idMember, String alias, String city, String email, String firstName, String lastName, String password) {
+    public Dryver(Integer idMember, String alias, String city, String email, String firstName, String lastName, String password, String gender, Date birthDate) {
         this.idMember = idMember;
         this.alias = alias;
         this.city = city;
@@ -124,6 +143,8 @@ public class Dryver implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.gender = gender;
+        this.birthDate = birthDate;
     }
 
     public Integer getIdMember() {
@@ -196,6 +217,27 @@ public class Dryver implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    //MemberSince is read-only
+    public Date getMemberSince() {
+        return memberSince;
     }
 
     @XmlTransient
@@ -287,6 +329,14 @@ public class Dryver implements Serializable {
         this.friendList1 = friendList1;
     }
 
+    //Generates a timestamp just before a new (and only a new) Dryver is inserted into the database
+    @PrePersist
+    public void createTimeStamp() {
+        if (memberSince == null) {
+            memberSince = new Date();
+        }
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -311,5 +361,6 @@ public class Dryver implements Serializable {
     public String toString() {
         return "entity.Dryver[ idMember=" + idMember + " ]";
     }
+    
     
 }

@@ -65,6 +65,21 @@ public class UserServlet extends HttpServlet {
         // store category list in servlet context
         getServletContext().setAttribute("dryvers", dryverFacade.findAll());
         getServletContext().setAttribute("cars", carFacade.findAll());
+
+        int numSeats = Integer.parseInt("3");
+        //price
+        String price = "10";
+        Dryver dryver = dryverFacade.find(100);
+        List<Car> carList = dryver.getCarList();
+        Car car = carList.get(0);
+        double distance = 60;
+        Date dateObj = new Date(13, 6, 6);
+
+        /********************** test creation and persisting of ride **************************/
+        //int rideId = rideFacade.placeRide("amsterdam", "den haag", dryver, car, dateObj, numSeats, price, distance);
+
+        /********************** test creation and persisting of dryver **************************/
+        //dryverFacade.persistNewDryver("koos83", "Delft", "koos83@yohaa.org.comh", "Koos", "de Vries", "333", "m", "15-06-1983");
     }
 
     /**
@@ -178,8 +193,9 @@ public class UserServlet extends HttpServlet {
             Dryver dryver = dryverFacade.find(100);
             List<Car> carList = dryver.getCarList();
             Car car = carList.get(0);
+            double distance = 60;
 
-            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
+            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
         }
 
 

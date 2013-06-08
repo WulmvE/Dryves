@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entity;
 
 import java.io.Serializable;
@@ -21,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,6 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ride.findByStartLocation", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation"),
     @NamedQuery(name = "Ride.findByStatus", query = "SELECT r FROM Ride r WHERE r.status = :status")})
 public class Ride implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,8 +84,17 @@ public class Ride implements Serializable {
     private String startLocation;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "distance")
+    private double distance;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "status")
     private boolean status;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "createdOn", updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdOn;
     @JoinColumn(name = "idMember", referencedColumnName = "idMember")
     @ManyToOne(optional = false)
     private Dryver idMember;
@@ -101,7 +111,7 @@ public class Ride implements Serializable {
         this.idRide = idRide;
     }
 
-    public Ride(Integer idRide, double askingPrice, Date departureDate, Date departureTime, String endLocation, int seatsAvailable, String startLocation, boolean status) {
+    public Ride(Integer idRide, double askingPrice, Date departureDate, Date departureTime, String endLocation, int seatsAvailable, String startLocation, double distance, boolean status) {
         this.idRide = idRide;
         this.askingPrice = askingPrice;
         this.departureDate = departureDate;
@@ -109,6 +119,7 @@ public class Ride implements Serializable {
         this.endLocation = endLocation;
         this.seatsAvailable = seatsAvailable;
         this.startLocation = startLocation;
+        this.distance = distance;
         this.status = status;
     }
 
@@ -168,12 +179,25 @@ public class Ride implements Serializable {
         this.startLocation = startLocation;
     }
 
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     public boolean getStatus() {
         return status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    //createdOn is read-only
+    public Date getCreatedOn() {
+        return createdOn;
     }
 
     public Dryver getIdMember() {
@@ -201,6 +225,15 @@ public class Ride implements Serializable {
         this.negotiationList = negotiationList;
     }
 
+    //Generates a timestamp just before a new (and only a new) Ride is inserted into the database
+    @PrePersist
+    public void createTimeStamp() {
+
+        if (createdOn == null) {
+            createdOn = new Date();
+        }
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -225,5 +258,4 @@ public class Ride implements Serializable {
     public String toString() {
         return "entity.Ride[ idRide=" + idRide + " ]";
     }
-    
 }

@@ -200,12 +200,12 @@ public class SearchRideServlet extends HttpServlet {
 
             //price
             String price = request.getParameter("create_price");
-
+            double distance = 60;
             Dryver dryver = dryverFacade.find(100); 
             List<Car> carList = dryver.getCarList();
             Car car = carList.get(0);
             
-            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price);
+            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
 
         }
 
