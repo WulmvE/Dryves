@@ -88,4 +88,8 @@ public class RideFacade extends AbstractFacade<Ride> {
         return ride.getIdRide();
     }
 
+      public String trimSearchString(String searchString){       
+       
+       return searchString.replaceAll(", Nederland", "");
+   }
 }

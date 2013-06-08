@@ -130,7 +130,7 @@ public class SearchRideServlet extends HttpServlet {
 
         // if searchRide action is called
         if (userPath.equals("/searchresults")) {
-            String van = request.getParameter("search_start");
+            String van = rideFacade.trimSearchString(request.getParameter("search_start")) ;
             String naar = request.getParameter("search_destination");
             String op = request.getParameter("search_date");
             getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
