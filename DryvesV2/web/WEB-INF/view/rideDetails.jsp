@@ -35,6 +35,7 @@
         };
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
+                document.getElementById('distance').innerHTML += response.routes[0].legs[0].distance.value / 1000 + " km";
                 directionsDisplay.setDirections(response);
             } else {
                 if (status == 'ZERO_RESULTS') {
@@ -91,6 +92,7 @@
                     Pending: ${negotiation.dryver.alias}<br>
                 </c:if>
             </c:forEach>
+            <div id="distance">Afstand: </div>
         </div>
 
         <!--        <h2>ik wil meerijden</h2>
