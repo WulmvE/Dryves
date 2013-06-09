@@ -35,7 +35,7 @@
         };
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                document.getElementById('distance').innerHTML += response.routes[0].legs[0].distance.value / 1000 + " km";
+                document.getElementById('distance').innerHTML += Math.round(Number(response.routes[0].legs[0].distance.value / 1000)) + " km";
                 directionsDisplay.setDirections(response);
             } else {
                 if (status == 'ZERO_RESULTS') {
