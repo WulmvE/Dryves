@@ -7,6 +7,7 @@ package controller;
 
 import entity.Car;
 import entity.Dryver;
+import entity.Negotiation;
 import entity.Ride;
 import java.io.IOException;
 import java.lang.Exception;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import session.CarFacade;
 import session.DryverFacade;
+import session.NegotiationFacade;
 import session.RideFacade;
 
 /**
@@ -35,7 +37,7 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails", "/searchRideList", "/searchresults", "/createRideDetails"})
+        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails2", "/searchRideList", "/searchresults", "/createRideDetails"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
@@ -44,6 +46,8 @@ public class SearchRideServlet extends HttpServlet {
     private RideFacade rideFacade;
     @EJB
     private CarFacade carFacade;
+    @EJB
+    private NegotiationFacade negotiationFacade;
     private String tempStartLocation;
     private String tempEndLocation;
     private String tempDate;
@@ -80,21 +84,46 @@ public class SearchRideServlet extends HttpServlet {
             //TODO: myDryves2 logic
             
             
-        } else if (userPath.equals("/rideDetails")) {
 
-            String idRide = request.getQueryString();
+        } 
             
+//        else if (userPath.equals("/rideDetails")) {
+//
+//            String idRide = request.getQueryString();
+//
+//
+//            if (idRide != null) {
+//
+//                // get selected ride
+//                selectedRide = rideFacade.find(Integer.parseInt(idRide));
+//
+//                // place selected category in session scope
+//                session.setAttribute("selectedRide", selectedRide);
+//
+//            }
             
 
+            
+
+       // } 
+        else if (userPath.equals("/rideDetails2")) {
+
+        String idRide = request.getQueryString();
+        
             if (idRide != null) {
-
+                System.out.println("test if loop");
                 // get selected ride
                 selectedRide = rideFacade.find(Integer.parseInt(idRide));
-
+                System.out.println("tussen");
+                List<Negotiation> negotiations = selectedRide.getNegotiationList();
+                System.out.println("tussen");
                 // place selected category in session scope
                 session.setAttribute("selectedRide", selectedRide);
-
+                session.setAttribute("negotiations", negotiations);
+                System.out.println(selectedRide.getIdRide());
+                System.out.println(negotiations.size());
             }
+
 
         } else if (userPath.equals("/searchRideList")) {
             // TODO: test, of de controller request forward naar view
@@ -127,6 +156,75 @@ public class SearchRideServlet extends HttpServlet {
 
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
+
+        Ride selectedRide;
+//        
+//        if (userPath.equals("/rideDetails")) {
+//            System.out.println("Dit is een test");
+//                
+//            int requestRide = Integer.parseInt(request.getParameter("requestRide"));
+//            int requestDryver = 100;
+//            System.out.println("ride" + requestRide);
+//            
+//           selectedRide = rideFacade.find(requestRide);
+//            
+//           session.setAttribute("selectedRide", selectedRide);
+//            
+//            if (request.getParameter("requestNegotiation").equals("1")) {
+////                Dryver dryver = dryverFacade.find(requestDryver);
+////                Ride ride = rideFacade.find(requestRide);
+//            
+//            
+//                Negotiation negotiation = new Negotiation(requestDryver, requestRide);  
+//                negotiation.setAcceptedDriver(0);
+//                negotiation.setAcceptedPassenger(1);
+//                negotiationFacade.create(negotiation);     
+//            }
+//        }
+
+            if (userPath.equals("/rideDetails2")) {
+
+                int confirmDryver = Integer.parseInt(request.getParameter("confirmDryver"));
+                int confirmRide = Integer.parseInt(request.getParameter("confirmRide"));
+
+                // get selected ride
+                selectedRide = rideFacade.find(confirmRide);
+                List<Negotiation> negotiations = selectedRide.getNegotiationList();
+
+
+                // place selected category in session scope
+                session.setAttribute("selectedRide", selectedRide);
+                session.setAttribute("negotiations", negotiations);
+
+
+                System.out.println("test in de post");
+
+                if (request.getParameter("confirmDryver") != null) {
+
+                    confirmDryver = Integer.parseInt(request.getParameter("confirmDryver"));
+                    System.out.println("test Dryver doorgegeven" + confirmDryver);
+                }
+
+                if (request.getParameter("confirmRide") != null) {
+                    confirmRide = Integer.parseInt(request.getParameter("confirmRide"));
+                    System.out.println("test Ride doorgegeven" + confirmRide);
+                }
+
+                if (request.getParameter("confirmNegotiation") != null) {
+                    if (request.getParameter("confirmNegotiation").equals("1")) {
+
+                        System.out.println("test status doorgegeven");
+                        // Dryver dryver = dryverFacade.find(Integer.parseInt(confirmDryver));
+                        //Ride ride = rideFacade.find(Integer.parseInt(confirmRide));
+
+                        Negotiation negotiation = negotiationFacade.findByIdMemberAndIdRide(confirmDryver, confirmRide);
+                        negotiation.setAcceptedDriver(1);
+                        negotiationFacade.edit(negotiation);
+
+                    }
+                }
+            }
+
 
         // if searchRide action is called
         if (userPath.equals("/searchresults")) {
@@ -222,5 +320,4 @@ public class SearchRideServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
-
 }

@@ -45,9 +45,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ride.findByEndLocation", query = "SELECT r FROM Ride r WHERE r.endLocation = :endLocation"),
     @NamedQuery(name = "Ride.findBySeatsAvailable", query = "SELECT r FROM Ride r WHERE r.seatsAvailable = :seatsAvailable"),
     @NamedQuery(name = "Ride.findByStartLocation", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation"),
-    @NamedQuery(name = "Ride.findByStatus", query = "SELECT r FROM Ride r WHERE r.status = :status")})
-public class Ride implements Serializable {
+    @NamedQuery(name = "Ride.findByStatus", query = "SELECT r FROM Ride r WHERE r.status = :status"),
+    @NamedQuery(name = "Ride.findByIdMember", query = "SELECT r FROM Ride r WHERE r.idMember = :idMember")})
 
+public class Ride implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

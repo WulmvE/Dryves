@@ -20,6 +20,10 @@
             </span>
 
         </form>
+        
+        <script type="text/javascript">
+        document.inlog.j_username.focus();    
+        </script>
     </div>
 
     <div class="block_six white">		
@@ -27,10 +31,10 @@
         <h2 class="blauw">nog geen alias?</h2></br>
         <p> </p></br>
 
-        <form  name="no_account" action="newuser" method=post>
+            <form  name="no_account" action="register" method=post>
             <input type="text" name="j_username" placeholder="username"><br/>
             <span class="local_menu">               
-                <a href="#" onclick="document.no_account.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
+                <a href="register" onclick="document.no_account.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
             </span>
         </form>
     </div>

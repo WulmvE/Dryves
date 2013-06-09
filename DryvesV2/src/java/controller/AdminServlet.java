@@ -7,6 +7,8 @@ import java.io.Writer;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,9 @@ import session.AdminFacade;
  *
  * @author Patrick
  */
-@WebServlet(name = "Admin", urlPatterns = {"/Admin"})
+@WebServlet(name = "Admin", urlPatterns = {"/adminpanel"})
+
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"Admin"}))
 public class AdminServlet extends HttpServlet {
 
     @EJB

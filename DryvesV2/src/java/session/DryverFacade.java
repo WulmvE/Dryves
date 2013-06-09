@@ -35,17 +35,17 @@ public class DryverFacade extends AbstractFacade<Dryver> {
         super(Dryver.class);
     }
 
-    public int persistNewDryver(String alias, String city, String email, String firstName, String lastName, String password, String gender, String birthDate) {
+    public int createDryver(String alias, String city, String email, String firstName, String adjective, String lastName, String password, String gender, String birthDate) {
 
         Dryver dryver = new Dryver();
         DateFormat format = new SimpleDateFormat("MM-DD-yyyy");
 
-
         dryver.setAlias(alias);
-        dryver.setCity(city);
-        dryver.setEmail(email);
         dryver.setFirstName(firstName);
+        dryver.setAdjective(adjective);
         dryver.setLastName(lastName);
+        dryver.setEmail(email);
+        dryver.setCity(city);
         dryver.setPassword(password);
         dryver.setGender(gender);
         
@@ -57,8 +57,19 @@ public class DryverFacade extends AbstractFacade<Dryver> {
             Logger.getLogger(DryverFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        dryver.setAvgRating(3.0);
+
+
         em.persist(dryver);
         em.flush();
         return dryver.getIdMember();
+    }
+
+    public Dryver findByDryverId(int dryverId) {
+        return (Dryver) em.createNamedQuery("Dryver.findByIdMember").setParameter("idMember", dryverId).getSingleResult();
+}
+
+    public Dryver findByAlias(String alias) {
+        return (Dryver) em.createNamedQuery("Dryver.findByAlias").setParameter("alias", alias).getSingleResult();
     }
 }

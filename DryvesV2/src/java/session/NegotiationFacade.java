@@ -6,7 +6,10 @@
 
 package session;
 
+import entity.Dryver;
 import entity.Negotiation;
+import entity.Ride;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +32,28 @@ public class NegotiationFacade extends AbstractFacade<Negotiation> {
         super(Negotiation.class);
     }
     
+     public Negotiation findByIdMemberAndIdRide(int idMember, int idRide) {
+        return (Negotiation) em.createNamedQuery("Negotiation.findByIdMemberAndIdRide").setParameter("idMember", idMember).setParameter("idRide", idRide).getSingleResult();
+}
+     
+        public void accept(Negotiation negotiation) {
+        em.getTransaction().begin();   
+        negotiation.setAcceptedDriver(1);
+        em.getTransaction().commit();
+        em.flush();
+   
+    }
+        
+       public void createNegotiation(Dryver dryver, Ride ride) {
+           System.out.println("test3");
+           Negotiation negotiation = new Negotiation();
+        
+        negotiation.setAcceptedDriver(0);
+        negotiation.setAcceptedPassenger(1);
+        negotiation.setDryver(dryver);
+        negotiation.setRide(ride);
+        
+        em.persist(negotiation);
+        em.flush();
+    }    
 }

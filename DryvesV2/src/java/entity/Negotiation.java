@@ -35,7 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Negotiation.findByAcceptedDriver", query = "SELECT n FROM Negotiation n WHERE n.acceptedDriver = :acceptedDriver"),
     @NamedQuery(name = "Negotiation.findByAcceptedPassenger", query = "SELECT n FROM Negotiation n WHERE n.acceptedPassenger = :acceptedPassenger"),
     @NamedQuery(name = "Negotiation.findByIdRide", query = "SELECT n FROM Negotiation n WHERE n.negotiationPK.idRide = :idRide"),
-    @NamedQuery(name = "Negotiation.findByIdMember", query = "SELECT n FROM Negotiation n WHERE n.negotiationPK.idMember = :idMember")})
+    @NamedQuery(name = "Negotiation.findByIdMember", query = "SELECT n FROM Negotiation n WHERE n.negotiationPK.idMember = :idMember"),
+    @NamedQuery(name = "Negotiation.findByIdMemberAndIdRide", query = "SELECT n FROM Negotiation n WHERE n.negotiationPK.idMember = :idMember AND n.negotiationPK.idRide = :idRide")
+})
 public class Negotiation implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId

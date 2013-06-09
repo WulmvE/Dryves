@@ -35,7 +35,7 @@
         };
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-            document.getElementById('distance').innerHTML += Math.round(response.routes[0].legs[0].distance.value /1000) + " km";    
+                document.getElementById('distance').innerHTML += response.routes[0].legs[0].distance.value / 1000 + " km";
                 directionsDisplay.setDirections(response);
             } else {
                 if (status == 'ZERO_RESULTS') {
@@ -64,7 +64,31 @@
     window.onload = go;
 </script>
 
+<div id="sub_menu">
+    <div class="block_double blue text_white"><div class="menu_icon icon_results">${aantalrides}</div><span class="menu_item">
+            ${aantalrides==1 ? "resultaat" : "resultaten"}
+        </span></div>
+    <a class="block_single white text_blue" href="index.jsp"><div class="menu_icon"></div><span class="menu_item menu_label_blue">opnieuw</span></a>
+
+    <div class="block_double white text_blue">
+        <div class="menu_icon">			
+            <ul class="sort_options">
+                <li class="sort_option active_up">tijdsdtip</li>
+                <li class="sort_option">gebruiker</li>
+                <li class="sort_option">rating</li>
+            </ul>			
+        </div>
+        <span class="menu_item menu_label_blue">sorteren op</span>
+    </div>
+
+    <a class="block_single white text_blue" href="#"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
+</div>
+
 <div id="col_content">
+    
+    <div class="block_six white" style="height: 605px; float:right" >		
+        <div id="map_canvas" style="width:100%; height:100%;"></div>
+    </div>
 
     <div class="block_six white">
         <div class="result block_triple white">
@@ -76,45 +100,35 @@
                 <span class="route" >${selectedRide.startLocation} <span class="text_green"><></span> ${selectedRide.endLocation}</span><br>
                 <span class="route">   <div class ="route" id="distance">Afstand: </div></span><br>
                 <fmt:formatDate pattern="MM/dd/yyyy" value="${selectedRide.departureDate}"/><br>
-                ${selectedRide.seatsAvailable} ${selectedRide.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
+                ${selectedRide.seatsAvailable} ${selectedRide.seatsAvailable==1 ? "plaats" : "plaatsen"} vrij<br>
                 <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${selectedRide.askingPrice}" /></span> / Plaats <br>                    
                 <r:rating_stars rating="${selectedRide.idMember.avgRating}"/>
 
             </div>
         </div>
-        <div class="result block_triple white">
-            
-          
-            <form action="<c:url value='rideDetails?${selectedRide.idRide}'/>" method="post">   
-                  <input type="hidden"
-                       name="requestRide"
-                       value="${selectedRide.idRide}">
-                <input type="hidden"
-                       name="requestNegotiation"
-                       value="1">  
-                <input type="submit"
-                       name="submit"
-                       value="aanmelden">
-            </form>
+        <div class="result block_triple white">           
 
+            <div class="local_menu">				
+                <a href="#" onclick="" class="local_menu_button" title="maandelijks">&#xf073;</a>
+                <a href="#" onclick="" class="local_menu_button" title="wekelijks">&#xf133;</a>
+                <a href="#" onclick="" class="local_menu_button" title="dagelijks">&#xf042;</a>					
+            </div>
 
-
-            <button onclick="location.href = '#'">Meld aan</button> <button onclick="location.href = '#'">Stuur Bericht</button> <button onclick="location.href = '#'">Friend Request</button><br>
-            Passagiers van deze rit: <br>
-            <c:forEach var="negotiation" items="${selectedRide.negotiationList}">
-                <c:if test="${negotiation.acceptedDriver == 1 && negotiation.acceptedPassenger == 1}">
-                    Confirmed: ${negotiation.dryver.alias}<br>
-                </c:if>
-                <c:if test="${negotiation.acceptedDriver != 1 || negotiation.acceptedPassenger != 1}">
-                    Pending: ${negotiation.dryver.alias}<br>
-                </c:if>
-            </c:forEach>
         </div>
 
+        <!--        <h2>ik wil meerijden</h2>
+                <form name="quick_search_form" method="post" action="searchresults">
+                    <input class="input_location" name="search_start" type="text"  placeholder="van"/><br/>
+                    <input class="input_location" name="search_destination" type="text"  placeholder="naar"/><br/>
+                    <input class="input_date"  name="search_date" type="text"  placeholder="op" /><br/>
+                    <a href="#" onclick="document.quick_search_form.submit()" class="button" id="button_search"><img src="img/arrow_right.png" alt="search button" /></a>
+                </form>-->
     </div>
 
     <div class="block_six white">		
-        <div id="map_canvas" style="width:100%; height:100%"></div>
+        
     </div>
+                
+               
 
 </div>

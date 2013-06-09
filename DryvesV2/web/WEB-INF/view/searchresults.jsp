@@ -34,7 +34,7 @@
         <c:forEach var="ride" items="${rides}">
             <li class="result block_triple white">
                 <div>
-                    <img class="avatar" src="img/avatar.jpg" />
+                    <img class="avatar" src="ava/avatar${ride.idMember.idMember}.jpg" />
                     <a href="#" class="avatar_label">${ride.idMember.alias}</a>
                 </div>
                 <div class="summary">

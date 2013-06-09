@@ -34,6 +34,11 @@ public class RideFacade extends AbstractFacade<Ride> {
         super(Ride.class);
     }
 
+    public List<Ride> searchRideBy(String van) {
+        return em.createNamedQuery("Ride.findByStartLocation").setParameter("startLocation", van).getResultList();
+    }
+    
+    
     public List<Ride> searchRideByStart(String van) {
         return em.createNamedQuery("Ride.findByStartLocation").setParameter("startLocation", van).getResultList();
     }
@@ -62,6 +67,10 @@ public class RideFacade extends AbstractFacade<Ride> {
         return em.createNamedQuery("Ride.findByAll").setParameter("startLocation", van).setParameter("endLocation", naar).setParameter("departureDate", op).getResultList();
     }
 
+    public List<Ride> findByDryver (Dryver dryver) {
+        return em.createNamedQuery("Ride.findByIdMember").setParameter("idMember", dryver).getResultList();
+    }
+    
     public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car, Date date, int numseats, String price, double distance) {
         Ride ride = new Ride();
 

@@ -405,6 +405,7 @@ input.local_menu_button{
     border-style:solid;
     border-color:#bfbdbd;
     border-width:1px;
+    max-height: 75px;
 }
 
 .avatar_label{color:#62b5dc; display:block; margin-top:-5px; }
@@ -563,6 +564,11 @@ h2{
     margin:10px 0px 20px 18px;
     padding:0px;
 }
+
+p.c{margin: 0px 10px 0px 20px}
+
+h2.blauw{margin: 10px 0px 0px 18px}
+
 
 input {
     width:214px;
