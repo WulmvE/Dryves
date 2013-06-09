@@ -94,14 +94,6 @@
                 </c:if>
             </c:forEach>
         </div>
-
-        <!--        <h2>ik wil meerijden</h2>
-                <form name="quick_search_form" method="post" action="searchresults">
-                    <input class="input_location" name="search_start" type="text"  placeholder="van"/><br/>
-                    <input class="input_location" name="search_destination" type="text"  placeholder="naar"/><br/>
-                    <input class="input_date"  name="search_date" type="text"  placeholder="op" /><br/>
-                    <a href="#" onclick="document.quick_search_form.submit()" class="button" id="button_search"><img src="img/arrow_right.png" alt="search button" /></a>
-                </form>-->
     </div>
 
     <div class="block_six white">		
