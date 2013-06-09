@@ -19,11 +19,10 @@
                 <a href="#" onclick="document.inlog.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
             </span>
 
-        </form>
-        
-        <script type="text/javascript">
-        document.inlog.j_username.focus();    
+        </form><script type="text/javascript">
+            document.inlog.j_username.focus();
         </script>
+        
     </div>
 
     <div class="block_six white">		

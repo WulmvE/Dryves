@@ -110,7 +110,6 @@
                 </c:if>
             </c:forEach>
         </div>
-
     </div>
 
     <div class="block_six white">		
