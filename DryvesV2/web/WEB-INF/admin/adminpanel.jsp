@@ -34,7 +34,7 @@
 
                 $element = $(element);
 
-                $.getJSON("Admin?type=" + type, function(items) {
+                $.getJSON("adminpanel?type=" + type, function(items) {
 
                     var resultslist = [];
                     $.each(items, function(i, item) {
@@ -59,9 +59,6 @@
                 });
             }
 
-
-
-
             $(function() {
 
                 initStats();
@@ -74,9 +71,7 @@
                         $('#col_content').show(200);
                         $('#menu_stats').removeClass('green').addClass('blue');
                         $('#menu_settings').removeClass('blue').addClass('green');
-
                     });
-
                 });
             });
         </script>
@@ -156,8 +151,6 @@
                     <div id="pie_container"><div id="pie"></div></div>
 
                 </div>
-
-
                 <!--instellingen-->
 
                 <div class="block_six white settings_cont">		
@@ -213,8 +206,6 @@
                         color: '#a0a0a0'}
                 });
             })();
-
-
 
             (function basic_pie(container) {
 
@@ -276,12 +267,6 @@
                 });
             })(document.getElementById("pie"));
 
-
-
-
-
-
     </script>
-
 
 </html>
