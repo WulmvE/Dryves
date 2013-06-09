@@ -159,44 +159,7 @@ public class UserServlet extends HttpServlet {
 
 
 
-        // if createRideConfirmed action is called
-        if (userPath.equals("/createRideConfirmed")) {
-            //start
-            String startLocation = request.getParameter("create_start");
-            if (startLocation.equals("")) {
-                startLocation = tempStartLocation;
-            }
-            //end
-            String endLocation = request.getParameter("create_destination");
-            if (endLocation.equals("")) {
-                endLocation = tempEndLocation;
-            }
-            //date
-            String date = request.getParameter("create_date");
-            if (date.equals("")) {
-                date = tempDate;
-            }
-            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
-            Date dateObj = new Date();
-            try {
-                dateObj = df.parse(date);
-            }
-            catch (ParseException ex) {
-                Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //car
-            //TODO
-            //number of seats
-            int numSeats = Integer.parseInt(request.getParameter("create_num_seats"));
-            //price
-            String price = request.getParameter("create_price");
-            Dryver dryver = dryverFacade.find(100);
-            List<Car> carList = dryver.getCarList();
-            Car car = carList.get(0);
-            double distance = 60;
-
-            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
-        }
+        
 
 
         if (userPath.equals("/logout")) {
@@ -267,6 +230,45 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("create_end", tempEndLocation);
             request.setAttribute("create_date", tempDate);
             request.setAttribute("create_car", tempCar);
+        }
+        
+        // if createRideConfirmed action is called
+        if (userPath.equals("/createRideConfirmed")) {
+            //start
+            String startLocation = request.getParameter("create_start");
+            if (startLocation.equals("")) {
+                startLocation = tempStartLocation;
+            }
+            //end
+            String endLocation = request.getParameter("create_destination");
+            if (endLocation.equals("")) {
+                endLocation = tempEndLocation;
+            }
+            //date
+            String date = request.getParameter("create_date");
+            if (date.equals("")) {
+                date = tempDate;
+            }
+            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+            Date dateObj = new Date();
+            try {
+                dateObj = df.parse(date);
+            }
+            catch (ParseException ex) {
+                Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //car
+            //TODO
+            //number of seats
+            int numSeats = Integer.parseInt(request.getParameter("create_num_seats"));
+            //price
+            String price = request.getParameter("create_price");
+            Dryver dryver = dryverFacade.find(100);
+            List<Car> carList = dryver.getCarList();
+            Car car = carList.get(0);
+            double distance = 60;
+
+            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
         }
 
 
