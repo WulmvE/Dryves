@@ -58,7 +58,7 @@
 
                 });
             }
-            
+
 
 
 
@@ -67,16 +67,16 @@
                 initStats();
 
                 $("#menu_settings").on("click", function(event) {
-                    $('#col_content').hide(200, function(){
-                        
+                    $('#col_content').hide(200, function() {
+
                         $('.stats_cont').hide();
                         $('.settings_cont').show();
                         $('#col_content').show(200);
                         $('#menu_stats').removeClass('green').addClass('blue');
                         $('#menu_settings').removeClass('blue').addClass('green');
-                        
-                    });                    
-                    
+
+                    });
+
                 });
             });
         </script>
@@ -84,7 +84,7 @@
         <div id="main">
 
             <div id="main_menu">
-                <a class="block_double green text_white" href="#"><div id="logo" class="menu_icon">&#xf06c;</div><span class="menu_item">dryves admin</span></a>
+                <a class="block_double blue text_white" href="#"><div id="logo" class="menu_icon">&#xf06c;</div><span class="menu_item">dryves admin</span></a>
                 <a id="menu_stats" class="block_single green" href="#"><div class="menu_icon"></div><span class="menu_item text_white">stastistieken</span></a>
                 <a id="menu_settings" class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item text_white">instellingen</span></a>
                 <a class="block_single blue" href="#"><div class="menu_icon"></div><span class="menu_item text_white">leden</span></a>
@@ -92,24 +92,30 @@
             </div>
 
             <div id="col_content" >
-                
+
                 <!--statistieken-->
 
                 <div class="block_six white stats_cont">		
                     <h2>Top 5</h2>
                     <ul class="selectstats">
-                        <li id="starter" class="selectstat" onclick="getStats('mostCreated', this)" ><span>Lid: Meeste ritten aangeboden</span></li>
-                        <li class="selectstat" onclick="getStats('mostDriven', this)"><span>Lid: Meeste ritten meegereden</span></li>
-                        <li class="selectstat" onclick="getStats('highestGrossing', this)"><span>Lid: Hoogste opbrengst</span></li>
-                        <li class="selectstat" onclick="getStats('mostDeparture', this)"><span>Populairste vertrekplaatsen</span></li>
-                        <li class="selectstat" onclick="getStats('mostDestination', this)"><span>Populairste aankomstplaatsen</span></li>
+                        <li id="starter" class="selectstat" onclick="getStats('mostCreated', this);" ><span>Lid: Meeste ritten aangeboden</span></li>
+                        <li class="selectstat" onclick="getStats('mostDriven', this);"><span>Lid: Meeste ritten meegereden</span></li>
+                        <li class="selectstat" onclick="getStats('highestGrossing', this);"><span>Lid: Hoogste opbrengst</span></li>
+                        <li class="selectstat" onclick="getStats('mostDeparture', this);"><span>Populairste vertrekplaatsen</span></li>
+                        <li class="selectstat" onclick="getStats('mostDestination', this);"><span>Populairste aankomstplaatsen</span></li>
                     </ul>
+
+                    <div class="local_menu">
+                        <a href="#" onclick="" class="local_menu_button" title="dagelijks">&#xf042;</a>	
+                        <a href="#" onclick="" class="local_menu_button" title="wekelijks">&#xf133;</a>
+                        <a href="#" onclick="" class="local_menu_button active" title="maandelijks">&#xf073;</a>
+                    </div>
                 </div>
 
                 <div id="top5" class="block_six white stats_cont">		
                     <h2 id="top5_header"></h2>
                     <table class="results">                          
-                    </table>
+                    </table>                  
                 </div>
 
                 <div class="block_six white stats_cont">		
@@ -119,6 +125,11 @@
                         <li class="selectstat" ><span>Aantal ritten</span></li>
                         <li class="selectstat" ><span>Opbrengst</span></li>
                     </ul>
+                    <div class="local_menu">
+                        <a href="#" onclick="" class="local_menu_button" title="dagelijks">&#xf042;</a>	
+                        <a href="#" onclick="" class="local_menu_button" title="wekelijks">&#xf133;</a>
+                        <a href="#" onclick="" class="local_menu_button active" title="maandelijks">&#xf073;</a>
+                    </div>                    
                 </div>
 
                 <div class="block_six white stats_cont">
@@ -133,6 +144,11 @@
                         <li class="selectstat" ><span class="active">Leeftijd</span></li>
                         <li class="selectstat" ><span>Geslacht</span></li>                       
                     </ul>
+                    <div class="local_menu">
+                        <a href="#" onclick="" class="local_menu_button" title="dagelijks">&#xf042;</a>	
+                        <a href="#" onclick="" class="local_menu_button" title="wekelijks">&#xf133;</a>
+                        <a href="#" onclick="" class="local_menu_button active" title="maandelijks">&#xf073;</a>
+                    </div>
                 </div>
 
                 <div class="block_six white stats_cont">

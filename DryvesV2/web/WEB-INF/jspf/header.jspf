@@ -63,15 +63,15 @@
 
             <div id="main_menu">
                 <a id="logo" class="block_double green text_white" href="index.jsp" ><span><img src="img/logo.png" alt="Dryves logo"/></span></a>
-                <c:if test="${not empty alias}"><a class="block_single blue" href="logout"><div class="menu_icon"></div><span class="menu_item">log out</span></a>
+                <c:if test="${not empty alias}"><a class="block_single blue" href="logout"><div class="menu_icon text_white" style="font-size:58px; height: 105px; padding: 15px 5px 0px 0px;">&#xf053;</div><span class="menu_item">log out</span></a>
                 </c:if>
 
                 <c:if test="${empty alias}">
-                    <a class="block_single blue" href="myDryves"><div class="menu_icon"></div><span class="menu_item">log in</span></a>
+                    <a class="block_single blue" href="myDryves"><div class="menu_icon text_white" style="font-size:58px; height: 105px; padding: 15px 0px 0px 5px;">&#xf054;</div><span class="menu_item">log in</span></a>
                 </c:if>
 
                 <!--                <a class="block_single blue text_white" href="#"><div class="menu_icon"></div><span class="menu_item">over dryves</span></a>-->
-                <a class="block_single blue text_white" href="#"><div class="menu_icon"></div><span class="menu_item">contact</span></a>
+                <a class="block_single blue text_white" href="#"><div class="menu_icon"></div><span class="menu_item">over dryves</span></a>
                 <a class="block_single blue text_white" href="#"><div class="menu_icon"></div><span class="menu_item">hoe werkt 't</span></a>
-                <a class="block_single blue text_white" href="myDryves"><div class="menu_icon">&#xf090;</div><span class="menu_item">mijn <span>dryves</span></span></a>		
+                <a class="block_single blue text_white" href="myDryves"><div class="menu_icon"></div><span class="menu_item">mijn <span>dryves</span></span></a>		
             </div>

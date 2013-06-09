@@ -25,7 +25,7 @@
         <span class="menu_item menu_label_blue">sorteren op</span>
     </div>
 
-    <a class="block_single white text_blue" href="#"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
+    <a class="block_single white text_blue" href="#"><div class="menu_icon" style="font-size:60px; height: 110px; padding: 10px 5px 0px 0px;">&#xf053;</div><span class="menu_item menu_label_blue">terug</span></a>		
 </div>
 
 <div id="col_content">
@@ -42,9 +42,12 @@
                     <fmt:formatDate pattern="MM/dd/yyyy" value="${ride.departureDate}"/><br>
                     ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"} vrij<br>
                     <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
-                    <r:rating_stars rating="${ride.idMember.avgRating}"/>
-                    <a class="button" href="<c:url value='rideDetails?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
+                    <r:rating_stars rating="${ride.idMember.avgRating}"/>                
                 </div>
+
+                <span class="local_menu">                    
+                    <a href="<c:url value='rideDetails?${ride.idRide}'/>" onclick="" class="local_menu_button larger" title="ritdetails">&#xf0fb;</a>	
+                </span>
             </li>
         </c:forEach>
 

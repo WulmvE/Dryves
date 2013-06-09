@@ -18,8 +18,8 @@
 
 @font-face {
     font-family: 'fontawesome';
-    src: url('../fonts/fontawesome-webfont.eot?v=3.1.0');
-    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=3.1.0') format('embedded-opentype'), url('../font/fontawesome-webfont.woff?v=3.1.0') format('woff'), url('../font/fontawesome-webfont.ttf?v=3.1.0') format('truetype'), url('../font/fontawesome-webfont.svg#fontawesomeregular?v=3.1.0') format('svg');
+    src: url('../fonts/FontAwesome.eot?v=3.1.0');
+    src: url('../fonts/FontAwesome.eot?#iefix&v=3.1.0') format('embedded-opentype'), url('../font/FontAwesome.woff?v=3.1.0') format('woff'), url('../font/FontAwesome.ttf?v=3.1.0') format('truetype'), url('../font/FontAwesome.svg#fontawesomeregular?v=3.1.0') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -27,8 +27,14 @@
 @font-face
 {
     font-family: fontawesome;
-    src: url('../fonts/fontawesome-webfont.ttf');
+    src: url('../fonts/FontAwesome.ttf');
 }	
+
+@font-face
+{
+    font-family: fontawesome;
+    src: url('../fonts/FontAwesome.otf');
+}
 
 html {
     min-height: 100%;
@@ -231,7 +237,7 @@ a.white:hover, .result:hover, .profile_result:hover{
     clear:right;
     height:120px;
     width:453px;
-/*    color:#62b5dc;*/
+    /*    color:#62b5dc;*/
 
     -webkit-user-select: none;  
     -moz-user-select: none;    
@@ -306,6 +312,61 @@ a.white:hover, .result:hover, .profile_result:hover{
     font-size:18px;
 }
 
+/*********************** local menu ************************/
+.local_menu{
+    display:block;
+    position:absolute;
+    bottom: 10px;
+    right: 12px;
+    margin:0px;
+    padding:0px;
+}
+
+.local_menu_button{
+    font-family: fontawesome;
+    font-size:22px;
+    color:#a7a7a7;
+    display:block;
+    float:left;
+    line-height:30px;
+    vertical-align:middle;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    margin:0px 0px 0px 3px;
+    padding:0px 0px 0px 0px;
+    background-color: transparent;
+    border-width:0px;
+}
+
+input.local_menu_button{
+    width: 26px;
+    height: 26px;
+}
+
+.px{
+    padding-left:2px;
+    padding-top:1px;
+    width: 20px;
+    height: 21px;
+}
+
+.local_menu_button.larger{
+    font-size: 24px;
+}
+.local_menu_button:hover{
+    font-size: 30px;
+}
+
+.local_menu_button, .local_menu_button:hover{
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+}
+
+.local_menu_button.active{
+    color: #62b5dc;
+    border-color:#62b5dc;
+}
 
 /*********************** results page ************************/
 
@@ -521,6 +582,7 @@ img{
 
 a{
     text-decoration:none;
+    outline: none;
 }
 
 .pac-container{
