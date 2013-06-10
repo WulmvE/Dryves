@@ -5,41 +5,53 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="js/messagescript.js"></script>
 <!DOCTYPE html>
 
 <div id="col_content">
+    <div id="sub_menu">
+        <a class="block_single white" href="javascript:history.back()"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
+        <a class="block_single blue" href="inbox"><div class="menu_icon icon_messages">&#xf003;</div><span class="menu_item menu_label_white">Ontvangen</span></a>		
+        <a class="block_single blue" href="outbox"><div class="menu_icon icon_messages">&#xf093;</div><span class="menu_item menu_label_white">Verzonden</span></a>		
 
-    <ul id="results">
+        <div class="block_triple blue">
 
-        <li class="block_six white" style="overflow: auto">
-            <c:forEach var="friend" items="${friends}">${friend.idFriend}</c:forEach>
-<!--                <form name="message_form_${friend.idMember}" method="post">
-                    <input type="hidden" name="idMessage" value="${message.idMessage}"/>
-                    <input type="hidden" name="idSender" value="${message.idMemberSender}"/>
-                    <input type="hidden" name="dateTime" value="${message.dateTime}"/>
-                </form>-->
-                <hr>
-                <span class="text_blue" style="text-align: left; margin-left: 5px;">Naam: ${friends.dryverCollection} 
-<!--                    datum: </span><span style="float: left; margin-left: 0.5em;"> ${message.dateTime}</span>-->
-<!--                <span><a href="#" onclick="document.message_form_${message.idMessage}.submit();"><img class="view_message" src="img/arrow_right.png" alt="Toon bericht"></a></span>-->
-                <br>
-                <hr>
-        </li>
-        <li class="block_six white">
-            <c:forEach var="single" items="${singleMessage}">
-                <span style="float: left; padding-left: 5px;">Ontvangen van:</span><span id="msgTitle" class="text_blue">${single.idMemberSender.alias}</span>
-                <br>
-                <hr>
-                <span id="msgText"class="text_blue">${single.text}</span><br>
-            </c:forEach>
-        </li>
-    </ul>
-</div>
-<div id="sub_menu">
-    <a class="block_single white" href="javascript:history.back()"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
-    <a class="block_single blue" href="outbox"><div class="menu_icon icon_messages">&#xf093;</div><span class="menu_item menu_label_white">Verzonden</span></a>		
-    <a class="block_single blue" href="#"><div class="menu_icon icon_messages">&#xf040;</div><span class="menu_item menu_label_white">Schrijven</span></a>		
+        </div>
+        <ul id="results">
+            <li class="block_six white" style="overflow: auto">
 
-    <div class="block_triple blue">
+                <div class="block_triple friends" style=" overflow-x: scroll; overflow-y: scroll;">
+
+                    <ul>            
+                        <c:forEach var="friend" items="${friends}">
+                            <form name="friendselecter_${friend.idFriend.idMember}" method="post">
+                                <input type="hidden" name="idMemberReciever" value="${friend.idFriend.idMember}">
+                                <a href="#" class="avatar_label" onclick="openwrite(); document.friendselecter_${friend.idFriend.idMember}.submit()">       
+                                    <li class="block_single white" style="float:left;">
+                                        <img class="avatar" style="margin-top: 15px;" src="ava/avatar${friend.idFriend.idMember}.jpg" />
+                                        <br>
+                                        ${friend.idFriend.alias}
+                                    </li>
+                                </a>
+                            </form>
+                        </c:forEach>            
+                    </ul>
+
+                </div>
+
+            </li>
+            <li class="block_six white" id="toHideDiv"></li>
+            <li class="block_six white" id="writeDiv">
+                <form name="msgForm" method="post">
+                    <input type="hidden" name="idMemberReciever" value="${idReciever}">
+                    <input type="hidden" name="dateTime" value="07-06-2013">
+                    <h2 style="text-align: right;">Verzenden aan: ${idReciever}</h2>
+                    <br>
+                    <textarea name="msg" rows="5" col="20">Typ hier uw bericht...</textarea>
+                    <input type="submit" onclick="document.msgForm.submit()">
+                </form>
+            </li>
+        </ul>
     </div>
+
 </div>

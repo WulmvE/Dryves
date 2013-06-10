@@ -9,7 +9,7 @@
 <div id="sub_menu">
     <a class="block_single white" href="javascript:history.back()"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
     <a class="block_single blue" href="outbox"><div class="menu_icon icon_messages">&#xf093;</div><span class="menu_item menu_label_white">Verzonden</span></a>		
-    <a class="block_single blue" href="#"><div class="menu_icon icon_messages">&#xf040;</div><span class="menu_item menu_label_white">Schrijven</span></a>		
+    <a class="block_single blue" href="write"><div class="menu_icon icon_messages">&#xf040;</div><span class="menu_item menu_label_white">Schrijven</span></a>		
 
     <div class="block_triple blue">
     </div>

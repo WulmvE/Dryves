@@ -34,6 +34,7 @@ import javax.servlet.http.HttpSession;
 import session.CarFacade;
 import session.DryverFacade;
 import session.FriendFacade;
+import session.MessageFacade;
 import session.NegotiationFacade;
 import session.RideFacade;
 
@@ -63,6 +64,8 @@ public class UserServlet extends HttpServlet {
     @EJB
     private CarFacade carFacade;
     @EJB
+    private MessageFacade messageFacade;
+    
     private NegotiationFacade negotiationFacade;
     private String tempStartLocation;
     private String tempEndLocation;
@@ -221,6 +224,30 @@ public class UserServlet extends HttpServlet {
 
         }
 
+if (userPath.equals("/inbox")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver idReciever = dryverFacade.find(loggedInUserId);
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
+        }
+        if (userPath.equals("/outbox")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver idReciever = dryverFacade.find(loggedInUserId);
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
+        }
+        if (userPath.equals("/write")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver idReciever = dryverFacade.find(loggedInUserId);
+            getServletContext().setAttribute("friends", friendFacade.findByDryver(idReciever));
+        }
+        if (userPath.equals("/send")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver idReciever = dryverFacade.find(loggedInUserId);
+            getServletContext().setAttribute("friends", friendFacade.findByDryver(idReciever));
+        }
 
 
         if (userPath.equals("/logout")) {
@@ -373,6 +400,51 @@ public class UserServlet extends HttpServlet {
             double distance = 60;
 
             int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
+        }
+        
+        if (userPath.equals("/inbox")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver idReciever = dryverFacade.find(loggedInUserId);
+
+            int idMessage = Integer.parseInt(request.getParameter("idMessage"));
+            Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
+            String dateTime = request.getParameter("dateTime");
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
+            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+        }
+        if (userPath.equals("/outbox")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver idReciever = dryverFacade.find(loggedInUserId);
+
+            int idMessage = Integer.parseInt(request.getParameter("idMessage"));
+            Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
+            String dateTime = request.getParameter("dateTime");
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
+            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+        }
+        if (userPath.equals("/write")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver idMemberReciever = dryverFacade.find(101);
+            Dryver idMemberSender = dryverFacade.find(loggedInUserId);
+            String text = request.getParameter("msg");
+            String dateTime = request.getParameter("dateTime");
+            
+            getServletContext().setAttribute(("idSender"), idMemberSender);
+            getServletContext().setAttribute(("idReciever"), idMemberReciever);
+            getServletContext().setAttribute("friends", friendFacade.findByDryver(idMemberReciever));
+
+            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+            Date dateObj = new Date();
+            try {
+                dateObj = df.parse(dateTime);
+            } catch (ParseException ex) {
+                Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            int idMessage = messageFacade.createMessage(idMemberSender, idMemberReciever, text, dateTime);
         }
 
         // use RequestDispatcher to forward request internally
