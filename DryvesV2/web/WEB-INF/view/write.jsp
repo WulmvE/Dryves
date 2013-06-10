@@ -17,40 +17,36 @@
         <div class="block_triple blue">
 
         </div>
-        <ul id="results">
-            <li class="block_six white" style="overflow: auto">
+        <div class="block_triple friends" style=" overflow-x: scroll; overflow-y: hidden;">
+            <ul>        
+                <c:forEach var="friend" items="${friends}">
+                    <li class="block_single white">
+                        <form name="friendselecter_${friend.idFriend.idMember}" method="post">
+                            <input type="hidden" name="idMemberReciever" value="${friend.idFriend.idMember}">
+                            <a href="#" class="avatar_label" onclick="openwrite();
+                                    document.friendselecter_${friend.idFriend.idMember}.submit()">       
+                                <div style="cursor: pointer;">
+                                    <img class="avatar" style="margin-top: 15px;" src="ava/avatar${friend.idFriend.idMember}.jpg" />
+                                    <br>${friend.idFriend.alias}
+                                </div>
+                            </a>
+                        </form>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
 
-                <div class="block_triple friends" style=" overflow-x: scroll; overflow-y: scroll;">
-
-                    <ul>            
-                        <c:forEach var="friend" items="${friends}">
-                            <form name="friendselecter_${friend.idFriend.idMember}" method="post">
-                                <input type="hidden" name="idMemberReciever" value="${friend.idFriend.idMember}">
-                                <a href="#" class="avatar_label" onclick="openwrite(); document.friendselecter_${friend.idFriend.idMember}.submit()">       
-                                    <li class="block_single white" style="float:left;">
-                                        <img class="avatar" style="margin-top: 15px;" src="ava/avatar${friend.idFriend.idMember}.jpg" />
-                                        <br>
-                                        ${friend.idFriend.alias}
-                                    </li>
-                                </a>
-                            </form>
-                        </c:forEach>            
-                    </ul>
-
-                </div>
-
-            </li>
-            <li class="block_six white" id="toHideDiv"></li>
-            <li class="block_six white" id="writeDiv" style="display:none;">
-                <form name="msgForm" method="post">
-                    <input type="hidden" name="idMemberReciever" value="${idReciever}">
-                    <input type="hidden" name="dateTime" value="07-06-2013">
-                    <h2 style="text-align: right;">Verzenden aan: ${idReciever}</h2>
-                    <br>
-                    <textarea name="msg" rows="5" col="20">Typ hier uw bericht...</textarea>
-                    <input type="submit" onclick="document.msgForm.submit()">
-                </form>
-            </li>
+        <li class="block_six white" id="toHideDiv"></li>
+        <li class="block_six white" id="writeDiv" style="display:none;">
+            <form name="msgForm" method="post">
+                <input type="hidden" name="idMemberReciever" value="${idReciever}">
+                <input type="hidden" name="dateTime" value="07-06-2013">
+                <h2 style="text-align: right;">Verzenden aan: ${idReciever.alias}</h2>
+                <br>
+                <textarea name="msg" rows="5" col="20">Typ hier uw bericht...</textarea>
+                <input type="submit" onclick="document.msgForm.submit();">
+            </form>
+        </li>
         </ul>
     </div>
 
