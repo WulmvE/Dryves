@@ -41,7 +41,7 @@
 
             </li>
             <li class="block_six white" id="toHideDiv"></li>
-            <li class="block_six white" id="writeDiv">
+            <li class="block_six white" id="writeDiv" style="display:none;">
                 <form name="msgForm" method="post">
                     <input type="hidden" name="idMemberReciever" value="${idReciever}">
                     <input type="hidden" name="dateTime" value="07-06-2013">

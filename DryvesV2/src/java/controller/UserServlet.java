@@ -49,7 +49,10 @@ import session.RideFacade;
     "/createRideConfirmed",
     "/createRide",
     "/logout",
-    "/rideDetails"})
+    "/rideDetails",
+        "/inbox",
+        "/outbox",
+        "/write"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"DryvesUser"}))
 public class UserServlet extends HttpServlet {
@@ -242,13 +245,6 @@ if (userPath.equals("/inbox")) {
             Dryver idReciever = dryverFacade.find(loggedInUserId);
             getServletContext().setAttribute("friends", friendFacade.findByDryver(idReciever));
         }
-        if (userPath.equals("/send")) {
-            String loggedInUser = request.getUserPrincipal().getName();
-            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
-            Dryver idReciever = dryverFacade.find(loggedInUserId);
-            getServletContext().setAttribute("friends", friendFacade.findByDryver(idReciever));
-        }
-
 
         if (userPath.equals("/logout")) {
             //HttpSession session = request.getSession();
@@ -434,7 +430,7 @@ if (userPath.equals("/inbox")) {
             
             getServletContext().setAttribute(("idSender"), idMemberSender);
             getServletContext().setAttribute(("idReciever"), idMemberReciever);
-            getServletContext().setAttribute("friends", friendFacade.findByDryver(idMemberReciever));
+            getServletContext().setAttribute("friends", friendFacade.findByDryver(idMemberSender));
 
             DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
             Date dateObj = new Date();
