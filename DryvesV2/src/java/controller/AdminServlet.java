@@ -1,10 +1,8 @@
 package controller;
 
-import Utils.Stat;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
@@ -47,8 +45,7 @@ public class AdminServlet extends HttpServlet {
 
             if (!(type == null)) {
                 json = new Gson().toJson(adminFacade.getStats(type));
-            }
-            else {
+            } else {
                 json = "";
             }
 
@@ -58,16 +55,13 @@ public class AdminServlet extends HttpServlet {
             try {
                 writer = response.getWriter();
                 writer.write(json);
-            }
-            finally {
+            } finally {
                 try {
                     writer.close();
-                }
-                catch (IOException ex) {
+                } catch (IOException ex) {
                 }
             }
-        }
-        else {
+        } else {
             // use RequestDispatcher to forward request internally
             String url = "/WEB-INF/admin/adminpanel.jsp";
             request.getRequestDispatcher(url).forward(request, response);
@@ -86,7 +80,6 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
     /**

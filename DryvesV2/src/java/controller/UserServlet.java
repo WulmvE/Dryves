@@ -9,16 +9,12 @@ import entity.Dryver;
 import entity.Negotiation;
 import entity.Ride;
 import java.io.IOException;
-import java.io.*;
 import java.lang.Exception;
-import java.lang.reflect.Member;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -29,7 +25,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.*;
 import javax.servlet.http.HttpSession;
 import session.CarFacade;
 import session.DryverFacade;
@@ -50,9 +45,9 @@ import session.RideFacade;
     "/createRide",
     "/logout",
     "/rideDetails",
-        "/inbox",
-        "/outbox",
-        "/write"})
+    "/inbox",
+    "/outbox",
+    "/write"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"DryvesUser"}))
 public class UserServlet extends HttpServlet {
@@ -68,7 +63,7 @@ public class UserServlet extends HttpServlet {
     private CarFacade carFacade;
     @EJB
     private MessageFacade messageFacade;
-    
+    @EJB
     private NegotiationFacade negotiationFacade;
     private String tempStartLocation;
     private String tempEndLocation;
@@ -76,29 +71,6 @@ public class UserServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        // store category list in servlet context
-        getServletContext().setAttribute("dryvers", dryverFacade.findAll());
-        getServletContext().setAttribute("cars", carFacade.findAll());
-
-        int numSeats = Integer.parseInt("3");
-        //price
-        String price = "10";
-        Dryver dryver = dryverFacade.find(100);
-        List<Car> carList = dryver.getCarList();
-        Car car = carList.get(0);
-        double distance = 60;
-        Date dateObj = new Date(13, 6, 6);
-
-        /**
-         * ******************** test creation and persisting of ride
-         * *************************
-         */
-        //int rideId = rideFacade.placeRide("amsterdam", "den haag", dryver, car, dateObj, numSeats, price, distance);
-        /**
-         * ******************** test creation and persisting of dryver
-         * *************************
-         */
-        //dryverFacade.createDryver("koos83", "Delft", "koos83@yohaa.org.comh", "Koos", "de Vries", "333", "m", "15-06-1983");
     }
 
     /**
@@ -112,19 +84,7 @@ public class UserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
         userPath = request.getServletPath();
-        // if myDryves is requested
-        if (userPath.equals("/myDryves")) {
-        }
-        // if changeProfile is requested
-//        if (userPath.equals("/changeprofile")) {
-////            orderList = customerOrderFacade.findAll();
-////            request.setAttribute("orderList", orderList);
-//        }
-
-
-        // use RequestDispatcher to forward request internally
         userPath = "index.jsp";
         try {
             request.getRequestDispatcher(userPath).forward(request, response);
@@ -150,10 +110,10 @@ public class UserServlet extends HttpServlet {
         HttpSession session = request.getSession();
 //                  ALIAS IS j_username IN HET INLOGSCHERM
         String alias = request.getUserPrincipal().getName();
-        getServletContext().setAttribute("alias", alias);
+        request.setAttribute("alias", alias);
 
         int idMember = dryverFacade.findByAlias(alias).getIdMember();
-        getServletContext().setAttribute("idMember", idMember);
+        request.setAttribute("idMember", idMember);
 
         String testHttp;
         testHttp = request.getLocalAddr();
@@ -167,14 +127,7 @@ public class UserServlet extends HttpServlet {
 
         request.setAttribute("en", terug);
 
-        request.setAttribute("httpistest", testHttp);
-        request.setAttribute("mijnreferer", referer);
-//          request.setAttribute("mijn_first_name", mijnFirstName);
-//          request.setAttribute("mijn_first_name", mijnAdjective);
-//          request.setAttribute("mijn_first_name", mijnLastName);
-//          request.setAttribute("mijn_first_name", mijnAvgRating);
-//          request.setAttribute("mijn_first_name", mijnCity);
-//          request.setAttribute("mijn_first_name", mijnEmail);         
+        request.setAttribute("mijnreferer", referer);      
         Ride selectedRide;
 
         if (userPath.equals("/rideDetails")) {
@@ -206,10 +159,10 @@ public class UserServlet extends HttpServlet {
 
             Dryver dryver = dryverFacade.find(loggedInUserId);
 
-            getServletContext().setAttribute("rides", rideFacade.findByDryver(dryver));
-            getServletContext().setAttribute("rides_passenger", rideFacade.findByNegotiationIdMember(dryver));
-            getServletContext().setAttribute("friends", friendFacade.findByDryver(dryver));
-            getServletContext().setAttribute("profileDryver", dryver);
+            request.setAttribute("rides", rideFacade.findByDryver(dryver));
+            request.setAttribute("rides_passenger", rideFacade.findByNegotiationIdMember(dryver));
+            request.setAttribute("friends", friendFacade.findByDryver(dryver));
+            request.setAttribute("profileDryver", dryver);
         }
 
 
@@ -223,27 +176,27 @@ public class UserServlet extends HttpServlet {
             List<Car> carList = dryver.getCarList();
             Car carProfileDryver = carList.iterator().next();
 
-            getServletContext().setAttribute("carProfileDryver", carProfileDryver);
+            request.setAttribute("carProfileDryver", carProfileDryver);
 
         }
 
-if (userPath.equals("/inbox")) {
+        if (userPath.equals("/inbox")) {
             String loggedInUser = request.getUserPrincipal().getName();
             int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
             Dryver idReciever = dryverFacade.find(loggedInUserId);
-            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
+            request.setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
         }
         if (userPath.equals("/outbox")) {
             String loggedInUser = request.getUserPrincipal().getName();
             int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
             Dryver idReciever = dryverFacade.find(loggedInUserId);
-            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
+            request.setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
         }
         if (userPath.equals("/write")) {
             String loggedInUser = request.getUserPrincipal().getName();
             int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
             Dryver idReciever = dryverFacade.find(loggedInUserId);
-            getServletContext().setAttribute("friends", friendFacade.findByDryver(idReciever));
+            request.setAttribute("friends", friendFacade.findByDryver(idReciever));
         }
 
         if (userPath.equals("/logout")) {
@@ -254,7 +207,7 @@ if (userPath.equals("/inbox")) {
 
             session.invalidate();   // terminate session
             try {
-                getServletContext().setAttribute("alias", alias);
+                request.setAttribute("alias", alias);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -348,10 +301,10 @@ if (userPath.equals("/inbox")) {
 
             List<Car> carList = dryver.getCarList();
             String tempCar = carList.iterator().next().getBrand();
-            getServletContext().setAttribute("create_start", tempStartLocation);
-            getServletContext().setAttribute("create_end", tempEndLocation);
-            getServletContext().setAttribute("create_date", tempDate);
-            getServletContext().setAttribute("create_car", tempCar);
+            request.setAttribute("create_start", tempStartLocation);
+            request.setAttribute("create_end", tempEndLocation);
+            request.setAttribute("create_date", tempDate);
+            request.setAttribute("create_car", tempCar);
         }
 
         // if createRideConfirmed action is called
@@ -397,7 +350,7 @@ if (userPath.equals("/inbox")) {
 
             int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
         }
-        
+
         if (userPath.equals("/inbox")) {
             String loggedInUser = request.getUserPrincipal().getName();
             int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
@@ -406,8 +359,8 @@ if (userPath.equals("/inbox")) {
             int idMessage = Integer.parseInt(request.getParameter("idMessage"));
             Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
             String dateTime = request.getParameter("dateTime");
-            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
-            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+            request.setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
+            request.setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
         }
         if (userPath.equals("/outbox")) {
             String loggedInUser = request.getUserPrincipal().getName();
@@ -417,8 +370,8 @@ if (userPath.equals("/inbox")) {
             int idMessage = Integer.parseInt(request.getParameter("idMessage"));
             Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
             String dateTime = request.getParameter("dateTime");
-            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
-            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+            request.setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
+            request.setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
         }
         if (userPath.equals("/write")) {
             String loggedInUser = request.getUserPrincipal().getName();
@@ -427,10 +380,10 @@ if (userPath.equals("/inbox")) {
             Dryver idMemberSender = dryverFacade.find(loggedInUserId);
             String text = request.getParameter("msg");
             String dateTime = request.getParameter("dateTime");
-            
-            getServletContext().setAttribute(("idSender"), idMemberSender);
-            getServletContext().setAttribute(("idReciever"), idMemberReciever);
-            getServletContext().setAttribute("friends", friendFacade.findByDryver(idMemberSender));
+
+            request.setAttribute(("idSender"), idMemberSender);
+            request.setAttribute(("idReciever"), idMemberReciever);
+            request.setAttribute("friends", friendFacade.findByDryver(idMemberSender));
 
             DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
             Date dateObj = new Date();

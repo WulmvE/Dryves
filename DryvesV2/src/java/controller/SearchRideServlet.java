@@ -14,7 +14,6 @@ import java.lang.Exception;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -45,20 +44,14 @@ public class SearchRideServlet extends HttpServlet {
     @EJB
     private RideFacade rideFacade;
     @EJB
-    private CarFacade carFacade;
-    @EJB
     private NegotiationFacade negotiationFacade;
+   
     private String tempStartLocation;
     private String tempEndLocation;
     private String tempDate;
 
     @Override
     public void init() throws ServletException {
-
-        // store category list in servlet context
-        getServletContext().setAttribute("dryvers", dryverFacade.findAll());
-
-
     }
 
     /**
@@ -77,58 +70,22 @@ public class SearchRideServlet extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         Ride selectedRide;
-
-        
-        // if myDryves2 page is requested
-        if (userPath.equals("/myDryves2")) {
-            //TODO: myDryves2 logic
-            
-            
-
-        } 
-            
-//        else if (userPath.equals("/rideDetails")) {
-//
-//            String idRide = request.getQueryString();
-//
-//
-//            if (idRide != null) {
-//
-//                // get selected ride
-//                selectedRide = rideFacade.find(Integer.parseInt(idRide));
-//
-//                // place selected category in session scope
-//                session.setAttribute("selectedRide", selectedRide);
-//
-//            }
-            
-
-            
-
-       // } 
-        else if (userPath.equals("/rideDetails2")) {
+ 
+        if (userPath.equals("/rideDetails2")) {
 
         String idRide = request.getQueryString();
         
             if (idRide != null) {
-                System.out.println("test if loop");
+                
                 // get selected ride
                 selectedRide = rideFacade.find(Integer.parseInt(idRide));
-                System.out.println("tussen");
                 List<Negotiation> negotiations = selectedRide.getNegotiationList();
-                System.out.println("tussen");
                 // place selected category in session scope
                 session.setAttribute("selectedRide", selectedRide);
                 session.setAttribute("negotiations", negotiations);
-                System.out.println(selectedRide.getIdRide());
-                System.out.println(negotiations.size());
             }
 
 
-        } else if (userPath.equals("/searchRideList")) {
-            // TODO: test, of de controller request forward naar view
-        } else if (userPath.equals("/test")) {
-            //dit is een test
         }
 
         // use RequestDispatcher to forward request internally
@@ -158,29 +115,7 @@ public class SearchRideServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         Ride selectedRide;
-//        
-//        if (userPath.equals("/rideDetails")) {
-//            System.out.println("Dit is een test");
-//                
-//            int requestRide = Integer.parseInt(request.getParameter("requestRide"));
-//            int requestDryver = 100;
-//            System.out.println("ride" + requestRide);
-//            
-//           selectedRide = rideFacade.find(requestRide);
-//            
-//           session.setAttribute("selectedRide", selectedRide);
-//            
-//            if (request.getParameter("requestNegotiation").equals("1")) {
-////                Dryver dryver = dryverFacade.find(requestDryver);
-////                Ride ride = rideFacade.find(requestRide);
-//            
-//            
-//                Negotiation negotiation = new Negotiation(requestDryver, requestRide);  
-//                negotiation.setAcceptedDriver(0);
-//                negotiation.setAcceptedPassenger(1);
-//                negotiationFacade.create(negotiation);     
-//            }
-//        }
+
 
             if (userPath.equals("/rideDetails2")) {
 
@@ -210,18 +145,14 @@ public class SearchRideServlet extends HttpServlet {
                     System.out.println("test Ride doorgegeven" + confirmRide);
                 }
 
-                if (request.getParameter("confirmNegotiation") != null) {
-                    if (request.getParameter("confirmNegotiation").equals("1")) {
-
-                        System.out.println("test status doorgegeven");
-                        // Dryver dryver = dryverFacade.find(Integer.parseInt(confirmDryver));
-                        //Ride ride = rideFacade.find(Integer.parseInt(confirmRide));
-
+                if (request.getParameter("confirmNegotiation") != null 
+                        && request.getParameter("confirmNegotiation").equals("1")) {
                         Negotiation negotiation = negotiationFacade.findByIdMemberAndIdRide(confirmDryver, confirmRide);
                         negotiation.setAcceptedDriver(1);
                         negotiationFacade.edit(negotiation);
 
-                    }
+                    
+                
                 }
             }
 
@@ -229,11 +160,9 @@ public class SearchRideServlet extends HttpServlet {
         // if searchRide action is called
         if (userPath.equals("/searchresults")) {
             String van = rideFacade.trimSearchString(request.getParameter("search_start")) ;
-            String naar = request.getParameter("search_destination");
-            String op = request.getParameter("search_date");
-            getServletContext().setAttribute("rides", rideFacade.searchRideByStart(van));
+            request.setAttribute("rides", rideFacade.searchRideByStart(van));
             int aantalrides = rideFacade.searchRideByStart(van).size();
-            getServletContext().setAttribute("aantalrides", aantalrides);
+            request.setAttribute("aantalrides", aantalrides);
         }
 
         // if createRide action is called
@@ -257,10 +186,10 @@ public class SearchRideServlet extends HttpServlet {
             List<Car> carList = dryver.getCarList();
             String tempCar = carList.iterator().next().getBrand();
 
-            getServletContext().setAttribute("create_start", tempStartLocation);
-            getServletContext().setAttribute("create_end", tempEndLocation);
-            getServletContext().setAttribute("create_date", tempDate);
-            getServletContext().setAttribute("create_car", tempCar);
+            request.setAttribute("create_start", tempStartLocation);
+            request.setAttribute("create_end", tempEndLocation);
+            request.setAttribute("create_date", tempDate);
+            request.setAttribute("create_car", tempCar);
 
         }
 
@@ -289,9 +218,6 @@ public class SearchRideServlet extends HttpServlet {
             } catch (ParseException ex) {
                 Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            //car
-            //TODO
 
             //number of seats
             int numSeats = Integer.parseInt(request.getParameter("create_num_seats"));

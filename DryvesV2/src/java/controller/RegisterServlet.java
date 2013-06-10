@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.CarFacade;
 import session.DryverFacade;
-import session.MessageFacade;
 
 /**
  *
@@ -84,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
 
         if (userPath.equals("/register")) {
             tempAlias = request.getParameter("j_username");
-            getServletContext().setAttribute("alias", tempAlias);
+            request.setAttribute("alias", tempAlias);
         }
 
         if (userPath.equals("/registerConfirmed")) {
