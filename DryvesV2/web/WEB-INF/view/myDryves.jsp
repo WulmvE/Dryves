@@ -38,8 +38,16 @@
 
 
         <div class="block_triple friends" style=" overflow-x: scroll; overflow-y: hidden;">
-            <ul>            
-                <li class="block_single white">
+            <ul>        
+
+                <c:forEach var="friend" items="${friends}">
+                    <li class="block_single white">
+                        <div>
+                            <img class="avatar" style="margin-top: 35px;" src="ava/avatar${friend.idFriend.idMember}.jpg" />
+                            <a href="#" class="avatar_label">${friend.idFriend.alias}</a>
+                    </li>
+                </c:forEach>
+<!--                <li class="block_single white">
                     <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
                     <a href="#" class="avatar_label">alias</a>
                 </li>
@@ -50,7 +58,7 @@
                     <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
                     <a href="#" class="avatar_label">alias</a>
                 </li>
-                <li class="block_single white"></li>
+                <li class="block_single white"></li>-->
             </ul>
         </div>
         <div id="sub_menu">
@@ -76,16 +84,16 @@
                         <div>
                             <img class="avatar" src="ava/avatar${idMember}.jpg" />
                             <a href="#" class="avatar_label">${ride.idMember.alias}</a>
-                    </div>
-                    <div class="summary">
+                        </div>
+                        <div class="summary">
                             <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
                             <fmt:formatDate pattern="MM/dd/yyyy" value="${ride.departureDate}"/><br>
                             ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>
                             <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
+                        </div>
+                    </li>
                 </c:forEach>
 
             </ul>
@@ -102,21 +110,21 @@
 
             <ul class="profile_results">
 
-                  <c:forEach var="ride" items="${rides_passenger}">
+                <c:forEach var="ride" items="${rides_passenger}">
                     <li class="result block_triple white">
                         <div>
                             <img class="avatar" src="ava/avatar${ride.idMember.idMember}.jpg" />
                             <a href="#" class="avatar_label">${ride.idMember.alias}</a>
-                    </div>
-                    <div class="summary">
+                        </div>
+                        <div class="summary">
                             <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
                             <fmt:formatDate pattern="MM/dd/yyyy" value="${ride.departureDate}"/><br>
                             ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>
                             <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
+                        </div>
+                    </li>
                 </c:forEach>
             </ul>
 

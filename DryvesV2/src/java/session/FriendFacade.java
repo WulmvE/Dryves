@@ -6,7 +6,9 @@
 
 package session;
 
+import entity.Dryver;
 import entity.Friend;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,7 +26,11 @@ public class FriendFacade extends AbstractFacade<Friend> {
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
+    public List<Friend> findByDryver(Dryver dryver) {
+        return em.createNamedQuery("Friend.findByIdMember").setParameter("idMember",dryver).getResultList();
+    }
+    
     public FriendFacade() {
         super(Friend.class);
     }

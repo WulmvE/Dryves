@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package controller;
+
 import entity.Car;
 import entity.Dryver;
 import entity.Negotiation;
@@ -32,21 +33,24 @@ import javax.servlet.http.*;
 import javax.servlet.http.HttpSession;
 import session.CarFacade;
 import session.DryverFacade;
+import session.FriendFacade;
 import session.NegotiationFacade;
 import session.RideFacade;
+
 /**
  *
  * @author Maartje
  */
 @WebServlet(name = "UserServlet",
         loadOnStartup = 1,
-        urlPatterns = { "/myDryves",
+        urlPatterns = {"/myDryves",
     "/changeprofile",
     "/createRideConfirmed",
     "/createRide",
-                        "/logout",
-                        "/rideDetails"})
-@ServletSecurity(@HttpConstraint(rolesAllowed = {"DryvesUser"}))
+    "/logout",
+    "/rideDetails"})
+@ServletSecurity(
+        @HttpConstraint(rolesAllowed = {"DryvesUser"}))
 public class UserServlet extends HttpServlet {
 
     private String userPath;
@@ -55,13 +59,15 @@ public class UserServlet extends HttpServlet {
     @EJB
     private RideFacade rideFacade;
     @EJB
+    private FriendFacade friendFacade;
+    @EJB
     private CarFacade carFacade;
-   @EJB
+    @EJB
     private NegotiationFacade negotiationFacade;
-    
     private String tempStartLocation;
     private String tempEndLocation;
     private String tempDate;
+
     @Override
     public void init() throws ServletException {
         // store category list in servlet context
@@ -77,10 +83,15 @@ public class UserServlet extends HttpServlet {
         double distance = 60;
         Date dateObj = new Date(13, 6, 6);
 
-        /********************** test creation and persisting of ride **************************/
+        /**
+         * ******************** test creation and persisting of ride
+         * *************************
+         */
         //int rideId = rideFacade.placeRide("amsterdam", "den haag", dryver, car, dateObj, numSeats, price, distance);
-
-        /********************** test creation and persisting of dryver **************************/
+        /**
+         * ******************** test creation and persisting of dryver
+         * *************************
+         */
         //dryverFacade.createDryver("koos83", "Delft", "koos83@yohaa.org.comh", "Koos", "de Vries", "333", "m", "15-06-1983");
     }
 
@@ -99,7 +110,6 @@ public class UserServlet extends HttpServlet {
         userPath = request.getServletPath();
         // if myDryves is requested
         if (userPath.equals("/myDryves")) {
-             
         }
         // if changeProfile is requested
         if (userPath.equals("/changeprofile")) {
@@ -136,8 +146,8 @@ public class UserServlet extends HttpServlet {
         String alias = request.getUserPrincipal().getName();
         getServletContext().setAttribute("alias", alias);
 
-          int idMember =dryverFacade.findByAlias(alias).getIdMember();
-          getServletContext().setAttribute("idMember", idMember);
+        int idMember = dryverFacade.findByAlias(alias).getIdMember();
+        getServletContext().setAttribute("idMember", idMember);
 
         String testHttp;
         testHttp = request.getLocalAddr();
@@ -159,15 +169,15 @@ public class UserServlet extends HttpServlet {
 //          request.setAttribute("mijn_first_name", mijnAvgRating);
 //          request.setAttribute("mijn_first_name", mijnCity);
 //          request.setAttribute("mijn_first_name", mijnEmail);         
-          Ride selectedRide;
+        Ride selectedRide;
 
-          if (userPath.equals("/rideDetails")) {
+        if (userPath.equals("/rideDetails")) {
 
             String idRide = request.getQueryString();
 
 
             if (idRide != null) {
-        
+
                 // get selected ride
                 selectedRide = rideFacade.find(Integer.parseInt(idRide));
 
@@ -175,26 +185,26 @@ public class UserServlet extends HttpServlet {
                 session.setAttribute("selectedRide", selectedRide);
 
             }
-            
-            
-            
 
-        } 
-          
-   
-               
+
+
+
+        }
+
+
+
         if (userPath.equals("/myDryves")) {
-            
-            String loggedInUser = request.getUserPrincipal().getName(); 
+
+            String loggedInUser = request.getUserPrincipal().getName();
             int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
-            
+
             Dryver dryver = dryverFacade.find(loggedInUserId);
-            
+
             getServletContext().setAttribute("rides", rideFacade.findByDryver(dryver));
             getServletContext().setAttribute("rides_passenger", rideFacade.findByNegotiationIdMember(dryver));
-  
-        }           
- 
+            getServletContext().setAttribute("friends", friendFacade.findByDryver(dryver));
+        }
+
         if (userPath.equals("/logout")) {
             //HttpSession session = request.getSession();
             alias = "";
@@ -218,6 +228,7 @@ public class UserServlet extends HttpServlet {
             ex.printStackTrace();
         }
     }
+
     /**
      * Handles the HTTP
      * <code>POST</code> method.
@@ -234,44 +245,44 @@ public class UserServlet extends HttpServlet {
         String userPath = request.getServletPath();
         // if searchRide action is called
         HttpSession session = request.getSession();
-        
-        
-         
-        
+
+
+
+
         //nieuw
         Ride selectedRide;
-        
+
         if (userPath.equals("/rideDetails")) {
             System.out.println("Dit is een test");
-                
+
             int requestRide = Integer.parseInt(request.getParameter("requestRide"));
-            String alias = request.getUserPrincipal().getName(); 
+            String alias = request.getUserPrincipal().getName();
             int requestDryver = dryverFacade.findByAlias(alias).getIdMember();
-   
+
             System.out.println("ride" + requestRide);
-            
+
             selectedRide = rideFacade.find(requestRide);
-            
+
             session.setAttribute("selectedRide", selectedRide);
-            
+
             if (request.getParameter("requestNegotiation").equals("1")) {
 
                 System.out.println("vincent");
                 System.out.println("dryver negotiation" + requestDryver);
                 System.out.println("ride negotiation" + requestRide);
-                
-                
-                Negotiation negotiation = new Negotiation(requestRide, requestDryver);  
+
+
+                Negotiation negotiation = new Negotiation(requestRide, requestDryver);
                 negotiation.setAcceptedDriver(0);
                 negotiation.setAcceptedPassenger(1);
-                negotiationFacade.create(negotiation);     
-        }
+                negotiationFacade.create(negotiation);
+            }
         }
 
         //nieuw
-        
-        
-        
+
+
+
         // if createRide action is called
         if (userPath.equals("/createRide")) {
             // pass parameters to createRideDetails
@@ -288,12 +299,12 @@ public class UserServlet extends HttpServlet {
                 tempDate = "datum";
             }
 
-            
-            String alias = request.getUserPrincipal().getName(); 
-            int dryverId = dryverFacade.findByAlias(alias).getIdMember();     
+
+            String alias = request.getUserPrincipal().getName();
+            int dryverId = dryverFacade.findByAlias(alias).getIdMember();
             Dryver dryver = dryverFacade.find(dryverId);
-            
-            
+
+
             List<Car> carList = dryver.getCarList();
             String tempCar = carList.iterator().next().getBrand();
             getServletContext().setAttribute("create_start", tempStartLocation);
@@ -301,7 +312,7 @@ public class UserServlet extends HttpServlet {
             getServletContext().setAttribute("create_date", tempDate);
             getServletContext().setAttribute("create_car", tempCar);
         }
-        
+
         // if createRideConfirmed action is called
         if (userPath.equals("/createRideConfirmed")) {
             //start
@@ -332,13 +343,13 @@ public class UserServlet extends HttpServlet {
             int numSeats = Integer.parseInt(request.getParameter("create_num_seats"));
             //price
             String price = request.getParameter("create_price");
-            
-            String alias = request.getUserPrincipal().getName(); 
-            int dryverId = dryverFacade.findByAlias(alias).getIdMember();     
+
+            String alias = request.getUserPrincipal().getName();
+            int dryverId = dryverFacade.findByAlias(alias).getIdMember();
             Dryver dryver = dryverFacade.find(dryverId);
-            
-            
-             
+
+
+
             List<Car> carList = dryver.getCarList();
             Car car = carList.get(0);
             double distance = 60;

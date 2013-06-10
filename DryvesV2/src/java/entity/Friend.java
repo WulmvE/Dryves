@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entity;
 
 import java.io.Serializable;
@@ -31,8 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Friend.findAll", query = "SELECT f FROM Friend f"),
     @NamedQuery(name = "Friend.findByIdRequest", query = "SELECT f FROM Friend f WHERE f.idRequest = :idRequest"),
+    @NamedQuery(name = "Friend.findByIdMember", query = "SELECT f FROM Friend f WHERE f.idMember = :idMember"),
     @NamedQuery(name = "Friend.findByStatus", query = "SELECT f FROM Friend f WHERE f.status = :status")})
 public class Friend implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -118,5 +119,4 @@ public class Friend implements Serializable {
     public String toString() {
         return "entity.Friend[ idRequest=" + idRequest + " ]";
     }
-    
 }
