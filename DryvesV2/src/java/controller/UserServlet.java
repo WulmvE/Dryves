@@ -44,7 +44,7 @@ import session.RideFacade;
 @WebServlet(name = "UserServlet",
         loadOnStartup = 1,
         urlPatterns = {"/myDryves",
-    "/changeprofile",
+    "/changeProfile",
     "/createRideConfirmed",
     "/createRide",
     "/logout",
@@ -112,10 +112,10 @@ public class UserServlet extends HttpServlet {
         if (userPath.equals("/myDryves")) {
         }
         // if changeProfile is requested
-        if (userPath.equals("/changeprofile")) {
-//            orderList = customerOrderFacade.findAll();
-//            request.setAttribute("orderList", orderList);
-        }
+//        if (userPath.equals("/changeprofile")) {
+////            orderList = customerOrderFacade.findAll();
+////            request.setAttribute("orderList", orderList);
+//        }
 
 
         // use RequestDispatcher to forward request internally
@@ -203,7 +203,25 @@ public class UserServlet extends HttpServlet {
             getServletContext().setAttribute("rides", rideFacade.findByDryver(dryver));
             getServletContext().setAttribute("rides_passenger", rideFacade.findByNegotiationIdMember(dryver));
             getServletContext().setAttribute("friends", friendFacade.findByDryver(dryver));
+            getServletContext().setAttribute("profileDryver", dryver);
         }
+
+
+
+        if (userPath.equals("/changeProfile")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+
+            Dryver dryver = dryverFacade.find(loggedInUserId);
+
+            List<Car> carList = dryver.getCarList();
+            Car carProfileDryver = carList.iterator().next();
+
+            getServletContext().setAttribute("carProfileDryver", carProfileDryver);
+
+        }
+
+
 
         if (userPath.equals("/logout")) {
             //HttpSession session = request.getSession();

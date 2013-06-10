@@ -15,15 +15,16 @@
         <h2>Mijn profiel</h2>
         <div class="profile block_triple white">
             <div>
-                <img class="avatar" src="ava/avatar${idMember}.jpg" />
-                <a href="#" class="avatar_label">wijzig foto</a>
+                <img class="avatar" src="ava/avatar${profileDryver.idMember}.jpg" />
             </div>
             <div class="summary">
-                <span class="text" style="font-weight: bold">${alias}</span><br>              
-                <br>
-                <span class="text" style="font-weight: bold">text</span><br>
-                <r:rating_stars rating="4"/><br>
-                <a href="#">ratings inzien</a>
+                    <span class="text" style="font-weight: bold">${profileDryver.alias}</span><br>              
+                    <br>
+                    <!--                <span class="text" style="font-weight: bold; color: red;">Welke statistieken moeten hier nog meer komen?</span><br>-->
+                    <span>gemiddelde rating:</span><br>
+                    <r:rating_stars rating="${profileDryver.avgRating}"/><br> 
+                    <br>
+                    <a href="changeProfile" class="avatar_label">wijzig profiel</a>
             </div>
         </div>
     </div>
@@ -43,22 +44,28 @@
                 <c:forEach var="friend" items="${friends}">
                     <li class="block_single white">
                         <div>
-                            <img class="avatar" style="margin-top: 35px;" src="ava/avatar${friend.idFriend.idMember}.jpg" />
+                            <img class="avatar" style="margin-top: 15px;" src="ava/avatar${friend.idFriend.idMember}.jpg" />
                             <a href="#" class="avatar_label">${friend.idFriend.alias}</a>
+                            <c:if test="${friend.status == true}">
+                                <span style="color: green">Vrienden</span>
+                            </c:if>
+                            <c:if test="${friend.status == false}">
+                                <span>Pending</span>
+                            </c:if>
                     </li>
                 </c:forEach>
-<!--                <li class="block_single white">
-                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
-                    <a href="#" class="avatar_label">alias</a>
-                </li>
-                <li class="block_single white">
-                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
-                    <a href="#" class="avatar_label">alias</a>
-                </li>                <li class="block_single white">
-                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
-                    <a href="#" class="avatar_label">alias</a>
-                </li>
-                <li class="block_single white"></li>-->
+                <!--                <li class="block_single white">
+                                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
+                                    <a href="#" class="avatar_label">alias</a>
+                                </li>
+                                <li class="block_single white">
+                                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
+                                    <a href="#" class="avatar_label">alias</a>
+                                </li>                <li class="block_single white">
+                                    <img class="avatar" style="margin-top: 35px;" src="img/avatar.jpg" />
+                                    <a href="#" class="avatar_label">alias</a>
+                                </li>
+                                <li class="block_single white"></li>-->
             </ul>
         </div>
         <div id="sub_menu">
