@@ -39,6 +39,7 @@
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
+                document.getElementById('distance').innerHTML += Math.round(Number(response.routes[0].legs[0].distance.value /1000)) + " km";
             } else {
                 if (status == 'ZERO_RESULTS') {
                     alert('No route could be found between the origin and destination.');
@@ -76,6 +77,7 @@
             </div>
             <div class="summary">
                 <span class="route" >${selectedRide.startLocation} <span class="text_green"><></span> ${selectedRide.endLocation}</span><br>
+                <span class="route">   <div class ="route" id="distance">Afstand: </div></span><br>
                 <fmt:formatDate pattern="MM/dd/yyyy" value="${selectedRide.departureDate}"/><br>
                 ${selectedRide.seatsAvailable} ${selectedRide.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                 <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${selectedRide.askingPrice}" /></span> / Plaats <br>                    

@@ -23,6 +23,7 @@
             mapTypeControl: false
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        document.getElementById('distance').innerHTML += response.routes[0].legs[0].distance.value / 1000 + " km";
         directionsDisplay.setMap(map);
     }
     function calcRoute() {
@@ -35,8 +36,8 @@
         };
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-            document.getElementById('distance').innerHTML += Math.round(response.routes[0].legs[0].distance.value /1000) + " km";    
                 directionsDisplay.setDirections(response);
+                document.getElementById('distance').innerHTML += Math.round(Number(response.routes[0].legs[0].distance.value /1000)) + " km";
             } else {
                 if (status == 'ZERO_RESULTS') {
                     alert('No route could be found between the origin and destination.');
