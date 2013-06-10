@@ -107,13 +107,10 @@ public class UserServlet extends HttpServlet {
         HttpSession session = request.getSession();
 //                  ALIAS IS j_username IN HET INLOGSCHERM
         String alias = request.getUserPrincipal().getName();
-        request.setAttribute("alias", alias);
-
+        session.setAttribute("alias", alias);
+        
         int idMember = dryverFacade.findByAlias(alias).getIdMember();
         request.setAttribute("idMember", idMember);
-
-        String testHttp;
-        testHttp = request.getLocalAddr();
 
         String referer = request.getHeader("Referer");
         if (referer == null) {
@@ -227,13 +224,11 @@ public class UserServlet extends HttpServlet {
         Ride selectedRide;
 
         if (userPath.equals("/rideDetails")) {
-            System.out.println("Dit is een test");
 
             int requestRide = Integer.parseInt(request.getParameter("requestRide"));
             String alias = request.getUserPrincipal().getName();
             int requestDryver = dryverFacade.findByAlias(alias).getIdMember();
 
-            System.out.println("ride" + requestRide);
 
             selectedRide = rideFacade.find(requestRide);
 
@@ -280,7 +275,7 @@ public class UserServlet extends HttpServlet {
 
 
             List<Car> carList = dryver.getCarList();
-            String tempCar = carList.iterator().next().getBrand();
+            String tempCar = carList.get(0).getBrand();
             request.setAttribute("create_start", tempStartLocation);
             request.setAttribute("create_end", tempEndLocation);
             request.setAttribute("create_date", tempDate);
@@ -328,7 +323,7 @@ public class UserServlet extends HttpServlet {
             Car car = carList.get(0);
             double distance = 60;
 
-            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
+            rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
         }
         
         

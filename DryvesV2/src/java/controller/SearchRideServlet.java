@@ -36,7 +36,7 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/test", "/searchRide", "/searchRideDetails", "/rideDetails2", "/searchRideList", "/searchresults", "/createRideDetails"})
+        urlPatterns = {"/searchRide", "/searchRideDetails", "/rideDetails2", "/searchRideList", "/searchresults", "/createRideDetails"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
@@ -45,7 +45,6 @@ public class SearchRideServlet extends HttpServlet {
     private RideFacade rideFacade;
     @EJB
     private NegotiationFacade negotiationFacade;
-   
     private String tempStartLocation;
     private String tempEndLocation;
     private String tempDate;
@@ -70,13 +69,13 @@ public class SearchRideServlet extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         Ride selectedRide;
- 
+
         if (userPath.equals("/rideDetails2")) {
 
-        String idRide = request.getQueryString();
-        
+            String idRide = request.getQueryString();
+
             if (idRide != null) {
-                
+
                 // get selected ride
                 selectedRide = rideFacade.find(Integer.parseInt(idRide));
                 List<Negotiation> negotiations = selectedRide.getNegotiationList();
@@ -117,49 +116,43 @@ public class SearchRideServlet extends HttpServlet {
         Ride selectedRide;
 
 
-            if (userPath.equals("/rideDetails2")) {
+        if (userPath.equals("/rideDetails2")) {
 
-                int confirmDryver = Integer.parseInt(request.getParameter("confirmDryver"));
-                int confirmRide = Integer.parseInt(request.getParameter("confirmRide"));
+            int confirmDryver = Integer.parseInt(request.getParameter("confirmDryver"));
+            int confirmRide = Integer.parseInt(request.getParameter("confirmRide"));
 
-                // get selected ride
-                selectedRide = rideFacade.find(confirmRide);
-                List<Negotiation> negotiations = selectedRide.getNegotiationList();
-
-
-                // place selected category in session scope
-                session.setAttribute("selectedRide", selectedRide);
-                session.setAttribute("negotiations", negotiations);
+            // get selected ride
+            selectedRide = rideFacade.find(confirmRide);
+            List<Negotiation> negotiations = selectedRide.getNegotiationList();
 
 
-                System.out.println("test in de post");
+            // place selected category in session scope
+            request.setAttribute("selectedRide", selectedRide);
+            request.setAttribute("negotiations", negotiations);
 
-                if (request.getParameter("confirmDryver") != null) {
 
-                    confirmDryver = Integer.parseInt(request.getParameter("confirmDryver"));
-                    System.out.println("test Dryver doorgegeven" + confirmDryver);
-                }
+            if (request.getParameter("confirmDryver") != null) {
 
-                if (request.getParameter("confirmRide") != null) {
-                    confirmRide = Integer.parseInt(request.getParameter("confirmRide"));
-                    System.out.println("test Ride doorgegeven" + confirmRide);
-                }
+                confirmDryver = Integer.parseInt(request.getParameter("confirmDryver"));
 
-                if (request.getParameter("confirmNegotiation") != null 
-                        && request.getParameter("confirmNegotiation").equals("1")) {
-                        Negotiation negotiation = negotiationFacade.findByIdMemberAndIdRide(confirmDryver, confirmRide);
-                        negotiation.setAcceptedDriver(1);
-                        negotiationFacade.edit(negotiation);
-
-                    
-                
-                }
             }
+
+            if (request.getParameter("confirmRide") != null) {
+                confirmRide = Integer.parseInt(request.getParameter("confirmRide"));
+            }
+
+            if (request.getParameter("confirmNegotiation") != null
+                    && request.getParameter("confirmNegotiation").equals("1")) {
+                Negotiation negotiation = negotiationFacade.findByIdMemberAndIdRide(confirmDryver, confirmRide);
+                negotiation.setAcceptedDriver(1);
+                negotiationFacade.edit(negotiation);
+            }
+        }
 
 
         // if searchRide action is called
         if (userPath.equals("/searchresults")) {
-            String van = rideFacade.trimSearchString(request.getParameter("search_start")) ;
+            String van = rideFacade.trimSearchString(request.getParameter("search_start"));
             request.setAttribute("rides", rideFacade.searchRideByStart(van));
             int aantalrides = rideFacade.searchRideByStart(van).size();
             request.setAttribute("aantalrides", aantalrides);
@@ -170,19 +163,19 @@ public class SearchRideServlet extends HttpServlet {
 
             // pass parameters to createRideDetails
             tempStartLocation = request.getParameter("create_start");
-            if  (tempStartLocation.equals("")){
+            if (tempStartLocation.equals("")) {
                 tempStartLocation = "van";
             }
             tempEndLocation = request.getParameter("create_destination");
-            if  (tempEndLocation.equals("")){
+            if (tempEndLocation.equals("")) {
                 tempEndLocation = "naar";
             }
             tempDate = request.getParameter("create_date");
-            if  (tempDate.equals("")){
+            if (tempDate.equals("")) {
                 tempDate = "datum";
             }
-            
-            Dryver dryver = dryverFacade.find(100); 
+
+            Dryver dryver = dryverFacade.find(100);
             List<Car> carList = dryver.getCarList();
             String tempCar = carList.iterator().next().getBrand();
 
@@ -225,19 +218,13 @@ public class SearchRideServlet extends HttpServlet {
             //price
             String price = request.getParameter("create_price");
             double distance = 60;
-            Dryver dryver = dryverFacade.find(100); 
+            Dryver dryver = dryverFacade.find(100);
             List<Car> carList = dryver.getCarList();
             Car car = carList.get(0);
-            
-            int rideId = rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
+
+            rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
 
         }
-
-
-
-
-
-
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {

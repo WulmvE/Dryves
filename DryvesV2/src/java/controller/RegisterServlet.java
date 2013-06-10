@@ -83,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
 
         if (userPath.equals("/register")) {
             tempAlias = request.getParameter("j_username");
-            request.setAttribute("alias", tempAlias);
+            request.setAttribute("tempAlias", tempAlias);
         }
 
         if (userPath.equals("/registerConfirmed")) {
@@ -102,13 +102,6 @@ public class RegisterServlet extends HttpServlet {
             String city = request.getParameter("city");
             String password = request.getParameter("password");
             
-            System.out.println("alias" + gebruiker);
-            System.out.println("firstname" + firstName);
-            System.out.println("adjective" + adjective);
-            System.out.println("lastname" + lastName);
-            System.out.println("email" + email);
-            System.out.println("city" + city);
-            System.out.println("password" + password);
             
 
             int dryverId = DryverFacade.createDryver(gebruiker, firstName, adjective, lastName, email, city, password, "m", "15-06-1983");
