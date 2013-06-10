@@ -46,7 +46,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ride.findBySeatsAvailable", query = "SELECT r FROM Ride r WHERE r.seatsAvailable = :seatsAvailable"),
     @NamedQuery(name = "Ride.findByStartLocation", query = "SELECT r FROM Ride r WHERE r.startLocation = :startLocation"),
     @NamedQuery(name = "Ride.findByStatus", query = "SELECT r FROM Ride r WHERE r.status = :status"),
-    @NamedQuery(name = "Ride.findByIdMember", query = "SELECT r FROM Ride r WHERE r.idMember = :idMember")})
+    @NamedQuery(name = "Ride.findByIdMember", query = "SELECT r FROM Ride r WHERE r.idMember = :idMember"),
+    @NamedQuery(name = "Ride.findByNegotiationIdMember", query = "SELECT r FROM Ride r WHERE r.idRide IN (SELECT n.ride.idRide FROM Negotiation n WHERE n.dryver.idMember = :idMember)")})
 
 public class Ride implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -191,6 +191,7 @@ public class UserServlet extends HttpServlet {
             Dryver dryver = dryverFacade.find(loggedInUserId);
             
             getServletContext().setAttribute("rides", rideFacade.findByDryver(dryver));
+            getServletContext().setAttribute("rides_passenger", rideFacade.findByNegotiationIdMember(dryver));
   
         }           
  

@@ -71,6 +71,10 @@ public class RideFacade extends AbstractFacade<Ride> {
         return em.createNamedQuery("Ride.findByIdMember").setParameter("idMember", dryver).getResultList();
     }
     
+    public List<Ride> findByNegotiationIdMember (Dryver dryver) {
+        return em.createNamedQuery("Ride.findByNegotiationIdMember").setParameter("idMember", dryver.getIdMember()).getResultList();
+    }
+    
     public int placeRide(String startLocation, String endLocation, Dryver dryver, Car car, Date date, int numseats, String price, double distance) {
         Ride ride = new Ride();
 

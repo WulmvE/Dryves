@@ -102,23 +102,22 @@
 
             <ul class="profile_results">
 
-                <li class="profile_result block_triple_half white">
+                  <c:forEach var="ride" items="${rides_passenger}">
+                    <li class="result block_triple white">
+                        <div>
+                            <img class="avatar" src="ava/avatar${ride.idMember.idMember}.jpg" />
+                            <a href="#" class="avatar_label">${ride.idMember.alias}</a>
+                    </div>
                     <div class="summary">
-                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
-
-                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
+                            <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
+                            <fmt:formatDate pattern="MM/dd/yyyy" value="${ride.departureDate}"/><br>
+                            ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
+                            <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
+                            <r:rating_stars rating="${ride.idMember.avgRating}"/>
+                            <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
                     </div>
                 </li>
-                <li class="profile_result block_triple_half white">
-                    <div class="summary">
-                        <span class="route" >ride.startLocation<span class="text_green"><></span>ride.endLocation</span><br>
-                        <span class="date_time">00/00/0000, 13:00u</span><span class="price">&euro; 99</span> / Plaats <br>                    
-
-                        <a class="button" href="#"><img src="img/arrow_right.png" /></a><br>
-                    </div>
-                </li>
-
+                </c:forEach>
             </ul>
 
         </div>
