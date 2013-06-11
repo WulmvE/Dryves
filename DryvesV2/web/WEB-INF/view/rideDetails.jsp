@@ -83,8 +83,6 @@
             </div>
         </div>
         <div class="result block_triple white">
-            
-          
             <form action="<c:url value='rideDetails?${selectedRide.idRide}'/>" method="post">   
                   <input type="hidden"
                        name="requestRide"
@@ -94,9 +92,9 @@
                        value="1">  
                 <input type="submit"
                        name="submit"
+                       style="background-color: #62b5dc; color: white; font-family: segoe; border: none;"
                        value="aanmelden">
             </form>
-
 
         </div>
     </div>
