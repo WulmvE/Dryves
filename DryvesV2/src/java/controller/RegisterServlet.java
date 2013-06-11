@@ -99,7 +99,7 @@ public class RegisterServlet extends HttpServlet {
             
             
 
-            int dryverId = DryverFacade.createDryver(gebruiker, firstName, adjective, lastName, email, city, password, "m", "15-06-1983");
+            int dryverId = DryverFacade.createDryver(gebruiker, city, email, firstName, adjective, lastName, password, "m", "06-15-1983");
             
             String brand = request.getParameter("carBrand");
             int numSeats = Integer.parseInt(request.getParameter("numSeats"));
