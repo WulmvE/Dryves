@@ -69,7 +69,7 @@
     <div class="block_six white">
         <div class="result block_triple white">
             <div>
-                <img class="avatar" src="img/avatar.jpg" />
+                <img class="avatar" src="ava/avatar${selectedRide.idMember.idMember}.jpg" />
                 <a href="#" class="avatar_label">${selectedRide.idMember.alias}</a>
             </div>
             <div class="summary">
