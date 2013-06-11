@@ -1,13 +1,7 @@
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import entity.Dryver;
+import entity.Message;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,18 +25,16 @@ import session.MessageFacade;
  */
 @WebServlet(name = "MessageServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/inbox", "/outbox", "/write"})
+        urlPatterns = {"/inbox", "/outbox", "/write", "/send"})
 public class MessageServlet extends HttpServlet {
 
     @EJB
     private MessageFacade messageFacade;
-    
     @EJB
     private DryverFacade dryverFacade;
-
     @EJB
     private FriendFacade friendFacade;
-    
+
     @Override
     public void init() throws ServletException {
     }
@@ -60,29 +52,23 @@ public class MessageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("GET");
         String userPath = request.getServletPath();
-        
+
         String loggedInUser = request.getUserPrincipal().getName();
         int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
         Dryver idMember = dryverFacade.find(loggedInUserId);
-        
+
         if (userPath.equals("/inbox")) {
-            Dryver idReciever = dryverFacade.find(loggedInUserId);
-            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
+            getServletContext().setAttribute("user", idMember);
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idMember));
         }
         if (userPath.equals("/outbox")) {
-            Dryver idReciever = dryverFacade.find(loggedInUserId);
-            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idMember));
         }
         if (userPath.equals("/write")) {
-            Dryver idSender = dryverFacade.find(loggedInUserId);
-            Dryver idReciever = dryverFacade.find(101);
-            getServletContext().setAttribute(("idReciever"), idReciever);
-            getServletContext().setAttribute("friends", friendFacade.findByDryver(idSender));
-
+            getServletContext().setAttribute("friends", friendFacade.findByDryver(idMember));
         }
-        // use RequestDispatcher to forward request internally
+        
         String url = "/WEB-INF/view" + userPath + ".jsp";
         try {
             request.getRequestDispatcher(url).forward(request, response);
@@ -98,39 +84,44 @@ public class MessageServlet extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-    * @throws IOException if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userPath = request.getServletPath();
 
-       String loggedInUser = request.getUserPrincipal().getName();
+        String loggedInUser = request.getUserPrincipal().getName();
         int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
-        Dryver idReciever = dryverFacade.find(loggedInUserId);
-        
-        int messageId = Integer.parseInt(request.getParameter("idMessage"));
-        Dryver idSender = new Dryver(Integer.parseInt(request.getParameter("idSender").replaceAll("\\D", "")));
-        String dateTime = request.getParameter("dateTime");
-        
-if (userPath.equals("/inbox")) {
-            int idMessage = Integer.parseInt(request.getParameter("idMessage"));
-            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idReciever));
-            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+        Dryver idMember = dryverFacade.find(loggedInUserId);
+
+        if (userPath.equals("/inbox")) {
+            int messageId = Integer.parseInt(request.getParameter("idMessage"));
+            String dateTime = request.getParameter("dateTime");
+            Dryver idSender = dryverFacade.find(Integer.parseInt(request.getParameter("idSender")));
+
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByIdReciever(idMember));
+            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(messageId, idSender, dateTime));
         }
         if (userPath.equals("/outbox")) {
-            int idMessage = Integer.parseInt(request.getParameter("idMessage"));
-            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idReciever));
-            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(idMessage, idSender, dateTime));
+            int messageId = Integer.parseInt(request.getParameter("idMessage"));
+            String dateTime = request.getParameter("dateTime");
+
+            getServletContext().setAttribute("messages", messageFacade.searchMessageByidSender(idMember));
+            getServletContext().setAttribute("singleMessage", messageFacade.getSingleMessage(messageId, idMember, dateTime));
         }
         if (userPath.equals("/write")) {
-            Dryver idMemberReciever = dryverFacade.find(101);
-            Dryver idMemberSender = dryverFacade.find(loggedInUserId);
+            Dryver idReciever = dryverFacade.find(Integer.parseInt(request.getParameter("idReciever")));
+
+            getServletContext().setAttribute("idReciever", idReciever);
+            getServletContext().setAttribute("friends", friendFacade.findByDryver(idMember));
+        }
+        if (userPath.equals("/send")) {
+            String dateTime = request.getParameter("dateTime");
+            Dryver idReciever = dryverFacade.find(Integer.parseInt(request.getParameter("idMemberReciever")));
             String text = request.getParameter("msg");
-            
-            getServletContext().setAttribute(("idSender"), idMemberSender);
-            getServletContext().setAttribute(("idReciever"), idMemberReciever);
-            getServletContext().setAttribute("friends", friendFacade.findByDryver(idMemberSender));
+
+            getServletContext().setAttribute("friends", friendFacade.findByDryver(idMember));
 
             DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
             Date dateObj = new Date();
@@ -140,7 +131,15 @@ if (userPath.equals("/inbox")) {
                 Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            int idMessage = messageFacade.createMessage(idMemberSender, idMemberReciever, text, dateTime);
+            Message idMessage = messageFacade.createMessage(idMember, idReciever, text, dateTime);
+            getServletContext().setAttribute("message", idMessage);
+        }
+        
+        String url = "/WEB-INF/view" + userPath + ".jsp";
+        try {
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }

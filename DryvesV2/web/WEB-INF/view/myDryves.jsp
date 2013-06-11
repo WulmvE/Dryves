@@ -68,9 +68,28 @@
                                 <li class="block_single white"></li>-->
             </ul>
         </div>
-        <div id="sub_menu">
+        <div id="sub_menu" style="margin: 0;padding: 0;">
             <div class="block_triple_half white">		
-                <h4 style="margin-top: 25px;">knoppenbalk</h4>
+                <ul>
+                    <li class="menu_icon_half blue">
+                        <a href="inbox"><div class="menu_icon_half icon_messages">&#xf003;
+                                <span class="menu_item_half menu_label_white">Inbox</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu_icon_half blue">
+                        <a href="outbox"><div class="menu_icon_half icon_messages">&#xf093;
+                                <span class="menu_item_half menu_label_white">Outbox</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu_icon_half blue">
+                        <a href="write"><div class="menu_icon_half icon_messages">&#xf040;
+                                <span class="menu_item_half menu_label_white">Schrijf</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
