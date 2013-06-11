@@ -55,7 +55,8 @@ public class SearchRideServlet extends HttpServlet {
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
         Ride selectedRide;
-
+        String loggedInUser = request.getUserPrincipal().getName();
+        
         if (userPath.equals("/rideDetails2")) {
 
             String idRide = request.getQueryString();
@@ -64,10 +65,13 @@ public class SearchRideServlet extends HttpServlet {
 
                 // get selected ride
                 selectedRide = rideFacade.find(Integer.parseInt(idRide));
-                List<Negotiation> negotiations = selectedRide.getNegotiationList();
-                // place selected category in session scope
-                session.setAttribute("selectedRide", selectedRide);
-                session.setAttribute("negotiations", negotiations);
+                if (!loggedInUser.equalsIgnoreCase(selectedRide.getIdMember().getAlias())) {
+                        response.sendRedirect("/DryvesV2/rideDetails?"+idRide);
+                    }
+                    List<Negotiation> negotiations = selectedRide.getNegotiationList();
+                    // place selected category in session scope
+                    session.setAttribute("selectedRide", selectedRide);
+                    session.setAttribute("negotiations", negotiations);
             }
 
 
@@ -103,7 +107,7 @@ public class SearchRideServlet extends HttpServlet {
         Ride selectedRide;
 
         if (userPath.equals("/rideDetails2")) {
-
+       
             int confirmDryver = Integer.parseInt(request.getParameter("confirmDryver"));
             int confirmRide = Integer.parseInt(request.getParameter("confirmRide"));
 
