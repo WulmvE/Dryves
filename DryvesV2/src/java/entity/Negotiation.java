@@ -9,6 +9,7 @@ package entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -38,6 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Negotiation.findByIdMember", query = "SELECT n FROM Negotiation n WHERE n.negotiationPK.idMember = :idMember"),
     @NamedQuery(name = "Negotiation.findByIdMemberAndIdRide", query = "SELECT n FROM Negotiation n WHERE n.negotiationPK.idMember = :idMember AND n.negotiationPK.idRide = :idRide")
 })
+@Cacheable(false)
+
 public class Negotiation implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
