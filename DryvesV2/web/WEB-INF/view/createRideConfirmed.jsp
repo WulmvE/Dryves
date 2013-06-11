@@ -14,13 +14,10 @@
         <span class="block_double">Deze rit is terug te vinden onder "Mijn Dryves"</span><br>
 
     </div>   
-
     
     <a class="block_single white" href="index.jsp"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>
      
     <div id="quick_search" class="block_triple white">		
     </div>
-
-
 
 </div>

@@ -24,11 +24,8 @@
     </security-role>
     <security-role>
             <description/>
-            <role-name>ADMIN</role-name>
+            <role-name>Admin</role-name>
     </security-role>
-
-
-    
    
     <!--BI DIT IS DE CODE AAN DE HAND VAN DE JDBC CODE-->
     <login-config>

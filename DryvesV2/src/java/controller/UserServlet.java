@@ -217,9 +217,6 @@ public class UserServlet extends HttpServlet {
         // if searchRide action is called
         HttpSession session = request.getSession();
 
-
-
-
         //nieuw
         Ride selectedRide;
 
@@ -239,7 +236,6 @@ public class UserServlet extends HttpServlet {
                 System.out.println("vincent");
                 System.out.println("dryver negotiation" + requestDryver);
                 System.out.println("ride negotiation" + requestRide);
-
 
                 Negotiation negotiation = new Negotiation(requestRide, requestDryver);
                 negotiation.setAcceptedDriver(0);

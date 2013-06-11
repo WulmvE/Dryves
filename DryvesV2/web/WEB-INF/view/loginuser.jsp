@@ -33,27 +33,7 @@
             <form  name="no_account" action="register" method=post>
             <input type="text" name="j_username" placeholder="username"><br/>
             <span class="local_menu">               
-                <a href="register" onclick="document.no_account.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
+                <a href="#" onclick="document.no_account.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
             </span>
         </form>
     </div>
-
-
-    <!--<<body>
-      <p>Login to access secure pages:</p>
-      <form method="post" action="j_security_check">
-        <panelGrid columns="2">
-          <outputLabel for="j_username" value="Username" />
-          <input type="text" name="j_username" />
-     
-          <outputLabel for="j_password" value="Password" />
-          <input type="password" name="j_password" />
-     
-          <outputText value="" />
-          <panelGrid columns="2">
-            <input type="submit" name="submit" value="Login" />
-            <button outcome="index" value="Cancel" />
-          </panelGrid>
-        </panelGrid>
-      </form>
-    <</body>-->

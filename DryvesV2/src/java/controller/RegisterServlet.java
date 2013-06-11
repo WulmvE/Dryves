@@ -30,8 +30,6 @@ public class RegisterServlet extends HttpServlet {
     @EJB
     private CarFacade CarFacade;
     
-    
-    private String alias;
     private String tempAlias;
 
     @Override
@@ -80,15 +78,12 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         String userPath = request.getServletPath();
 
-
         if (userPath.equals("/register")) {
             tempAlias = request.getParameter("j_username");
             request.setAttribute("tempAlias", tempAlias);
         }
 
         if (userPath.equals("/registerConfirmed")) {
-            
-      
             
            String gebruiker = request.getParameter("alias");
             if (gebruiker.equals("")) {
