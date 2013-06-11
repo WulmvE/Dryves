@@ -23,7 +23,6 @@
             mapTypeControl: false
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-        document.getElementById('distance').innerHTML += response.routes[0].legs[0].distance.value / 1000 + " km";
         directionsDisplay.setMap(map);
     }
     function calcRoute() {
