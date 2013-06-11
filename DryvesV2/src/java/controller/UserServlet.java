@@ -182,6 +182,10 @@ public class UserServlet extends HttpServlet {
         String userPath = request.getServletPath();
         // if searchRide action is called
         HttpSession session = request.getSession();
+        
+        //get alias of user and store in session
+        String alias = request.getUserPrincipal().getName();
+        session.setAttribute("alias", alias);
 
         //nieuw
         Ride selectedRide;
@@ -189,7 +193,6 @@ public class UserServlet extends HttpServlet {
         if (userPath.equals("/rideDetails")) {
 
             int requestRide = Integer.parseInt(request.getParameter("requestRide"));
-            String alias = request.getUserPrincipal().getName();
             int requestDryver = dryverFacade.findByAlias(alias).getIdMember();
 
 
@@ -222,7 +225,6 @@ public class UserServlet extends HttpServlet {
                 tempDate = "datum";
             }
 
-            String alias = request.getUserPrincipal().getName();
             int dryverId = dryverFacade.findByAlias(alias).getIdMember();
             Dryver dryver = dryverFacade.find(dryverId);
             List<Car> carList = dryver.getCarList();
@@ -265,7 +267,6 @@ public class UserServlet extends HttpServlet {
             //price
             String price = request.getParameter("create_price");
 
-            String alias = request.getUserPrincipal().getName();
             int dryverId = dryverFacade.findByAlias(alias).getIdMember();
             Dryver dryver = dryverFacade.find(dryverId);
 
