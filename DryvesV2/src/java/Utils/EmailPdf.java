@@ -165,8 +165,7 @@ public class EmailPdf {
 
         Paragraph paragraph2 = new Paragraph();
         paragraph2.add(new Chunk("Rit id: " + getRitId() + "\n"
-                + "Datum: " + getDatum() + "\n"
-                + "Prijs: " + getPrijs() + "\n\n"
+                + "Prijs: €" + getPrijs() + "\n\n"
                 + "De vermelde prijs a.u.b. overmaken op rekeningnummer 11.22.33.44"));
         document.add(paragraph2);
 

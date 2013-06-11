@@ -5,9 +5,11 @@
  */
 package controller;
 
+import Utils.EmailPdf;
 import entity.Negotiation;
 import entity.Ride;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -127,6 +129,14 @@ public class SearchRideServlet extends HttpServlet {
                 Negotiation negotiation = negotiationFacade.findByIdMemberAndIdRide(confirmDryver, confirmRide);
                 negotiation.setAcceptedDriver(1);
                 negotiationFacade.edit(negotiation);
+                
+                // after accept from driver, email pdf to passenger
+                EmailPdf emailer = new EmailPdf();
+                emailer.setDatum(new Date().toString());
+                emailer.setPrijs(selectedRide.getAskingPrice());
+                emailer.setRitId(confirmRide);
+                emailer.setRecipient(negotiation.getDryver().getEmail());
+                emailer.email();
             }
         }
 
