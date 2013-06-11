@@ -98,17 +98,6 @@
             </form>
 
 
-
-            <button onclick="location.href = '#'">Meld aan</button> <button onclick="location.href = '#'">Stuur Bericht</button> <button onclick="location.href = '#'">Friend Request</button><br>
-            Passagiers van deze rit: <br>
-            <c:forEach var="negotiation" items="${selectedRide.negotiationList}">
-                <c:if test="${negotiation.acceptedDriver == 1 && negotiation.acceptedPassenger == 1}">
-                    Confirmed: ${negotiation.dryver.alias}<br>
-                </c:if>
-                <c:if test="${negotiation.acceptedDriver != 1 || negotiation.acceptedPassenger != 1}">
-                    Pending: ${negotiation.dryver.alias}<br>
-                </c:if>
-            </c:forEach>
         </div>
     </div>
 
@@ -116,4 +105,43 @@
         <div id="map_canvas" style="width:100%; height:100%"></div>
     </div>
 
+                <div id="sub_menu">
+                    <div class="block_triple_half blue">		
+                        <h2 style="color: white">Passagiers</h2>
+                    </div>
+                </div> 
+                <div id="sub_menu">
+                    <div class="block_triple_half blue">		
+
+                    </div>
+                </div> 
+                
+                
+            <c:forEach var="negotiation" items="${selectedRide.negotiationList}" varStatus="loop"> 
+                <li class="result block_triple white">
+                    <div>
+                        <img class="avatar" src="ava/avatar${negotiation.dryver.idMember}.jpg" />
+                        <a href="#" class="avatar_label">${negotiation.dryver.alias}</a>
+                    </div>
+
+                    <c:if test="${negotiation.acceptedDriver == 0}">                
+                        <br>
+                        <br>
+                        <h1 style="color: #66ccff"><span>wachtend op goedkeuring</span></h1>
+                    </c:if>
+
+                    <c:if test="${negotiation.acceptedDriver == 1}">                               
+                        <br>
+                        <br>
+                        <h1 style="color: #66ccff"><span>geaccepteerd</span></h1>
+                    </c:if>
+
+
+                </li>
+            </c:forEach>
+
+        </ul>
+    </div>
+
+                
 </div>
