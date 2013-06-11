@@ -38,30 +38,42 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //check if a type of admin statistic has been requested
+        //normally these type of requests stem from AJAX calls coming from the clientside
         if (request.getParameterMap().containsKey("type")) {
 
             String type = request.getParameter("type");
             String json;
 
             if (!(type == null)) {
+                //the 'type' from the request determines which statiscal query is call in the getStats method from adminFacade
+                //The methods returns a List of 'Object' arrays. Each object containing a 'key' and a 'value' object.
+                //Gson converts the returned List to JSON. 
                 json = new Gson().toJson(adminFacade.getStats(type));
-            } else {
+            }            
+            //if type is empty return an empty json string.
+            else {
                 json = "";
             }
 
+            //return json to client
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             Writer writer = null;
             try {
                 writer = response.getWriter();
                 writer.write(json);
-            } finally {
+            }
+            finally {
                 try {
                     writer.close();
-                } catch (IOException ex) {
+                }
+                catch (IOException ex) {
                 }
             }
-        } else {
+        }
+        //if no 'type' parameter is present return the full jsp to the client
+        else {
             // use RequestDispatcher to forward request internally
             String url = "/WEB-INF/admin/adminpanel.jsp";
             request.getRequestDispatcher(url).forward(request, response);
@@ -89,6 +101,6 @@ public class AdminServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "AdminServlet: manages several administrator tools for the Dryves application";
     }
 }

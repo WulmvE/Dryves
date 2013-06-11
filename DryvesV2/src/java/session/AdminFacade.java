@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
-import Utils.Stat;
 import entity.Admin;
-import java.util.AbstractList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +9,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author hctung
+ * @author patrick
  */
 @Stateless
 public class AdminFacade extends AbstractFacade<Admin> {
@@ -31,13 +24,18 @@ public class AdminFacade extends AbstractFacade<Admin> {
 
     public AdminFacade() {
         super(Admin.class);
-    }
-
+    }    
+    
+    /**
+     * Executes different type of statistical SQL Queries, based upon which type is requested
+     * @param type
+     * @return List<Object[]> 
+     */
     public List<Object[]> getStats(String type) {
 
         String query = "";
 
-
+        //Several SQL queries. 'type' determines which one is chosen
         if (type.equals("mostCreated")) {
 
             query = "SELECT M.alias, COUNT(*)AS aantal_ritten\n"
@@ -70,9 +68,9 @@ public class AdminFacade extends AbstractFacade<Admin> {
 
         }
         
+        //Entity manager executes the chosen query. Result are stored in a List and returned
         Query q = em.createNativeQuery(query);
         List<Object[]> stats = q.getResultList();
-
         return stats;
     }
 }

@@ -9,7 +9,6 @@ import entity.Dryver;
 import entity.Negotiation;
 import entity.Ride;
 import java.io.IOException;
-import java.lang.Exception;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -79,38 +78,18 @@ public class UserServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        userPath = request.getServletPath();
-        userPath = "index.jsp";
-        try {
-            request.getRequestDispatcher(userPath).forward(request, response);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    /**
-     * Handles the HTTP
-     * <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String userPath = request.getServletPath();
         HttpSession session = request.getSession();
-//                  ALIAS IS j_username IN HET INLOGSCHERM
+        // ALIAS IS value van j_username form field IN HET INLOGSCHERM
         String alias = request.getUserPrincipal().getName();
         session.setAttribute("alias", alias);
-        
+
         int idMember = dryverFacade.findByAlias(alias).getIdMember();
-        request.setAttribute("idMember", idMember);
+        session.setAttribute("idMember", idMember);
 
         String referer = request.getHeader("Referer");
         if (referer == null) {
@@ -121,13 +100,12 @@ public class UserServlet extends HttpServlet {
 
         request.setAttribute("en", terug);
 
-        request.setAttribute("mijnreferer", referer);      
+        request.setAttribute("mijnreferer", referer);
         Ride selectedRide;
 
         if (userPath.equals("/rideDetails")) {
 
             String idRide = request.getQueryString();
-
 
             if (idRide != null) {
 
@@ -136,15 +114,8 @@ public class UserServlet extends HttpServlet {
 
                 // place selected category in session scope
                 session.setAttribute("selectedRide", selectedRide);
-
             }
-
-
-
-
         }
-
-
 
         if (userPath.equals("/myDryves")) {
 
@@ -159,8 +130,6 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("profileDryver", dryver);
         }
 
-
-
         if (userPath.equals("/changeProfile")) {
             String loggedInUser = request.getUserPrincipal().getName();
             int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
@@ -171,22 +140,18 @@ public class UserServlet extends HttpServlet {
             Car carProfileDryver = carList.iterator().next();
 
             request.setAttribute("carProfileDryver", carProfileDryver);
-
         }
-
-
 
         if (userPath.equals("/logout")) {
             //HttpSession session = request.getSession();
             alias = "";
 
-
-
             session.invalidate();   // terminate session
             try {
                 request.setAttribute("alias", alias);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
@@ -195,7 +160,8 @@ public class UserServlet extends HttpServlet {
         String url = "/WEB-INF/view" + userPath + ".jsp";
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -233,20 +199,12 @@ public class UserServlet extends HttpServlet {
 
             if (request.getParameter("requestNegotiation").equals("1")) {
 
-                System.out.println("vincent");
-                System.out.println("dryver negotiation" + requestDryver);
-                System.out.println("ride negotiation" + requestRide);
-
                 Negotiation negotiation = new Negotiation(requestRide, requestDryver);
                 negotiation.setAcceptedDriver(0);
                 negotiation.setAcceptedPassenger(1);
                 negotiationFacade.create(negotiation);
             }
         }
-
-        //nieuw
-
-
 
         // if createRide action is called
         if (userPath.equals("/createRide")) {
@@ -264,12 +222,9 @@ public class UserServlet extends HttpServlet {
                 tempDate = "datum";
             }
 
-
             String alias = request.getUserPrincipal().getName();
             int dryverId = dryverFacade.findByAlias(alias).getIdMember();
             Dryver dryver = dryverFacade.find(dryverId);
-
-
             List<Car> carList = dryver.getCarList();
             String tempCar = carList.get(0).getBrand();
             request.setAttribute("create_start", tempStartLocation);
@@ -299,7 +254,8 @@ public class UserServlet extends HttpServlet {
             Date dateObj = new Date();
             try {
                 dateObj = df.parse(date);
-            } catch (ParseException ex) {
+            }
+            catch (ParseException ex) {
                 Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             //car
@@ -313,22 +269,19 @@ public class UserServlet extends HttpServlet {
             int dryverId = dryverFacade.findByAlias(alias).getIdMember();
             Dryver dryver = dryverFacade.find(dryverId);
 
-
-
             List<Car> carList = dryver.getCarList();
             Car car = carList.get(0);
             double distance = 60;
 
             rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
         }
-        
-        
 
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
