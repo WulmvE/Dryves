@@ -4,6 +4,44 @@
     Author     : Vincent
 --%>
 
+<script type="text/javascript">
+
+    function initStats() {
+        $element = $('selectstat').first();
+        $('.selectstats li:first').trigger('click');
+    }
+
+    function getCarData(lp) {
+        
+        if(lp.length<8){
+            return;
+        }
+        
+        $.getJSON("getCar?lp=" + lp, function(data) {
+
+            if (typeof data.d.results[0] !== undefined) {
+                br = data.d.results[0].Merk;
+                tp = data.d.results[0].Handelsbenaming;
+                zp = data.d.results[0].Aantalzitplaatsen;
+
+                $(input_carBrand).val(br + " " + tp).removeAttr('disabled');
+                $(input_numSeats).val(zp).removeAttr('disabled');
+
+            }
+        });
+    }
+
+    $(function() {
+        $('#input_licensePlate').bindWithDelay("keyup", function(e) {
+            getCarData($(e.target).val());
+        }, 100);
+        
+//        $('#input_licensePlate').change(function(e) {
+//            getCarData($(e.target).val());
+//        });
+    });
+
+</script>
 
 <div id="col_content">
     <form name="quick_create_form" method="post" action="registerConfirmed">
@@ -15,7 +53,7 @@
         </div>
 
         <div id="quick_create" class="block_six white">		
-            <h2>naam</h2><br/><br/><br/><br/>
+            <h2>naam</h2>
 
             <input class="input_firstName" name="firstName" type="text"  placeholder= "voornaam"/><br/>
             <input class="input_adjective"  name="adjective" type="text"  placeholder="tussenvoegsel" /><br/>
@@ -23,17 +61,17 @@
         </div>
 
         <div id="quick_create" class="block_six white">		
-            <h2>auto</h2><br/><br/><br/><br/>
+            <h2>auto</h2>
+            <input id="input_licensePlate" name="licensePlate" name="carPlate" type="text"  placeholder= "kenteken"/><br/>
+            <input id="input_carBrand" name="carBrand" type="text"  placeholder= "autotype"  disabled/><br/>
+            <input id="input_numSeats"  name="numSeats" type="text"  placeholder="max. aantal meerijders"  disabled/><br/>
 
-            <input class="input_carBrand" name="carBrand" type="text"  placeholder= "autotype"/><br/>
-            <input class="input_numSeats"  name="numSeats" type="text"  placeholder="max. aantal meerijders" /><br/>
-            
         </div>   
         <div id="quick_create" class="block_six white">		
-            <h2>woonplaats</h2><br/><br/><br/><br/>
+            <h2>woonplaats</h2>
 
             <input class="input_city" name="city" type="text"  placeholder= "city"/><br/>
- 
+
             <a href="#" onclick="document.quick_create_form.submit()" class="button" id="button_create"><img src="img/arrow_right.png" alt="create button" /></a>
         </div>  
 

@@ -1,5 +1,6 @@
 package controller;
 
+import Utils.RdwTool;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.Writer;
@@ -17,7 +18,7 @@ import session.AdminFacade;
  *
  * @author Patrick
  */
-@WebServlet(name = "Admin", urlPatterns = {"/adminpanel"})
+@WebServlet(name = "Admin", urlPatterns = {"/adminpanel",})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"Admin"}))
 public class AdminServlet extends HttpServlet {
@@ -38,16 +39,16 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //check if a type of admin statistic has been requested
-        //normally these type of requests stem from AJAX calls coming from the clientside
+        //check if a type of admin statistic has been requested.
+        //normally these type of requests stem from AJAX calls coming from the clientside.
         if (request.getParameterMap().containsKey("type")) {
 
             String type = request.getParameter("type");
             String json;
 
             if (!(type == null)) {
-                //the 'type' from the request determines which statiscal query is call in the getStats method from adminFacade
-                //The methods returns a List of 'Object' arrays. Each object containing a 'key' and a 'value' object.
+                //the 'type' from the request determines which statiscal query is called in the getStats method from adminFacade.
+                //The method returns a List of 'Object' arrays. Each object containing a 'key' and a 'value' object.
                 //Gson converts the returned List to JSON. 
                 json = new Gson().toJson(adminFacade.getStats(type));
             }            

@@ -5,8 +5,10 @@
  */
 package controller;
 
+import Utils.RdwTool;
 import entity.Dryver;
 import java.io.IOException;
+import java.io.Writer;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,7 @@ import session.DryverFacade;
  */
 @WebServlet(name = "RegisterServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/register", "/registerConfirmed", "/contact"})
+        urlPatterns = {"/register", "/registerConfirmed", "/contact", "/getCar"})
 public class RegisterServlet extends HttpServlet {
 
     @EJB
@@ -52,6 +54,26 @@ public class RegisterServlet extends HttpServlet {
         System.out.println("GET");
         String userPath = request.getServletPath();
         if (userPath.equals("/register")) {
+        }
+        
+        
+        else if (userPath.equals("/getCar")){
+        
+        //return json to client
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            Writer writer = null;
+            try {
+                writer = response.getWriter();
+                writer.write(RdwTool.getCarJSON((String)request.getParameter("lp")));
+            }
+            finally {
+                try {
+                    writer.close();
+                }
+                catch (IOException ex) {
+                }
+            }
         }
 
         // use RequestDispatcher to forward request internally

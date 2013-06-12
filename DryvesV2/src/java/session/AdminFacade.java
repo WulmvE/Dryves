@@ -36,14 +36,14 @@ public class AdminFacade extends AbstractFacade<Admin> {
         String query = "";
 
         //Several SQL queries. 'type' determines which one is chosen
-        if (type.equals("mostCreated")) {
+        if (type.equals("topCreated")) {
 
             query = "SELECT M.alias, COUNT(*)AS aantal_ritten\n"
                     + "FROM ride R, member M\n"
                     + "WHERE R.idMember = M.idMember\n"
                     + "GROUP BY R.idmember ORDER BY aantal_ritten desc limit 5";
         }
-        else if (type.equals("mostDriven")) {
+        else if (type.equals("topDriven")) {
 
             query = "SELECT M.alias, COUNT(*) AS aantal_ritten\n"
                     + "FROM negotiation N, member M\n"
@@ -54,13 +54,13 @@ public class AdminFacade extends AbstractFacade<Admin> {
                     + "ORDER BY aantal_ritten desc limit 5";
 
         }
-        else if (type.equals("mostDestination")) {
+        else if (type.equals("topDestination")) {
             query = "SELECT R.endLocation, COUNT(*) AS aantal_ritten\n"
                     + "FROM ride R\n"
                     + "GROUP BY R.endLocation\n"
                     + "ORDER BY aantal_ritten desc limit 5";
         }
-        else if (type.equals("mostDeparture")) {
+        else if (type.equals("topDeparture")) {
             query = "SELECT R.startLocation, COUNT(*) AS aantal_ritten\n"
                     + "FROM ride R\n"
                     + "GROUP BY R.startLocation\n"

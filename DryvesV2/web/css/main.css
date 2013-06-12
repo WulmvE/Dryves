@@ -602,8 +602,9 @@ h2{
     float:left;
     margin:10px 0px 20px 18px;
     padding:0px;
+    width:100%;
+    text-align: left;
 }
-
 p.c{margin: 0px 10px 0px 20px}
 
 h2.blauw{margin: 10px 0px 0px 18px}
@@ -651,8 +652,6 @@ a{
 
 
 }
-
-
 
 .pac-container:after{
     display:none;

@@ -12,6 +12,7 @@
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/jquery.ui.datepicker-nl.js"></script>
+        <script type="text/javascript" src="js/bindWithDelay.js"></script>
 
         <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&language=nl"></script>
         <script type="text/javascript" src="js/jquery.geocomplete.min.js"></script>
