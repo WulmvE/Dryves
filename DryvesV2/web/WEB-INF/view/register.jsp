@@ -10,25 +10,25 @@
         $element = $('selectstat').first();
         $('.selectstats li:first').trigger('click');
     }
-    
-    function capitalize(string){
-        
+
+    function capitalize(string) {
+
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
 
     function getCarData(lp) {
-        
+
         //as long there are less than 8 charaters in the associated text input, don't call getJSON.
-        if(lp.length<8){
+        if (lp.length < 8) {
             return;
         }
-        
+
         $.getJSON("getCar?lp=" + lp, function(data) {
 
             if (typeof data.d.results[0] !== undefined) {
                 br = capitalize(data.d.results[0].Merk);
                 tp = capitalize(data.d.results[0].Handelsbenaming);
-                zp = parseInt(data.d.results[0].Aantalzitplaatsen)-1;
+                zp = parseInt(data.d.results[0].Aantalzitplaatsen) - 1;
 
                 $(input_carBrand).val(br + " " + tp).removeAttr('disabled');
                 $(input_numSeats).val(zp).removeAttr('disabled');
@@ -37,10 +37,10 @@
     }
 
     $(function() {
-        $('#input_licensePlate').bindWithDelay("keyup", function(e) {
+        $('#input_licensePlate').on("keyup", function(e) {
             getCarData($(e.target).val());
-        }, 100);
-        
+        });
+
 //        $('#input_licensePlate').change(function(e) {
 //            getCarData($(e.target).val());
 //        });
@@ -73,11 +73,20 @@
 
         </div>   
         <div id="quick_create" class="block_six white">		
-            <h2>woonplaats</h2>
+            <h2>overige</h2>
 
-            <input class="input_city" name="city" type="text"  placeholder= "city"/><br/>
-
-            <a href="#" onclick="document.quick_create_form.submit()" class="button" id="button_create"><img src="img/arrow_right.png" alt="create button" /></a>
+            <input class="input_city" name="city" type="text"  placeholder= "woonplaats"/><br/>
+            <input class="input_city" name="birthDate" type="text"  placeholder= "geboortedatum"/><br/>
+            
+            <select  name="gender">
+                <option value="" disabled selected>geslacht</option>
+                <option value="m">man</option>
+                <option value="v">vrouw</option>
+            </select>
+            
+            <span class="local_menu">               
+                <a href="#" onclick="document.quick_create_form.submit()" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
+            </span>
         </div>  
 
     </form>

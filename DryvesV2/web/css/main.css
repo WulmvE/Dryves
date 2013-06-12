@@ -610,7 +610,7 @@ p.c{margin: 0px 10px 0px 20px}
 h2.blauw{margin: 10px 0px 0px 18px}
 
 
-input {
+input, select {
     width:214px;
     font-family:arial;
     font-size:22px;
@@ -620,6 +620,10 @@ input {
     border-width:1px;
     padding: 7px 8px;
     margin: 0px 0px 18px 0px;
+}
+
+select{
+    width:234px;
 }
 
 img{
