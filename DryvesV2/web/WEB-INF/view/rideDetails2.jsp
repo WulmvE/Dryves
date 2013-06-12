@@ -131,6 +131,7 @@
                                    value="1">  
                             <input type="submit"
                                    name="submit"
+                                   style="background-color: #62b5dc; color: white; font-family: segoe; border: none;"
                                    value="accepteren">
                             
                         </form>
