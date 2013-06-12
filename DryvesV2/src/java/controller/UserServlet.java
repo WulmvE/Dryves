@@ -312,17 +312,13 @@ public class UserServlet extends HttpServlet {
             dryver.setCity(city);
 
             dryverFacade.edit(dryver);
+           
+            Car car = carFacade.find(idMember);
+            
+            car.setBrand(carBrand);
+            car.setNumSeats(numSeats);
 
-            
-            //TODO: hij gaat hier nu nog in de fout?
-            
-//            List<Car> carList = dryver.getCarList();
-//            Car car = carList.get(idMember);
-//
-//            car.setBrand(carBrand);
-//            car.setNumSeats(numSeats);
-//
-//            carFacade.edit(car);
+            carFacade.edit(car);
 
         }
 
