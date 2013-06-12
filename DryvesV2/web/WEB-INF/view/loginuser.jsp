@@ -9,8 +9,7 @@
 
 <div id="col_content">
     <div class="block_six white">		
-        <h2 class="blauw">login</h2></br>
-        <p> </p></br>
+        <h2>login</h2>
 
         <form  name="inlog" action="j_security_check" method=post><br/>
             <input type="text" name="j_username" placeholder="alias"><br/>
@@ -27,8 +26,7 @@
 
     <div class="block_six white">		
 
-        <h2 class="blauw">nog geen alias?</h2></br>
-        <p> </p></br>
+        <h2>nog geen alias?</h2>
 
             <form  name="no_account" action="register" method=post>
             <input type="text" name="j_username" placeholder="username"><br/>

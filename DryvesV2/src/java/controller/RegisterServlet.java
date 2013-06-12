@@ -56,7 +56,6 @@ public class RegisterServlet extends HttpServlet {
         if (userPath.equals("/register")) {
         }
         
-        
         else if (userPath.equals("/getCar")){
         
         //return json to client
@@ -74,6 +73,7 @@ public class RegisterServlet extends HttpServlet {
                 catch (IOException ex) {
                 }
             }
+            return;
         }
 
         // use RequestDispatcher to forward request internally
@@ -118,8 +118,6 @@ public class RegisterServlet extends HttpServlet {
             String email = request.getParameter("email");
             String city = request.getParameter("city");
             String password = request.getParameter("password");
-            
-            
 
             int dryverId = DryverFacade.createDryver(gebruiker, city, email, firstName, adjective, lastName, password, "m", "06-15-1983");
             
@@ -127,12 +125,8 @@ public class RegisterServlet extends HttpServlet {
             int numSeats = Integer.parseInt(request.getParameter("numSeats"));
             Dryver dryver = DryverFacade.find(dryverId);
             
-            
             int carId = CarFacade.createCar(brand, numSeats, dryver);
         }
-
-
-
 
         String url = "/WEB-INF/view" + userPath + ".jsp";
 

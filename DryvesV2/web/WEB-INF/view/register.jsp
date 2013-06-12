@@ -10,9 +10,15 @@
         $element = $('selectstat').first();
         $('.selectstats li:first').trigger('click');
     }
+    
+    function capitalize(string){
+        
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    }
 
     function getCarData(lp) {
         
+        //as long there are less than 8 charaters in the associated text input, don't call getJSON.
         if(lp.length<8){
             return;
         }
@@ -20,13 +26,12 @@
         $.getJSON("getCar?lp=" + lp, function(data) {
 
             if (typeof data.d.results[0] !== undefined) {
-                br = data.d.results[0].Merk;
-                tp = data.d.results[0].Handelsbenaming;
-                zp = data.d.results[0].Aantalzitplaatsen;
+                br = capitalize(data.d.results[0].Merk);
+                tp = capitalize(data.d.results[0].Handelsbenaming);
+                zp = parseInt(data.d.results[0].Aantalzitplaatsen)-1;
 
                 $(input_carBrand).val(br + " " + tp).removeAttr('disabled');
                 $(input_numSeats).val(zp).removeAttr('disabled');
-
             }
         });
     }
