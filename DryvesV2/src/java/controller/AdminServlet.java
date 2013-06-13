@@ -72,6 +72,7 @@ public class AdminServlet extends HttpServlet {
                 catch (IOException ex) {
                 }
             }
+           
         }
         //if no 'type' parameter is present return the full jsp to the client
         else {

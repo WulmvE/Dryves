@@ -93,11 +93,11 @@
                 <div class="block_six white stats_cont">		
                     <h2>Top 5</h2>
                     <ul class="selectstats">
-                        <li id="starter" class="selectstat" onclick="getStats('mostCreated', this);" ><span>Lid: Meeste ritten aangeboden</span></li>
-                        <li class="selectstat" onclick="getStats('mostDriven', this);"><span>Lid: Meeste ritten meegereden</span></li>
-                        <li class="selectstat" onclick="getStats('highestGrossing', this);"><span>Lid: Hoogste opbrengst</span></li>
-                        <li class="selectstat" onclick="getStats('mostDeparture', this);"><span>Populairste vertrekplaatsen</span></li>
-                        <li class="selectstat" onclick="getStats('mostDestination', this);"><span>Populairste aankomstplaatsen</span></li>
+                        <li id="starter" class="selectstat" onclick="getStats('topCreated', this);" ><span>Lid: Meeste ritten aangeboden</span></li>
+                        <li class="selectstat" onclick="getStats('topDriven', this);"><span>Lid: Meeste ritten meegereden</span></li>
+                        <li class="selectstat" onclick="getStats('topGrossing', this);"><span>Lid: Hoogste opbrengst</span></li>
+                        <li class="selectstat" onclick="getStats('topDeparture', this);"><span>Populairste vertrekplaatsen</span></li>
+                        <li class="selectstat" onclick="getStats('topDestination', this);"><span>Populairste aankomstplaatsen</span></li>
                     </ul>
 
                     <div class="local_menu">

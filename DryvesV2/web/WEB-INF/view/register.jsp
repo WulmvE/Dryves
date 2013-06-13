@@ -27,11 +27,18 @@
 
             if (typeof data.d.results[0] !== undefined) {
                 br = capitalize(data.d.results[0].Merk);
-                tp = capitalize(data.d.results[0].Handelsbenaming);
-                zp = parseInt(data.d.results[0].Aantalzitplaatsen) - 1;
+                tp = capitalize(data.d.results[0].Handelsbenaming);            
+                zp = data.d.results[0].Aantalzitplaatsen ;
+                
+                if(zp>=1){
+                    zp--;
+                }
 
                 $(input_carBrand).val(br + " " + tp).removeAttr('disabled');
                 $(input_numSeats).val(zp).removeAttr('disabled');
+            }
+            else{
+                alert("kenteken niet gevonden");
             }
         });
     }
@@ -67,7 +74,7 @@
 
         <div id="quick_create" class="block_six white">		
             <h2>auto</h2>
-            <input id="input_licensePlate" name="licensePlate" name="carPlate" type="text"  placeholder= "kenteken"/><br/>
+            <input id="input_licensePlate" name="licensePlate" name="carPlate" type="text"  placeholder= "kenteken (xx-xx-xx)"/><br/>
             <input id="input_carBrand" name="carBrand" type="text"  placeholder= "autotype"  disabled/><br/>
             <input id="input_numSeats"  name="numSeats" type="text"  placeholder="max. aantal meerijders"  disabled/><br/>
 
