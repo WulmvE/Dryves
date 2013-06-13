@@ -63,7 +63,7 @@ $(".form_msg_error").addClass("hidden");
         <div id="quick_search" class="block_six white">		
             <h2>accountgegevens</h2>
             <input class="input_alias" name="alias" type="text"  value="${tempAlias}" placeholder="alias"/><br/>
-            <input class="input_password" name="password" type="text"  placeholder= "wachtwoord"/><br/>
+            <input class="input_password" name="password" type="password"  placeholder= "wachtwoord"/><br/>
             <input class="input_email"  name="email" type="text"  placeholder="emailadres" /><br/>
         </div>
 

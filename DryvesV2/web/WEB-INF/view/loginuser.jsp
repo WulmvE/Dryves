@@ -9,7 +9,7 @@
 
 <div id="col_content">
     <div class="block_six white">		
-        <h2>login</h2>
+        <h2>ik wil inloggen</h2>
 
         <form  name="inlog" action="j_security_check" method=post><br/>
             <input type="text" name="j_username" placeholder="alias"><br/>
@@ -26,10 +26,10 @@
 
     <div class="block_six white">		
 
-        <h2>nog geen alias?</h2>
+        <h2>ik wil lid worden</h2>
 
             <form  name="no_account" action="register" method=post>
-            <input type="text" name="j_username" placeholder="username"><br/>
+            <input type="text" name="j_username" placeholder="kies je alias"><br/>
             <span class="local_menu">               
                 <a href="#" onclick="document.no_account.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
             </span>

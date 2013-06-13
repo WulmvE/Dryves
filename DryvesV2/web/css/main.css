@@ -579,6 +579,24 @@ hr{
     border-color: #62b5dc;
 }
 
+/*********************** form error messages ************************/
+.form_msg_error{
+  
+    display: inline-block;
+    font-size:16px;
+    
+    opacity: 1;
+    
+}
+
+.form_msg_error.hidden{
+    opacity: 0.1;
+}
+
+.form_msg_error .form_msg_error.hidden{
+    transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+} 
 /*********************** other ************************/
 
 /* subscript 2 from CO2 in promo text */
