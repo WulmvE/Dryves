@@ -3,7 +3,7 @@
     Created on : 7-jun-2013, 11:14:56
     Author     : Vincent
 --%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript">
 
     function initStats() {
@@ -17,7 +17,8 @@
     }
 
     function getCarData(lp) {
-
+        
+$(".form_msg_error").addClass("hidden");
         //as long there are less than 8 charaters in the associated text input, don't call getJSON.
         if (lp.length < 8) {
             return;
@@ -25,7 +26,7 @@
 
         $.getJSON("getCar?lp=" + lp, function(data) {
 
-            if (typeof data.d.results[0] !== undefined) {
+            if (data.d.results.length > 0) {
                 br = capitalize(data.d.results[0].Merk);
                 tp = capitalize(data.d.results[0].Handelsbenaming);            
                 zp = data.d.results[0].Aantalzitplaatsen ;
@@ -37,8 +38,10 @@
                 $(input_carBrand).val(br + " " + tp).removeAttr('disabled');
                 $(input_numSeats).val(zp).removeAttr('disabled');
             }
+            
+            //if there are no results show error message.
             else{
-                alert("kenteken niet gevonden");
+               
             }
         });
     }
@@ -74,7 +77,8 @@
 
         <div id="quick_create" class="block_six white">		
             <h2>auto</h2>
-            <input id="input_licensePlate" name="licensePlate" name="carPlate" type="text"  placeholder= "kenteken (xx-xx-xx)"/><br/>
+            
+            <input id="input_licensePlate" name="licensePlate" name="carPlate" type="text"  placeholder= "kenteken (xx-xx-xx)"/>
             <input id="input_carBrand" name="carBrand" type="text"  placeholder= "autotype"  disabled/><br/>
             <input id="input_numSeats"  name="numSeats" type="text"  placeholder="max. aantal meerijders"  disabled/><br/>
 
@@ -95,7 +99,5 @@
                 <a href="#" onclick="document.quick_create_form.submit()" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
             </span>
         </div>  
-
     </form>
-
 </div>
