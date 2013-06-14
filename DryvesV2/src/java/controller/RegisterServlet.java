@@ -31,7 +31,6 @@ public class RegisterServlet extends HttpServlet {
     private DryverFacade DryverFacade;
     @EJB
     private CarFacade CarFacade;
-    
     private String tempAlias;
 
     @Override
@@ -51,20 +50,17 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("GET");
         String userPath = request.getServletPath();
-        if (userPath.equals("/register")) {
-        }
-        
-        else if (userPath.equals("/getCar")){
-        
-        //return json to client
+
+        if (userPath.equals("/getCar")) {
+
+            //return json to client
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             Writer writer = null;
             try {
                 writer = response.getWriter();
-                writer.write(RdwTool.getCarJSON((String)request.getParameter("lp")));
+                writer.write(RdwTool.getCarJSON((String) request.getParameter("lp")));
             }
             finally {
                 try {
@@ -81,7 +77,8 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -100,39 +97,38 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         String userPath = request.getServletPath();
 
-        if (userPath.equals("/register")) {
-            tempAlias = request.getParameter("j_username");
-            request.setAttribute("tempAlias", tempAlias);
-        }
-
         if (userPath.equals("/registerConfirmed")) {
-            
-           String gebruiker = request.getParameter("alias");
-            if (gebruiker.equals("")) {
-                gebruiker = tempAlias;
-            }
 
+            String alias = request.getParameter("alias");
             String firstName = request.getParameter("firstName");
             String adjective = request.getParameter("adjective");
             String lastName = request.getParameter("lastName");
             String email = request.getParameter("email");
             String city = request.getParameter("city");
             String password = request.getParameter("password");
+            String gender = request.getParameter("gender");
+            String birthDate = request.getParameter("birthDate");
 
-            int dryverId = DryverFacade.createDryver(gebruiker, city, email, firstName, adjective, lastName, password, "m", "06-15-1983");
-            
+            int dryverId = DryverFacade.createDryver(alias, city, email, firstName, adjective, lastName, password, gender, "12-06-1990");
+
             String brand = request.getParameter("carBrand");
             int numSeats = Integer.parseInt(request.getParameter("numSeats"));
             Dryver dryver = DryverFacade.find(dryverId);
-            
+
             int carId = CarFacade.createCar(brand, numSeats, dryver);
+
+            request.login(alias, password);
+
+            response.sendRedirect("/DryvesV2/myDryves");
+            return;
         }
 
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
         }
     }
