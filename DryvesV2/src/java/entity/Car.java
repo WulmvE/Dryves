@@ -9,6 +9,7 @@ package entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,6 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Car.findByIdCar", query = "SELECT c FROM Car c WHERE c.idCar = :idCar"),
     @NamedQuery(name = "Car.findByBrand", query = "SELECT c FROM Car c WHERE c.brand = :brand"),
     @NamedQuery(name = "Car.findByNumSeats", query = "SELECT c FROM Car c WHERE c.numSeats = :numSeats")})
+@Cacheable(false)
 public class Car implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
