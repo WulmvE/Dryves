@@ -29,7 +29,7 @@
         <h2>ik wil lid worden</h2>
 
             <form  name="no_account" action="register" method=post>
-            <input type="text" name="j_username" placeholder="kies je alias"><br/>
+            <input type="text" name="alias" placeholder="kies je alias"><br/>
             <span class="local_menu">               
                 <a href="#" onclick="document.no_account.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
             </span>
