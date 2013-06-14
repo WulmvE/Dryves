@@ -37,7 +37,7 @@ public class DryverFacade extends AbstractFacade<Dryver> {
     public int createDryver(String alias, String city, String email, String firstName, String adjective, String lastName, String password, String gender, String birthDate) {
 
         Dryver dryver = new Dryver();
-        DateFormat format = new SimpleDateFormat("MM-DD-yyyy");
+        DateFormat format = new SimpleDateFormat("DD-MM-yyyy");
 
         dryver.setAlias(alias);
         dryver.setFirstName(firstName);
