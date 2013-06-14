@@ -9,6 +9,7 @@ import entity.Dryver;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -47,12 +48,11 @@ public class DryverFacade extends AbstractFacade<Dryver> {
         dryver.setCity(city);
         dryver.setPassword(password);
         dryver.setGender(gender);
-        
+
         //parse the birthDate string to an actual date
         try {
             dryver.setBirthDate(format.parse(birthDate));
-        }
-        catch (ParseException ex) {
+        } catch (ParseException ex) {
             Logger.getLogger(DryverFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -66,9 +66,13 @@ public class DryverFacade extends AbstractFacade<Dryver> {
 
     public Dryver findByDryverId(int dryverId) {
         return (Dryver) em.createNamedQuery("Dryver.findByIdMember").setParameter("idMember", dryverId).getSingleResult();
-}
+    }
 
     public Dryver findByAlias(String alias) {
         return (Dryver) em.createNamedQuery("Dryver.findByAlias").setParameter("alias", alias).getSingleResult();
+    }
+
+    public List<Dryver> findByFirstName(String firstName) {
+        return em.createNamedQuery("Dryver.findByFirstName").setParameter("firstName", firstName).getResultList();
     }
 }
