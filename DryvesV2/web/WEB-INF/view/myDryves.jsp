@@ -22,7 +22,7 @@
                     <br>
                     <!--                <span class="text" style="font-weight: bold; color: red;">Welke statistieken moeten hier nog meer komen?</span><br>-->
                     <span>gemiddelde rating:</span><br>
-                    <r:rating_stars rating="${score}"/><br> 
+                    <r:rating_stars rating="${profileDryver.avgRating}"/><br> 
                     <br>
                     <a href="changeProfile" class="avatar_label">wijzig profiel</a>
             </div>

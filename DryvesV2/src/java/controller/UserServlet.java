@@ -133,19 +133,6 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("rides_passenger", rideFacade.findByNegotiationIdMember(dryver));
             request.setAttribute("friends", friendFacade.findByDryver(dryver));
             request.setAttribute("profileDryver", dryver);
-            
-            // bereken gemiddelde rating van dryver
-            List ratinglist = ratingFacade.findByIdMember(dryver);
-            int aantalratings = ratinglist.size();
-            int totaalratings = 0;
-            for (int i = 0; i < aantalratings; i++){
-                Rating rating = (Rating) ratinglist.get(i);
-                totaalratings += rating.getScore();
-            }
-            if (aantalratings != 0){
-                double gemiddeldeRating = totaalratings/aantalratings;
-                request.setAttribute("score", gemiddeldeRating);
-            }
         }
         
         if (userPath.equals("/giveRating")){
@@ -166,6 +153,20 @@ public class UserServlet extends HttpServlet {
             rating.setComment("rating via link");
             rating.setScore(score);
             ratingFacade.create(rating);
+            
+            // bereken het gemiddelde van de aanbieder opnieuw en sla op in DB
+            List ratinglist = ratingFacade.findByIdMember(ratedDryver);
+            int aantalratings = ratinglist.size();
+            int totaalratings = 0;
+            for (int i = 0; i < aantalratings; i++){
+                Rating DryverRating = (Rating) ratinglist.get(i);
+                totaalratings += DryverRating.getScore();
+            }
+            if (aantalratings != 0){
+                double gemiddeldeRating = totaalratings/aantalratings;
+                ratedDryver.setAvgRating(gemiddeldeRating);
+                dryverFacade.edit(ratedDryver);
+            }
             
             // update de negotiation zodat rating maar 1 keer gedaan kan worden per dryver per rit
             Negotiation negotiation = negotiationFacade.findByIdMemberAndIdRide(rater.getIdMember(), ratedRide.getIdRide());
