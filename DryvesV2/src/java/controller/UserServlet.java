@@ -155,7 +155,7 @@ public class UserServlet extends HttpServlet {
             ratingFacade.create(rating);
             
             // bereken het gemiddelde van de aanbieder opnieuw en sla op in DB
-            List ratinglist = ratingFacade.findByIdMember(ratedDryver);
+            List ratinglist = ratingFacade.findByDryver(ratedDryver);
             int aantalratings = ratinglist.size();
             int totaalratings = 0;
             for (int i = 0; i < aantalratings; i++){

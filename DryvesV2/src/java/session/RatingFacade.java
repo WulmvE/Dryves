@@ -27,7 +27,7 @@ public class RatingFacade extends AbstractFacade<Rating> {
         return em;
     }
 
-    public List<Rating> findByIdMember(Dryver dryver){
+    public List<Rating> findByDryver(Dryver dryver){
         return (List<Rating>) em.createNamedQuery("Rating.findByIdMember").setParameter("idMember", dryver).getResultList();
     }
     
