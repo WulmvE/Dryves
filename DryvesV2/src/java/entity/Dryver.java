@@ -46,8 +46,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dryver.findByEmail", query = "SELECT d FROM Dryver d WHERE d.email = :email"),
     @NamedQuery(name = "Dryver.findByFirstName", query = "SELECT d FROM Dryver d WHERE d.firstName = :firstName"),
     @NamedQuery(name = "Dryver.findByLastName", query = "SELECT d FROM Dryver d WHERE d.lastName = :lastName"),
+    @NamedQuery(name = "Dryver.findByFirstNameLastName", query = "SELECT d FROM Dryver d WHERE d.firstName = :firstName AND d.lastName = :lastName"),
+    @NamedQuery(name = "Dryver.findByFirstNameEmail", query = "SELECT d FROM Dryver d WHERE d.firstName = :firstName AND d.email = :email"),
+    @NamedQuery(name = "Dryver.findByLastNameEmail", query = "SELECT d FROM Dryver d WHERE d.lastName = :lastName AND d.email = :email"),
     @NamedQuery(name = "Dryver.findByPassword", query = "SELECT d FROM Dryver d WHERE d.password = :password")})
 public class Dryver implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -360,5 +364,4 @@ public class Dryver implements Serializable {
     public String toString() {
         return "entity.Dryver[ idMember=" + idMember + " ]";
     }
-    
 }

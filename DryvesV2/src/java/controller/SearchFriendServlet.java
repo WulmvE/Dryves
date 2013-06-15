@@ -21,7 +21,7 @@ import session.DryverFacade;
  *
  * @author hctung
  */
-@WebServlet(name = "SearchFriendServlet", urlPatterns = {"/searchFriend","/searchFriendResults"})
+@WebServlet(name = "SearchFriendServlet", urlPatterns = {"/searchFriend", "/searchFriendResults"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"DryvesUser"}))
 public class SearchFriendServlet extends HttpServlet {
@@ -68,7 +68,6 @@ public class SearchFriendServlet extends HttpServlet {
 
 
         if (userPath.equals("/searchFriend")) {
-            //TODO: searchFriend logic
         }
 
 
@@ -115,11 +114,25 @@ public class SearchFriendServlet extends HttpServlet {
 //
 
         if (userPath.equals("/searchFriend")) {
+            if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_last_name") == "") {
+                request.setAttribute("friends", dryverFacade.findByFirstName(request.getParameter("search_friend_first_name")));
+            }
+            if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") == "") {
+                request.setAttribute("friends", dryverFacade.findByLastName(request.getParameter("search_friend_last_name")));
+            }
+            if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_email") != "") {
+                request.setAttribute("friends", dryverFacade.findByEmail(request.getParameter("search_friend_email")));
+            }
+            if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") == "") {
+                request.setAttribute("friends", dryverFacade.findByFirstNameLastName(request.getParameter("search_friend_first_name"), request.getParameter("search_friend_last_name")));
+            }
+            if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_email") != "") {
+                request.setAttribute("friends", dryverFacade.findByFirstNameEmail(request.getParameter("search_friend_first_name"), request.getParameter("search_friend_email")));
+            }
+            if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") != "") {
+                request.setAttribute("friends", dryverFacade.findByLastNameEmail(request.getParameter("search_friend_last_name"), request.getParameter("search_friend_email")));
+            }
 
-                       
-            request.setAttribute("friends", dryverFacade.findByFirstName(request.getParameter("search_friend_first_name")));
-      
-          
         }
 
         String url = "/WEB-INF/view" + userPath + ".jsp";

@@ -18,13 +18,13 @@
                 <img class="avatar" src="ava/avatar${profileDryver.idMember}.jpg" />
             </div>
             <div class="summary">
-                    <span class="text" style="font-weight: bold">${profileDryver.alias}</span><br>              
-                    <br>
-                    <!--                <span class="text" style="font-weight: bold; color: red;">Welke statistieken moeten hier nog meer komen?</span><br>-->
-                    <span>gemiddelde rating:</span><br>
-                    <r:rating_stars rating="${profileDryver.avgRating}"/><br> 
-                    <br>
-                    <a href="changeProfile" class="avatar_label">wijzig profiel</a>
+                <span class="text" style="font-weight: bold">${profileDryver.alias}</span><br>              
+                <br>
+                <!--                <span class="text" style="font-weight: bold; color: red;">Welke statistieken moeten hier nog meer komen?</span><br>-->
+                <span>gemiddelde rating:</span><br>
+                <r:rating_stars rating="${profileDryver.avgRating}"/><br> 
+                <br>
+                <a href="changeProfile" class="avatar_label">wijzig profiel</a>
             </div>
         </div>
     </div>
@@ -32,13 +32,23 @@
 
     <div id="col_content">
         <div id="sub_menu">
-            <div class="block_triple_half blue">		
-                <h2 style="color: white">Mijn vrienden</h2>
+            <div class="block_triple_half blue">
+                <ul>
+                    <li class="menu_icon_half blue" style="width: 380px; font-family: segoe">
+                        <h2 style="color: white">Mijn vrienden</h2>
+                    </li>
+                    <li class="menu_icon_half blue" style="float: end">
+                        <a href="searchFriend"><div class="menu_icon_half icon_messages">&#xf002;
+                                <span class="menu_item_half menu_label_white">Zoeken</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
 
 
-        <div class="block_triple friends" style=" overflow-x: scroll; overflow-y: hidden;">
+        <div class="block_triple friends white" style=" overflow-x: scroll; overflow-y: hidden;">
             <ul>        
 
                 <c:forEach var="friend" items="${friends}">
@@ -149,20 +159,20 @@
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>
                             <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
-                              <c:forEach var="negotiation" items="${ride.negotiationList}" varStatus="loop">
-                                  <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember}">
-                                      <c:if test="${negotiation.ratingdone == false}">
-                                      Geef rating: <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=1'/>">*</a>
-                                      <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=2'/>">**</a>
-                                      <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=3'/>">***</a>
-                                      <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=4'/>">****</a>
-                                      <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=5'/>">*****</a>
-                                      </c:if>
-                                      <c:if test="${negotiation.ratingdone == true}">
-                                          rating al gegeven
-                                      </c:if>
-                                  </c:if>
-                              </c:forEach>
+                                <c:forEach var="negotiation" items="${ride.negotiationList}" varStatus="loop">
+                                    <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember}">
+                                        <c:if test="${negotiation.ratingdone == false}">
+                                        Geef rating: <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=1'/>">*</a>
+                                        <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=2'/>">**</a>
+                                        <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=3'/>">***</a>
+                                        <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=4'/>">****</a>
+                                        <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=5'/>">*****</a>
+                                    </c:if>
+                                    <c:if test="${negotiation.ratingdone == true}">
+                                        rating al gegeven
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
                         </div>
                     </li>
                 </c:forEach>
