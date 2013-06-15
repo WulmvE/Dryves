@@ -7,6 +7,7 @@ package controller;
 import entity.Car;
 import entity.Dryver;
 import entity.Negotiation;
+import entity.Rating;
 import entity.Ride;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -30,6 +31,7 @@ import session.DryverFacade;
 import session.FriendFacade;
 import session.MessageFacade;
 import session.NegotiationFacade;
+import session.RatingFacade;
 import session.RideFacade;
 
 /**
@@ -44,7 +46,7 @@ import session.RideFacade;
     "/createRideConfirmed",
     "/createRide",
     "/logout",
-    "/rideDetails"})
+    "/rideDetails", "/giveRating"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"DryvesUser"}))
 public class UserServlet extends HttpServlet {
@@ -62,6 +64,8 @@ public class UserServlet extends HttpServlet {
     private MessageFacade messageFacade;
     @EJB
     private NegotiationFacade negotiationFacade;
+    @EJB
+    private RatingFacade ratingFacade;
     private String tempStartLocation;
     private String tempEndLocation;
     private String tempDate;
@@ -129,6 +133,33 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("rides_passenger", rideFacade.findByNegotiationIdMember(dryver));
             request.setAttribute("friends", friendFacade.findByDryver(dryver));
             request.setAttribute("profileDryver", dryver);
+        }
+        
+        if (userPath.equals("/giveRating")){
+            
+            int rideId = Integer.parseInt(request.getParameter("idRide"));
+            int score = Integer.parseInt(request.getParameter("score"));
+            
+            // rating hoort deze welke dryvers en rit
+            Ride ratedRide = rideFacade.find(rideId);
+            Dryver ratedDryver = dryverFacade.find(ratedRide.getIdMember().getIdMember());
+            Dryver rater = dryverFacade.findByAlias(alias);
+            
+            // maak een nieuwe rating aan voor de aanbieder van de rit
+            Rating rating = new Rating();
+            rating.setIdMember(ratedDryver);
+            rating.setRatingType(alias);
+            rating.setRatingType("1");
+            rating.setComment("rating via link");
+            rating.setScore(score);
+            ratingFacade.create(rating);
+            
+            // update de negotiation zodat rating maar 1 keer gedaan kan worden per dryver per rit
+            Negotiation negotiation = negotiationFacade.findByIdMemberAndIdRide(rater.getIdMember(), ratedRide.getIdRide());
+            negotiation.setRatingdone(true);
+            negotiationFacade.edit(negotiation);
+            response.sendRedirect("/DryvesV2/myDryves");
+            
         }
 
         if (userPath.equals("/changeProfile")) {
@@ -321,7 +352,7 @@ public class UserServlet extends HttpServlet {
             carFacade.edit(car);
 
         }
-
+        
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
         try {

@@ -8,6 +8,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Rating.findByComment", query = "SELECT r FROM Rating r WHERE r.comment = :comment"),
     @NamedQuery(name = "Rating.findByRatingType", query = "SELECT r FROM Rating r WHERE r.ratingType = :ratingType"),
     @NamedQuery(name = "Rating.findByScore", query = "SELECT r FROM Rating r WHERE r.score = :score")})
+@Cacheable(false)
 public class Rating implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

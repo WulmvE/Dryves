@@ -42,6 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Cacheable(false)
 
 public class Negotiation implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ratingdone")
+    private boolean ratingdone;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected NegotiationPK negotiationPK;
@@ -148,6 +152,14 @@ public class Negotiation implements Serializable {
     @Override
     public String toString() {
         return "entity.Negotiation[ negotiationPK=" + negotiationPK + " ]";
+    }
+
+    public boolean getRatingdone() {
+        return ratingdone;
+    }
+
+    public void setRatingdone(boolean ratingdone) {
+        this.ratingdone = ratingdone;
     }
     
 }

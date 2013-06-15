@@ -117,7 +117,7 @@
                             ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>
-                            <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
+                            <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>  
                         </div>
                     </li>
                 </c:forEach>
@@ -149,6 +149,20 @@
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>
                             <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
+                              <c:forEach var="negotiation" items="${ride.negotiationList}" varStatus="loop">
+                                  <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember}">
+                                      <c:if test="${negotiation.ratingdone == false}">
+                                      Geef rating: <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=1'/>">*</a>
+                                      <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=2'/>">**</a>
+                                      <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=3'/>">***</a>
+                                      <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=4'/>">****</a>
+                                      <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=5'/>">*****</a>
+                                      </c:if>
+                                      <c:if test="${negotiation.ratingdone == true}">
+                                          rating al gegeven
+                                      </c:if>
+                                  </c:if>
+                              </c:forEach>
                         </div>
                     </li>
                 </c:forEach>
