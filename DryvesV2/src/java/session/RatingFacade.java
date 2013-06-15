@@ -6,7 +6,9 @@
 
 package session;
 
+import entity.Dryver;
 import entity.Rating;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +27,10 @@ public class RatingFacade extends AbstractFacade<Rating> {
         return em;
     }
 
+    public List<Rating> findByIdMember(Dryver dryver){
+        return (List<Rating>) em.createNamedQuery("Rating.findByIdMember").setParameter("idMember", dryver).getResultList();
+    }
+    
     public RatingFacade() {
         super(Rating.class);
     }

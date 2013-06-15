@@ -133,6 +133,19 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("rides_passenger", rideFacade.findByNegotiationIdMember(dryver));
             request.setAttribute("friends", friendFacade.findByDryver(dryver));
             request.setAttribute("profileDryver", dryver);
+            
+            // bereken gemiddelde rating van dryver
+            List ratinglist = ratingFacade.findByIdMember(dryver);
+            int aantalratings = ratinglist.size();
+            int totaalratings = 0;
+            for (int i = 0; i < aantalratings; i++){
+                Rating rating = (Rating) ratinglist.get(i);
+                totaalratings += rating.getScore();
+            }
+            if (aantalratings != 0){
+                double gemiddeldeRating = totaalratings/aantalratings;
+                request.setAttribute("score", gemiddeldeRating);
+            }
         }
         
         if (userPath.equals("/giveRating")){
