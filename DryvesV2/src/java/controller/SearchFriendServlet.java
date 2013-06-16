@@ -5,6 +5,7 @@
 package controller;
 
 import entity.Dryver;
+import entity.Friend;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -128,34 +129,54 @@ public class SearchFriendServlet extends HttpServlet {
             String lastName = request.getParameter("search_friend_last_name");
             String email = request.getParameter("search_friend_email");
 
+            List<Dryver> dryverList = null;
+            int status;
 
             if (firstName != "" && lastName == "" && email == "") {
-                List<Dryver> dryverList = dryverFacade.findByFirstName(firstName);
+                dryverList = dryverFacade.findByFirstName(firstName);
                 request.setAttribute("dryvers", dryverList);
             }
             if (firstName == "" && lastName != "" && email == "") {
-                List<Dryver> dryverList = dryverFacade.findByLastName(lastName);
+                dryverList = dryverFacade.findByLastName(lastName);
                 request.setAttribute("dryvers", dryverList);
             }
             if (firstName == "" && lastName == "" && email != "") {
                 request.setAttribute("dryvers", dryverFacade.findByEmail(email));
-                List<Dryver> dryverList = dryverFacade.findByEmail(email);
+                dryverList = dryverFacade.findByEmail(email);
                 request.setAttribute("dryvers", dryverList);
             }
             if (firstName != "" && lastName != "" && email == "") {
-                List<Dryver> dryverList = dryverFacade.findByFirstNameLastName(firstName, lastName);
+                dryverList = dryverFacade.findByFirstNameLastName(firstName, lastName);
                 request.setAttribute("dryvers", dryverList);
             }
             if (firstName != "" && lastName == "" && email != "") {
-                List<Dryver> dryverList = dryverFacade.findByFirstNameEmail(firstName, email);
+                dryverList = dryverFacade.findByFirstNameEmail(firstName, email);
                 request.setAttribute("dryvers", dryverList);
             }
             if (firstName == "" && lastName != "" && email != "") {
-                List<Dryver> dryverList = dryverFacade.findByLastNameEmail(lastName, email);
+                dryverList = dryverFacade.findByLastNameEmail(lastName, email);
                 request.setAttribute("dryvers", dryverList);
             }
 
+            for (Dryver queryDryver : dryverList) {
+                request.setAttribute("queryDryver", queryDryver.getIdMember());
 
+                List<Friend> friendList = queryDryver.getFriendList();
+
+                for (int i = 0; i < friendList.size(); i++) {
+                    if (friendList.get(i).getIdFriend().getIdMember() == idMember) {
+                        if (friendList.get(i).getStatus() == true) {
+                            status = 1;
+                            request.setAttribute("status", status);
+                        }
+                        if (friendList.get(i).getStatus() == false) {
+                            status = 0;
+                            request.setAttribute("status", status);
+
+                        }
+                    }
+                }
+            }
 
         }
 
