@@ -5,6 +5,8 @@
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"
+    prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div id="col_content">
@@ -31,6 +33,9 @@
                     <a href="#" class="avatar_label">${dryver.alias}</a>
 
                 </div>
+                        <c:if test="${fn:length(dryver.friendList) == 0}">
+                            <h1 style="color: #66ccff"><span>Geen vrienden</span></h1>
+                            </c:if>
                 <c:forEach var="friendCheck" items="${dryver.friendList}" varStatus="loop">
                     <c:choose>
                         <c:when test="${friendCheck.idFriend.idMember == idMember}">
@@ -38,12 +43,9 @@
                                 <h1 style="color: #66ccff"><span>Vrienden</span></h1>
                             </c:if>
                             <c:if test="${friendCheck.status == false}">
-                               <h1 style="color: #66ccff"><span>Geen Vrienden</span></h1>
+                               <h1 style="color: #66ccff"><span>In aanvraag</span></h1>
                             </c:if>
                         </c:when>
-                        <c:otherwise>
-                            <h1 style="color: #66ccff"><span>Geen Vrienden</span></h1>
-                        </c:otherwise>
                     </c:choose>
 
                 </c:forEach>
