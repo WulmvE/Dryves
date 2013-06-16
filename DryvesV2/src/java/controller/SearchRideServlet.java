@@ -9,8 +9,13 @@ import Utils.EmailPdf;
 import entity.Negotiation;
 import entity.Ride;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,7 +61,7 @@ public class SearchRideServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Ride selectedRide;
         String loggedInUser = request.getUserPrincipal().getName();
-        
+
         if (userPath.equals("/rideDetails2")) {
 
             String idRide = request.getQueryString();
@@ -66,12 +71,12 @@ public class SearchRideServlet extends HttpServlet {
                 // get selected ride
                 selectedRide = rideFacade.find(Integer.parseInt(idRide));
                 if (!loggedInUser.equalsIgnoreCase(selectedRide.getIdMember().getAlias())) {
-                        response.sendRedirect("/DryvesV2/rideDetails?"+idRide);
-                    }
-                    List<Negotiation> negotiations = selectedRide.getNegotiationList();
-                    // place selected category in session scope
-                    session.setAttribute("selectedRide", selectedRide);
-                    session.setAttribute("negotiations", negotiations);
+                    response.sendRedirect("/DryvesV2/rideDetails?" + idRide);
+                }
+                List<Negotiation> negotiations = selectedRide.getNegotiationList();
+                // place selected category in session scope
+                session.setAttribute("selectedRide", selectedRide);
+                session.setAttribute("negotiations", negotiations);
             }
 
 
@@ -82,8 +87,7 @@ public class SearchRideServlet extends HttpServlet {
 
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -107,7 +111,7 @@ public class SearchRideServlet extends HttpServlet {
         Ride selectedRide;
 
         if (userPath.equals("/rideDetails2")) {
-       
+
             int confirmDryver = Integer.parseInt(request.getParameter("confirmDryver"));
             int confirmRide = Integer.parseInt(request.getParameter("confirmRide"));
 
@@ -133,7 +137,7 @@ public class SearchRideServlet extends HttpServlet {
                 Negotiation negotiation = negotiationFacade.findByIdMemberAndIdRide(confirmDryver, confirmRide);
                 negotiation.setAcceptedDriver(1);
                 negotiationFacade.edit(negotiation);
-                
+
                 // after accept from driver, email pdf to passenger
                 EmailPdf emailer = new EmailPdf();
                 emailer.setDatum(new Date().toString());
@@ -147,16 +151,72 @@ public class SearchRideServlet extends HttpServlet {
         // if searchRide action is called
         if (userPath.equals("/searchresults")) {
             String van = rideFacade.trimSearchString(request.getParameter("search_start"));
-            request.setAttribute("rides", rideFacade.searchRideByStart(van));
-            int aantalrides = rideFacade.searchRideByStart(van).size();
-            request.setAttribute("aantalrides", aantalrides);
+            String naar = rideFacade.trimSearchString(request.getParameter("search_destination"));
+            String op = request.getParameter("search_date");
+
+            if (naar.equals("") && op.toString().equals("")) {
+                request.setAttribute("rides", rideFacade.searchRideByStart(van));
+                int aantalrides = rideFacade.searchRideByStart(van).size();
+                request.setAttribute("aantalrides", aantalrides);
+            } else if (van.equals("") && op.toString().equals("")) {
+                request.setAttribute("rides", rideFacade.searchByEnd(naar));
+                int aantalrides = rideFacade.searchByEnd(naar).size();
+                request.setAttribute("aantalrides", aantalrides);
+            } else if (van.equals("") && naar.equals("")) {
+                try {
+                    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = formatter.parse(op);
+
+                    request.setAttribute("rides", rideFacade.searchByDate(date));
+                    int aantalrides = rideFacade.searchByDate(date).size();
+                    request.setAttribute("aantalrides", aantalrides);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (op.toString().equals("")) {
+                request.setAttribute("rides", rideFacade.searchRideByStartEnd(van, naar));
+                int aantalrides = rideFacade.searchRideByStartEnd(van, naar).size();
+                request.setAttribute("aantalrides", aantalrides);
+            } else if (naar.equals("")) {
+                try {
+                    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = formatter.parse(op);
+
+                    request.setAttribute("rides", rideFacade.searchRideByStartDate(van, date));
+                    int aantalrides = rideFacade.searchRideByStartDate(van, date).size();
+                        request.setAttribute("aantalrides", aantalrides);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (van.equals("")) {
+                try {
+                    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = formatter.parse(op);
+
+                    request.setAttribute("rides", rideFacade.searchRideByEndDate(naar, date));
+                    int aantalrides = rideFacade.searchRideByEndDate(naar, date).size();
+                        request.setAttribute("aantalrides", aantalrides);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                try {
+                    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = formatter.parse(op);
+
+                    request.setAttribute("rides", rideFacade.searchRideByAll(van, naar, date));
+                    int aantalrides = rideFacade.searchRideByAll(van, naar, date).size();
+                        request.setAttribute("aantalrides", aantalrides);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SearchRideServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
