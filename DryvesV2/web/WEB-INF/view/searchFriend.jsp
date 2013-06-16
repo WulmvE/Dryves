@@ -31,24 +31,23 @@
                     <a href="#" class="avatar_label">${dryver.alias}</a>
 
                 </div>
-                <c:forEach var="friendCheck" items="${dryver.friendList}" varStatus="loop">
-                    ${friendCheck.idFriend.idMember}
-                    ${idMember}
-                    <c:choose>
-                        <c:when test="${friendCheck.idFriend.idMember == idMember}">
-                            <c:if test="${friendCheck.status == true}">
-                                vrienden
-                            </c:if>
-                            <c:if test="${friendCheck.status == false}">
-                                Geen vrienden
-                            </c:if>
-                        </c:when>
-                        <c:otherwise>
-                            geen vrienden
-                        </c:otherwise>
-                    </c:choose>
+                    ${queryDryver}
+                    ${status}
+                    
+                <c:choose>                
+                    <c:when test="${status == 1}">
+                        <br>
+                        <br>
+                        <h1 style="color: #66ccff"><span>Vrienden</span></h1>
+                    </c:when>
+                    <c:otherwise>
+                        <br>
+                        <br>
+                        <h1 style="color: #66ccff"><span>Geen vrienden</span></h1>        
+                    </c:otherwise>
+                </c:choose>
 
-                </c:forEach>
+
             </li>
         </c:forEach>
 
