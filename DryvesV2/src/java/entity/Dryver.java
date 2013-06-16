@@ -9,9 +9,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,6 +52,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dryver.findByFirstNameEmail", query = "SELECT d FROM Dryver d WHERE d.firstName = :firstName AND d.email = :email"),
     @NamedQuery(name = "Dryver.findByLastNameEmail", query = "SELECT d FROM Dryver d WHERE d.lastName = :lastName AND d.email = :email"),
     @NamedQuery(name = "Dryver.findByPassword", query = "SELECT d FROM Dryver d WHERE d.password = :password")})
+@Cacheable(false)
 public class Dryver implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -126,7 +129,7 @@ public class Dryver implements Serializable {
     private List<Negotiation> negotiationList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
     private List<Rating> ratingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember", fetch = FetchType.EAGER)
     private List<Friend> friendList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFriend")
     private List<Friend> friendList1;

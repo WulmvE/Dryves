@@ -7,6 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Friend.findByIdRequest", query = "SELECT f FROM Friend f WHERE f.idRequest = :idRequest"),
     @NamedQuery(name = "Friend.findByIdMember", query = "SELECT f FROM Friend f WHERE f.idMember = :idMember"),
     @NamedQuery(name = "Friend.findByStatus", query = "SELECT f FROM Friend f WHERE f.status = :status")})
+@Cacheable(false)
 public class Friend implements Serializable {
 
     private static final long serialVersionUID = 1L;
