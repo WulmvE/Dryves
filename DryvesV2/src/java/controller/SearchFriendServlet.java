@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import session.DryverFacade;
+import session.FriendFacade;
 
 /**
  *
@@ -29,6 +30,8 @@ public class SearchFriendServlet extends HttpServlet {
     private String userPath;
     @EJB
     private DryverFacade dryverFacade;
+    @EJB
+    private FriendFacade friendFacade;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -114,23 +117,31 @@ public class SearchFriendServlet extends HttpServlet {
 //
 
         if (userPath.equals("/searchFriend")) {
+
+            String loggedInUser = request.getUserPrincipal().getName();
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+
+            Dryver dryver = dryverFacade.find(loggedInUserId);
+            
+
+
             if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_last_name") == "") {
-                request.setAttribute("friends", dryverFacade.findByFirstName(request.getParameter("search_friend_first_name")));
+                request.setAttribute("dryvers", dryverFacade.findByFirstName(request.getParameter("search_friend_first_name")));
             }
             if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") == "") {
-                request.setAttribute("friends", dryverFacade.findByLastName(request.getParameter("search_friend_last_name")));
+                request.setAttribute("dryvers", dryverFacade.findByLastName(request.getParameter("search_friend_last_name")));
             }
             if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_email") != "") {
-                request.setAttribute("friends", dryverFacade.findByEmail(request.getParameter("search_friend_email")));
+                request.setAttribute("dryvers", dryverFacade.findByEmail(request.getParameter("search_friend_email")));
             }
             if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") == "") {
-                request.setAttribute("friends", dryverFacade.findByFirstNameLastName(request.getParameter("search_friend_first_name"), request.getParameter("search_friend_last_name")));
+                request.setAttribute("dryvers", dryverFacade.findByFirstNameLastName(request.getParameter("search_friend_first_name"), request.getParameter("search_friend_last_name")));
             }
             if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_email") != "") {
-                request.setAttribute("friends", dryverFacade.findByFirstNameEmail(request.getParameter("search_friend_first_name"), request.getParameter("search_friend_email")));
+                request.setAttribute("dryvers", dryverFacade.findByFirstNameEmail(request.getParameter("search_friend_first_name"), request.getParameter("search_friend_email")));
             }
             if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") != "") {
-                request.setAttribute("friends", dryverFacade.findByLastNameEmail(request.getParameter("search_friend_last_name"), request.getParameter("search_friend_email")));
+                request.setAttribute("dryvers", dryverFacade.findByLastNameEmail(request.getParameter("search_friend_last_name"), request.getParameter("search_friend_email")));
             }
 
         }

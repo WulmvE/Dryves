@@ -24,14 +24,33 @@
 
     <div id="result_search_friend" class="block_six white">
 
-                <c:forEach var="friend" items="${friends}">
-                    <li class="result block_triple white">
-                        <div> 
-                            <img class="avatar" src="ava/avatar${friend.idMember}.jpg" />
-                            <a href="#" class="avatar_label">${friend.alias}</a>
-                        </div>
-                    </li>
+        <c:forEach var="dryver" items="${dryvers}">
+            <li class="result block_triple white">
+                <div> 
+                    <img class="avatar" src="ava/avatar${dryver.idMember}.jpg" />
+                    <a href="#" class="avatar_label">${dryver.alias}</a>
+
+                </div>
+                <c:forEach var="friendCheck" items="${dryver.friendList}" varStatus="loop">
+                    ${friendCheck.idFriend.idMember}
+                    ${idMember}
+                    <c:choose>
+                        <c:when test="${friendCheck.idFriend.idMember == idMember}">
+                            <c:if test="${friendCheck.status == true}">
+                                vrienden
+                            </c:if>
+                            <c:if test="${friendCheck.status == false}">
+                                Geen vrienden
+                            </c:if>
+                        </c:when>
+                        <c:otherwise>
+                            geen vrienden
+                        </c:otherwise>
+                    </c:choose>
+
                 </c:forEach>
+            </li>
+        </c:forEach>
 
     </div>
 
