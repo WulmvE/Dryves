@@ -6,6 +6,7 @@ package controller;
 
 import entity.Dryver;
 import java.io.IOException;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
@@ -122,27 +123,39 @@ public class SearchFriendServlet extends HttpServlet {
             int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
 
             Dryver dryver = dryverFacade.find(loggedInUserId);
-            
+
+            String firstName = request.getParameter("search_friend_first_name");
+            String lastName = request.getParameter("search_friend_last_name");
+            String email = request.getParameter("search_friend_email");
 
 
-            if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_last_name") == "") {
-                request.setAttribute("dryvers", dryverFacade.findByFirstName(request.getParameter("search_friend_first_name")));
+            if (firstName != "" && lastName == "" && email == "") {
+                List<Dryver> dryverList = dryverFacade.findByFirstName(firstName);
+                request.setAttribute("dryvers", dryverList);
             }
-            if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") == "") {
-                request.setAttribute("dryvers", dryverFacade.findByLastName(request.getParameter("search_friend_last_name")));
+            if (firstName == "" && lastName != "" && email == "") {
+                List<Dryver> dryverList = dryverFacade.findByLastName(lastName);
+                request.setAttribute("dryvers", dryverList);
             }
-            if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_email") != "") {
-                request.setAttribute("dryvers", dryverFacade.findByEmail(request.getParameter("search_friend_email")));
+            if (firstName == "" && lastName == "" && email != "") {
+                request.setAttribute("dryvers", dryverFacade.findByEmail(email));
+                List<Dryver> dryverList = dryverFacade.findByEmail(email);
+                request.setAttribute("dryvers", dryverList);
             }
-            if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") == "") {
-                request.setAttribute("dryvers", dryverFacade.findByFirstNameLastName(request.getParameter("search_friend_first_name"), request.getParameter("search_friend_last_name")));
+            if (firstName != "" && lastName != "" && email == "") {
+                List<Dryver> dryverList = dryverFacade.findByFirstNameLastName(firstName, lastName);
+                request.setAttribute("dryvers", dryverList);
             }
-            if (request.getParameter("search_friend_first_name") != "" && request.getParameter("search_friend_last_name") == "" && request.getParameter("search_friend_email") != "") {
-                request.setAttribute("dryvers", dryverFacade.findByFirstNameEmail(request.getParameter("search_friend_first_name"), request.getParameter("search_friend_email")));
+            if (firstName != "" && lastName == "" && email != "") {
+                List<Dryver> dryverList = dryverFacade.findByFirstNameEmail(firstName, email);
+                request.setAttribute("dryvers", dryverList);
             }
-            if (request.getParameter("search_friend_first_name") == "" && request.getParameter("search_friend_last_name") != "" && request.getParameter("search_friend_email") != "") {
-                request.setAttribute("dryvers", dryverFacade.findByLastNameEmail(request.getParameter("search_friend_last_name"), request.getParameter("search_friend_email")));
+            if (firstName == "" && lastName != "" && email != "") {
+                List<Dryver> dryverList = dryverFacade.findByLastNameEmail(lastName, email);
+                request.setAttribute("dryvers", dryverList);
             }
+
+
 
         }
 

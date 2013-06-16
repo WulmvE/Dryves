@@ -80,19 +80,19 @@ public class DryverFacade extends AbstractFacade<Dryver> {
         return em.createNamedQuery("Dryver.findByLastName").setParameter("lastName", lastName).getResultList();
     }
 
-    public Object findByEmail(String email) {
+    public List<Dryver> findByEmail(String email) {
         return em.createNamedQuery("Dryver.findByEmail").setParameter("email", email).getResultList();
     }
 
-    public Object findByFirstNameLastName(String firstName, String lastName) {
+    public List<Dryver> findByFirstNameLastName(String firstName, String lastName) {
         return em.createNamedQuery("Dryver.findByFirstNameLastName").setParameter("firstName", firstName).setParameter("lastName", lastName).getResultList();
     }
 
-    public Object findByFirstNameEmail(String firstName, String email) {
+    public List<Dryver> findByFirstNameEmail(String firstName, String email) {
         return em.createNamedQuery("Dryver.findByFirstNameEmail").setParameter("firstName", firstName).setParameter("email", email).getResultList();
     }
 
-    public Object findByLastNameEmail(String lastName, String email) {
+    public List<Dryver> findByLastNameEmail(String lastName, String email) {
         return em.createNamedQuery("Dryver.findByLastNameEmail").setParameter("lastName", lastName).setParameter("email", email).getResultList();
     }
 }
