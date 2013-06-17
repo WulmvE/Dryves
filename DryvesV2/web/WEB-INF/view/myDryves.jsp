@@ -8,7 +8,6 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <div id="col_content">
 
     <div class="block_six white">		
@@ -18,15 +17,19 @@
                 <img class="avatar" src="ava/avatar000.jpg" style="position:absolute; top:0px; left:0px;"/>
                 <img class="avatar" src="ava/avatar${profileDryver.idMember}.jpg" style="position:absolute; top:0px; left:0px;" />
             </div>
-            <div class="summary">
+            <div class="summary" style="position: relative">
                 <span class="text" style="font-weight: bold">${profileDryver.alias}</span><br>              
                 <br>
-                <!--                <span class="text" style="font-weight: bold; color: red;">Welke statistieken moeten hier nog meer komen?</span><br>-->
+                <!--                                <span class="text" style="font-weight: bold; color: red;">Welke statistieken moeten hier nog meer komen?</span><br>-->
                 <span>gemiddelde rating:</span><br>
                 <r:rating_stars rating="${profileDryver.avgRating}"/><br> 
                 <br>
-                <a href="changeProfile" class="avatar_label">wijzig profiel</a>
-            </div>
+                <br>
+                <br>
+                <span class="local_menu">                    
+                    <a href="<c:url value='changeProfile'/>" onclick="" class="local_menu_button larger" title="Wijzig profielgegevens">&#xf044;</a>
+                </span>     
+            </div>                  
         </div>
     </div>
 
@@ -131,7 +134,11 @@
                             ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>
-                            <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>  
+
+                            <span class="local_menu">                    
+                                <a href="<c:url value='rideDetails2?${ride.idRide}'/>" onclick="" class="local_menu_button larger" title="ritdetails">&#xf0fb;</a>	
+                            </span>
+
                         </div>
                     </li>
                 </c:forEach>
@@ -162,10 +169,14 @@
                             ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>
-                            <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>
-                                <c:forEach var="negotiation" items="${ride.negotiationList}" varStatus="loop">
-                                    <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember}">
-                                        <c:if test="${negotiation.ratingdone == false}">
+<!--                            <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>-->
+                            <span class="local_menu">                    
+                                <a href="<c:url value='rideDetails2?${ride.idRide}'/>" onclick="" class="local_menu_button larger" title="ritdetails">&#xf0fb;</a>	
+                            </span>  
+
+                            <c:forEach var="negotiation" items="${ride.negotiationList}" varStatus="loop">
+                                <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember}">
+                                    <c:if test="${negotiation.ratingdone == false}">
                                         Geef rating: <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=1'/>">*</a>
                                         <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=2'/>">**</a>
                                         <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=3'/>">***</a>
