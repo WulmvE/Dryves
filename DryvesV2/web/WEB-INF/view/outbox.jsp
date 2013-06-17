@@ -26,7 +26,7 @@
                     <input type="hidden" name="dateTime" value="${message.dateTime}"/>
                 </form>
                 <hr>
-                <span class="text_blue" style="float: left; margin-left: 5px;">Afzender: <a href="${message.idMemberSender}">${message.idMemberSender.alias}</a>, 
+                <span class="text_blue" style="float: left; margin-left: 5px;">Verzonden aan: <a href="${message.idMemberReciever}">${message.idMemberReciever.alias}</a>, 
                     datum: </span><span style="float: left; margin-left: 0.5em;"> ${message.dateTime}</span>
                 <span><a href="#" onclick="document.message_form_${message.idMessage}.submit();"><img class="view_message" src="img/arrow_right.png" alt="Toon bericht"></a></span>
                 <br>
@@ -36,7 +36,7 @@
         <li class="block_six white">
             <c:forEach var="single" items="${singleMessage}">
                 <hr>
-                <span style="float: left; padding-left: 5px;">Ontvangen van:</span><span id="msgTitle" class="text_blue">${single.idMemberSender.alias}</span>
+                <span style="float: left; padding-left: 5px;">Verzonden aan:</span><span id="msgTitle" class="text_blue">${single.idMemberReciever.alias}</span>
                 <br>
                 <hr>
                 <span id="msgText"class="text_blue">${single.text}</span><br>
