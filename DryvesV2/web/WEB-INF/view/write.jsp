@@ -9,7 +9,7 @@
 
 <div id="col_content">
     <div id="sub_menu">
-        <a class="block_single white" href="javascript:history.back()"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
+        <a class="block_single white text_blue" href="javascript:history.back()"><div class="menu_icon"></div><span class="menu_item menu_label_blue">terug</span></a>		
         <a class="block_single blue" href="inbox"><div class="menu_icon icon_messages">&#xf003;</div><span class="menu_item menu_label_white">Ontvangen</span></a>		
         <a class="block_single blue" href="outbox"><div class="menu_icon icon_messages">&#xf093;</div><span class="menu_item menu_label_white">Verzonden</span></a>		
     </div>
