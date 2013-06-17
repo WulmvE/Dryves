@@ -24,7 +24,7 @@ import session.FriendFacade;
  *
  * @author hctung
  */
-@WebServlet(name = "SearchFriendServlet", urlPatterns = {"/searchFriend", "/searchFriendResults"})
+@WebServlet(name = "SearchFriendServlet", urlPatterns = {"/searchFriend", "/searchFriendResults", "/requestFriend"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"DryvesUser"}))
 public class SearchFriendServlet extends HttpServlet {
@@ -75,7 +75,38 @@ public class SearchFriendServlet extends HttpServlet {
         if (userPath.equals("/searchFriend")) {
         }
 
-
+        if (userPath.equals("/requestFriend")){
+            
+            // haal Dryverid uit request (dit is de vriend)
+            int dryverId = Integer.parseInt(request.getParameter("requestDryver"));
+            // maak er een Dryver van
+            Dryver queryDryver = dryverFacade.find(dryverId);
+            // maak nieuwe Friend data aan
+            Friend f = new Friend();
+            f.setIdMember(queryDryver);
+            f.setIdFriend(dryverFacade.findByAlias(alias));
+            f.setStatus(false);
+            List<Friend> friendList = friendFacade.findByDryver(queryDryver);
+            // zet Friend data in database (persistent)
+            friendFacade.create(f);
+            // voeg Friend toe aan vriendenlijst
+            friendList.add(f);
+            queryDryver.setFriendList(friendList);
+            // zet Dryver in database (persistent)
+            dryverFacade.edit(queryDryver);
+            
+            // doe dit nu ook, maar dan voor de ingelogde gebruiker
+            Dryver ingelogd = dryverFacade.findByAlias(alias);
+            f.setIdMember(ingelogd);
+            f.setIdFriend(queryDryver);
+            f.setStatus(false);
+            // haal vriendenlijst van ingelogde gebruiker op
+            friendList = friendFacade.findByDryver(ingelogd);
+            friendFacade.create(f);
+            friendList.add(f);
+            ingelogd.setFriendList(friendList);
+            dryverFacade.edit(ingelogd);
+        }
 
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
@@ -178,6 +209,19 @@ public class SearchFriendServlet extends HttpServlet {
                 }
             }
 
+        }
+        
+        if (userPath.equals("/requestFriend")){
+            Dryver queryDryver = dryverFacade.find(request.getParameter("queryDryver"));
+            List<Friend> friendList = friendFacade.findByDryver(queryDryver);
+            Friend f = new Friend();
+            friendFacade.create(f);
+            f.setIdMember(queryDryver);
+            f.setIdFriend(dryverFacade.findByAlias(alias));
+            f.setStatus(false);
+            friendList.add(f);
+            friendFacade.edit(f);
+            dryverFacade.edit(queryDryver);
         }
 
         String url = "/WEB-INF/view" + userPath + ".jsp";
