@@ -48,7 +48,7 @@ import session.RideFacade;
     "/logout",
     "/rideDetails", "/giveRating"})
 @ServletSecurity(
-        @HttpConstraint(rolesAllowed = {"DryvesUser"}))
+        @HttpConstraint(rolesAllowed = {"DryvesUser","Admin"}))
 public class UserServlet extends HttpServlet {
 
     private String userPath;
@@ -201,6 +201,7 @@ public class UserServlet extends HttpServlet {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+            return;
         }
 
         // use RequestDispatcher to forward request internally
