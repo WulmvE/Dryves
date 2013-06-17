@@ -85,6 +85,7 @@ public class SearchFriendServlet extends HttpServlet {
             Friend f = new Friend();
             f.setIdMember(queryDryver);
             f.setIdFriend(dryverFacade.findByAlias(alias));
+            f.setIdRequester(dryverFacade.findByAlias(alias).getIdMember());
             f.setStatus(false);
             List<Friend> friendList = friendFacade.findByDryver(queryDryver);
             // zet Friend data in database (persistent)
@@ -99,6 +100,7 @@ public class SearchFriendServlet extends HttpServlet {
             Dryver ingelogd = dryverFacade.findByAlias(alias);
             f.setIdMember(ingelogd);
             f.setIdFriend(queryDryver);
+            f.setIdRequester(ingelogd.getIdMember());
             f.setStatus(false);
             // haal vriendenlijst van ingelogde gebruiker op
             friendList = friendFacade.findByDryver(ingelogd);

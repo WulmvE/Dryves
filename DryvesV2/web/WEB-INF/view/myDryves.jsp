@@ -60,9 +60,12 @@
                             <c:if test="${friend.status == true}">
                                 <span style="color: green">Vrienden</span>
                             </c:if>
-                            <c:if test="${friend.status == false}">
-                                <span>Pending</span>
+                            <c:if test="${profileDryver.idMember == friend.idRequester}">
+                                <span>Pending</span>   
                             </c:if>
+                            <c:if test="${profileDryver.idMember != friend.idRequester}">
+                                KNOP
+                            </c:if>   
                     </li>
                 </c:forEach>
                 <!--                <li class="block_single white">

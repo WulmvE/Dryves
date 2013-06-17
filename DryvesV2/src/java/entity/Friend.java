@@ -35,6 +35,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Friend.findByStatus", query = "SELECT f FROM Friend f WHERE f.status = :status")})
 @Cacheable(false)
 public class Friend implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "idRequester")
+    private int idRequester;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -120,5 +124,13 @@ public class Friend implements Serializable {
     @Override
     public String toString() {
         return "entity.Friend[ idRequest=" + idRequest + " ]";
+    }
+
+    public int getIdRequester() {
+        return idRequester;
+    }
+
+    public void setIdRequester(int idRequester) {
+        this.idRequester = idRequester;
     }
 }
