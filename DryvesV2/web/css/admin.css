@@ -60,6 +60,28 @@ li.selectstat, li.selectstat:hover{
     width:456px;
 }*/
 
+select, input.selectstats{
+    width:300px;
+    font-size: 16px;
+    border: #d0d0d0 1px solid;
+    color:#a0a0a0;
+    padding: 5px;
+    margin: 0px 0px 20px 0px;
+    
+}
+
+input.selectstats{
+        width:287px; 
+        padding-left: 8px;
+        
+}
+
+.input_date.selectstats{
+        width:133px; 
+        padding-left: 8px;
+}
+
+
 table.results{
     
     display: inline-block;
@@ -74,16 +96,36 @@ td{
 }
 
 td.item_name{
-    /*min-width: 250px;*/
+    min-width: 250px;
 }
 
 #graph_container, #pie_container{
     display:inline-block;
-    width: 350px;
-    height: 200px;
+    position:relative;
+    text-align: left;
+    width: 410px;
+    height: 220px;
+}
+#pie_container{
+ top:-20px;   
 }
 
 #graph, #pie{
-    width: 350px;
-    height: 200px;
+    text-align: left;
+    width: 410px;
+    height: 220px;
+}
+
+ul.overview{
+    display: inline-block;
+    list-style-type: none;
+    padding:0;
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+    overflow-y: auto;
+  min-width: 250px;
+    max-height: 180px;
+  
+    
 }

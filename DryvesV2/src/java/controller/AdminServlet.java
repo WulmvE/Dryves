@@ -18,7 +18,7 @@ import session.AdminFacade;
  *
  * @author Patrick
  */
-@WebServlet(name = "Admin", urlPatterns = {"/adminpanel",})
+@WebServlet(name = "Admin", urlPatterns = {"/admin","/statistics","/settings","/membercontrol"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"Admin"}))
 public class AdminServlet extends HttpServlet {
@@ -39,18 +39,23 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String userPath = request.getServletPath();
+        
         //check if a type of admin statistic has been requested.
         //normally these type of requests stem from AJAX calls coming from the clientside.
         if (request.getParameterMap().containsKey("type")) {
 
             String type = request.getParameter("type");
+            String from = request.getParameter("from");
+            String to = request.getParameter("to");
+            String by = request.getParameter("by");
             String json;
 
-            if (!(type == null)) {
+            if (!(type == null)){
                 //the 'type' from the request determines which statiscal query is called in the getStats method from adminFacade.
                 //The method returns a List of 'Object' arrays. Each object containing a 'key' and a 'value' object.
                 //Gson converts the returned List to JSON. 
-                json = new Gson().toJson(adminFacade.getStats(type));
+                json = new Gson().toJson(adminFacade.getStats(type, from, to, by));
             }            
             //if type is empty return an empty json string.
             else {
@@ -72,12 +77,23 @@ public class AdminServlet extends HttpServlet {
                 catch (IOException ex) {
                 }
             }
-           
         }
-        //if no 'type' parameter is present return the full jsp to the client
-        else {
+        //determine if client should be forwarded to the statistics page
+        else if (userPath.equals("/admin") || userPath.equals("/statistics")) {
             // use RequestDispatcher to forward request internally
-            String url = "/WEB-INF/admin/adminpanel.jsp";
+            String url = "/WEB-INF/admin/admin_statistics.jsp";
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+           
+        else if (userPath.equals("/settings")) {
+            // use RequestDispatcher to forward request internally
+            String url = "/WEB-INF/admin/admin_settings.jsp";
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+        
+        else if (userPath.equals("/membercontrol")) {
+            // use RequestDispatcher to forward request internally
+            String url = "/WEB-INF/admin/admin_membercontrol.jsp";
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
