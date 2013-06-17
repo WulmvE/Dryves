@@ -51,7 +51,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dryver.findByFirstNameLastName", query = "SELECT d FROM Dryver d WHERE d.firstName = :firstName AND d.lastName = :lastName"),
     @NamedQuery(name = "Dryver.findByFirstNameEmail", query = "SELECT d FROM Dryver d WHERE d.firstName = :firstName AND d.email = :email"),
     @NamedQuery(name = "Dryver.findByLastNameEmail", query = "SELECT d FROM Dryver d WHERE d.lastName = :lastName AND d.email = :email"),
-    @NamedQuery(name = "Dryver.findByPassword", query = "SELECT d FROM Dryver d WHERE d.password = :password")})
+    @NamedQuery(name = "Dryver.findByPassword", query = "SELECT d FROM Dryver d WHERE d.password = :password"),
+    @NamedQuery(name = "Dryver.findByIsBlocked", query = "SELECT d FROM Dryver d WHERE d.blocked = true")
+})
 @Cacheable(false)
 public class Dryver implements Serializable {
 
@@ -113,6 +115,10 @@ public class Dryver implements Serializable {
     @Column(name = "memberSince", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date memberSince;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "blocked")
+    private boolean blocked;
     @ManyToMany(mappedBy = "dryverList")
     private List<Groups> groupsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMember")
@@ -244,6 +250,14 @@ public class Dryver implements Serializable {
     //MemberSince is read-only
     public Date getMemberSince() {
         return memberSince;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     @XmlTransient

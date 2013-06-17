@@ -52,7 +52,8 @@ public class DryverFacade extends AbstractFacade<Dryver> {
         //parse the birthDate string to an actual date
         try {
             dryver.setBirthDate(format.parse(birthDate));
-        } catch (ParseException ex) {
+        }
+        catch (ParseException ex) {
             Logger.getLogger(DryverFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -94,5 +95,9 @@ public class DryverFacade extends AbstractFacade<Dryver> {
 
     public List<Dryver> findByLastNameEmail(String lastName, String email) {
         return em.createNamedQuery("Dryver.findByLastNameEmail").setParameter("lastName", lastName).setParameter("email", email).getResultList();
+    }
+
+    public List<Dryver> findByIsBlocked(String lastName, String email) {
+        return em.createNamedQuery("Dryver.findByIsBlocked").getResultList();
     }
 }
