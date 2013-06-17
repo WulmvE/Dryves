@@ -1,0 +1,76 @@
+/* 
+    Document   : error
+    Created on : Jun 13, 2013, 8:57:58 PM
+    Author     : Patrick
+    Description:
+       styling for custom error pages.
+*/
+
+html, body{
+                font-family: segoe;
+                position:relative;
+                color:#ffffff;
+                height: 100%;
+                text-align: left;
+            }
+
+            [class^="error"]{
+                display: block;
+                float: left;
+            }
+
+            .error_main{
+                display: inline-block;
+                position:absolute;
+                top:40%;
+                left:50%;
+                height:120px;
+                width:870px;
+                margin-top:-60px;
+                margin-left:-435px;
+                float: none;
+            }
+
+            .error_logo{
+                font-family: fontawesome;
+                font-size:118px;
+                margin:10px 25px;
+            }
+
+            .error_type, .error_msg{
+                font-size: 60px;
+                margin: 0px;
+            }
+
+            .error_type{
+                color:#3f3f3f;
+            }
+
+            .error_msg{
+                margin-left:50px;
+            }        
+
+            .error_menu{
+                position: absolute;
+                bottom:-200%;
+                right: -10%;
+                width:342px;
+            }
+
+            .error_menu_item{
+                float:none;
+                color:#ffffff;
+                font-size: 30px;
+                height: 54px;
+                vertical-align: middle;
+                margin-bottom: 4px;
+
+            } 
+            .error_menu_icon{
+                line-height: 54px;
+                display: inline-block;
+                float: none;
+                font-family: fontawesome;
+                padding:0px 18px;
+            } 
+
