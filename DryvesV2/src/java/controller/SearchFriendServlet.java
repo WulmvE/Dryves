@@ -24,7 +24,7 @@ import session.FriendFacade;
  *
  * @author hctung
  */
-@WebServlet(name = "SearchFriendServlet", urlPatterns = {"/searchFriend", "/searchFriendResults", "/requestFriend"})
+@WebServlet(name = "SearchFriendServlet", urlPatterns = {"/searchFriend", "/searchFriendResults", "/requestFriend", "/acceptFriend"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"DryvesUser"}))
 public class SearchFriendServlet extends HttpServlet {
@@ -75,6 +75,34 @@ public class SearchFriendServlet extends HttpServlet {
         if (userPath.equals("/searchFriend")) {
         }
 
+        if (userPath.equals("/acceptFriend")){
+            int idFriend = Integer.parseInt(request.getParameter("idFriend"));
+           Dryver ingelogd =  dryverFacade.findByAlias(alias);
+           Dryver friend = dryverFacade.find(idFriend);
+        List<Friend> ingelogd_lijst = ingelogd.getFriendList();
+        List<Friend> friend_lijst = friend.getFriendList();
+        
+        for (int i = 0; i < ingelogd_lijst.size(); i++){
+            if (ingelogd_lijst.get(i).getIdMember().getIdMember() == ingelogd.getIdMember() && ingelogd_lijst.get(i).getIdFriend().getIdMember() == friend.getIdMember()){
+                ingelogd_lijst.get(i).setStatus(true);
+            }
+        }
+        
+                for (int i = 0; i < friend_lijst.size(); i++){
+            if (friend_lijst.get(i).getIdMember().getIdMember() == friend.getIdMember() && friend_lijst.get(i).getIdFriend().getIdMember() == ingelogd.getIdMember()){
+                friend_lijst.get(i).setStatus(true);
+            }
+        }
+        
+                ingelogd.setFriendList(ingelogd_lijst);
+                friend.setFriendList(friend_lijst);
+                
+        dryverFacade.edit(ingelogd);
+        dryverFacade.edit(friend);
+        
+        
+        }
+        
         if (userPath.equals("/requestFriend")){
             
             // haal Dryverid uit request (dit is de vriend)
