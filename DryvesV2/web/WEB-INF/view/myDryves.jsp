@@ -12,25 +12,24 @@
 
     <div class="block_six white">		
         <h2>Mijn profiel</h2>
-        <div class="profile block_triple white">
-            <div style="position:relative; display: inline-block; width:77px; height:77px;">
-                <img class="avatar" src="ava/avatar000.jpg" style="position:absolute; top:0px; left:0px;"/>
-                <img class="avatar" src="ava/avatar${profileDryver.idMember}.jpg" style="position:absolute; top:0px; left:0px;" />
-            </div>
-            <div class="summary" style="position: relative">
-                <span class="text" style="font-weight: bold">${profileDryver.alias}</span><br>              
-                <br>
-                <!--                                <span class="text" style="font-weight: bold; color: red;">Welke statistieken moeten hier nog meer komen?</span><br>-->
-                <span>gemiddelde rating:</span><br>
-                <r:rating_stars rating="${profileDryver.avgRating}"/><br> 
-                <br>
-                <br>
-                <br>
-                <span class="local_menu">                    
-                    <a href="<c:url value='changeProfile'/>" onclick="" class="local_menu_button larger" title="Wijzig profielgegevens">&#xf044;</a>
-                </span>     
-            </div>                  
+
+        <div style="position:relative; display: inline-block; width:77px; height:77px;">
+            <img class="avatar" src="ava/avatar000.jpg" style="position:absolute; top:0px; left:0px;"/>
+            <img class="avatar" src="ava/avatar${profileDryver.idMember}.jpg" style="position:absolute; top:0px; left:0px;" />
         </div>
+
+        <div class="summary" style="position: relative">
+            <span class="text" style="font-weight: bold">${profileDryver.alias}</span><br>              
+            <br>
+            <!--                                <span class="text" style="font-weight: bold; color: red;">Welke statistieken moeten hier nog meer komen?</span><br>-->
+            <span>gemiddelde rating:</span><br>
+            <r:rating_stars rating="${profileDryver.avgRating}"/><br> 
+
+        </div>   
+
+        <span class="local_menu">                    
+            <a href="<c:url value='changeProfile'/>" onclick="" class="local_menu_button larger" title="Wijzig profielgegevens">&#xf044;</a>
+        </span>  
     </div>
 
 
@@ -68,7 +67,7 @@
                             </c:if>
                             <c:if test="${profileDryver.idMember != friend.idRequester}">
                                 <a class="button" href="<c:url value='acceptFriend?idFriend=${friend.idFriend.idMember}'/>"><img src="img/arrow_right.png" /></a>
-                            </c:if>   
+                                </c:if>   
                     </li>
                 </c:forEach>
                 <!--                <li class="block_single white">
