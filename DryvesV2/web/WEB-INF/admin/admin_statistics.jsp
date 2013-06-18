@@ -12,16 +12,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
         <title>Dryves Admin - Statistieken</title>
 
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/admin.css" />
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="/DryvesV2/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/DryvesV2/css/admin.css" />
+        <link rel="stylesheet" type="text/css" href="/DryvesV2/css/jquery-ui.css" />
 
-        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/jquery.ui.datepicker-nl.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery.ui.datepicker-nl.js"></script>
 
-        <script type="text/javascript" src="js/canvasjs.min.js"></script>
-        <script type="text/javascript" src="js/date.format.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/canvasjs.min.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/date.format.js"></script>
 
     </head>
 

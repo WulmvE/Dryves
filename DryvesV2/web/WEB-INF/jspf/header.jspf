@@ -6,16 +6,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dryves</title>
 
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="/DryvesV2/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/DryvesV2/css/jquery-ui.css" />
 
-        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/jquery.ui.datepicker-nl.js"></script>
-        <script type="text/javascript" src="js/bindWithDelay.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery.ui.datepicker-nl.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/bindWithDelay.js"></script>
 
         <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&language=nl"></script>
-        <script type="text/javascript" src="js/jquery.geocomplete.min.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery.geocomplete.min.js"></script>
 
     </head>
 
