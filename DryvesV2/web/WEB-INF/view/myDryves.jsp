@@ -66,7 +66,7 @@
                             <c:if test="${profileDryver.idMember == friend.idRequester && friend.status == false}">
                                 <span>Pending</span>   
                             </c:if>
-                            <c:if test="${profileDryver.idMember != friend.idRequester}">
+                            <c:if test="${profileDryver.idMember != friend.idRequester && friend.status == false}">
                                 <a class="button" href="<c:url value='acceptFriend?idFriend=${friend.idFriend.idMember}'/>"><img src="img/arrow_right.png" /></a>
                             </c:if>   
                     </li>

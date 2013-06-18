@@ -7,6 +7,7 @@ package controller;
 import entity.Dryver;
 import entity.Friend;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -191,11 +192,25 @@ public class SearchFriendServlet extends HttpServlet {
             String email = request.getParameter("search_friend_email");
 
             List<Dryver> dryverList = null;
+            
+            // een tweede dryverList om de friends uit kan halen (anders ConcurrentModificationException)
+            List<Dryver> dryverListCopy = null;
+            List<Dryver> alreadyFriends = new ArrayList();
             int status;
 
             if (firstName != "" && lastName == "" && email == "") {
                 dryverList = dryverFacade.findByFirstName(firstName);
-                request.setAttribute("dryvers", dryverList);
+                dryverListCopy = dryverFacade.findByFirstName(firstName);
+                for (Dryver dryver1 : dryverList) {
+                    for (int i = 0; i < dryver1.getFriendList().size(); i++){
+                        if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember){
+                            alreadyFriends.add(dryver1);
+                            dryverListCopy.remove(dryver1);
+                        }
+                    }
+                }
+                request.setAttribute("dryvers", dryverListCopy);
+                request.setAttribute("alreadyFriends", alreadyFriends);
             }
             if (firstName == "" && lastName != "" && email == "") {
                 dryverList = dryverFacade.findByLastName(lastName);

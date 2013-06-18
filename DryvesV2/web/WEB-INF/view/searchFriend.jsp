@@ -32,10 +32,33 @@
                     <a href="#" class="avatar_label">${dryver.alias}</a>
 
                 </div>
-                        <c:if test="${fn:length(dryver.friendList) == 0}">
                   <a class="button" href="<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>"><img src="img/arrow_right.png" /></a>
-                            </c:if>
                 <c:forEach var="friendCheck" items="${dryver.friendList}" varStatus="loop">
+                    <c:choose>
+                        <c:when test="${friendCheck.idFriend.idMember == idMember}">
+                            <c:if test="${friendCheck.status == true}">
+                                <h1 style="color: #66ccff"><span>Vrienden</span></h1>
+                            </c:if>
+                            <c:if test="${friendCheck.status == false}">
+                               <h1 style="color: #66ccff"><span>In aanvraag</span></h1>
+                            </c:if>
+                        </c:when>
+                    </c:choose>
+
+                </c:forEach>
+
+
+            </li>
+        </c:forEach>
+            
+                    <c:forEach var="friend" items="${alreadyFriends}">
+            <li class="result block_triple white">
+                <div> 
+                    <img class="avatar" src="ava/avatar${friend.idMember}.jpg" />
+                    <a href="#" class="avatar_label">${friend.alias}</a>
+
+                </div>
+                <c:forEach var="friendCheck" items="${friend.friendList}" varStatus="loop">
                     <c:choose>
                         <c:when test="${friendCheck.idFriend.idMember == idMember}">
                             <c:if test="${friendCheck.status == true}">
