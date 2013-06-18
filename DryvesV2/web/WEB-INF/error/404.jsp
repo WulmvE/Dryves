@@ -10,8 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dryves - We zijn het even kwijt</title>
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/error.css" />
+        <link rel="stylesheet" type="text/css" href="/DryvesV2/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/DryvesV2/css/error.css" />
     </head>
     
     <body>

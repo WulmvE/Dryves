@@ -57,7 +57,7 @@ public class DryverFacade extends AbstractFacade<Dryver> {
             Logger.getLogger(DryverFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        dryver.setAvgRating(3.0);
+        dryver.setAvgRating(-1.0);
 
 
         em.persist(dryver);
