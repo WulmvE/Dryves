@@ -29,7 +29,12 @@ public class PercentageFacade extends AbstractFacade<Percentage> {
         super(Percentage.class);
     }
 
-    public List<Percentage> findByDateToIsNull() {
-        return em.createNamedQuery("Percentage.findByDateToIsNull").getResultList();
+    @Override
+    public List<Percentage> findAll() {
+        return em.createNamedQuery("Percentage.findAll").getResultList();
+    }
+    
+    public Percentage findByDateToIsNull() {
+        return (Percentage) em.createNamedQuery("Percentage.findByDateToIsNull").getSingleResult();
     }
 }

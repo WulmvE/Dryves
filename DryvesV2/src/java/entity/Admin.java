@@ -21,13 +21,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author hctung
+ * @author hctung , 
  */
 @Entity
 @Table(name = "admin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a"),
+    @NamedQuery(name = "Admin.findAll", query = "SELECT a FROM Admin a WHERE a.dryver.blocked = false"),
     @NamedQuery(name = "Admin.findByIdAdmin", query = "SELECT a FROM Admin a WHERE a.idAdmin = :idAdmin")})
 public class Admin implements Serializable {
     private static final long serialVersionUID = 1L;

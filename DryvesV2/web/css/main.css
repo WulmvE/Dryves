@@ -165,7 +165,11 @@ body{
     text-align:center;
 }
 
-
+.column_triple_flexh{
+    width:453px;
+    float: left;
+    margin-right: 3px;
+}
 /****************** global background colors ******************/
 .white{
     background-color:#ffffff;
@@ -581,12 +585,12 @@ hr{
 
 /*********************** form error messages ************************/
 .form_msg_error{
-  
+
     display: inline-block;
     font-size:16px;
-    
+
     opacity: 1;
-    
+
 }
 
 .form_msg_error.hidden{
