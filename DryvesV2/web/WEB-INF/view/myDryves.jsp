@@ -62,7 +62,7 @@
                             <c:if test="${friend.status == true}">
                                 <span style="color: green">Vrienden</span>
                             </c:if>
-                            <c:if test="${profileDryver.idMember == friend.idRequester}">
+                            <c:if test="${profileDryver.idMember == friend.idRequester && friend.status == false}">
                                 <span>Pending</span>   
                             </c:if>
                             <c:if test="${profileDryver.idMember != friend.idRequester}">
