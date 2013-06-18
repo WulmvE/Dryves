@@ -76,36 +76,37 @@ public class SearchFriendServlet extends HttpServlet {
         if (userPath.equals("/searchFriend")) {
         }
 
-        if (userPath.equals("/acceptFriend")){
+        if (userPath.equals("/acceptFriend")) {
             int idFriend = Integer.parseInt(request.getParameter("idFriend"));
-           Dryver ingelogd =  dryverFacade.findByAlias(alias);
-           Dryver friend = dryverFacade.find(idFriend);
-        List<Friend> ingelogd_lijst = ingelogd.getFriendList();
-        List<Friend> friend_lijst = friend.getFriendList();
-        
-        for (int i = 0; i < ingelogd_lijst.size(); i++){
-            if (ingelogd_lijst.get(i).getIdMember().getIdMember() == ingelogd.getIdMember() && ingelogd_lijst.get(i).getIdFriend().getIdMember() == friend.getIdMember()){
-                ingelogd_lijst.get(i).setStatus(true);
+            Dryver ingelogd = dryverFacade.findByAlias(alias);
+            Dryver friend = dryverFacade.find(idFriend);
+            List<Friend> ingelogd_lijst = ingelogd.getFriendList();
+            List<Friend> friend_lijst = friend.getFriendList();
+
+            for (int i = 0; i < ingelogd_lijst.size(); i++) {
+                if (ingelogd_lijst.get(i).getIdMember().getIdMember() == ingelogd.getIdMember() && ingelogd_lijst.get(i).getIdFriend().getIdMember() == friend.getIdMember()) {
+                    ingelogd_lijst.get(i).setStatus(true);
+                }
             }
-        }
-        
-                for (int i = 0; i < friend_lijst.size(); i++){
-            if (friend_lijst.get(i).getIdMember().getIdMember() == friend.getIdMember() && friend_lijst.get(i).getIdFriend().getIdMember() == ingelogd.getIdMember()){
-                friend_lijst.get(i).setStatus(true);
+
+            for (int i = 0; i < friend_lijst.size(); i++) {
+                if (friend_lijst.get(i).getIdMember().getIdMember() == friend.getIdMember() && friend_lijst.get(i).getIdFriend().getIdMember() == ingelogd.getIdMember()) {
+                    friend_lijst.get(i).setStatus(true);
+                }
             }
+
+            ingelogd.setFriendList(ingelogd_lijst);
+            friend.setFriendList(friend_lijst);
+
+            dryverFacade.edit(ingelogd);
+            dryverFacade.edit(friend);
+
+            response.sendRedirect("/DryvesV2/myDryves");
+
         }
-        
-                ingelogd.setFriendList(ingelogd_lijst);
-                friend.setFriendList(friend_lijst);
-                
-        dryverFacade.edit(ingelogd);
-        dryverFacade.edit(friend);
-        
-        
-        }
-        
-        if (userPath.equals("/requestFriend")){
-            
+
+        if (userPath.equals("/requestFriend")) {
+
             // haal Dryverid uit request (dit is de vriend)
             int dryverId = Integer.parseInt(request.getParameter("requestDryver"));
             // maak er een Dryver van
@@ -124,7 +125,7 @@ public class SearchFriendServlet extends HttpServlet {
             queryDryver.setFriendList(friendList);
             // zet Dryver in database (persistent)
             dryverFacade.edit(queryDryver);
-            
+
             // doe dit nu ook, maar dan voor de ingelogde gebruiker
             Dryver ingelogd = dryverFacade.findByAlias(alias);
             f.setIdMember(ingelogd);
@@ -137,6 +138,7 @@ public class SearchFriendServlet extends HttpServlet {
             friendList.add(f);
             ingelogd.setFriendList(friendList);
             dryverFacade.edit(ingelogd);
+            response.sendRedirect("/DryvesV2/myDryves");
         }
 
         // use RequestDispatcher to forward request internally
@@ -192,7 +194,7 @@ public class SearchFriendServlet extends HttpServlet {
             String email = request.getParameter("search_friend_email");
 
             List<Dryver> dryverList = null;
-            
+
             // een tweede dryverList om de friends uit kan halen (anders ConcurrentModificationException)
             List<Dryver> dryverListCopy = null;
             List<Dryver> alreadyFriends = new ArrayList();
@@ -202,8 +204,8 @@ public class SearchFriendServlet extends HttpServlet {
                 dryverList = dryverFacade.findByFirstName(firstName);
                 dryverListCopy = dryverFacade.findByFirstName(firstName);
                 for (Dryver dryver1 : dryverList) {
-                    for (int i = 0; i < dryver1.getFriendList().size(); i++){
-                        if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember){
+                    for (int i = 0; i < dryver1.getFriendList().size(); i++) {
+                        if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember) {
                             alreadyFriends.add(dryver1);
                             dryverListCopy.remove(dryver1);
                         }
@@ -214,24 +216,73 @@ public class SearchFriendServlet extends HttpServlet {
             }
             if (firstName == "" && lastName != "" && email == "") {
                 dryverList = dryverFacade.findByLastName(lastName);
-                request.setAttribute("dryvers", dryverList);
+                dryverListCopy = dryverFacade.findByLastName(lastName);
+                for (Dryver dryver1 : dryverList) {
+                    for (int i = 0; i < dryver1.getFriendList().size(); i++) {
+                        if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember) {
+                            alreadyFriends.add(dryver1);
+                            dryverListCopy.remove(dryver1);
+                        }
+                    }
+                }
+                request.setAttribute("dryvers", dryverListCopy);
+                request.setAttribute("alreadyFriends", alreadyFriends);
             }
             if (firstName == "" && lastName == "" && email != "") {
-                request.setAttribute("dryvers", dryverFacade.findByEmail(email));
                 dryverList = dryverFacade.findByEmail(email);
-                request.setAttribute("dryvers", dryverList);
+                dryverListCopy = dryverFacade.findByEmail(email);
+                for (Dryver dryver1 : dryverList) {
+                    for (int i = 0; i < dryver1.getFriendList().size(); i++) {
+                        if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember) {
+                            alreadyFriends.add(dryver1);
+                            dryverListCopy.remove(dryver1);
+                        }
+                    }
+                }
+                request.setAttribute("dryvers", dryverListCopy);
+                request.setAttribute("alreadyFriends", alreadyFriends);
             }
             if (firstName != "" && lastName != "" && email == "") {
                 dryverList = dryverFacade.findByFirstNameLastName(firstName, lastName);
-                request.setAttribute("dryvers", dryverList);
+                dryverListCopy = dryverFacade.findByFirstNameLastName(firstName, lastName);
+                for (Dryver dryver1 : dryverList) {
+                    for (int i = 0; i < dryver1.getFriendList().size(); i++) {
+                        if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember) {
+                            alreadyFriends.add(dryver1);
+                            dryverListCopy.remove(dryver1);
+                        }
+                    }
+                }
+                request.setAttribute("dryvers", dryverListCopy);
+                request.setAttribute("alreadyFriends", alreadyFriends);
             }
             if (firstName != "" && lastName == "" && email != "") {
                 dryverList = dryverFacade.findByFirstNameEmail(firstName, email);
-                request.setAttribute("dryvers", dryverList);
+                dryverListCopy = dryverFacade.findByFirstNameEmail(firstName, email);
+                for (Dryver dryver1 : dryverList) {
+                    for (int i = 0; i < dryver1.getFriendList().size(); i++) {
+                        if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember) {
+                            alreadyFriends.add(dryver1);
+                            dryverListCopy.remove(dryver1);
+                        }
+                    }
+                }
+                request.setAttribute("dryvers", dryverListCopy);
+                request.setAttribute("alreadyFriends", alreadyFriends);
             }
             if (firstName == "" && lastName != "" && email != "") {
                 dryverList = dryverFacade.findByLastNameEmail(lastName, email);
-                request.setAttribute("dryvers", dryverList);
+                dryverListCopy = dryverFacade.findByLastNameEmail(lastName, email);
+                for (Dryver dryver1 : dryverList) {
+                    for (int i = 0; i < dryver1.getFriendList().size(); i++) {
+                        if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember) {
+                            alreadyFriends.add(dryver1);
+                            dryverListCopy.remove(dryver1);
+                        }
+                    }
+                }
+                request.setAttribute("dryvers", dryverListCopy);
+                request.setAttribute("alreadyFriends", alreadyFriends);
             }
 
             for (Dryver queryDryver : dryverList) {
@@ -255,8 +306,8 @@ public class SearchFriendServlet extends HttpServlet {
             }
 
         }
-        
-        if (userPath.equals("/requestFriend")){
+
+        if (userPath.equals("/requestFriend")) {
             Dryver queryDryver = dryverFacade.find(request.getParameter("queryDryver"));
             List<Friend> friendList = friendFacade.findByDryver(queryDryver);
             Friend f = new Friend();
@@ -267,6 +318,7 @@ public class SearchFriendServlet extends HttpServlet {
             friendList.add(f);
             friendFacade.edit(f);
             dryverFacade.edit(queryDryver);
+            response.sendRedirect("/DryvesV2/myDryves");
         }
 
         String url = "/WEB-INF/view" + userPath + ".jsp";
