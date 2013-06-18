@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,8 @@ import session.MessageFacade;
 @WebServlet(name = "MessageServlet",
         loadOnStartup = 1,
         urlPatterns = {"/inbox", "/outbox", "/write", "/send"})
+@ServletSecurity(
+        @HttpConstraint(rolesAllowed = {"DryvesUser","Admin"}))
 public class MessageServlet extends HttpServlet {
 
     @EJB

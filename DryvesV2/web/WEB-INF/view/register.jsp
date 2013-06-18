@@ -100,4 +100,11 @@ $(".form_msg_error").addClass("hidden");
             </span>
         </div>  
     </form>
+            <div id="quick_create" class="block_six white">		
+        <form action="geslaagd" method="post" enctype="multipart/form-data">
+            <label for="fileName">Selecteer profielfoto</label>
+            <input id="fileName" type="file" name="fileName" size="30"/><br>
+            <input type="submit" value="Upload"/>
+        </form>
+    </div>
 </div>
