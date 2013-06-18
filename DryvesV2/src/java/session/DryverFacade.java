@@ -97,7 +97,7 @@ public class DryverFacade extends AbstractFacade<Dryver> {
         return em.createNamedQuery("Dryver.findByLastNameEmail").setParameter("lastName", lastName).setParameter("email", email).getResultList();
     }
 
-    public List<Dryver> findByIsBlocked(String lastName, String email) {
+    public List<Dryver> findByIsBlocked() {
         return em.createNamedQuery("Dryver.findByIsBlocked").getResultList();
     }
 }

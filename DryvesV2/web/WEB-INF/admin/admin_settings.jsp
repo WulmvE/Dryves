@@ -4,6 +4,8 @@
     Author     : Patrick
 --%>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +22,7 @@
     </head>
 
     <body>
-        
+
         <div id="main">
 
             <div id="main_menu">
@@ -38,25 +40,30 @@
 
                     <form name="modify_perc" action="adminDo" method="post">
                         <input type='hidden' name='task' value='setPerc' />
-                        <input type="text" name="perc" value="10" style="width:40px; margin-top: 50px;"/> <span style="font-size: 22px">% van ritprijs</span>
+                        <input type="text" name="perc" value="${current}" style="width:50px; margin-top: 50px;"/> <span style="font-size: 22px">% van de ritprijs</span>
                         <span class="local_menu">               
                             <a href="#" onclick="document.modify_perc.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
                         </span>
                 </div>
-                
+
                 <div class="block_six white settings_cont">
-                    <h2>Oude afdrachtpercentages </h2>
-                    <ul class="overview">
-                        <li>henk</li>
-                        <li>jan </li>
-                        <li>piet</li>
-                       
-                    </ul>
+                    <h2>Overzicht Percentages </h2>
+                    <div style="overflow-y: auto; height: 200px;">
+                        <table class="results">                          
+
+                            <c:forEach var="percentage" items="${percentages}">
+                                <tr>
+                                    <td class=""> <fmt:formatDate pattern="MM/dd/yyyy" value="${percentage.dateFrom}"/></td>
+                                    <td class=""> ${percentage.size} %</td>
+                                </tr>
+                            </c:forEach>
+                        </table> 
+                    </div>
                 </div>
 
-            <div id="cont_promo">al 24.145 ton co<span class="sub">2</span> bespaard...</div>
-        </div>
+                <div id="cont_promo">al 24.145 ton co<span class="sub">2</span> bespaard...</div>
+            </div>
 
     </body>
-    
+
 </html>

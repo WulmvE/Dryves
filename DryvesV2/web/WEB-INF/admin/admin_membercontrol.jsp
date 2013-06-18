@@ -4,6 +4,9 @@
     Author     : Patrick
 --%>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="r"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,29 +36,7 @@
 
             <div id="col_content" >
 
-                <div class="block_triple white settings_cont">		
-                    <h2 style="margin-bottom: 10px;">Lid blokkeren</h2>
-                    <form name="block_member" action="adminDo" method="post">
-                        <input type='hidden' name='task' value='blockMem' />
-                        <input class="selectstats" name="alias" type="text" placeholder="alias" />
-                        <span class="local_menu">               
-                            <a href="#" onclick="document.block_member.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
-                        </span>
-                    </form>
-                </div>
-
-                <div class="block_triple white settings_cont">		
-                    <h2 style="margin-bottom: 10px;">Lid vrijgeven</h2>
-                    <form name="unblock_member" action="adminDo" method="post">
-                        <input type='hidden' name='task' value='unblockMem' />
-                        <input class="selectstats" name="alias" type="text" placeholder="alias" />
-                        <span class="local_menu">               
-                            <a href="#" onclick="document.unblock_member.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
-                        </span>
-                    </form>
-                </div>
-
-                <div style="width:453px; float: left; margin-right: 3px;">
+                <div class="column_triple_flexh">
                     <div class="block_triple white settings_cont">		
                         <h2 style="margin-bottom: 10px;">Admin toevoegen</h2>
                         <form name="add_admin" action="adminDo" method="post">
@@ -70,27 +51,77 @@
                     <div class="block_triple white settings_cont">		
                         <h2 style="margin-bottom: 10px;">Admin verwijderen</h2>
                         <form name="remove_admin" action="adminDo" method="post">
-                            <input type='hidden' name='task' value='remAdmin' />
+                            <input type='hidden' name='task' value='removeAdmin' />
                             <input class="selectstats" name="alias" type="text" placeholder="alias" />
                             <span class="local_menu">               
                                 <a href="#" onclick="document.remove_admin.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
                             </span>
+                        </form>
                     </div>
-                </div>
-                <div class="block_six white settings_cont">
-                    <h2>Wie is er Admin?</h2>
-                    <ul>
-                        <li>henk</li>
-                        <li>jan </li>
-                        <li>piet</li>
-                    </ul>
-                   
-                </div>
-                
-            </div>
 
-            <div id="cont_promo">al 24.145 ton co<span class="sub">2</span> bespaard...</div>
-        </div>
+
+                    <div class="block_triple_half blue">		
+                        <h2 style="color: white">Huidige Admins</h2>
+                    </div>
+
+                    <ul class="member_list">        
+
+                        <c:forEach var="admin" items="${admins}">
+                            <li class="block_single white">
+                                <div style="position:relative; top:10px">
+                                    <img class="avatar" style="margin-top: 15px;" src="ava/avatar${admin.dryver.idMember}.jpg" />
+                                    <a href="#" class="avatar_label">${admin.dryver.alias}</a>
+                                </div>   
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+
+                <div class="column_triple_flexh">
+                    <div class="block_triple white settings_cont">		
+                        <h2 style="margin-bottom: 10px;">Lid blokkeren</h2>
+                        <form name="block_member" action="adminDo" method="post">
+                            <input type='hidden' name='task' value='blockMem' />
+                            <input class="selectstats" name="alias" type="text" placeholder="alias" />
+                            <span class="local_menu">               
+                                <a href="#" onclick="document.block_member.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
+                            </span>
+                        </form>
+                    </div>
+
+                    <div class="block_triple white settings_cont">		
+                        <h2 style="margin-bottom: 10px;">Lid vrijgeven</h2>
+                        <form name="unblock_member" action="adminDo" method="post">
+                            <input type='hidden' name='task' value='unblockMem' />
+                            <input class="selectstats" name="alias" type="text" placeholder="alias" />
+                            <span class="local_menu">               
+                                <a href="#" onclick="document.unblock_member.submit();" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
+                            </span>
+                        </form>
+                    </div>
+
+                    <div class="block_triple_half blue">		
+                        <h2 style="color: white">Geblokkeerde leden</h2>
+                    </div>
+
+                    <ul class="member_list">        
+
+                        <c:forEach var="blocked_member" items="${blocked_members}">
+                            <li class="block_single white">
+                                <div style="position:relative; top:10px">
+                                    <img class="avatar" style="margin-top: 15px;" src="ava/avatar${blocked_member.idMember}.jpg" />
+                                    <a href="#" class="avatar_label">${blocked_member.alias}</a>
+                                </div>   
+                            </li>
+                        </c:forEach>
+                    </ul>
+
+
+
+                </div>
+
+                <div id="cont_promo">al 24.145 ton co<span class="sub">2</span> bespaard...</div>
+            </div>
 
     </body>
 

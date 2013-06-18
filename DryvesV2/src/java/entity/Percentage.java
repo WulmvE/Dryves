@@ -44,7 +44,7 @@ public class Percentage implements Serializable {
     private Integer idPercentage;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "'size'")
+    @Column(name = "\"size\"")
     private double size;
     @Basic(optional = false)
     @NotNull
@@ -62,8 +62,8 @@ public class Percentage implements Serializable {
         this.idPercentage = idPercentage;
     }
 
-    public Percentage(Integer idPercentage, double size, Date dateFrom) {
-        this.idPercentage = idPercentage;
+    public Percentage(double size, Date dateFrom) {
+        //this.idPercentage = idPercentage;
         this.size = size;
         this.dateFrom = dateFrom;
     }

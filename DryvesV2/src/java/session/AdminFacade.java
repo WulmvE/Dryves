@@ -24,14 +24,34 @@ public class AdminFacade extends AbstractFacade<Admin> {
 
     public AdminFacade() {
         super(Admin.class);
-    }    
+    }
+
+    @Override
+    public List<Admin> findAll() {
+        return em.createNamedQuery("Admin.findAll").getResultList();
+    }
+
+    public void manageAdmin(Admin admin) {
+        if (em.contains(admin)) {
+            em.persist(admin);
+        }
+        else {
+            em.merge(admin);
+        }
+    }
     
+     public void removeAdmin(Admin admin) {
+        if (em.contains(admin)) {
+            em.remove(admin);
+        }
+    }
+
     /**
      * Executes different type of statistical SQL Queries, based upon which type
      * is requested
      *
      * @param type
-     * @return List<Object[]> 
+     * @return List<Object[]>
      */
     public List<Object[]> getStats(String type, String from, String to, String by) {
 
@@ -201,7 +221,7 @@ public class AdminFacade extends AbstractFacade<Admin> {
                     + "AND M.`memberSince` <= STR_TO_DATE('" + to + "', '" + dateFormat + "')\n"
                     + "GROUP BY age_range";
         }
-        
+
         //Entity manager executes the chosen query. Result are stored in a List and returned
         Query q = em.createNativeQuery(query);
         List<Object[]> stats = q.getResultList();
