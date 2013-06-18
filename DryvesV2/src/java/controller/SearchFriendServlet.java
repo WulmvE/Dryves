@@ -196,6 +196,9 @@ public class SearchFriendServlet extends HttpServlet {
             List<Dryver> dryverList = null;
 
             // een tweede dryverList om de friends uit kan halen (anders ConcurrentModificationException)
+            // dryverList wordt (uiteindelijk) een list met dryvers die van de ingelogde user geen vrienden zijn
+            // alreadyFriends wordt een list met dryvers waarvan de ingelogde user vrienden zijn / aanvragen hebben
+            // dit scheelt een hoop sorteerwerk op de jsp zelf met de for each loops
             List<Dryver> dryverListCopy = null;
             List<Dryver> alreadyFriends = new ArrayList();
             int status;
@@ -203,6 +206,7 @@ public class SearchFriendServlet extends HttpServlet {
             if (firstName != "" && lastName == "" && email == "") {
                 dryverList = dryverFacade.findByFirstName(firstName);
                 dryverListCopy = dryverFacade.findByFirstName(firstName);
+                // sorteer de dryvers naar alreadyFriends of houd ze in dryverList
                 for (Dryver dryver1 : dryverList) {
                     for (int i = 0; i < dryver1.getFriendList().size(); i++) {
                         if (dryver1.getFriendList().get(i).getIdFriend().getIdMember() == idMember) {
