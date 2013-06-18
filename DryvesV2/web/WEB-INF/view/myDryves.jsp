@@ -63,7 +63,7 @@
                                 <span style="color: green">Vrienden</span>
                             </c:if>
                             <c:if test="${profileDryver.idMember == friend.idRequester && friend.status == false}">
-                                <span>Pending</span>   
+                                <span style="color: yellowgreen">In aanvraag</span>   
                             </c:if>
                             <c:if test="${profileDryver.idMember != friend.idRequester && friend.status == false}">
                                 <a class="button" href="<c:url value='acceptFriend?idFriend=${friend.idFriend.idMember}'/>"><img src="img/arrow_right.png" /></a>
