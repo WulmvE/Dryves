@@ -192,10 +192,14 @@ public class AdminServlet extends HttpServlet {
             else if (task.equals("setPerc")) {
                 try {
                     Date date = new Date();
+                    Double formPerc = Double.parseDouble(request.getParameter("perc"));
+                    if(formPerc>100.0){
+                        formPerc=100.0;
+                    }
+                    Percentage perc  = new Percentage(formPerc, date);
                     Percentage old = percentageFacade.findByDateToIsNull();
                     old.setDateTo(date);
                     percentageFacade.edit(old);
-                    Percentage perc  = new Percentage(Double.parseDouble(request.getParameter("perc")), date);
                     percentageFacade.create(perc);
                 }
                 catch (Exception ex) {
