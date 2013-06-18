@@ -17,7 +17,7 @@
     <div class="block_double white text_blue">
         <div class="menu_icon">			
             <ul class="sort_options">
-                <li class="sort_option active_up">tijdsdtip</li>
+                <li class="sort_option active_up">tijdstip</li>
                 <li class="sort_option">gebruiker</li>
                 <li class="sort_option">rating</li>
             </ul>			
