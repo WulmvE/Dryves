@@ -177,6 +177,8 @@
                                 <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember && negotiation.acceptedDriver == 0}">
                                     In aanvraag
                                 </c:if>
+                                <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
+                                <c:if test="${ride.departureDate < now}">
                                 <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember && negotiation.acceptedDriver == 1}">
                                     <c:if test="${negotiation.ratingdone == false}">
                                         <b>Rate rit:</b> <a title="Zeer slecht" href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=1'/>" style="font-family: fontawesome; color: red">&#xf006;</a>
@@ -188,6 +190,7 @@
                                     <c:if test="${negotiation.ratingdone == true}">
                                         rating al gegeven
                                     </c:if>
+                                </c:if>
                                 </c:if>
                             </c:forEach>
                         </div>
