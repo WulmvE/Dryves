@@ -63,9 +63,9 @@
                                 <span style="color: green">Vrienden</span>
                             </c:if>
                             <c:if test="${profileDryver.idMember == friend.idRequester && friend.status == false}">
-                                <span>Pending</span>   
+                                <span style="color: orange">In aanvraag</span>   
                             </c:if>
-                            <c:if test="${profileDryver.idMember != friend.idRequester}">
+                            <c:if test="${profileDryver.idMember != friend.idRequester && friend.status == false}">
                                 <a class="button" href="<c:url value='acceptFriend?idFriend=${friend.idFriend.idMember}'/>"><img src="img/arrow_right.png" /></a>
                                 </c:if>   
                     </li>
@@ -171,20 +171,26 @@
 <!--                            <a class="button" href="<c:url value='rideDetails2?${ride.idRide}'/>"><img src="img/arrow_right.png" /></a><br>-->
                             <span class="local_menu">                    
                                 <a href="<c:url value='rideDetails2?${ride.idRide}'/>" onclick="" class="local_menu_button larger" title="ritdetails">&#xf0fb;</a>	
-                            </span>  
+                            </span>  <br>
 
                             <c:forEach var="negotiation" items="${ride.negotiationList}" varStatus="loop">
-                                <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember}">
+                                <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember && negotiation.acceptedDriver == 0}">
+                                    In aanvraag
+                                </c:if>
+                                <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
+                                <c:if test="${ride.departureDate < now}">
+                                <c:if test="${negotiation.negotiationPK.idMember == profileDryver.idMember && negotiation.acceptedDriver == 1}">
                                     <c:if test="${negotiation.ratingdone == false}">
-                                        Geef rating: <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=1'/>">*</a>
-                                        <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=2'/>">**</a>
-                                        <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=3'/>">***</a>
-                                        <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=4'/>">****</a>
-                                        <a href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=5'/>">*****</a>
+                                        <b>Rate rit:</b> <a title="Zeer slecht" href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=1'/>" style="font-family: fontawesome; color: red">&#xf006;</a>
+                                        <a title ="Slecht" href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=2'/>" style="font-family: fontawesome; color: red">&#xf123;</a>
+                                        <a title ="Matig" href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=3'/>" style="font-family: fontawesome; color: orange">&#xf123;</a>
+                                        <a title ="Goed" href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=4'/>" style="font-family: fontawesome; color: gold">&#xf005;</a>
+                                        <a title="Zeer goed"href="<c:url value='giveRating?idRide=${negotiation.negotiationPK.idRide}&score=5'/>" style="font-family: fontawesome; color: green">&#xf005;</a>
                                     </c:if>
                                     <c:if test="${negotiation.ratingdone == true}">
                                         rating al gegeven
                                     </c:if>
+                                </c:if>
                                 </c:if>
                             </c:forEach>
                         </div>
