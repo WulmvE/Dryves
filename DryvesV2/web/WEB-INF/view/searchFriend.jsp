@@ -32,7 +32,7 @@
                     <a href="#" class="avatar_label">${dryver.alias}</a>
 
                 </div>
-                <a class="button" href="<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>"><img src="img/arrow_right.png" /></a>
+                <a class="button" title="Doe friend request" href="<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>"><img src="img/arrow_right.png" /></a>
 
 
 
@@ -50,9 +50,13 @@
                     <c:choose>
                         <c:when test="${friendCheck.idFriend.idMember == idMember}">
                             <c:if test="${friendCheck.status == true}">
+                                <br>
+                                <br>
                                 <h1 style="color: #66ccff"><span>Vrienden</span></h1>
                             </c:if>
                             <c:if test="${friendCheck.status == false}">
+                                <br>
+                                <br>
                                 <h1 style="color: #66ccff"><span>In aanvraag</span></h1>
                             </c:if>
                         </c:when>
