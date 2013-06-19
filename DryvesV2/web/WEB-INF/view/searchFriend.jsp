@@ -32,41 +32,43 @@
                     <a href="#" class="avatar_label">${dryver.alias}</a>
 
                 </div>
-                <a class="button" title="Doe friend request" href="<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>"><img src="img/arrow_right.png" /></a>
+<!--                <a class="button" title="Doe friend request" href="<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>"><img src="img/arrow_right.png" /></a>-->
+                    <br>
+                    <br>
+                    <input type="button" value="vriendverzoek" style="background-color: #62b5dc; color: white; font-family: segoe; border: none;" onclick="location.href ='<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>';">
 
 
-
-            </li>
-        </c:forEach>
-
-        <c:forEach var="friend" items="${alreadyFriends}">
-            <li class="result block_triple white">
-                <div> 
-                    <img class="avatar" src="ava/avatar${friend.idMember}.jpg" />
-                    <a href="#" class="avatar_label">${friend.alias}</a>
-
-                </div>
-                <c:forEach var="friendCheck" items="${friend.friendList}" varStatus="loop">
-                    <c:choose>
-                        <c:when test="${friendCheck.idFriend.idMember == idMember}">
-                            <c:if test="${friendCheck.status == true}">
-                                <br>
-                                <br>
-                                <h1 style="color: #66ccff"><span>Vrienden</span></h1>
-                            </c:if>
-                            <c:if test="${friendCheck.status == false}">
-                                <br>
-                                <br>
-                                <h1 style="color: #66ccff"><span>In aanvraag</span></h1>
-                            </c:if>
-                        </c:when>
-                    </c:choose>
-
+                    </li>
                 </c:forEach>
 
+                <c:forEach var="friend" items="${alreadyFriends}">
+                    <li class="result block_triple white">
+                        <div> 
+                            <img class="avatar" src="ava/avatar${friend.idMember}.jpg" />
+                            <a href="#" class="avatar_label">${friend.alias}</a>
 
-            </li>
-        </c:forEach>
+                        </div>
+                        <c:forEach var="friendCheck" items="${friend.friendList}" varStatus="loop">
+                            <c:choose>
+                                <c:when test="${friendCheck.idFriend.idMember == idMember}">
+                                    <c:if test="${friendCheck.status == true}">
+                                        <br>
+                                        <br>
+                                        <h1 style="color: #66ccff"><span>Vrienden</span></h1>
+                                    </c:if>
+                                    <c:if test="${friendCheck.status == false}">
+                                        <br>
+                                        <br>
+                                        <h1 style="color: #66ccff"><span>In aanvraag</span></h1>
+                                    </c:if>
+                                </c:when>
+                            </c:choose>
+
+                        </c:forEach>
+
+
+                    </li>
+                </c:forEach>
 
     </div>
 
