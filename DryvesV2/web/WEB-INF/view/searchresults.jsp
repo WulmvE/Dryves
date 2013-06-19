@@ -16,10 +16,10 @@
 
     <div class="block_double white text_blue">
         <div class="menu_icon">			
-            <ul class="sort_options">
-                <li class="sort_option active_up">tijdstip</li>
-                <li class="sort_option">gebruiker</li>
-                <li class="sort_option">rating</li>
+            <ul class="sort_options" style="min-width:70px;">
+                <li data-sort_type="byDate" class="sort_option active_up">datum</li>
+                <li data-sort_type="byPrice" class="sort_option">prijs</li>
+                <li data-sort_type="byRating" class="sort_option">rating</li>
             </ul>			
         </div>
         <span class="menu_item menu_label_blue">sorteren op</span>
@@ -33,13 +33,13 @@
 
         <c:forEach var="ride" items="${rides}">
             <li class="result block_triple white">
-                <div>
+                <div style="width:80px">
                     <img class="avatar" src="ava/avatar${ride.idMember.idMember}.jpg" />
                     <a href="#" class="avatar_label">${ride.idMember.alias}</a>
                 </div>
                 <div class="summary">
                     <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
-                    <fmt:formatDate pattern="MM/dd/yyyy" value="${ride.departureDate}"/><br>
+                    <span class="date" data-timestamp="${ride.departureDate.time}"><fmt:formatDate pattern="dd/MM/yyyy" value="${ride.departureDate}"/></span><br>
                     ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"} vrij<br>
                     <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                     <r:rating_stars rating="${ride.idMember.avgRating}"/>                
@@ -52,5 +52,8 @@
         </c:forEach>
 
     </ul>
+    
+    
+    
 </div>
 

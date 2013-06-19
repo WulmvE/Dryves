@@ -13,6 +13,8 @@
         <script type="text/javascript" src="/DryvesV2/js/jquery-ui.min.js"></script>
         <script type="text/javascript" src="/DryvesV2/js/jquery.ui.datepicker-nl.js"></script>
         <script type="text/javascript" src="/DryvesV2/js/bindWithDelay.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery.tinysort.charorder.min.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery.tinysort.min.js"></script>
 
         <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&language=nl"></script>
         <script type="text/javascript" src="/DryvesV2/js/jquery.geocomplete.min.js"></script>
@@ -38,26 +40,48 @@
         </script>
         <script type="text/javascript">
             $(function() {
-                $(".view_details img").click(function() {
-                    var position = $(this).parents("#result").position();
-                    $(this).parents("#results").toggleClass("dimmed");
-                    $('body').append('<div class="overlay"/>');
-                });
+//                $(".view_details img").click(function() {
+//                    var position = $(this).parents("#result").position();
+//                    $(this).parents("#results").toggleClass("dimmed");
+//                    $('body').append('<div class="overlay"/>');
+//                });
+
+                function callSort(sortType, order) {
+
+                    if (sortType === "byDate") {
+                        $('.result').tsort('.date', {data:'timestamp',order: order});
+                    }
+                    else if (sortType === "byUser") {
+                        $('.result').tsort('.avatar_label', {order: order});
+                    }
+                    else if (sortType === "byRating") {
+                        $('.result').tsort('.rating_small',{data:'score',order: order});
+                        //price
+                    }
+                    else if (sortType === "byPrice") {
+                        $('.result').tsort('.price',{order: order});
+                        
+                    }
+                }
 
                 $(".sort_option").click(function() {
                     var current = $(this);
+                    var sortType = current.data('sort_type');
+
                     if (!current.hasClass("active_up") && !current.hasClass("active_down")) {
                         current.addClass("active_up").siblings().removeClass("active_up active_down");
+                        //$('.result').tsort('.avatar_label',{order:order});
                     }
-                    else {
+                    if (current.hasClass("active_up")) {
+                        callSort(sortType, 'desc');
                         current.toggleClass("active_up active_down");
+                    }
+                    else if (current.hasClass("active_down")) {
+                        current.toggleClass("active_up active_down");
+                        callSort(sortType, 'asc');
                     }
                 });
             });
-
-
-
-
         </script>
 
         <div id="main">
