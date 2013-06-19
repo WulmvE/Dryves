@@ -66,7 +66,7 @@
                                 <span style="color: orange">In aanvraag</span>   
                             </c:if>
                             <c:if test="${profileDryver.idMember != friend.idRequester && friend.status == false}">
-                                <a class="button" href="<c:url value='acceptFriend?idFriend=${friend.idFriend.idMember}'/>"><img src="img/arrow_right.png" /></a>
+                                <a href="<c:url value='acceptFriend?idFriend=${friend.idFriend.idMember}'/>">Verzoek accepteren</a>
                                 </c:if>   
                     </li>
                 </c:forEach>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="summary">
                             <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
-                            <fmt:formatDate pattern="dd/MM/yyyy" value="${ride.departureDate}"/><br>
+                            <fmt:formatDate pattern="MM/dd/yyyy" value="${ride.departureDate}"/><br>
                             ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>

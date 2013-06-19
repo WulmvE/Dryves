@@ -32,8 +32,10 @@
                     <a href="#" class="avatar_label">${dryver.alias}</a>
 
                 </div>
-                <a class="button" title="Doe friend request" href="<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>"><img src="img/arrow_right.png" /></a>
-
+<!--                <a class="button" title="Doe friend request" href="<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>"><img src="img/arrow_right.png" /></a>-->
+                    <br>
+                    <br>
+                    <input type="button" value="vriendverzoek" style="background-color: #62b5dc; color: white; font-family: segoe; border: none;" onclick="location.href ='<c:url value='requestFriend?requestDryver=${dryver.idMember}'/>';">
 
 
             </li>
