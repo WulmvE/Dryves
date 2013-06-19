@@ -164,7 +164,7 @@
                         </div>
                         <div class="summary">
                             <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
-                            <fmt:formatDate pattern="dd/MM/yyyy" value="${ride.departureDate}"/><br>
+                            <fmt:formatDate pattern="MM/dd/yyyy" value="${ride.departureDate}"/><br>
                             ${ride.seatsAvailable} ${ride.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                             <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${ride.askingPrice}" /></span> / Plaats <br>                    
                             <r:rating_stars rating="${ride.idMember.avgRating}"/>
