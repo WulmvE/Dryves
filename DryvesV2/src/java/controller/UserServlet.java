@@ -173,6 +173,7 @@ public class UserServlet extends HttpServlet {
             negotiation.setRatingdone(true);
             negotiationFacade.edit(negotiation);
             response.sendRedirect("/DryvesV2/myDryves");
+            return;
             
         }
 
@@ -283,6 +284,7 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("create_end", tempEndLocation);
             request.setAttribute("create_date", tempDate);
             request.setAttribute("create_car", tempCar);
+            
         }
 
         // if createRideConfirmed action is called
@@ -324,6 +326,10 @@ public class UserServlet extends HttpServlet {
             double distance = 60;
 
             rideFacade.placeRide(startLocation, endLocation, dryver, car, dateObj, numSeats, price, distance);
+            
+            response.sendRedirect("/DryvesV2/myDryves");
+            return;
+            
         }
 
 

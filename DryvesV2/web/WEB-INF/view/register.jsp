@@ -59,44 +59,43 @@
 </script>
 
 <div id="col_content">
-    <form name="quick_create_form" method="post" action="registerConfirmed">
-        <div id="quick_search" class="block_six white">		
+    <form name="register_form" id="register_form" method="post" action="registerConfirmed">
+        <div  class="block_six white">		
             <h2>accountgegevens</h2>
-            <input class="input_alias" name="alias" type="text"  value="${param.alias}" placeholder="alias"/><br/>
-            <input class="input_password" name="password" type="password"  placeholder= "wachtwoord"/><br/>
-            <input class="input_email"  name="email" type="text"  placeholder="emailadres" /><br/>
+            <input class="input_alias" name="alias" type="text"  value="${param.alias}" placeholder="alias" required title="vul een alias in"/><br/>
+            <input class="input_password" name="password" type="password"  placeholder= "wachtwoord" required pattern=".{8,}"  title="een wachtwoord moet mininmaal 8 karakters hebben"/><br/>
+            <input class="input_email"  name="email" type="email" placeholder="emailadres" required title="vul een geldig email adres in"/><br/>
         </div>
 
-        <div id="quick_create" class="block_six white">		
+        <div  class="block_six white">		
             <h2>naam</h2>
 
-            <input class="input_firstName" name="firstName" type="text"  placeholder= "voornaam"/><br/>
-            <input class="input_adjective"  name="adjective" type="text"  placeholder="tussenvoegsel" /><br/>
-            <input class="input_lastName"  name="lastName" type="text"  placeholder="achternaam" /><br/>
+            <input class="input_firstName" name="firstName" type="text"  placeholder= "voornaam" required title="vul je voornaam in"/><br/>
+            <input class="input_adjective"  name="adjective" type="text"  placeholder="tussenvoegsel"  title="vul een tussenvoegsel in"/><br/>
+            <input class="input_lastName"  name="lastName" type="text"  placeholder="achternaam" required title="vul je achternaam in"/><br/>
         </div>
 
-        <div id="quick_create" class="block_six white">		
+        <div  class="block_six white">		
             <h2>auto</h2>
 
-            <input id="input_licensePlate" name="licensePlate" name="carPlate" type="text"  placeholder= "kenteken (xx-xx-xx)"/>
+            <input id="input_licensePlate" name="licensePlate" name="carPlate" type="text"  placeholder= "kenteken (xx-xx-xx)" title="vul je kenteken in. dryves haalt de info voor je op"/>
             <input id="input_carBrand" name="carBrand" type="text"  placeholder= "autotype"  disabled/><br/>
             <input id="input_numSeats"  name="numSeats" type="text"  placeholder="max. aantal meerijders"  disabled/><br/>
-
         </div>   
-        <div id="quick_create" class="block_six white">		
+        <div class="block_six white">		
             <h2>overige</h2>
 
-            <input class="input_city" name="city" type="text"  placeholder= "woonplaats"/><br/>
-            <input class="input_city" name="birthDate" type="text"  placeholder= "geboortedatum"/><br/>
+            <input class="input_city" name="city" type="text"  placeholder= "woonplaats" required title="vul je woonplaats in"/><br/>
+            <input class="input_city" name="birthDate" type="text"  placeholder= "geboortedatum" required pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" title="vul je geboortedatum in (mm-dd-jjjj)"/><br/>
 
-            <select  name="gender">
+            <select  name="gender" required  title="vul je geslacht in">
                 <option value="" disabled selected>geslacht</option>
                 <option value="m">man</option>
                 <option value="v">vrouw</option>
             </select>
 
             <span class="local_menu">               
-                <a href="#" onclick="document.quick_create_form.submit()" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
+                <input class="submit_reg" type="submit" value="&#xf0fb;">
             </span>
         </div>  
     </form>
