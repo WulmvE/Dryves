@@ -75,7 +75,7 @@
             <div class="summary">
                 <span class="route" >${selectedRide.startLocation} <span class="text_green"><></span> ${selectedRide.endLocation}</span><br>
                 <span class="route">   <div class ="route" id="distance">Afstand: </div></span><br>
-                <fmt:formatDate pattern="MM/dd/yyyy" value="${selectedRide.departureDate}"/><br>
+                <fmt:formatDate pattern="dd/MM/yyyy" value="${selectedRide.departureDate}"/><br>
                 ${selectedRide.seatsAvailable} ${selectedRide.seatsAvailable==1 ? "plaats" : "plaatsen"}<br>
                 <span class="price">&euro; <fmt:formatNumber type="number" pattern="#0.00" value="${selectedRide.askingPrice}" /></span> / Plaats <br>                    
                 <r:rating_stars rating="${selectedRide.idMember.avgRating}"/>

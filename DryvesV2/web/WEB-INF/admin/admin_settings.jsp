@@ -53,7 +53,7 @@
 
                             <c:forEach var="percentage" items="${percentages}">
                                 <tr>
-                                    <td class=""> <fmt:formatDate pattern="MM/dd/yyyy" value="${percentage.dateFrom}"/></td>
+                                    <td class=""> <fmt:formatDate pattern="dd/MM/yyyy" value="${percentage.dateFrom}"/></td>
                                     <td class=""> ${percentage.size} %</td>
                                 </tr>
                             </c:forEach>
