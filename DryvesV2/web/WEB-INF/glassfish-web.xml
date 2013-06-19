@@ -8,6 +8,17 @@
     </property>
   </jsp-config>
   <!--"from" is is het pad dat bij de browser aan de client side terecht komt.
-       dir + ava is waar je de bestanden moet opslaan zodat Glassfish ze kan vinden. In dit geval is dat dus C:/ava -->
-    <property name="alternatedocroot_1" value="from=~/ava/* dir=/Users/hctung" />
+
+       "dir + from" is waar je de bestanden moet opslaan zodat Glassfish ze kan vinden. In dit geval is dat dus C:/ava -->
+    <property name="alternatedocroot_1" value="from=/ava/* dir=C:/" />
+    
+<!--    <security-role-mapping>
+        <role-name>Admin</role-name>
+        <group-name>Admin</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>DryvesUser</role-name>
+        <group-name>DryvesUser</group-name>
+  </security-role-mapping>-->
+    
 </glassfish-web-app>

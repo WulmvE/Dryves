@@ -11,33 +11,33 @@
     <form name="change_profile_form" method="post" action="changeProfileConfirmed">
         <div id="quick_search" class="block_six white">		
             <h2>accountgegevens</h2>
-            <input class="input_alias" name="alias" type="text"  value="${dryver.alias}" placeholder="gebruikersnaam"/><br/>
-            <input class="input_password" name="password" type="password" value="${dryver.password}" placeholder="password"/><br/>
-            <input class="input_email"  name="email" type="text"  value="${dryver.email}" placeholder="email adres" /><br/>
+            <input class="input_alias" name="alias" type="text"  value="${dryver.alias}" placeholder="gebruikersnaam" required title="vul een alias in"/><br/>
+            <input class="input_password" name="password" type="password" value="${dryver.password}" placeholder="password" required pattern=".{8,}"  title="een wachtwoord moet mininmaal 8 karakters hebben"/><br/>
+            <input class="input_email"  name="email" type="email"  value="${dryver.email}" placeholder="email adres" required title="vul een geldig email adres in"/><br/>
         </div>
 
         <div id="" class="block_six white">		
             <h2>naam</h2>
 
-            <input class="input_firstName" name="firstName" type="text"  value= "${dryver.firstName}" placeholder="voornaam"/><br/>
-            <input class="input_adjective"  name="adjective" type="text"  value="${dryver.adjective}" placeholder="tussenvoegsel"/><br/>
-            <input class="input_lastName"  name="lastName" type="text"  value="${dryver.lastName}" placeholder="achternaam"/><br/>
+            <input class="input_firstName" name="firstName" type="text"  value= "${dryver.firstName}" placeholder="voornaam" required title="vul je voornaam in"/><br/>
+            <input class="input_adjective"  name="adjective" type="text"  value="${dryver.adjective}" placeholder="tussenvoegsel" title="vul een tussenvoegsel in"/><br/>
+            <input class="input_lastName"  name="lastName" type="text"  value="${dryver.lastName}" placeholder="achternaam" required title="vul je achternaam in"/><br/>
         </div>
 
         <div id="" class="block_six white">		
             <h2>auto</h2>
 
-            <input class="input_carBrand" name="carBrand" type="text"  value= "${carProfileDryver.brand}" placeholder="merk"/><br/>
-            <input class="input_numSeats"  name="numSeats" type="text"  value="${carProfileDryver.numSeats}" placeholder="zitplaatsen"/><br/>
+            <input class="input_carBrand" name="carBrand" type="text"  value= "${carProfileDryver.brand}" placeholder="merk"  title="vul het automerk in"/><br/>
+            <input class="input_numSeats"  name="numSeats" type="text"  value="${carProfileDryver.numSeats}" placeholder="zitplaatsen" title="vul het aantal zitplaatsen in"/><br/>
 
         </div>   
         <div id="" class="block_six white">		
             <h2>woonplaats</h2>
 
-            <input class="input_city" name="city" type="text"  value= "${dryver.city}" placeholder="stad"/><br/>
+            <input class="input_city" name="city" type="text"  value= "${dryver.city}" placeholder="woonplaats" required title="vul je woonplaats in"/><br/>
 
             <span class="local_menu">               
-                <a href="#" onclick="document.change_profile_form.submit()" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
+                <input class="submit_reg" type="submit" value="&#xf0fb;">
             </span>
         </div>  
 

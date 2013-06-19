@@ -15,6 +15,8 @@
         <script type="text/javascript" src="/DryvesV2/js/bindWithDelay.js"></script>
         <script type="text/javascript" src="/DryvesV2/js/jquery.tinysort.charorder.min.js"></script>
         <script type="text/javascript" src="/DryvesV2/js/jquery.tinysort.min.js"></script>
+        <script type="text/javascript" src="/DryvesV2/js/jquery.tinysort.min.js"></script>
+
 
         <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&language=nl"></script>
         <script type="text/javascript" src="/DryvesV2/js/jquery.geocomplete.min.js"></script>
@@ -81,6 +83,9 @@
                         callSort(sortType, 'asc');
                     }
                 });
+                
+                
+            
             });
         </script>
 
