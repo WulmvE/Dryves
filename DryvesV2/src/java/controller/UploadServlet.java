@@ -40,9 +40,9 @@ public class UploadServlet extends HttpServlet {
 
     @EJB
     private DryverFacade dryverFacade;
-    private static final String TMP_DIR_PATH = "D:\\Software Engineering\\Project SE\\Dryves\\DryvesV2\\web\\ava";
+    private static final String TMP_DIR_PATH = "C:\\_dryves_test\\Dryves\\DryvesV2\\web\\ava";
     private File tmpDir;
-    private static final String DESTINATION_DIR_PATH = "D:\\Software Engineering\\Project SE\\Dryves\\DryvesV2\\web\\ava";
+    private static final String DESTINATION_DIR_PATH = "C:\\_dryves_test\\Dryves\\DryvesV2\\web\\ava";
     private File destinationDir;
 
     public void init(ServletConfig config) throws ServletException {
@@ -101,7 +101,8 @@ public class UploadServlet extends HttpServlet {
                     // Handle Uploaded files.
                     String url = "/WEB-INF/view/" + userPath + ".jsp";
                     try {
-                        request.getRequestDispatcher(url).forward(request, response);
+                        response.sendRedirect("/DryvesV2/changeProfile");
+                        //request.getRequestDispatcher(url).forward(request, response);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

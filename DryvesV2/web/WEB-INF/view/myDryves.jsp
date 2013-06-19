@@ -14,8 +14,8 @@
         <h2>Mijn profiel</h2>
 
         <div style="position:relative; display: inline-block; width:77px; height:77px;">
-            <img class="avatar" src="ava/avatar000.jpg" style="position:absolute; top:0px; left:0px;"/>
-            <img class="avatar" src="ava/avatar${profileDryver.idMember}.jpg" style="position:absolute; top:0px; left:0px;" />
+            <img class="avatar" src="ava/avatar000.jpg" style="position:absolute; top:0px; left:0px; "/>
+            <img class="avatar" src="ava/avatar${profileDryver.idMember}.jpg" style="position:absolute; top:0px; left:0px; " />
         </div>
 
         <div class="summary" style="position: relative">

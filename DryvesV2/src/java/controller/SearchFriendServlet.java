@@ -27,7 +27,7 @@ import session.FriendFacade;
  */
 @WebServlet(name = "SearchFriendServlet", urlPatterns = {"/searchFriend", "/searchFriendResults", "/requestFriend", "/acceptFriend"})
 @ServletSecurity(
-        @HttpConstraint(rolesAllowed = {"DryvesUser"}))
+        @HttpConstraint(rolesAllowed = {"DryvesUser","Admin"}))
 public class SearchFriendServlet extends HttpServlet {
 
     private String userPath;

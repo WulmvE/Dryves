@@ -17,8 +17,8 @@
     }
 
     function getCarData(lp) {
-        
-$(".form_msg_error").addClass("hidden");
+
+        $(".form_msg_error").addClass("hidden");
         //as long there are less than 8 charaters in the associated text input, don't call getJSON.
         if (lp.length < 8) {
             return;
@@ -28,20 +28,20 @@ $(".form_msg_error").addClass("hidden");
 
             if (data.d.results.length > 0) {
                 br = capitalize(data.d.results[0].Merk);
-                tp = capitalize(data.d.results[0].Handelsbenaming);            
-                zp = data.d.results[0].Aantalzitplaatsen ;
-                
-                if(zp>=1){
+                tp = capitalize(data.d.results[0].Handelsbenaming);
+                zp = data.d.results[0].Aantalzitplaatsen;
+
+                if (zp >= 1) {
                     zp--;
                 }
 
                 $(input_carBrand).val(br + " " + tp).removeAttr('disabled');
                 $(input_numSeats).val(zp).removeAttr('disabled');
             }
-            
+
             //if there are no results show error message.
-            else{
-               
+            else {
+
             }
         });
     }
@@ -77,7 +77,7 @@ $(".form_msg_error").addClass("hidden");
 
         <div id="quick_create" class="block_six white">		
             <h2>auto</h2>
-            
+
             <input id="input_licensePlate" name="licensePlate" name="carPlate" type="text"  placeholder= "kenteken (xx-xx-xx)"/>
             <input id="input_carBrand" name="carBrand" type="text"  placeholder= "autotype"  disabled/><br/>
             <input id="input_numSeats"  name="numSeats" type="text"  placeholder="max. aantal meerijders"  disabled/><br/>
@@ -88,23 +88,23 @@ $(".form_msg_error").addClass("hidden");
 
             <input class="input_city" name="city" type="text"  placeholder= "woonplaats"/><br/>
             <input class="input_city" name="birthDate" type="text"  placeholder= "geboortedatum"/><br/>
-            
+
             <select  name="gender">
                 <option value="" disabled selected>geslacht</option>
                 <option value="m">man</option>
                 <option value="v">vrouw</option>
             </select>
-            
+
             <span class="local_menu">               
                 <a href="#" onclick="document.quick_create_form.submit()" class="local_menu_button larger submit" id="button_create">&#xf0fb;</a>
             </span>
         </div>  
     </form>
-            <div id="quick_create" class="block_six white">		
+<!--    <div id="quick_create" class="block_six white">		
         <form action="geslaagd" method="post" enctype="multipart/form-data">
             <label for="fileName">Selecteer profielfoto</label>
             <input id="fileName" type="file" name="fileName" size="30"/><br>
             <input type="submit" value="Upload"/>
         </form>
-    </div>
+    </div>-->
 </div>
