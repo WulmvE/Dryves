@@ -6,6 +6,7 @@ package controller;
 
 import entity.Car;
 import entity.Dryver;
+import entity.Friend;
 import entity.Negotiation;
 import entity.Rating;
 import entity.Ride;
@@ -46,7 +47,7 @@ import session.RideFacade;
     "/createRideConfirmed",
     "/createRide",
     "/logout",
-    "/rideDetails", "/giveRating"})
+    "/rideDetails", "/giveRating","/viewFriendProfile","/viewProfile"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = {"DryvesUser","Admin"}))
 public class UserServlet extends HttpServlet {
@@ -204,6 +205,74 @@ public class UserServlet extends HttpServlet {
             return;
         }
 
+        // viewProfile, laatste edit
+        if (userPath.equals("/viewProfile")) {
+            
+                
+            String aliasFriend = request.getQueryString();
+            request.setAttribute("aliasFriend", aliasFriend);
+            
+            Dryver dryverFriend = dryverFacade.findByAlias(aliasFriend);
+            request.setAttribute("dryverFriend", dryverFriend);
+            int idMemberProfile = dryverFriend.getIdMember();
+            
+            String loggedInUser = request.getUserPrincipal().getName();
+            request.setAttribute("loggedInUser", loggedInUser);
+            
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver dryver = dryverFacade.find(loggedInUserId);
+            request.setAttribute("dryver", dryver);
+            
+                
+            List<Friend> friendFriends = friendFacade.findByDryverAndDryver(dryverFriend, dryver);
+            List<Friend> friendUsers = friendFacade.findByDryverAndDryver(dryver, dryverFriend);
+            
+            int a = friendUsers.size();
+            int b = friendFriends.size();
+            
+            request.setAttribute("a", a);
+            request.setAttribute("b", b);
+            
+            if (a != 0 || b != 0){
+            response.sendRedirect("/DryvesV2/viewFriendProfile?" + aliasFriend);
+            }    
+            
+            List<Ride> rideDryverProfiles = dryverFriend.getRideList();
+            request.setAttribute("rideDryverProfiles", rideDryverProfiles);
+                
+            }
+        
+        
+                if (userPath.equals("/viewFriendProfile")) {
+            String loggedInUser = request.getUserPrincipal().getName();
+            request.setAttribute("loggedInUser", loggedInUser);
+            
+            
+            int loggedInUserId = dryverFacade.findByAlias(loggedInUser).getIdMember();
+            Dryver dryver = dryverFacade.find(loggedInUserId);
+            request.setAttribute("dryver", dryver);
+            
+            String aliasFriend = request.getQueryString();
+            request.setAttribute("aliasFriend", aliasFriend);
+            
+            Dryver dryverFriend = dryverFacade.findByAlias(aliasFriend);
+            request.setAttribute("dryverFriend", dryverFriend);
+
+            
+            List<Ride> rideDryverfriends = dryverFriend.getRideList();
+                request.setAttribute("rideDryverFriends", rideDryverfriends);
+            
+            List<Car> carDryverFriends = dryverFriend.getCarList();
+            request.setAttribute("carDryverFriends", carDryverFriends);
+            
+            String birthDate = new SimpleDateFormat("dd/MM/yyyy").format(dryverFriend.getBirthDate());
+            request.setAttribute("birthDate", birthDate);
+            
+        }
+
+
+        
+        
         // use RequestDispatcher to forward request internally
         String url = "/WEB-INF/view" + userPath + ".jsp";
         try {

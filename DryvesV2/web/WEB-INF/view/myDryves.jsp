@@ -58,7 +58,8 @@
                     <li class="block_single white">
                         <div>
                             <img class="avatar" style="margin-top: 15px;" src="ava/avatar${friend.idFriend.idMember}.jpg" />
-                            <a href="#" class="avatar_label">${friend.idFriend.alias}</a>
+<!--                            <a href="#" class="avatar_label">${friend.idFriend.alias}</a>-->
+                            <a href="<c:url value='viewProfile?${friend.idFriend.alias}'/>" class="avatar_label"> ${friend.idFriend.alias}</a>
                             <c:if test="${friend.status == true}">
                                 <span style="color: green">Vrienden</span>
                             </c:if>
@@ -125,7 +126,8 @@
                     <li class="result block_triple white">
                         <div>
                             <img class="avatar" src="ava/avatar${idMember}.jpg" />
-                            <a href="#" class="avatar_label">${ride.idMember.alias}</a>
+<!--                            <a href="#" class="avatar_label">${ride.idMember.alias}</a>-->
+                            <a href="<c:url value='viewProfile?${ride.idMember.alias}'/>" class="avatar_label"> ${ride.idMember.alias}</a>
                         </div>
                         <div class="summary">
                             <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>
@@ -160,7 +162,8 @@
                     <li class="result block_triple white">
                         <div>
                             <img class="avatar" src="ava/avatar${ride.idMember.idMember}.jpg" />
-                            <a href="#" class="avatar_label">${ride.idMember.alias}</a>
+<!--                            <a href="#" class="avatar_label">${ride.idMember.alias}</a>-->
+                            <a href="<c:url value='viewProfile?${ride.idMember.alias}'/>" class="avatar_label"> ${ride.idMember.alias}</a>
                         </div>
                         <div class="summary">
                             <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>

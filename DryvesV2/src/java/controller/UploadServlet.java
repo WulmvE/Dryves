@@ -40,9 +40,9 @@ public class UploadServlet extends HttpServlet {
 
     @EJB
     private DryverFacade dryverFacade;
-    private static final String TMP_DIR_PATH = "C:\\_dryves_test\\Dryves\\DryvesV2\\web\\ava";
+    private static final String TMP_DIR_PATH = "\\Users\\hctung\\NetBeansProjects\\Dryves\\DryvesV2\\web\\ava";
     private File tmpDir;
-    private static final String DESTINATION_DIR_PATH = "C:\\_dryves_test\\Dryves\\DryvesV2\\web\\ava";
+    private static final String DESTINATION_DIR_PATH = "\\Users\\hctung\\NetBeansProjects\\Dryves\\DryvesV2\\web\\ava";
     private File destinationDir;
 
     public void init(ServletConfig config) throws ServletException {

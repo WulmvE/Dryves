@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Friend.findAll", query = "SELECT f FROM Friend f"),
     @NamedQuery(name = "Friend.findByIdRequest", query = "SELECT f FROM Friend f WHERE f.idRequest = :idRequest"),
     @NamedQuery(name = "Friend.findByIdMember", query = "SELECT f FROM Friend f WHERE f.idMember = :idMember"),
-    @NamedQuery(name = "Friend.findByStatus", query = "SELECT f FROM Friend f WHERE f.status = :status")})
+    @NamedQuery(name = "Friend.findByStatus", query = "SELECT f FROM Friend f WHERE f.status = :status"),
+    @NamedQuery(name = "Friend.findByIdFriendIdMember", query = "SELECT f FROM Friend f WHERE f.idMember = :idMember AND f.idFriend = :idFriend")})
 @Cacheable(false)
 public class Friend implements Serializable {
     @Basic(optional = false)
@@ -133,4 +134,5 @@ public class Friend implements Serializable {
     public void setIdRequester(int idRequester) {
         this.idRequester = idRequester;
     }
+    
 }

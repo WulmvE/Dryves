@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package session;
 
 import entity.Dryver;
@@ -19,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class FriendFacade extends AbstractFacade<Friend> {
+
     @PersistenceContext(unitName = "DryvesPU")
     private EntityManager em;
 
@@ -26,13 +26,16 @@ public class FriendFacade extends AbstractFacade<Friend> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     public List<Friend> findByDryver(Dryver dryver) {
-        return em.createNamedQuery("Friend.findByIdMember").setParameter("idMember",dryver).getResultList();
+        return em.createNamedQuery("Friend.findByIdMember").setParameter("idMember", dryver).getResultList();
     }
-    
+
     public FriendFacade() {
         super(Friend.class);
     }
-    
+
+    public List<Friend> findByDryverAndDryver(Dryver dryverMember, Dryver dryverFriend) {
+        return em.createNamedQuery("Friend.findByIdFriendIdMember").setParameter("idMember", dryverMember).setParameter("idFriend", dryverFriend).getResultList();
+    }
 }

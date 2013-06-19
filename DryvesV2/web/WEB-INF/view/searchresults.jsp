@@ -35,7 +35,8 @@
             <li class="result block_triple white">
                 <div style="width:80px">
                     <img class="avatar" src="ava/avatar${ride.idMember.idMember}.jpg" />
-                    <a href="#" class="avatar_label">${ride.idMember.alias}</a>
+<!--                    <a href="#" class="avatar_label">${ride.idMember.alias}</a>-->
+                    <a href="<c:url value='viewProfile?${ride.idMember.alias}'/>" class="avatar_label"> ${ride.idMember.alias}</a>
                 </div>
                 <div class="summary">
                     <span class="route" >${ride.startLocation} <span class="text_green"><></span> ${ride.endLocation}</span><br>

@@ -451,6 +451,13 @@ input.local_menu_button{
     max-height: 75px;
 }
 
+.avatargroot{
+    border-style:solid;
+    border-color:#bfbdbd;
+    border-width:1px;
+    max-height: 160px;
+}
+
 .avatar_label{color:#62b5dc; display:block; margin-top:-5px; }
 .avatar_label:link {text-decoration:none;}
 .avatar_label:visited {text-decoration:none;}

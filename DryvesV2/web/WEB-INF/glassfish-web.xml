@@ -9,5 +9,5 @@
   </jsp-config>
   <!--"from" is is het pad dat bij de browser aan de client side terecht komt.
        dir + ava is waar je de bestanden moet opslaan zodat Glassfish ze kan vinden. In dit geval is dat dus C:/ava -->
-    <property name="alternatedocroot_1" value="from=/ava/* dir=C:/" />
+    <property name="alternatedocroot_1" value="from=~/ava/* dir=/Users/hctung" />
 </glassfish-web-app>

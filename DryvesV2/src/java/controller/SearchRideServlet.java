@@ -32,7 +32,7 @@ import session.RideFacade;
  */
 @WebServlet(name = "SearchRideServlet",
         loadOnStartup = 1,
-        urlPatterns = {"/searchRide", "/searchRideDetails", "/rideDetails2", "/searchresults"})
+        urlPatterns = {"/searchRide", "/searchRideDetails", "/rideDetails2", "/searchresults","/hoewerktt"})
 public class SearchRideServlet extends HttpServlet {
 
     @EJB
@@ -80,6 +80,9 @@ public class SearchRideServlet extends HttpServlet {
             }
 
 
+        }
+        if (userPath.equals("/hoewerktt")) {
+        
         }
 
         // use RequestDispatcher to forward request internally
