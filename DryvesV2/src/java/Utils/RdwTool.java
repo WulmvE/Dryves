@@ -27,7 +27,6 @@ public class RdwTool {
         
         //clean the license plate string if non alphanumeric characters.
         licensePlate = cleanLicensePlate(licensePlate);
-        System.out.println(licensePlate);
         
         //string for connecting to the RDW API.
         //returned fields are determined in the $select clause. See for additional fields the respective documentation at the azure datamarket.
